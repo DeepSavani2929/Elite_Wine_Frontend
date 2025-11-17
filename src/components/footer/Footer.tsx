@@ -438,7 +438,7 @@ const Footer = () => {
                   <input
                     type="text"
                     placeholder="Enter Your Email"
-                    className="w-full rounded-full font-semibold py-4 pl-8 pr-40 bg-[#F0F0F0] text-[#0B0B0B] placeholder:text-[#0B0B0B] focus:outline-none font-urbanist text-base"
+                    className="w-full rounded-full font-semibold py-3 pl-8 pr-40 bg-[#F0F0F0] text-[#0B0B0B] placeholder:text-[#0B0B0B] focus:outline-none font-urbanist text-base"
                   />
                   <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#EED291] rounded-full px-8 py-3 font-urbanist font-semibold text-base text-[#0B0B0B]">
                     SUBSCRIBE

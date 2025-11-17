@@ -6,7 +6,7 @@ const ProductsChild = ({ product }) => {
 	const navigate =  useNavigate()
   return (
     <>
-      <div className="group flex h-full flex-col gap-6 cursor-pointer rounded-[32px] transition-all duration-300 hover:-translate-y-2" onClick = {() => navigate("/productDetails")}>
+      <div className="group flex h-full flex-col gap-6 cursor-pointer rounded-[32px] transition-all duration-300 hover:-translate-y-2" onClick = {() => navigate(`/productDetails/${product.id}`)}>
         <div className="relative flex items-center justify-center rounded-[24px] ">
           <div className="w-full rounded-md bg-[#FFFFFF] py-10">
             <img
@@ -27,8 +27,8 @@ const ProductsChild = ({ product }) => {
           </p>
 
           <div className="mt-auto flex flex-col gap-4">
-            <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-1 md:gap-4 text-sm font-medium text-[#5E5E5E]">
-              <div className="flex items-center gap-2 min-h-[32px] flex-row-reverse md:flex-row">
+            <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-y-0.1 gap-x-1 md:gap-4 text-sm font-medium text-[#5E5E5E]">
+              <div className="flex items-center  gap-2 min-h-[32px] flex-row-reverse md:flex-row">
                 <span className="font-urbanist text-md xl:text-base font-semibold text-[#565656] whitespace-nowrap">
                   {product.variety}
                 </span>
@@ -39,12 +39,12 @@ const ProductsChild = ({ product }) => {
                 />
               </div>
 
-              <div className="flex items-center gap-3 text-[#0B0B0B] min-h-[32px]">
+              <div className="flex items-center gap-0.5 text-[#0B0B0B] min-h-[32px]">
                 {product.medal && (
                   <img
                     src={product.medal}
                     alt="Medal"
-                    className="h-10 w-10 object-contain"
+                    className="h-8 w-8 object-contain"
                   />
                 )}
                 <span className="font-urbanist text-sm lg:text-base font-semibold text-[#565656]">

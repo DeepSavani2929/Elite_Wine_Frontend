@@ -677,14 +677,14 @@ const FilterDropdown: React.FC<Props> = ({
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="border px-3 py-1 rounded">${min}</div>
+                <div className="border px-3 py-1 font-urbanist rounded">${min}</div>
                 <span>to</span>
-                <div className="border px-3 py-1 rounded">${max}</div>
+                <div className="border px-3 py-1 font-urbanist rounded">${max}</div>
               </div>
 
               <button
                 onClick={applyPrice}
-                className="py-2 bg-[#E5C97A] rounded-lg font-semibold"
+                className="py-2 bg-[#E5C97A] font-urbanist rounded-lg font-semibold"
               >
                 Apply
               </button>

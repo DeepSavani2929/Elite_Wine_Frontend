@@ -93,7 +93,6 @@
 //     },
 //   ];
 
-
 //     const sizeOptions = ['Size', 'Small', 'Medium', 'Large', 'Extra Large'];
 //   const priceOptions = ['Price', 'Under $20', '$20-$30', '$30-$50', 'Over $50'];
 //   const grapeOptions = ['Grape', 'Merlot', 'Pinot Noir', 'Sauvignon Blanc', 'Riesling'];
@@ -109,7 +108,6 @@
 //     'Date, old to new',
 //     'Date, new to old',
 //   ];
-
 
 //   const handleFilterChange = (filterName: string, value: string) => {
 //     setFilters(prev => ({ ...prev, [filterName]: value }));
@@ -179,8 +177,6 @@
 // };
 
 // export default Shop;
-
-
 
 // import React, { useState } from 'react';
 // import product1 from "../../assets/images/product1.png";
@@ -375,7 +371,6 @@
 //     },
 //   ];
 
-
 //     const sizeOptions = ['Size', 'Small', 'Medium', 'Large', 'Extra Large'];
 //   const priceOptions = ['In Stock(11)', 'Out Of Stock(4)'];
 //   const grapeOptions = ['Grape Variety(14)','Grape Variety(1)'];
@@ -391,7 +386,6 @@
 //     'Date, old to new',
 //     'Date, new to old',
 //   ];
-
 
 //   const handleFilterChange = (filterName: string, value: string) => {
 //     setFilters(prev => ({ ...prev, [filterName]: value }));
@@ -466,14 +460,12 @@
 //             ))}
 //           </div>
 
-
 //       </div>
 //     </>
 //   );
 // };
 
 // export default Shop;
-
 
 // UPDATED SHOP COMPONENT WITH PAGINATION (6 PRODUCTS PER PAGE)
 // MATCHED TO EXISTING DESIGN + COLOR SCHEME
@@ -667,19 +659,6 @@
 
 // export default Shop
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ===== Updated Shop.tsx =====
 
 // import React, { useState } from 'react';
@@ -728,8 +707,6 @@
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const productsPerPage = 6;
 
-
-  
 //   const shopDetails: Product[] = [
 //     { type: "Bergdolt, Reif & Nett", productImg: product1, productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized", variety: "Grape variety", varietylogo: verietyImg, price: "$29.76", medal: productmedal, flavour: "Merlot" },
 //     { type: "Bergdolt, Reif & Nett", productImg: product2, productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized", variety: "Grape variety", varietylogo: verietyImg, price: "$29.38", flavour: "Pinot Noir" },
@@ -747,8 +724,6 @@
 //     { type: "Matthias Anton", productImg: fifthtabproduct4, productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized", variety: "Grape variety", varietylogo: verietyImg, price: "$25.61", flavour: "Pinot Grigio" },
 //     { type: "Matthias Anton", productImg: fifthtabproduct5, productName: "Matthias Anton Blanc de Blancs Sparkling (vegan) Dealcoholized", variety: "Grape variety", varietylogo: verietyImg, price: "$28.19", flavour: "Pinot Noir" }
 //   ];
-
-
 
 //   const totalPages = Math.ceil(shopDetails.length / productsPerPage);
 //   const startIndex = (currentPage - 1) * productsPerPage;
@@ -858,9 +833,6 @@
 // };
 
 // export default Shop;
-
-
-
 
 // import React, { useState, useMemo } from 'react';
 // import product1 from "../../assets/images/product1.png";
@@ -1050,7 +1022,7 @@
 //               const active = currentPage === page;
 //               return (
 //                 <button key={page} onClick={()=>changePage(page)}
-//                   className={`px-4 py-2 rounded-md text-sm transition 
+//                   className={`px-4 py-2 rounded-md text-sm transition
 //                     ${active ? "bg-[#E5C97A]" : "bg-white border border-[#E5C97A] hover:bg-[#E5C97A]"}`}>
 //                   {page}
 //                 </button>
@@ -1070,10 +1042,6 @@
 // };
 
 // export default Shop;
-
-
-
-
 
 // import React, { useState, useMemo } from "react";
 // import { X, Filter, Plus, Minus } from "lucide-react";
@@ -1602,10 +1570,6 @@
 
 // export default Shop;
 
-
-
-
-
 // import React, { useState, useMemo, useEffect } from "react";
 // import { X, Filter, Plus, Minus } from "lucide-react";
 
@@ -1808,7 +1772,6 @@
 //       </div>
 //     );
 //   };
-
 
 //   useEffect(() => {
 //   const handleResize = () => {
@@ -2082,7 +2045,6 @@
 //         {/* PAGINATION + DROPDOWN + TEXT */}
 //         <div className="w-full flex flex-col md:flex-row justify-between items-center px-6 pb-12">
 
-
 //           <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
 //             <p className="text-sm text-gray-700 whitespace-nowrap">Showing</p>
 
@@ -2141,7 +2103,6 @@
 //             </button>
 //           </div>
 
-
 //         </div>
 //       </div>
 //     </>
@@ -2149,8 +2110,6 @@
 // };
 
 // export default Shop;
-
-
 
 // import React, { useState, useMemo, useEffect } from "react";
 // import { X, Filter, Plus, Minus } from "lucide-react";
@@ -2315,7 +2274,6 @@
 //   return sorted;
 // }, [filters, shopDetails]);
 
-
 //   /** PAGINATION **/
 //   const totalItems = filteredProducts.length;
 //   const totalPages = Math.ceil(totalItems / limit);
@@ -2351,7 +2309,6 @@
 //   //   setCurrentPage(1);
 //   // };
 
-
 //   /** UPDATE FILTER **/
 //   const handleFilterChange = (name: string, value: any) => {
 //     setFilters((prev) => ({ ...prev, [name]: value }));
@@ -2379,7 +2336,6 @@
 //     }
 //   };
 
-  
 //   const Accordion = ({ title, children }: { title: string; children: any }) => {
 //     const [open, setOpen] = useState(false);
 //     return (
@@ -2400,7 +2356,6 @@
 //       </div>
 //     );
 //   };
-
 
 //   /** CLEAR ALL **/
 //   const clearAll = () => {
@@ -2822,7 +2777,6 @@
 
 // export default Shop;
 
-
 // import React, { useState, useMemo, useEffect } from "react";
 // import { X, Filter, Plus, Minus } from "lucide-react";
 
@@ -3054,13 +3008,6 @@
 //     }
 //   };
 
-
-
-
-
-
-
-
 import React, { useState, useMemo, useEffect } from "react";
 import { X, Filter, Plus, Minus } from "lucide-react";
 
@@ -3111,7 +3058,7 @@ const Shop: React.FC = () => {
     grape: [] as string[],
     all: "All",
     availability: [] as string[],
-    sortBy: "Best Sellers",
+    sortBy: "Alphabetically Z-A",
   });
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -3132,25 +3079,211 @@ const Shop: React.FC = () => {
 
   const shopDetails: Product[] = useMemo(
     () => [
-      { type: "Bergdolt, Reif & Nett", productImg: product1, productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$29.76", medal: productmedal, flavour: "Merlot", size: randomSize(), inStock: true, categoryType: "Featured" },
-      { type: "Bergdolt, Reif & Nett", productImg: product2, productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$29.38", flavour: "Pinot Noir", size: randomSize(), inStock: false, categoryType: "Popular" },
-      { type: "Bergdolt, Reif & Nett", productImg: product3, productName: "Reverse Sauvignon Blanc Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$25.76", flavour: "Sauvignon Blanc", size: randomSize(), inStock: true, categoryType: "New Arrivals" },
-      { type: "Bergdolt, Reif & Nett", productImg: product4, productName: "Reverse Gewurztraminer Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$29.38", flavour: "Gewurztraminer", size: randomSize(), inStock: true, categoryType: "Popular" },
-      { type: "Bergdolt, Reif & Nett", productImg: product5, productName: "Reverse Rosé Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$25.76", flavour: "Rosé", size: randomSize(), inStock: false, categoryType: "Featured" },
-      { type: "Bergdolt, Reif & Nett", productImg: product6, productName: "Reverse Riesling Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$27.16", flavour: "Riesling", size: randomSize(), inStock: true, categoryType: "New Arrivals" },
+      {
+        id: 1,
+        type: "Bergdolt, Reif & Nett",
+        productImg: product1,
+        productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$29.76",
+        medal: productmedal,
+        flavour: "Merlot",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Featured",
+      },
+      {
+        id: 2,
+        type: "Bergdolt, Reif & Nett",
+        productImg: product2,
+        productName:
+          "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$29.38",
+        flavour: "Pinot Noir",
+        size: randomSize(),
+        inStock: false,
+        categoryType: "Popular",
+      },
+      {
+        id: 3,
+        type: "Bergdolt, Reif & Nett",
+        productImg: product3,
+        productName: "Reverse Sauvignon Blanc Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$25.76",
+        flavour: "Sauvignon Blanc",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "New Arrivals",
+      },
+      {
+        id: 4,
+        type: "Bergdolt, Reif & Nett",
+        productImg: product4,
+        productName: "Reverse Gewurztraminer Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$29.38",
+        flavour: "Gewurztraminer",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Popular",
+      },
+      {
+        id: 5,
+        type: "Bergdolt, Reif & Nett",
+        productImg: product5,
+        productName: "Reverse Rosé Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$25.76",
+        flavour: "Rosé",
+        size: randomSize(),
+        inStock: false,
+        categoryType: "Featured",
+      },
+      {
+        id: 6,
+        type: "Bergdolt, Reif & Nett",
+        productImg: product6,
+        productName: "Reverse Riesling Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$27.16",
+        flavour: "Riesling",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "New Arrivals",
+      },
 
-      { type: "Lamm Jung", productImg: secondtabproduct, productName: "Lamm-Jung Riesling Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$26.97", medal: productmedal, flavour: "Riesling", size: randomSize(), inStock: true, categoryType: "Popular" },
+      {
+        id: 7,
+        type: "Lamm Jung",
+        productImg: secondtabproduct,
+        productName: "Lamm-Jung Riesling Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$26.97",
+        medal: productmedal,
+        flavour: "Riesling",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Popular",
+      },
 
-      { type: "KvD Strauch", productImg: thirdtabproduct, productName: "Rouge Pur Alkoholfrei", variety: "Grape variety", varietylogo: verietyImg, price: "$28.91", medal: productmedal, flavour: "Rouge Pur", size: randomSize(), inStock: true, categoryType: "Featured" },
+      {
+        id: 8,
+        type: "KvD Strauch",
+        productImg: thirdtabproduct,
+        productName: "Rouge Pur Alkoholfrei",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$28.91",
+        medal: productmedal,
+        flavour: "Rouge Pur",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Featured",
+      },
 
-      { type: "Château Clos de Boüard", productImg: fourthtabproduct1, productName: "Sauvignon Blanc Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$25.61", flavour: "Sauvignon Blanc", size: randomSize(), inStock: false, categoryType: "New Arrivals" },
-      { type: "Château Clos de Boüard", productImg: fourthtabproduct2, productName: "Rosé Sparkling Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$28.19", flavour: "Pinot Noir", size: randomSize(), inStock: true, categoryType: "Featured" },
+      {
+        id: 9,
+        type: "Château Clos de Boüard",
+        productImg: fourthtabproduct1,
+        productName: "Sauvignon Blanc Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$25.61",
+        flavour: "Sauvignon Blanc",
+        size: randomSize(),
+        inStock: false,
+        categoryType: "New Arrivals",
+      },
+      {
+        id: 10,
+        type: "Château Clos de Boüard",
+        productImg: fourthtabproduct2,
+        productName: "Rosé Sparkling Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$28.19",
+        flavour: "Pinot Noir",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Featured",
+      },
 
-      { type: "Matthias Anton", productImg: fifthtabproduct1, productName: "Sauvignon Blanc (vegan)", variety: "Grape variety", varietylogo: verietyImg, price: "$33.61", medal: productmedal, flavour: "Sauvignon Blanc", size: randomSize(), inStock: true, categoryType: "Popular" },
-      { type: "Matthias Anton", productImg: fifthtabproduct2, productName: "Rosé Sparkling", variety: "Grape variety", varietylogo: verietyImg, price: "$28.19", medal: productmedal, flavour: "Pinot Noir", size: randomSize(), inStock: true, categoryType: "New Arrivals" },
-      { type: "Matthias Anton", productImg: fifthtabproduct3, productName: "Rosé Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$25.61", flavour: "Rosé", size: randomSize(), inStock: false, categoryType: "Featured" },
-      { type: "Matthias Anton", productImg: fifthtabproduct4, productName: "Pinot Grigio Dealalcoolized", variety: "Grape variety", varietylogo: verietyImg, price: "$25.61", flavour: "Pinot Grigio", size: randomSize(), inStock: true, categoryType: "Popular" },
-      { type: "Matthias Anton", productImg: fifthtabproduct5, productName: "Blanc de Blancs Sparkling", variety: "Grape variety", varietylogo: verietyImg, price: "$28.19", flavour: "Pinot Noir", size: randomSize(), inStock: true, categoryType: "Featured" },
+      {
+        id: 11,
+        type: "Matthias Anton",
+        productImg: fifthtabproduct1,
+        productName: "Sauvignon Blanc (vegan)",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$33.61",
+        medal: productmedal,
+        flavour: "Sauvignon Blanc",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Popular",
+      },
+      {
+        id: 12,
+        type: "Matthias Anton",
+        productImg: fifthtabproduct2,
+        productName: "Rosé Sparkling",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$28.19",
+        medal: productmedal,
+        flavour: "Pinot Noir",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "New Arrivals",
+      },
+      {
+        id: 13,
+        type: "Matthias Anton",
+        productImg: fifthtabproduct3,
+        productName: "Rosé Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$25.61",
+        flavour: "Rosé",
+        size: randomSize(),
+        inStock: false,
+        categoryType: "Featured",
+      },
+      {
+        id: 14,
+        type: "Matthias Anton",
+        productImg: fifthtabproduct4,
+        productName: "Pinot Grigio Dealalcoolized",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$25.61",
+        flavour: "Pinot Grigio",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Popular",
+      },
+      {
+        id: 15,
+        type: "Matthias Anton",
+        productImg: fifthtabproduct5,
+        productName: "Blanc de Blancs Sparkling",
+        variety: "Grape variety",
+        varietylogo: verietyImg,
+        price: "$28.19",
+        flavour: "Pinot Noir",
+        size: randomSize(),
+        inStock: true,
+        categoryType: "Featured",
+      },
     ],
     []
   );
@@ -3193,15 +3326,11 @@ const Shop: React.FC = () => {
         break;
 
       case "Price, low to high":
-        sorted.sort(
-          (a, b) => priceToNumber(a.price) - priceToNumber(b.price)
-        );
+        sorted.sort((a, b) => priceToNumber(a.price) - priceToNumber(b.price));
         break;
 
       case "Price, high to low":
-        sorted.sort(
-          (a, b) => priceToNumber(b.price) - priceToNumber(a.price)
-        );
+        sorted.sort((a, b) => priceToNumber(b.price) - priceToNumber(a.price));
         break;
 
       case "Date, new to old":
@@ -3292,9 +3421,6 @@ const Shop: React.FC = () => {
     }
   };
 
-
-
-  
   const Accordion = ({ title, children }: { title: string; children: any }) => {
     const [open, setOpen] = useState(false);
     return (
@@ -3315,7 +3441,6 @@ const Shop: React.FC = () => {
       </div>
     );
   };
-
 
   /** CLEAR ALL **/
   const clearAll = () => {
@@ -3354,7 +3479,8 @@ const Shop: React.FC = () => {
       <div className="bg-[url('images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
-            Home <span className="font-Poppins">&gt; </span>Bergdolt, Reif & Nett
+            Home <span className="font-Poppins">&gt; </span>Bergdolt, Reif &
+            Nett
           </p>
           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
             Bergdolt, Reif & Nett
@@ -3367,11 +3493,9 @@ const Shop: React.FC = () => {
 
       <div className="w-full">
         <div className="w-[95%] mx-auto pt-[55px] xl:pt-[100px]">
-
           {/* FILTER BAR */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
             <div className="flex items-center flex-wrap gap-3">
-
               {/* MOBILE FILTER BUTTON */}
               <button
                 onClick={handleOpenSidebar}
@@ -3434,23 +3558,24 @@ const Shop: React.FC = () => {
               </div>
             </div>
 
-              <div className="flex items-center gap-3 w-full md:w-auto">
-               <span className="font-urbanist font-semibold text-sm md:text-base text-[#0B0B0B]">
-                 Sort By:
-               </span>               <div className="w-[180px]">
-                 <FilterDropdown
-                   type="single"
-                   label="Sort"
-                   options={sortByOptions}
-                   onChange={(v) => handleFilterChange("sortBy", v)}
-                 />
-               </div>
-           </div>
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <span className="font-urbanist font-semibold text-sm md:text-base text-[#0B0B0B]">
+                Sort By:
+              </span>{" "}
+              <div className="w-[180px]">
+                <FilterDropdown
+                  type="single"
+                  value={filters.sortBy}
+                  label="Sort"
+                  options={sortByOptions}
+                  onChange={(v) => handleFilterChange("sortBy", v)}
+                />
+              </div>
+            </div>
           </div>
 
           {/* FILTER CHIPS */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
-
             {/* CLEAR ALL */}
             {(filters.size !== "Size" ||
               filters.price.min !== 0 ||
@@ -3484,11 +3609,7 @@ const Shop: React.FC = () => {
 
             {/* GRAPES */}
             {filters.grape.map((g) => (
-              <Chip
-                key={g}
-                label={g}
-                onRemove={() => removeChip("grape", g)}
-              />
+              <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
             ))}
 
             {/* AVAILABILITY */}
@@ -3508,10 +3629,10 @@ const Shop: React.FC = () => {
               />
             )}
           </div>
-
         </div>
 
-                {/* MOBILE SIDEBAR */}
+        {/* MOBILE SIDEBAR */}
+        {/* SIDEBAR */}
         <div
           className={`fixed top-0 left-0 h-full w-[72%] sm:w-[40%] md:w-[38%] lg:w-[28%] z-[9999] bg-white shadow-xl transform transition-all duration-300 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -3519,77 +3640,80 @@ const Shop: React.FC = () => {
         >
           {/* HEADER */}
           <div className="flex justify-between items-center px-4 py-4 border-b border-gray-300">
-            <h2 className="text-xl font-semibold font-cormorant">Sidebar </h2>
+            <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
             <button onClick={() => setSidebarOpen(false)}>
               <X size={24} />
             </button>
           </div>
 
           {/* SIDEBAR CONTENT */}
-                  {/* SIDEBAR CONTENT (MOBILE) */}
           <div className="p-4 overflow-y-auto h-[calc(100%-60px)] font-urbanist">
-
-            {/* FILTER HEADER INSIDE SIDEBAR */}
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-urbanist font-semibold text-lg">Filters</h3>
-
-              {/* CLEAR ALL BUTTON INSIDE SIDEBAR */}
-              {(filters.size !== "Size" ||
-                filters.price.min !== 0 ||
-                filters.price.max !== 100 ||
-                filters.grape.length > 0 ||
-                filters.availability.length > 0 ||
-                filters.all !== "All") && (
+            {/* SHOW FILTER HEADER + CLEAR ALL ONLY IF ANY FILTER IS ACTIVE */}
+            {(filters.size !== "Size" ||
+              filters.price.min !== 0 ||
+              filters.price.max !== 100 ||
+              filters.grape.length > 0 ||
+              filters.availability.length > 0 ||
+              filters.all !== "All") && (
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-urbanist font-semibold text-lg">Filters</h3>
                 <button
                   onClick={clearAll}
                   className="text-[#0B0B0B] underline text-sm font-medium"
                 >
                   Clear All
                 </button>
-              )}
-            </div>
+              </div>
+            )}
 
-            {/* CHIPS INSIDE SIDEBAR (ONLY FOR MOBILE ≤ 1024px) */}
-            <div className="flex flex-wrap gap-2 mb-4 xl:hidden">
-              {filters.size !== "Size" && (
-                <Chip
-                  label={filters.size}
-                  onRemove={() => removeChip("size", filters.size)}
-                />
-              )}
+            {/* CHIPS (SHOW ONLY IF ANY FILTER ACTIVE) */}
+            {(filters.size !== "Size" ||
+              filters.price.min !== 0 ||
+              filters.price.max !== 100 ||
+              filters.grape.length > 0 ||
+              filters.availability.length > 0 ||
+              filters.all !== "All") && (
+              <div className="flex flex-wrap gap-2 mb-4 xl:hidden">
+                {filters.size !== "Size" && (
+                  <Chip
+                    label={filters.size}
+                    onRemove={() => removeChip("size", filters.size)}
+                  />
+                )}
 
-              {(filters.price.min !== 0 || filters.price.max !== 100) && (
-                <Chip
-                  label={`$${filters.price.min} - $${filters.price.max}`}
-                  onRemove={() => removeChip("price", "")}
-                />
-              )}
+                {(filters.price.min !== 0 || filters.price.max !== 100) && (
+                  <Chip
+                    label={`$${filters.price.min} - $${filters.price.max}`}
+                    onRemove={() => removeChip("price", "")}
+                  />
+                )}
 
-              {filters.grape.map((g) => (
-                <Chip
-                  key={g}
-                  label={g}
-                  onRemove={() => removeChip("grape", g)}
-                />
-              ))}
+                {filters.grape.map((g) => (
+                  <Chip
+                    key={g}
+                    label={g}
+                    onRemove={() => removeChip("grape", g)}
+                  />
+                ))}
 
-              {filters.availability.map((a) => (
-                <Chip
-                  key={a}
-                  label={a}
-                  onRemove={() => removeChip("availability", a)}
-                />
-              ))}
+                {filters.availability.map((a) => (
+                  <Chip
+                    key={a}
+                    label={a}
+                    onRemove={() => removeChip("availability", a)}
+                  />
+                ))}
 
-              {filters.all !== "All" && (
-                <Chip
-                  label={filters.all}
-                  onRemove={() => removeChip("all", filters.all)}
-                />
-              )}
-            </div>
+                {filters.all !== "All" && (
+                  <Chip
+                    label={filters.all}
+                    onRemove={() => removeChip("all", filters.all)}
+                  />
+                )}
+              </div>
+            )}
 
-            {/* SIDEBAR FILTER ACCORDIONS */}
+            {/* SIDEBAR ACCORDIONS */}
             <Accordion title="Size">
               {sizeOptions.map((opt) => (
                 <label key={opt} className="flex items-center gap-3 py-1">
@@ -3598,7 +3722,10 @@ const Shop: React.FC = () => {
                     name="size"
                     value={filters.size}
                     checked={filters.size === opt}
-                    onChange={() => handleFilterChange("size", opt)}
+                    onChange={() => {
+                      handleFilterChange("size", opt);
+                      setSidebarOpen(false); // CLOSE SIDEBAR
+                    }}
                     className="accent-[#E5C97A]"
                   />
                   <span>{opt}</span>
@@ -3619,40 +3746,57 @@ const Shop: React.FC = () => {
 
                   <input
                     type="range"
-                    min={0} max={100}
+                    min={0}
+                    max={100}
                     value={filters.price.min}
                     onChange={(e) => {
                       const v = +e.target.value;
                       if (v < filters.price.max)
-                        handleFilterChange("price", { ...filters.price, min: v });
+                        handleFilterChange("price", {
+                          ...filters.price,
+                          min: v,
+                        });
                     }}
+                    onMouseUp={() => setSidebarOpen(false)} // CLOSE SIDEBAR
                     className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
                   />
 
                   <input
                     type="range"
-                    min={0} max={100}
+                    min={0}
+                    max={100}
                     value={filters.price.max}
                     onChange={(e) => {
                       const v = +e.target.value;
                       if (v > filters.price.min)
-                        handleFilterChange("price", { ...filters.price, max: v });
+                        handleFilterChange("price", {
+                          ...filters.price,
+                          max: v,
+                        });
                     }}
+                    onMouseUp={() => setSidebarOpen(false)} // CLOSE SIDEBAR
                     className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
                   />
                 </div>
 
                 <div className="flex justify-between">
-                  <div className="border px-3 py-1 rounded">${filters.price.min}</div>
+                  <div className="border px-3 py-1 rounded">
+                    ${filters.price.min}
+                  </div>
                   <span>to</span>
-                  <div className="border px-3 py-1 rounded">${filters.price.max}</div>
+                  <div className="border px-3 py-1 rounded">
+                    ${filters.price.max}
+                  </div>
                 </div>
               </div>
             </Accordion>
 
             <Accordion title="Grape">
               {grapeOptions.map((opt) => (
-                <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
+                <label
+                  key={opt}
+                  className="flex items-center gap-3 py-2 cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     value={opt}
@@ -3661,7 +3805,9 @@ const Shop: React.FC = () => {
                       const u = filters.grape.includes(opt)
                         ? filters.grape.filter((x) => x !== opt)
                         : [...filters.grape, opt];
+
                       handleFilterChange("grape", u);
+                      setSidebarOpen(false); // CLOSE SIDEBAR
                     }}
                     className="w-4 h-4 accent-[#E5C97A]"
                   />
@@ -3678,7 +3824,10 @@ const Shop: React.FC = () => {
                     name="all"
                     value={filters.all}
                     checked={filters.all === opt}
-                    onChange={() => handleFilterChange("all", opt)}
+                    onChange={() => {
+                      handleFilterChange("all", opt);
+                      setSidebarOpen(false); // CLOSE SIDEBAR
+                    }}
                     className="accent-[#E5C97A]"
                   />
                   <span>{opt}</span>
@@ -3688,7 +3837,10 @@ const Shop: React.FC = () => {
 
             <Accordion title="Availability">
               {availabilityOptions.map((opt) => (
-                <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
+                <label
+                  key={opt}
+                  className="flex items-center gap-3 py-2 cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     value={opt}
@@ -3697,7 +3849,9 @@ const Shop: React.FC = () => {
                       const u = filters.availability.includes(opt)
                         ? filters.availability.filter((x) => x !== opt)
                         : [...filters.availability, opt];
+
                       handleFilterChange("availability", u);
+                      setSidebarOpen(false); // CLOSE SIDEBAR
                     }}
                     className="w-4 h-4 accent-[#E5C97A]"
                   />
@@ -3705,7 +3859,6 @@ const Shop: React.FC = () => {
                 </label>
               ))}
             </Accordion>
-
           </div>
         </div>
 
@@ -3725,7 +3878,7 @@ const Shop: React.FC = () => {
         </div>
 
         {/* PAGINATION */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center px-6 pb-12">
+        <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
           <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
             <p className="text-sm">Showing</p>
             <select
@@ -3752,7 +3905,7 @@ const Shop: React.FC = () => {
             <button
               onClick={() => changePage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1 border border-[#E5C97A] rounded disabled:opacity-50"
+              className="px-3 py-1 border font-urbanist border-[#E5C97A] rounded disabled:opacity-50"
             >
               Prev
             </button>
@@ -3763,7 +3916,7 @@ const Shop: React.FC = () => {
                 <button
                   key={p}
                   onClick={() => changePage(p)}
-                  className={`px-4 py-2 rounded text-sm ${
+                  className={`px-4 py-2 rounded  font-urbanist text-sm ${
                     currentPage === p
                       ? "bg-[#E5C97A]"
                       : "bg-white border border-[#E5C97A]"
@@ -3777,13 +3930,12 @@ const Shop: React.FC = () => {
             <button
               onClick={() => changePage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 border border-[#E5C97A] rounded disabled:opacity-50"
+              className="px-3 py-1 border  font-urbanist border-[#E5C97A] rounded disabled:opacity-50"
             >
               Next
             </button>
           </div>
         </div>
-
       </div>
     </>
   );

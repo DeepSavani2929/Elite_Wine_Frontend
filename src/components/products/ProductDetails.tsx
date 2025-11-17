@@ -15,11 +15,28 @@ import relatedproduct1 from "../../assets/images/relatedproduct1.png";
 import relatedproduct2 from "../../assets/images/relatedproduct2.png";
 import verietyImg from "../../assets/images/variety.png";
 import ProductsChild from "./productsChild";
+import product1 from "../../assets/images/product1.png";
+import product2 from "../../assets/images/product2.png";
+import product3 from "../../assets/images/product3.png";
+import product4 from "../../assets/images/product4.png";
+import product5 from "../../assets/images/product5.png";
+import product6 from "../../assets/images/product6.png";
+import thirdtabproduct from "../../assets/images/thirdtabproduct.png";
+import fourthtabproduct1 from "../../assets/images/fourthtabproduct1.png";
+import fourthtabproduct2 from "../../assets/images/fourthtabproduct2.png";
+import fifthtabproduct1 from "../../assets/images/fifthtabproduct1.png";
+import fifthtabproduct2 from "../../assets/images/fifthtabproduct2.png";
+import fifthtabproduct3 from "../../assets/images/fifthtabproduct3.png";
+import fifthtabproduct4 from "../../assets/images/fifthtabproduct4.png";
+import fifthtabproduct5 from "../../assets/images/fifthtabproduct5.png";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
 
   const [activeTab, setActiveTab] = useState("description");
   const [modalContent, setModalContent] = useState(null); // for mobile modal
+
+  const {productId} = useParams()
 
   const tabs = [
     { id: "description", label: "Description" },
@@ -83,6 +100,168 @@ const ProductDetails = () => {
 
   ]
 
+   const productsDetails = [
+    {
+      id:1,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product1,
+      productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$29.76",
+      flavour: "Merlot",
+    },
+    {
+       id:2,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product2,
+      productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$29.38",
+      flavour: "Pinot Noir",
+    },
+    {
+       id:3,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product3,
+      productName:
+        "Bergdolt, Reif & Nett Reverse Sauvignon Blanc (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$25.76",
+      flavour: "Sauvignon Blanc",
+    },
+    {
+       id:4,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product4,
+      productName:
+        "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$29.38",
+      flavour: "Gewurztraminer",
+    },
+    {
+       id:5,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product5,
+      productName: "Bergdolt, Reif & Nett Reverse Rosé (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$25.76",
+      flavour: "Rosé",
+    },
+    {
+       id:6,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product6,
+      productName:
+        "Bergdolt, Reif & Nett Reverse Riesling (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$27.16",
+      flavour: "Riesling",
+    },
+    {
+       id:7,
+      type: "Lamm Jung",
+      productImg: secondtabproduct,
+      productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$26.97",
+      flavour: "Riesling",
+    },
+    {
+       id:8,
+      type: "KvD Strauch Sektmanufaktur",
+      productImg: thirdtabproduct,
+      productName:
+        "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$28.91",
+      flavour: "Rouge Pur",
+    },
+    {
+       id:9,
+      type: "Château Clos de Boüard",
+      productImg: fourthtabproduct1,
+      productName: "Château Clos de Boüard Sauvignon Blanc Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$25.61",
+      flavour: "Sauvignon Blanc",
+    },
+    {
+       id:10,
+      type: "Château Clos de Boüard",
+      productImg: fourthtabproduct2,
+      productName: "Château Clos de Boüard Rosé Sparkling Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$28.19",
+      flavour: "Pinot Noir",
+    },
+    {
+       id:11,
+      type: "Matthias Anton",
+      productImg: fifthtabproduct1,
+      productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$33.61",
+      flavour: "Sauvignon Blanc",
+    },
+    {
+       id:12,
+      type: "Matthias Anton",
+      productImg: fifthtabproduct2,
+      productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$28.19",
+      flavour: "Pinot Noir",
+    },
+    {
+       id:13,
+      type: "Matthias Anton",
+      productImg: fifthtabproduct3,
+      productName: "Matthias Anton Rosé (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$25.61",
+      flavour: "Rosé",
+    },
+    {
+       id:14,
+      type: "Matthias Anton",
+      productImg: fifthtabproduct4,
+      productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$25.61",
+      flavour: "Pinot Grigio",
+    },
+    {
+       id:15,
+      type: "Matthias Anton",
+      productImg: fifthtabproduct5,
+      productName:
+        "Matthias Anton Blanc de Blancs Sparkling (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$28.19",
+      flavour: "Pinot Noir",
+    },
+  ];
+
+const currentProduct = productsDetails.find(
+  (product) => product.id === Number(productId)
+);
+
   return (
     <>
       <div className="bg-[url('images/productDetailsImg.png')]  h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
@@ -101,26 +280,37 @@ const ProductDetails = () => {
         <div className="w-[95%]  mx-auto ">
 
           <div className="flex flex-col py-[55px] xl:py-[100px] md:flex-row gap-6 xl:gap-18 justify-between md:items-start">
-            <div className="w-full md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
+
+            <div className="flex flex-col gap-4 xl:gap-5   Justify-center w-full md:w-auto md:flex-1">
+                            <div className="w-full flex flex-col justify-center md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
               <img
-                  src={product}
+                  src={currentProduct?.productImg}
+  alt={currentProduct?.productName}
                   alt=""
                 className="object-contain object-center w-full h-[788px]"
-              />
+              />  
             </div>
+
+            <div className="w-full flex justify-center">
+                    <img   src={currentProduct?.productImg}
+  alt={currentProduct?.productName} className=" w-[160px] border border-[#CCCCCC] py-2  h-[160px] object-contain" />
+            </div>
+
+            </div>
+
 
             <div className="flex flex-col gap-1 xl:gap-3 w-full md:flex-1">
               <div className="flex flex-col gap-1 xl:gap-2">
-                <p className="font-cormorant font-semibold text-[24px] lg:text-[36px] text-[#641026]">
-                  Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized
-                </p>
+        <p className="font-cormorant font-semibold text-[24px] lg:text-[36px] text-[#641026]">
+  {currentProduct?.productName}
+</p>
                 <p className="font-urbanist font-medium text-md text-[#0B0B0B] pb-3">
                   <span className="capitalize ">De</span>-
                   <span>Alcoholized</span>
                 </p>
-                <p className="font-urbanist font-bold text-2xl text-[#0B0B0B]">
-                  $ 29.76
-                </p>
+        <p className="font-urbanist font-bold text-2xl text-[#0B0B0B]">
+  {currentProduct?.price}
+</p>
               </div>
 
               <div className="w-full  xl:max-w-[611px] flex flex-col gap-6 mt-3">
@@ -465,7 +655,7 @@ const ProductDetails = () => {
 
             {modalContent === "additional" && (
               <>
-                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]  ">Product Specifications</h3>
+                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">Product Specifications</h3>
                 <ul className="list-disc list-inside mb-4">
                   <li>Volume: 750ml</li>
                   <li>Alcohol Content: 13.5%</li>

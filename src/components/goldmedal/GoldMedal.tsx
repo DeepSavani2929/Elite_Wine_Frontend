@@ -47,12 +47,12 @@ const GoldMedal = () => {
     <div className=' py-[55px] xl:py-[100px] flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6 lg:gap-12 '>
         
         {/* Text Section */}
-        <div className='flex order-2 md:order-1 w-full  md:w-[50%] flex-col items-start  gap-5 max-w-[600px]  md:text-left'>
-          <p className='font-cormorant font-bold text-2xl md:text-base lg:text-xl xl:text-[36px] text-[#0B0B0B] uppercase leading-snug'>
+        <div className='flex order-2 md:order-1 w-full  md:w-[50%] flex-col items-start  gap-3 max-w-[600px]  md:text-left'>
+          <p className='font-cormorant font-bold text-3xl md:text-xl  lg:text-3xl xl:text-[36px] text-[#0B0B0B] uppercase leading-snug'>
             Elite Wine Selections – Pure <br className='hidden sm:block' /> terroir. Zero compromise.
           </p>
 
-          <p className='text-[#565656] font-medium font-urbanist text-xs xl:text-sm  leading-relaxed'>
+          <p className='text-[#565656] font-medium font-urbanist text-md xl:text-base  leading-relaxed'>
             Elite Wine Selections is a New York–based importer and wholesaler specializing in premium,
             award-winning European dealcoholized wines (&le; 0.5% ABV) primarily from Germany, France,
             Italy, and Spain. <br /><br />
@@ -81,7 +81,7 @@ const GoldMedal = () => {
             />
 
             <div className='w-full'>
-            <p className='font-urbanist font-semibold  text-sm md:text-xs xl:text-base text-[#0B0B0B] !text-center  px-3 md:px-0'>
+            <p className='font-urbanist font-semibold  text-md md:text-sm xl:text-base text-[#0B0B0B] !text-center  px-3 md:px-0'>
             Gold Medal for the Bergdolt-Reif & Nett Breakaway Merlot
           </p>
             </div>

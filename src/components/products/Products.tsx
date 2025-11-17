@@ -19,6 +19,7 @@ import fifthtabproduct2 from "../../assets/images/fifthtabproduct2.png";
 import fifthtabproduct3 from "../../assets/images/fifthtabproduct3.png";
 import fifthtabproduct4 from "../../assets/images/fifthtabproduct4.png";
 import fifthtabproduct5 from "../../assets/images/fifthtabproduct5.png";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
   const wineries = [
@@ -29,8 +30,11 @@ const Products = () => {
     "Matthias Anton",
   ];
 
+  const params = useParams()
+
   const productsDetails = [
     {
+      id:1,
       type: "Bergdolt, Reif & Nett",
       productImg: product1,
       productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized",
@@ -41,6 +45,7 @@ const Products = () => {
       flavour: "Merlot",
     },
     {
+       id:2,
       type: "Bergdolt, Reif & Nett",
       productImg: product2,
       productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized",
@@ -50,6 +55,7 @@ const Products = () => {
       flavour: "Pinot Noir",
     },
     {
+       id:3,
       type: "Bergdolt, Reif & Nett",
       productImg: product3,
       productName:
@@ -60,6 +66,7 @@ const Products = () => {
       flavour: "Sauvignon Blanc",
     },
     {
+       id:4,
       type: "Bergdolt, Reif & Nett",
       productImg: product4,
       productName:
@@ -70,6 +77,7 @@ const Products = () => {
       flavour: "Gewurztraminer",
     },
     {
+       id:5,
       type: "Bergdolt, Reif & Nett",
       productImg: product5,
       productName: "Bergdolt, Reif & Nett Reverse Rosé (vegan) Dealcoholized",
@@ -79,6 +87,7 @@ const Products = () => {
       flavour: "Rosé",
     },
     {
+       id:6,
       type: "Bergdolt, Reif & Nett",
       productImg: product6,
       productName:
@@ -89,6 +98,7 @@ const Products = () => {
       flavour: "Riesling",
     },
     {
+       id:7,
       type: "Lamm Jung",
       productImg: secondtabproduct,
       productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
@@ -99,6 +109,7 @@ const Products = () => {
       flavour: "Riesling",
     },
     {
+       id:8,
       type: "KvD Strauch Sektmanufaktur",
       productImg: thirdtabproduct,
       productName:
@@ -110,6 +121,7 @@ const Products = () => {
       flavour: "Rouge Pur",
     },
     {
+       id:9,
       type: "Château Clos de Boüard",
       productImg: fourthtabproduct1,
       productName: "Château Clos de Boüard Sauvignon Blanc Dealcoholized",
@@ -119,6 +131,7 @@ const Products = () => {
       flavour: "Sauvignon Blanc",
     },
     {
+       id:10,
       type: "Château Clos de Boüard",
       productImg: fourthtabproduct2,
       productName: "Château Clos de Boüard Rosé Sparkling Dealcoholized",
@@ -128,6 +141,7 @@ const Products = () => {
       flavour: "Pinot Noir",
     },
     {
+       id:11,
       type: "Matthias Anton",
       productImg: fifthtabproduct1,
       productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
@@ -138,6 +152,7 @@ const Products = () => {
       flavour: "Sauvignon Blanc",
     },
     {
+       id:12,
       type: "Matthias Anton",
       productImg: fifthtabproduct2,
       productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
@@ -148,6 +163,7 @@ const Products = () => {
       flavour: "Pinot Noir",
     },
     {
+       id:13,
       type: "Matthias Anton",
       productImg: fifthtabproduct3,
       productName: "Matthias Anton Rosé (vegan) Dealcoholized",
@@ -157,6 +173,7 @@ const Products = () => {
       flavour: "Rosé",
     },
     {
+       id:14,
       type: "Matthias Anton",
       productImg: fifthtabproduct4,
       productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized",
@@ -166,6 +183,7 @@ const Products = () => {
       flavour: "Pinot Grigio",
     },
     {
+       id:15,
       type: "Matthias Anton",
       productImg: fifthtabproduct5,
       productName:
@@ -190,7 +208,7 @@ const Products = () => {
           <div className="py-[55px] xl:py-[100px] flex flex-col items-center justify-between gap-12">
             {/* Title + Winery Buttons */}
             <div className="flex flex-col items-center justify-between gap-8 text-center w-full">
-              <p className="font-cormorant font-bold text-[36px] uppercase leading-tight">
+              <p className="font-cormorant font-bold text-[28px] xl:text-[36px] uppercase leading-tight">
                 Products
               </p>
 
@@ -199,7 +217,7 @@ const Products = () => {
                 className="
                   flex items-center gap-4 md:gap-3 xl:gap-8 
                   overflow-x-auto xl:overflow-visible 
-                  w-full scrollbar-thin scrollbar-thumb-[#EED291] scrollbar-track-transparent
+                  w-full scrollbar-thin scrollbar-thumb-[#EED291] scrollbar-track-[#D9D9D9]
                   lg:justify-between
                 "
               >
@@ -237,18 +255,19 @@ const Products = () => {
       </div>
 
       {/* Custom Scrollbar */}
-      <style jsx>{`
-        .scrollbar-thin::-webkit-scrollbar {
-          height: 6px;
-        }
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-          background-color: #eed291;
-          border-radius: 10px;
-        }
-        .scrollbar-thin::-webkit-scrollbar-track {
-          background: transparent;
-        }
-      `}</style>
+  <style jsx>{`
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #eed291; /* gold thumb */
+    border-radius: 10px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f2f2f2; /* very light gray track */
+    border-radius: 10px;
+  }
+`}</style>
     </>
   );
 };

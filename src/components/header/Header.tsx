@@ -149,7 +149,7 @@ const Header = () => {
                 to="/shop"
                 className={({ isActive }) => (isActive ? "text-[#EED291]" : "")}
               >
-                <li>Shop</li>
+                <li>Shop All</li>
               </NavLink>
 
               <NavLink
@@ -270,7 +270,7 @@ const Header = () => {
                 } px-5 pb-3 pt-2.5 border-b border-[#e6e6e673] rounded bg-transparent hover:bg-white/5 flex items-center justify-between`
               }
             >
-              <span>Shop</span>
+              <span>Shop All</span>
             </NavLink>
 
             <NavLink
