@@ -1096,7 +1096,148 @@
 
 
 
-import React, { useRef, useEffect, useState } from "react";
+// import React, { useRef, useEffect, useState } from "react";
+// import product1 from "../../assets/images/product1.png";
+// import verietyImg from "../../assets/images/variety.png";
+// import productmedal from "../../assets/images/productmedal.png";
+// import ProductsChild from "../products/productsChild";
+// import secondtabproduct from "../../assets/images/secondtabproduct.png";
+// import thirdtabproduct from "../../assets/images/thirdtabproduct.png";
+
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import { Navigation } from "swiper/modules";
+
+// import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// const PopularProducts = () => {
+//   const prevRef = useRef<HTMLButtonElement | null>(null);
+//   const nextRef = useRef<HTMLButtonElement | null>(null);
+
+//   const [swiperInstance, setSwiperInstance] = useState<any>(null);
+
+//   const productsDetails = [
+//     {
+//       type: "Lamm Jung",
+//       productImg: secondtabproduct,
+//       productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+//       variety: "Grape variety",
+//       varietylogo: verietyImg,
+//       price: "$26.97",
+//       flavour: "Riesling",
+//     },
+//     {
+//       type: "Bergdolt, Reif & Nett",
+//       productImg: product1,
+//       productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
+//       variety: "Grape variety",
+//       varietylogo: verietyImg,
+//       price: "$29.76",
+//       medal: productmedal,
+//       flavour: "Merlot",
+//     },
+//     {
+//       type: "KvD Strauch Sektmanufaktur",
+//       productImg: thirdtabproduct,
+//       productName:
+//         "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealalcoolized",
+//       variety: "Grape variety",
+//       varietylogo: verietyImg,
+//       price: "$28.91",
+//       flavour: "Rouge Pur",
+//     },
+//   ];
+
+//   useEffect(() => {
+//     if (swiperInstance && prevRef.current && nextRef.current) {
+//       swiperInstance.params.navigation.prevEl = prevRef.current;
+//       swiperInstance.params.navigation.nextEl = nextRef.current;
+
+//       swiperInstance.navigation.destroy();
+//       swiperInstance.navigation.init();
+//       swiperInstance.navigation.update();
+//     }
+//   }, [swiperInstance]);
+
+//   return (
+//     <div className="w-full bg-[#F8F8F8]">
+//       <div className="w-[95%] xl:w-[80%] mx-auto">
+//         <div className="py-[55px] xl:py-[100px] flex flex-col items-center justify-between gap-12">
+//           <p className="font-cormorant font-bold text-[28px] xl:text-[36px] text-[#0B0B0B] text-center uppercase leading-tight">
+//             Popular products
+//           </p>
+
+//           <div className="hidden xl:grid w-full gap-8 xl:gap-10 grid-cols-2 md:grid-cols-3 transition-all duration-500">
+//             {productsDetails.map((product, index) => (
+//               <ProductsChild key={index} product={product} />
+//             ))}
+//           </div>
+
+
+//           <div className="block xl:hidden w-full relative">
+//             <Swiper
+//               modules={[Navigation]}
+//               spaceBetween={20}
+//               onSwiper={setSwiperInstance} // store swiper instance
+//               breakpoints={{
+//                 0: { slidesPerView: 2 },
+//                 640: { slidesPerView: 2 },
+//                 768: { slidesPerView: 3 },
+//               }}
+//               className="!pb-16"
+//             >
+//               {productsDetails.map((product, index) => (
+//                 <SwiperSlide key={index}>
+//                   <div className="px-2 h-full">
+//                     <ProductsChild product={product} />
+//                   </div>
+//                 </SwiperSlide>
+//               ))}
+//             </Swiper>
+
+
+//             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3">
+//               <button
+//                 ref={prevRef}
+//                 className="border border-[#0B0B0B] rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0B0B0B] hover:text-white transition"
+//               >
+//                 <ChevronLeft size={20} />
+//               </button>
+
+//               <button
+//                 ref={nextRef}
+//                 className="border border-[#0B0B0B] rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0B0B0B] hover:text-white transition"
+//               >
+//                 <ChevronRight size={20} />
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PopularProducts;
+
+
+
+
+// import React, { useState } from "react";
+// import Title from "./Title";
+// import product1 from "/products/product1.png";
+// import product2 from "/products/product2.png";
+// import product3 from "/products/product3.png";
+// import Product from "./Product";
+
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+// import { Navigation } from "swiper/modules";
+
+import React, {  useState } from "react";
 import product1 from "../../assets/images/product1.png";
 import verietyImg from "../../assets/images/variety.png";
 import productmedal from "../../assets/images/productmedal.png";
@@ -1107,17 +1248,34 @@ import thirdtabproduct from "../../assets/images/thirdtabproduct.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PopularProducts = () => {
-  const prevRef = useRef<HTMLButtonElement | null>(null);
-  const nextRef = useRef<HTMLButtonElement | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const [showNav, setShowNav] = useState(true);
 
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const handleNavigationVisibility = (swiper) => {
+    if (swiper.slides.length <= swiper.params.slidesPerView) {
+      setShowNav(false);
+    } else {
+      setShowNav(true);
+    }
 
-  const productsDetails = [
+    if (swiper.navigation) {
+      swiper.navigation.destroy();
+      swiper.navigation.init();
+      swiper.navigation.update();
+    }
+
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  const productDetails = [
     {
       type: "Lamm Jung",
       productImg: secondtabproduct,
@@ -1149,79 +1307,77 @@ const PopularProducts = () => {
     },
   ];
 
-  /** IMPORTANT FIX:
-   * After buttons render, attach navigation to swiper & update.
-   */
-  useEffect(() => {
-    if (swiperInstance && prevRef.current && nextRef.current) {
-      swiperInstance.params.navigation.prevEl = prevRef.current;
-      swiperInstance.params.navigation.nextEl = nextRef.current;
-
-      swiperInstance.navigation.destroy();
-      swiperInstance.navigation.init();
-      swiperInstance.navigation.update();
-    }
-  }, [swiperInstance]);
-
   return (
-    <div className="w-full bg-[#F8F8F8]">
-      <div className="w-[95%] xl:w-[80%] mx-auto">
-        <div className="py-[55px] xl:py-[100px] flex flex-col items-center justify-between gap-12">
-          <p className="font-cormorant font-bold text-[28px] xl:text-[36px] text-[#0B0B0B] text-center uppercase leading-tight">
-            Popular products
-          </p>
+    <section className="w-full bg-[#F8F8F8] py-10 md:py-20">
+      <div className="w-[90%] xl:w-[80%] mx-auto">
+        {/* Title */}
+        <div className="flex flex-col gap-8">
+                        <p className="font-cormorant font-bold text-[28px] xl:text-[36px] text-[#0B0B0B] text-center uppercase leading-tight">
+             Popular products
+           </p>
 
-          {/* Desktop grid */}
-          <div className="hidden xl:grid w-full gap-8 xl:gap-10 grid-cols-2 md:grid-cols-3 transition-all duration-500">
-            {productsDetails.map((product, index) => (
-              <ProductsChild key={index} product={product} />
+        {/* Swiper Container */}
+        <div className="relative">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={20}
+            navigation={{
+              nextEl: ".swiper-button-next-custom",
+              prevEl: ".swiper-button-prev-custom",
+            }}
+            breakpoints={{
+              320: { slidesPerView: 2 },
+              640: { slidesPerView: 3 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="mySwiper pb-16"
+            onInit={(swiper) => {
+              handleNavigationVisibility(swiper);
+            }}
+            onResize={(swiper) => {
+              handleNavigationVisibility(swiper);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+          >
+            {productDetails.map((product, index) => (
+              <SwiperSlide key={index}>
+            <ProductsChild key={index} product={product} />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
 
-          {/* Mobile Swiper */}
-          <div className="block xl:hidden w-full relative">
-            <Swiper
-              modules={[Navigation]}
-              spaceBetween={20}
-              onSwiper={setSwiperInstance} // store swiper instance
-              breakpoints={{
-                0: { slidesPerView: 2 },
-                640: { slidesPerView: 2 },
-                768: { slidesPerView: 3 },
-              }}
-              className="!pb-16"
-            >
-              {productsDetails.map((product, index) => (
-                <SwiperSlide key={index}>
-                  <div className="px-2 h-full">
-                    <ProductsChild product={product} />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* Navigation Buttons */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3">
+          {/* Custom Navigation Buttons */}
+          {showNav && (
+            <div className="flex justify-center gap-2 mt-6">
               <button
-                ref={prevRef}
-                className="border border-[#0B0B0B] rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0B0B0B] hover:text-white transition"
+                className={`swiper-button-prev-custom border border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition ${
+                  isBeginning
+                    ? "opacity-40 cursor-not-allowed"
+                    : "hover:bg-gray-200"
+                }`}
+                disabled={isBeginning}
               >
-                <ChevronLeft size={20} />
+                ❮
               </button>
-
               <button
-                ref={nextRef}
-                className="border border-[#0B0B0B] rounded-full w-12 h-12 flex items-center justify-center hover:bg-[#0B0B0B] hover:text-white transition"
+                className={`swiper-button-next-custom border border-black rounded-full w-12 h-12 flex items-center justify-center shadow-md transition ${
+                  isEnd ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-200"
+                }`}
+                disabled={isEnd}
               >
-                <ChevronRight size={20} />
+                ❯
               </button>
             </div>
-          </div>
+          )}
         </div>
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 
 export default PopularProducts;
-

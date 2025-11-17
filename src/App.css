@@ -22,3 +22,9 @@
      background: #641026 !important;
 }
 
+
+.scroll-lock {
+  height: 100vh;
+  overflow: hidden;
+}
+

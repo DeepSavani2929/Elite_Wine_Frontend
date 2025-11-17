@@ -3639,7 +3639,7 @@ const Shop: React.FC = () => {
           }`}
         >
           {/* HEADER */}
-          <div className="flex justify-between items-center px-4 py-4 border-b border-gray-300">
+          <div className="flex justify-between items-center px-4 py-4">
             <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
             <button onClick={() => setSidebarOpen(false)}>
               <X size={24} />

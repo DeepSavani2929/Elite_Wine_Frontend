@@ -274,7 +274,7 @@ const About = () => {
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className="pb-[55px] xl:pb-[100px] pt-0">
             <div className="flex flex-col md:flex-row justify-between lg:gap-1 xl:gap-20">
-              <div className="order-2 md:order-1 lg:w-1/2 flex flex-col justify-center py-3 lg:py-0">
+              <div className="order-2 md:order-1 md:w-1/2 flex flex-col justify-center py-3 lg:py-0">
                 <h2 className="font-cormorant font-bold text-[28px] xl:text-[36px] uppercase text-[#0B0B0B] mb-0 md:mb-2 xl:mb-6">
                   AWARDS & RECOGNITION
                 </h2>
@@ -297,7 +297,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="order-1 md:order-2 flex">
+              <div className="order-1 md:order-2 flex w-full md:w-1/2">
                 <div className="w-full cursor-pointer">
                   <img
                     src={about2}
@@ -339,6 +339,42 @@ const About = () => {
           </div>
         </div>
       </div>
+
+{/* 
+                <section className="py-0 flex flex-col-reverse md:flex-row md:justify-between gap-5 animate-fadeIn delay-200">
+            <div className="w-full md:w-1/2 flex flex-col justify-center">
+              <h3 className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-semibold mb-4 uppercase font-[Cormorant-Upright-bold] tracking-wider">
+                Awards & Recognition
+              </h3>
+
+              <p className="leading-relaxed  text-sm md:text-[16px] opacity-80 mb-4">
+                We proudly showcase wines from e.g. Bergdolt-Reif & Nett (Pfalz,
+                Germany), a pioneer in artisanal dealcoholized winemaking, whose
+                achievements include:
+              </p>
+
+              <p className="leading-relaxed  text-sm md:text-[16px] opacity-80 mb-4">
+                Falstaff Alcohol-Free Trophy: Reverse Riesling (90 pts),
+                Breakaway Pinot Blanc (90 pts), Breakaway Gewürztraminer (91
+                pts), Reverse Sauvignon Blanc (90.5 pts)
+              </p>
+
+              <p className="leading-relaxed  text-sm md:text-[16px] opacity-80 mt-4">
+                These accolades underline our commitment to offering
+                award-winning wines that set the benchmark for the non-alcoholic
+                category.
+              </p>
+            </div>
+
+  
+            <div className="w-full md:w-1/2 flex justify-center">
+              <img
+                src={about2}
+                alt="Falstaff award"
+                className="w-full lg:w-80 rounded-xl"
+              />
+            </div>
+          </section> */}
 
       {/* WHAT SETS US APART */}
       <div className="w-full bg-gradient-to-b from-[#FFFFFF] via-white via-70% to-[#FFF1D2]">

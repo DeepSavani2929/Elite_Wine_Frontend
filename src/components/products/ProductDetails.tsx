@@ -9,7 +9,7 @@ import share from "../../assets/images/share.png";
 import paymentcard from "../../assets/images/paymentcard.png";
 import shipping1 from "../../assets/images/shipping1.png";
 import shipping2 from "../../assets/images/shipping2.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import secondtabproduct from "../../assets/images/secondtabproduct.png";
 import relatedproduct1 from "../../assets/images/relatedproduct1.png";
 import relatedproduct2 from "../../assets/images/relatedproduct2.png";
@@ -32,11 +32,14 @@ import fifthtabproduct5 from "../../assets/images/fifthtabproduct5.png";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
-
   const [activeTab, setActiveTab] = useState("description");
   const [modalContent, setModalContent] = useState(null); // for mobile modal
 
-  const {productId} = useParams()
+  const { productId } = useParams();
+  const rightRef = useRef(null);
+  const leftRef = useRef(null);
+
+  const [lockScroll, setLockScroll] = useState(false);
 
   const tabs = [
     { id: "description", label: "Description" },
@@ -54,8 +57,7 @@ const ProductDetails = () => {
     document.body.style.overflow = "auto";
   };
 
-
-    useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && modalContent) {
         closeModal();
@@ -65,44 +67,67 @@ const ProductDetails = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [modalContent]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!rightRef.current || !leftRef.current) return;
+
+      const leftHeight = leftRef.current.offsetHeight;
+      const rightHeight = rightRef.current.scrollHeight;
+
+      const leftBottom = leftRef.current.getBoundingClientRect().bottom;
+      const rightBottom = rightRef.current.getBoundingClientRect().bottom;
+
+      const reachedTop = rightRef.current.getBoundingClientRect().top <= 0;
+      const rightOverflowing = rightHeight > leftHeight;
+
+      if (rightOverflowing && reachedTop && rightBottom > leftBottom) {
+        document.body.classList.add("scroll-lock");
+        setLockScroll(true);
+      } else if (lockScroll && rightBottom <= leftBottom + 5) {
+        document.body.classList.remove("scroll-lock");
+        setLockScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.body.classList.remove("scroll-lock");
+    };
+  }, [lockScroll]);
 
   const relatedProductsList = [
-
-         {
-
-         productImg: relatedproduct1,
-         productName: "Reverse Gewurztraminer Dealcoholized",
-         variety: "Grape variety",
-         varietylogo: verietyImg,
-         price: "$29.38",
-         flavour: "Gewurztraminer",
-       },
-
-           {
-   
-         productImg: relatedproduct2,
-         productName: "Reverse Rose (vegan) Dealcoholized",
-         variety: "Grape variety",
-         varietylogo: verietyImg,
-         price: "$25.76",
-         flavour: "Rose",
-       },
-
-       {
-         productImg: secondtabproduct,
-         productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-         variety: "Grape variety",
-         varietylogo: verietyImg,
-         price: "$26.97",
-         flavour: "Riesling",
-       },
-
-
-  ]
-
-   const productsDetails = [
     {
-      id:1,
+      productImg: relatedproduct1,
+      productName: "Reverse Gewurztraminer Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$29.38",
+      flavour: "Gewurztraminer",
+    },
+
+    {
+      productImg: relatedproduct2,
+      productName: "Reverse Rose (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$25.76",
+      flavour: "Rose",
+    },
+
+    {
+      productImg: secondtabproduct,
+      productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: "$26.97",
+      flavour: "Riesling",
+    },
+  ];
+
+  const productsDetails = [
+    {
+      id: 1,
       type: "Bergdolt, Reif & Nett",
       productImg: product1,
       productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized",
@@ -112,7 +137,7 @@ const ProductDetails = () => {
       flavour: "Merlot",
     },
     {
-       id:2,
+      id: 2,
       type: "Bergdolt, Reif & Nett",
       productImg: product2,
       productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized",
@@ -122,7 +147,7 @@ const ProductDetails = () => {
       flavour: "Pinot Noir",
     },
     {
-       id:3,
+      id: 3,
       type: "Bergdolt, Reif & Nett",
       productImg: product3,
       productName:
@@ -133,18 +158,17 @@ const ProductDetails = () => {
       flavour: "Sauvignon Blanc",
     },
     {
-       id:4,
+      id: 4,
       type: "Bergdolt, Reif & Nett",
       productImg: product4,
-      productName:
-        "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
+      productName: "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
       variety: "Grape variety",
       varietylogo: verietyImg,
       price: "$29.38",
       flavour: "Gewurztraminer",
     },
     {
-       id:5,
+      id: 5,
       type: "Bergdolt, Reif & Nett",
       productImg: product5,
       productName: "Bergdolt, Reif & Nett Reverse Rosé (vegan) Dealcoholized",
@@ -154,7 +178,7 @@ const ProductDetails = () => {
       flavour: "Rosé",
     },
     {
-       id:6,
+      id: 6,
       type: "Bergdolt, Reif & Nett",
       productImg: product6,
       productName:
@@ -165,7 +189,7 @@ const ProductDetails = () => {
       flavour: "Riesling",
     },
     {
-       id:7,
+      id: 7,
       type: "Lamm Jung",
       productImg: secondtabproduct,
       productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
@@ -175,7 +199,7 @@ const ProductDetails = () => {
       flavour: "Riesling",
     },
     {
-       id:8,
+      id: 8,
       type: "KvD Strauch Sektmanufaktur",
       productImg: thirdtabproduct,
       productName:
@@ -186,7 +210,7 @@ const ProductDetails = () => {
       flavour: "Rouge Pur",
     },
     {
-       id:9,
+      id: 9,
       type: "Château Clos de Boüard",
       productImg: fourthtabproduct1,
       productName: "Château Clos de Boüard Sauvignon Blanc Dealcoholized",
@@ -196,7 +220,7 @@ const ProductDetails = () => {
       flavour: "Sauvignon Blanc",
     },
     {
-       id:10,
+      id: 10,
       type: "Château Clos de Boüard",
       productImg: fourthtabproduct2,
       productName: "Château Clos de Boüard Rosé Sparkling Dealcoholized",
@@ -206,7 +230,7 @@ const ProductDetails = () => {
       flavour: "Pinot Noir",
     },
     {
-       id:11,
+      id: 11,
       type: "Matthias Anton",
       productImg: fifthtabproduct1,
       productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
@@ -216,7 +240,7 @@ const ProductDetails = () => {
       flavour: "Sauvignon Blanc",
     },
     {
-       id:12,
+      id: 12,
       type: "Matthias Anton",
       productImg: fifthtabproduct2,
       productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
@@ -226,7 +250,7 @@ const ProductDetails = () => {
       flavour: "Pinot Noir",
     },
     {
-       id:13,
+      id: 13,
       type: "Matthias Anton",
       productImg: fifthtabproduct3,
       productName: "Matthias Anton Rosé (vegan) Dealcoholized",
@@ -236,7 +260,7 @@ const ProductDetails = () => {
       flavour: "Rosé",
     },
     {
-       id:14,
+      id: 14,
       type: "Matthias Anton",
       productImg: fifthtabproduct4,
       productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized",
@@ -246,7 +270,7 @@ const ProductDetails = () => {
       flavour: "Pinot Grigio",
     },
     {
-       id:15,
+      id: 15,
       type: "Matthias Anton",
       productImg: fifthtabproduct5,
       productName:
@@ -258,9 +282,9 @@ const ProductDetails = () => {
     },
   ];
 
-const currentProduct = productsDetails.find(
-  (product) => product.id === Number(productId)
-);
+  const currentProduct = productsDetails.find(
+    (product) => product.id === Number(productId)
+  );
 
   return (
     <>
@@ -278,112 +302,99 @@ const currentProduct = productsDetails.find(
 
       <div className="w-full">
         <div className="w-[95%]  mx-auto ">
-
-          <div className="flex flex-col py-[55px] xl:py-[100px] md:flex-row gap-6 xl:gap-18 justify-between md:items-start">
-
-            <div className="flex flex-col gap-4 xl:gap-5   Justify-center w-full md:w-auto md:flex-1">
-                            <div className="w-full flex flex-col justify-center md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
-              <img
+          <div className="  flex flex-col py-[55px] xl:py-[100px] md:flex-row gap-6 xl:gap-18 justify-between md:items-start">
+            <div
+              className="flex flex-col gap-4 xl:gap-5   Justify-center w-full md:w-auto md:flex-1"
+              ref={leftRef}
+            >
+              <div className="w-full flex flex-col justify-center md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
+                <img
                   src={currentProduct?.productImg}
-  alt={currentProduct?.productName}
+                  alt={currentProduct?.productName}
                   alt=""
-                className="object-contain object-center w-full h-[788px]"
-              />  
-            </div>
+                  className="object-contain object-center w-full h-[788px]"
+                />
+              </div>
 
-            <div className="w-full flex justify-center">
-                    <img   src={currentProduct?.productImg}
-  alt={currentProduct?.productName} className=" w-[160px] border border-[#CCCCCC] py-2  h-[160px] object-contain" />
+              <div className="w-full flex justify-center">
+                <img
+                  src={currentProduct?.productImg}
+                  alt={currentProduct?.productName}
+                  className=" w-[160px] border border-[#CCCCCC] py-2  h-[160px] object-contain"
+                />
+              </div>
             </div>
-
-            </div>
-
 
             <div className="flex flex-col gap-1 xl:gap-3 w-full md:flex-1">
-              <div className="flex flex-col gap-1 xl:gap-2">
-        <p className="font-cormorant font-semibold text-[24px] lg:text-[36px] text-[#641026]">
-  {currentProduct?.productName}
-</p>
+              <div
+                ref={rightRef}
+                className={`flex flex-col gap-1 xl:gap-3 w-full md:flex-1 ${
+                  lockScroll ? "overflow-y-auto h-screen" : ""
+                }`}
+              >
+                <p className="font-cormorant font-semibold text-[24px] lg:text-[36px] text-[#641026]">
+                  {currentProduct?.productName}
+                </p>
                 <p className="font-urbanist font-medium text-md text-[#0B0B0B] pb-3">
                   <span className="capitalize ">De</span>-
                   <span>Alcoholized</span>
                 </p>
-        <p className="font-urbanist font-bold text-2xl text-[#0B0B0B]">
-  {currentProduct?.price}
-</p>
+                <p className="font-urbanist font-bold text-2xl text-[#0B0B0B]">
+                  {currentProduct?.price}
+                </p>
               </div>
 
-              <div className="w-full  xl:max-w-[611px] flex flex-col gap-6 mt-3">
-                <div className="flex flex-col md:flex-row flex-wrap lg:gap-x-2 lg:gap-x-14 xl:gap-x-40 gap-y-2 md:gap-y-4">
-                  <div className="gap-2 lg:gap-4 flex items-center">
-                    <img
-                      src={productDetails1}
-                      className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
-                      alt=""
-                    />
-                    <p className="flex ">
-                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
-                        Alcohol
-                      </span>
-                      <p className="text-[#0B0B0B] text-sm md:text-base">&lt; 0.5% abv</p>
-                    </p>
-                  </div>
-
-                  <div className="gap-2 lg:gap-4 flex items-center ms-0 lg:ms-3 xl:ms-3">
-                    <img
-                      src={productDetails2}
-                      className=" w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
-                      alt=""
-                    />
-                    <p className="flex gap-1 ">
-                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
-                        Residual Sugar
-                      </span>
-                      <p className="text-[#0B0B0B] text-sm md:text-base">20.9g/l</p>
-                    </p>
-                  </div>
-
-                  <div className=" gap-2 lg:gap-4 flex items-center">
-                    <img
-                      src={productDetails3}
-                      className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
-                      alt=""
-                    />
-                    <p className="flex gap-1">
-                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
-                        Grap Variety
-                      </span>
-                      <p className="text-[#0B0B0B] text-sm md:text-base">Mertol</p>
-                    </p>
-                  </div>
-
-                  <div className=" gap-2 lg:gap-4 flex items-center">
-                    <img
-                      src={productDetails4}
-                      className=" w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
-                      alt=""
-                    />
-                    <p className="flex gap-1 items-start pt-0.5">
-                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
-                        Total Acidity
-                      </span>
-                      <p className="text-[#0B0B0B] text-sm md:text-base">5.5g/l</p>
-                    </p>
-                  </div>
-
-                  <div className="gap-2 lg:gap-4 flex items-center">
-                    <img
-                      src={productDetails5}
-                      className=" w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
-                      alt=""
-                    />
-                    <p className="flex gap-1 ">
-                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
-                        Maturation
-                      </span>
-                      <p className="text-[#0B0B0B] text-sm md:text-base"> in Wooden Barrels</p>
-                    </p>
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 xl:gap-5 space-y-2">
+                <div className="flex items-center gap-2 xl:gap-5">
+                  <img src={productDetails1} alt="alcohol" />
+                  <p>
+                    <span className="font-bold text-sm xl:text-lg">
+                      Alcohol &lt;
+                    </span>
+                    <span> 0.5%</span> abv
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 xl:gap-5">
+                  <img src={productDetails2} alt="alcohol" />
+                  <p className="lowercase">
+                    <span className="font-bold text-sm xl:text-lg capitalize">
+                      {"RESIDUAL SUGAR".toLowerCase()}
+                    </span>
+                    <span> 20.9</span>G/L
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 xl:gap-5">
+                  <img src={productDetails3} alt="alcohol" />
+                  <p className="lowercase">
+                    <span className="font-bold text-sm xl:text-lg capitalize">
+                      {"GRAPE VARIETY".toLowerCase()}
+                    </span>
+                    <span className=" capitalize">
+                      {" "}
+                      {"MERLOT".toLowerCase()}
+                    </span>
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 xl:gap-5">
+                  <img src={productDetails4} alt="alcohol" />
+                  <p className="lowercase">
+                    <span className="font-bold text-sm xl:text-lg capitalize">
+                      {"TOTAL ACIDITY".toLowerCase()}
+                    </span>
+                    <span> 5.5</span>G/L
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 xl:gap-5">
+                  <img src={productDetails5} alt="alcohol" />
+                  <p className="lowercase">
+                    <span className="font-bold text-sm xl:text-lg capitalize">
+                      {"MATURATION".toLowerCase()}
+                    </span>
+                    <span className=" capitalize">
+                      {" "}
+                      {"IN WOODEN BARRELS".toLowerCase()}
+                    </span>
+                  </p>
                 </div>
               </div>
 
@@ -504,242 +515,266 @@ const currentProduct = productsDetails.find(
             </div>
           </div>
 
-
           {/* shipping Tab view */}
-           
- <div>
-      {/* ===================== Desktop Tabs ===================== */}
-      <div className="hidden md:block">
-        <div className="w-full border-b flex justify-center border-gray-300">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 pb-5 text-md text-urbanist font-semibold cursor-pointer  ${
-                activeTab === tab.id
-                  ? "border-b-2 border-black text-black"
-                  : "text-[#0B0B0B]"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
 
-        <div className="mt-4 text-md text-gray-700 leading-relaxed font-urbanist font-semibold">
-          {activeTab === "description" && (
-            <p>
-              <strong>Sensorik:</strong> This merlot presents a deep, appealing
-              color that is nearly indistinguishable from a conventional red
-              wine. The nose reveals a spicy-fruity bouquet with notes of dried
-              berries and a hint of red pepper. On the palate, it is juicy with
-              cherry-like flavors supported by vibrant acidity. The body remains
-              lean and completely free of tannins. The finish is smooth and
-              well-rounded — also enjoyable lightly chilled in summer. <br />– A
-              fitting companion to salads, picnics, or mild cheeses.
-            </p>
-          )}
+          <div>
+            {/* ===================== Desktop Tabs ===================== */}
+            <div className="hidden md:block">
+              <div className="w-full border-b flex justify-center border-gray-300">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-4 py-2 pb-5 text-md text-urbanist font-semibold cursor-pointer  ${
+                      activeTab === tab.id
+                        ? "border-b-2 border-black text-black"
+                        : "text-[#0B0B0B]"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
 
-          {activeTab === "additional" && (
-            <div>
-              <h3 className="font-semibold mb-2">Product Specifications</h3>
-              <ul className="list-disc list-inside mb-4">
-                <li>Volume: 750ml</li>
-                <li>Alcohol Content: 13.5%</li>
-                <li>Serving Temperature: 16–18°C</li>
-                <li>Closure Type: Natural Cork</li>
-              </ul>
-              <h3 className="font-semibold mb-2">Storage Instructions</h3>
-              <p>
-                Store in a cool, dark place away from direct sunlight. Best
-                consumed within 2 years of purchase for optimal freshness.
-              </p>
+              <div className="mt-4 text-md text-gray-700 leading-relaxed font-urbanist font-semibold">
+                {activeTab === "description" && (
+                  <p>
+                    <strong>Sensorik:</strong> This merlot presents a deep,
+                    appealing color that is nearly indistinguishable from a
+                    conventional red wine. The nose reveals a spicy-fruity
+                    bouquet with notes of dried berries and a hint of red
+                    pepper. On the palate, it is juicy with cherry-like flavors
+                    supported by vibrant acidity. The body remains lean and
+                    completely free of tannins. The finish is smooth and
+                    well-rounded — also enjoyable lightly chilled in summer.{" "}
+                    <br />– A fitting companion to salads, picnics, or mild
+                    cheeses.
+                  </p>
+                )}
+
+                {activeTab === "additional" && (
+                  <div>
+                    <h3 className="font-semibold mb-2">
+                      Product Specifications
+                    </h3>
+                    <ul className="list-disc list-inside mb-4">
+                      <li>Volume: 750ml</li>
+                      <li>Alcohol Content: 13.5%</li>
+                      <li>Serving Temperature: 16–18°C</li>
+                      <li>Closure Type: Natural Cork</li>
+                    </ul>
+                    <h3 className="font-semibold mb-2">Storage Instructions</h3>
+                    <p>
+                      Store in a cool, dark place away from direct sunlight.
+                      Best consumed within 2 years of purchase for optimal
+                      freshness.
+                    </p>
+                  </div>
+                )}
+
+                {activeTab === "shipping" && (
+                  <div>
+                    <h3 className="font-semibold mb-2">Returns Policy</h3>
+                    <p className="mb-4">
+                      You may return most new, unopened items within 30 days of
+                      delivery for a full refund. We'll also pay the return
+                      shipping costs if the return is a result of our error (you
+                      received an incorrect or defective item, etc.).
+                    </p>
+                    <p className="mb-4">
+                      You should expect to receive your refund within four weeks
+                      of giving your package to the return shipper; however, in
+                      many cases you will receive a refund more quickly.
+                    </p>
+                    <p>
+                      If you need to return an item, simply login to your
+                      account, view your order, and click the "Return Item(s)"
+                      button. We'll notify you via e-mail once we've processed
+                      the returned item.
+                    </p>
+
+                    <h3 className="font-semibold mb-2 mt-5">Shipping</h3>
+
+                    <p className="mb-4">
+                      We can ship to virtually any address in the world. Note
+                      that there are restrictions on some products, and some
+                      products cannot be shipped to international destinations.
+                    </p>
+                    <p className="mb-4">
+                      When you place an order, we will estimate shipping and
+                      delivery dates for you based on the availability of your
+                      items and the shipping options you choose. Depending on
+                      the shipping provider you choose, shipping date estimates
+                      may appear on the shipping quotes page.
+                    </p>
+                    <p>
+                      Please also note that the shipping rates for many items we
+                      sell are weight-based. The weight of any such item can be
+                      found on its detail page. To reflect the policies of the
+                      shipping companies we use, all weights will be rounded up
+                      to the next full pound.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
 
-          {activeTab === "shipping" && (
-            <div>
-              <h3 className="font-semibold mb-2">Returns Policy</h3>
-              <p className="mb-4">
-                You may return most new, unopened items within 30 days of
-                delivery for a full refund. We'll also pay the return shipping
-                costs if the return is a result of our error (you received an
-                incorrect or defective item, etc.).
-              </p>
-              <p className="mb-4">
-                You should expect to receive your refund within four weeks of
-                giving your package to the return shipper; however, in many
-                cases you will receive a refund more quickly.
-              </p>
-              <p>
-                If you need to return an item, simply login to your account,
-                view your order, and click the "Return Item(s)" button. We'll
-                notify you via e-mail once we've processed the returned item.
-              </p>
-
-              <h3 className="font-semibold mb-2 mt-5">Shipping</h3>
-
-              <p className="mb-4">
-                We can ship to virtually any address in the world. Note that
-                there are restrictions on some products, and some products
-                cannot be shipped to international destinations.
-              </p>
-              <p className="mb-4">
-                When you place an order, we will estimate shipping and delivery
-                dates for you based on the availability of your items and the
-                shipping options you choose. Depending on the shipping provider
-                you choose, shipping date estimates may appear on the shipping
-                quotes page.
-              </p>
-              <p>
-                Please also note that the shipping rates for many items we sell
-                are weight-based. The weight of any such item can be found on
-                its detail page. To reflect the policies of the shipping
-                companies we use, all weights will be rounded up to the next
-                full pound.
-              </p>
+            {/* ===================== Mobile View ===================== */}
+            <div className="block md:hidden space-y-2">
+              {tabs.map((tab) => (
+                <div key={tab.id} className="border-b border-gray-200">
+                  <button
+                    onClick={() => openModal(tab.id)}
+                    className="flex justify-between items-center w-full py-3 text-base text-urbanist font-semibold text-left"
+                  >
+                    <span>{tab.label}</span>
+                    <span className="text-2xl">›</span>
+                  </button>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* ===================== Mobile View ===================== */}
-      <div className="block md:hidden space-y-2">
-        {tabs.map((tab) => (
-          <div key={tab.id} className="border-b border-gray-200">
-            <button
-              onClick={() => openModal(tab.id)}
-              className="flex justify-between items-center w-full py-3 text-base text-urbanist font-semibold text-left"
-            >
-              <span>{tab.label}</span>
-              <span className="text-2xl">›</span>
-            </button>
-          </div>
-        ))}
-      </div>
+            {/* ===================== Mobile Modal ===================== */}
+            {modalContent && (
+              <div className="fixed inset-0 bg-white z-50 overflow-y-auto font-urbanist">
+                <div className="flex justify-between items-center px-4 py-1.5 border-b border-gray-300 sticky top-0 bg-[#eed291]">
+                  <h2 className="text-lg font-medium uppercase font-urbanist">
+                    {modalContent === "description" && "Description"}
+                    {modalContent === "additional" && "Additional Information"}
+                    {modalContent === "shipping" && "Shipping & Return"}
+                  </h2>
+                  <button
+                    onClick={closeModal}
+                    className="text-4xl pb-2 font-light"
+                  >
+                    ×
+                  </button>
+                </div>
 
-      {/* ===================== Mobile Modal ===================== */}
-      {modalContent && (
-        <div className="fixed inset-0 bg-white z-50 overflow-y-auto font-urbanist">
-          <div className="flex justify-between items-center px-4 py-1.5 border-b border-gray-300 sticky top-0 bg-[#eed291]">
-            <h2 className="text-lg font-medium uppercase font-urbanist">
-              {modalContent === "description" && "Description"}
-              {modalContent === "additional" && "Additional Information"}
-              {modalContent === "shipping" && "Shipping & Return"}
-            </h2>
-            <button onClick={closeModal} className="text-4xl pb-2 font-light">
-              ×
-            </button>
-          </div>
+                <div className="p-5 text-sm text-gray-700 leading-relaxed">
+                  {modalContent === "description" && (
+                    <>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Origin & Winery
+                      </h3>
+                      <p className="mb-4">
+                        Produced by Weingut Lamm-Jung KG, located in Eltville am
+                        Rhein at the heart of the Rheingau — a historic region
+                        renowned for Riesling. The estate follows sustainable
+                        viticulture and specializes in varietal clarity.
+                      </p>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Character
+                      </h3>
+                      <p>
+                        Classic Riesling notes of citrus and stone fruits. The
+                        wine shows fruit-driven freshness with a charming
+                        residual sweetness, delivering balance and easy
+                        drinkability. The vibrant acidity keeps the palate
+                        lively, while the gentle sweetness adds charm and
+                        approachability.
+                      </p>
+                    </>
+                  )}
 
-          <div className="p-5 text-sm text-gray-700 leading-relaxed">
-            {modalContent === "description" && (
-              <>
-                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">Origin & Winery</h3>
-                <p className="mb-4">
-                  Produced by Weingut Lamm-Jung KG, located in Eltville am Rhein
-                  at the heart of the Rheingau — a historic region renowned for
-                  Riesling. The estate follows sustainable viticulture and
-                  specializes in varietal clarity.
-                </p>
-                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">Character</h3>
-                <p>
-                  Classic Riesling notes of citrus and stone fruits. The wine
-                  shows fruit-driven freshness with a charming residual
-                  sweetness, delivering balance and easy drinkability. The
-                  vibrant acidity keeps the palate lively, while the gentle
-                  sweetness adds charm and approachability.
-                </p>
-              </>
+                  {modalContent === "additional" && (
+                    <>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Product Specifications
+                      </h3>
+                      <ul className="list-disc list-inside mb-4">
+                        <li>Volume: 750ml</li>
+                        <li>Alcohol Content: 13.5%</li>
+                        <li>Serving Temperature: 16–18°C</li>
+                        <li>Closure Type: Natural Cork</li>
+                      </ul>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Storage Instructions
+                      </h3>
+                      <p className="mb-4">
+                        Store in a cool, dark place away from direct sunlight.
+                        Best consumed within 2 years of purchase for optimal
+                        freshness.
+                      </p>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Tasting Notes
+                      </h3>
+                      <p>
+                        A medium-bodied red wine with a pleasant mix of cherry,
+                        plum, and a touch of vanilla oak, creating a balanced
+                        and smooth profile perfect for casual dinners.
+                      </p>
+                    </>
+                  )}
+
+                  {modalContent === "shipping" && (
+                    <>
+                      <h3 className="font-semibold text-xl text-[#0b0b0b] mb-4">
+                        Returns Policy
+                      </h3>
+                      <p className="mb-4">
+                        You may return most new, unopened items within 30 days
+                        of delivery for a full refund. We'll also pay the return
+                        shipping costs if the return is a result of our error
+                        (you received an incorrect or defective item, etc.).
+                      </p>
+                      <p className="mb-4">
+                        You should expect to receive your refund within four
+                        weeks of giving your package to the return shipper;
+                        however, in many cases you will receive a refund more
+                        quickly.
+                      </p>
+                      <p>
+                        If you need to return an item, simply login to your
+                        account, view your order, and click the "Return Item(s)"
+                        button. We'll notify you via e-mail once we've processed
+                        the returned item.
+                      </p>
+
+                      <h3 className="font-semibold mb-4 mt-5 text-xl text-[#0b0b0b]">
+                        Shipping
+                      </h3>
+
+                      <p className="mb-4">
+                        We can ship to virtually any address in the world. Note
+                        that there are restrictions on some products, and some
+                        products cannot be shipped to international
+                        destinations.
+                      </p>
+                      <p className="mb-4">
+                        When you place an order, we will estimate shipping and
+                        delivery dates for you based on the availability of your
+                        items and the shipping options you choose. Depending on
+                        the shipping provider you choose, shipping date
+                        estimates may appear on the shipping quotes page.
+                      </p>
+                      <p>
+                        Please also note that the shipping rates for many items
+                        we sell are weight-based. The weight of any such item
+                        can be found on its detail page. To reflect the policies
+                        of the shipping companies we use, all weights will be
+                        rounded up to the next full pound.
+                      </p>
+                    </>
+                  )}
+                </div>
+              </div>
             )}
-
-            {modalContent === "additional" && (
-              <>
-                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">Product Specifications</h3>
-                <ul className="list-disc list-inside mb-4">
-                  <li>Volume: 750ml</li>
-                  <li>Alcohol Content: 13.5%</li>
-                  <li>Serving Temperature: 16–18°C</li>
-                  <li>Closure Type: Natural Cork</li>
-                </ul>
-                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">Storage Instructions</h3>
-                <p className="mb-4">
-                  Store in a cool, dark place away from direct sunlight. Best
-                  consumed within 2 years of purchase for optimal freshness.
-                </p>
-                <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">Tasting Notes</h3>
-                <p>
-                  A medium-bodied red wine with a pleasant mix of cherry, plum,
-                  and a touch of vanilla oak, creating a balanced and smooth
-                  profile perfect for casual dinners.
-                </p>
-              </>
-            )}
-
-            {modalContent === "shipping" && (
-              <>
-                <h3 className="font-semibold text-xl text-[#0b0b0b] mb-4">Returns Policy</h3>
-                <p className="mb-4">
-                  You may return most new, unopened items within 30 days of
-                  delivery for a full refund. We'll also pay the return shipping
-                  costs if the return is a result of our error (you received an
-                  incorrect or defective item, etc.).
-                </p>
-                <p className="mb-4">
-                  You should expect to receive your refund within four weeks of
-                  giving your package to the return shipper; however, in many
-                  cases you will receive a refund more quickly.
-                </p>
-                <p>
-                  If you need to return an item, simply login to your account,
-                  view your order, and click the "Return Item(s)" button. We'll
-                  notify you via e-mail once we've processed the returned item.
-                </p>
-
-                <h3 className="font-semibold mb-4 mt-5 text-xl text-[#0b0b0b]">Shipping</h3>
-
-                <p className="mb-4">
-                  We can ship to virtually any address in the world. Note that
-                  there are restrictions on some products, and some products
-                  cannot be shipped to international destinations.
-                </p>
-                <p className="mb-4">
-                  When you place an order, we will estimate shipping and
-                  delivery dates for you based on the availability of your items
-                  and the shipping options you choose. Depending on the shipping
-                  provider you choose, shipping date estimates may appear on the
-                  shipping quotes page.
-                </p>
-                <p>
-                  Please also note that the shipping rates for many items we
-                  sell are weight-based. The weight of any such item can be
-                  found on its detail page. To reflect the policies of the
-                  shipping companies we use, all weights will be rounded up to
-                  the next full pound.
-                </p>
-              </>
-            )}
           </div>
-        </div>
-      )}
-    </div>
 
-
-    <div className="py-[55px] xl:py-[100px]">
-         <div className="flex flex-col items-center justify-between gap-8 text-center w-full">
+          <div className="py-[55px] xl:py-[100px]">
+            <div className="flex flex-col items-center justify-between gap-8 text-center w-full">
               <p className="font-cormorant font-bold text-[28px] lg:text-[36px] uppercase leading-tight">
                 Related Products
               </p>
 
-
-               <div className="grid w-full gap-8 md:gap-8 xl:gap-10  grid-cols-2 md:grid-cols-3 transition-all duration-500">
+              <div className="grid w-full gap-8 md:gap-8 xl:gap-10  grid-cols-2 md:grid-cols-3 transition-all duration-500">
                 {relatedProductsList.map((product, index) => (
                   <ProductsChild key={index} product={product} />
                 ))}
               </div>
-         </div>
-    </div>
-
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -747,3 +782,79 @@ const currentProduct = productsDetails.find(
 };
 
 export default ProductDetails;
+
+{
+  /* <div className="w-full  xl:max-w-[611px] flex flex-col gap-6 mt-3">
+                <div className="flex flex-col md:flex-row flex-wrap lg:gap-x-2 lg:gap-x-14 xl:gap-x-40 gap-y-2 md:gap-y-4">
+                  <div className="gap-2 lg:gap-4 flex items-center">
+                    <img
+                      src={productDetails1}
+                      className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
+                      alt=""
+                    />
+                    <p className="flex ">
+                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
+                        Alcohol
+                      </span>
+                      <p className="text-[#0B0B0B] text-sm md:text-base">&lt; 0.5% abv</p>
+                    </p>
+                  </div>
+
+                  <div className="gap-2 lg:gap-4 flex items-center ms-0 lg:ms-3 xl:ms-3">
+                    <img
+                      src={productDetails2}
+                      className=" w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
+                      alt=""
+                    />
+                    <p className="flex gap-1 ">
+                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
+                        Residual Sugar
+                      </span>
+                      <p className="text-[#0B0B0B] text-sm md:text-base">20.9g/l</p>
+                    </p>
+                  </div>
+
+                  <div className=" gap-2 lg:gap-4 flex items-center">
+                    <img
+                      src={productDetails3}
+                      className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
+                      alt=""
+                    />
+                    <p className="flex gap-1">
+                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
+                        Grap Variety
+                      </span>
+                      <p className="text-[#0B0B0B] text-sm md:text-base">Mertol</p>
+                    </p>
+                  </div>
+
+                  <div className=" gap-2 lg:gap-4 flex items-center">
+                    <img
+                      src={productDetails4}
+                      className=" w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
+                      alt=""
+                    />
+                    <p className="flex gap-1 items-start pt-0.5">
+                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
+                        Total Acidity
+                      </span>
+                      <p className="text-[#0B0B0B] text-sm md:text-base">5.5g/l</p>
+                    </p>
+                  </div>
+
+                  <div className="gap-2 lg:gap-4 flex items-center">
+                    <img
+                      src={productDetails5}
+                      className=" w-[30px] h-[30px] md:w-[36px] md:h-[36px] lg:w-[40px] lg:h-[40px]"
+                      alt=""
+                    />
+                    <p className="flex gap-1 ">
+                      <span className="text-[#641026] font-urbanist font-semibold text-sm md:text-base lg:text-md capitalize">
+                        Maturation
+                      </span>
+                      <p className="text-[#0B0B0B] text-sm md:text-base"> in Wooden Barrels</p>
+                    </p>
+                  </div>
+                </div>
+              </div> */
+}
