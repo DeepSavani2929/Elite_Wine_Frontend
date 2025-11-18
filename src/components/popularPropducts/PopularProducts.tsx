@@ -1277,6 +1277,7 @@ const PopularProducts = () => {
 
   const productDetails = [
     {
+         id: 7,
       type: "Lamm Jung",
       productImg: secondtabproduct,
       productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
@@ -1286,6 +1287,7 @@ const PopularProducts = () => {
       flavour: "Riesling",
     },
     {
+        id: 1,
       type: "Bergdolt, Reif & Nett",
       productImg: product1,
       productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
@@ -1296,6 +1298,7 @@ const PopularProducts = () => {
       flavour: "Merlot",
     },
     {
+      id: 8,
       type: "KvD Strauch Sektmanufaktur",
       productImg: thirdtabproduct,
       productName:

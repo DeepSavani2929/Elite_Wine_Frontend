@@ -152,14 +152,14 @@
 //           <div className="py-[55px] xl:py-[100px]">
 //             {/* Layout: Image left, Text/List right on desktop; Stacked on mobile */}
 //             <div className="flex flex-col lg:flex-row lg:gap-20 items-start">
-              
+
 //               {/* LEFT COLUMN: Image (about5) */}
 //               <div className="w-full lg:w-1/2 order-1 mb-8 lg:mb-0">
 //                 <img
 //                   src={about4}
 //                   alt="Couple sampling non-alcoholic wine in cellar"
 //                   className="w-full h-auto object-cover rounded-lg shadow-xl"
-    
+
 //                 />
 //               </div>
 
@@ -168,7 +168,7 @@
 //                 <h3 className="font-cormorant font-bold text-[28px] md:text-[32px] xl:text-[36px] uppercase text-[#0B0B0B] mb-6">
 //                   WHAT SETS US APART
 //                 </h3>
-                
+
 //                 <ul className="space-y-4 font-urbanist text-sm xl:text-base text-[#565656] list-none p-0">
 //                   {/* Using a custom span for the bullet to replicate the yellow dot */}
 //                   <li className="flex items-start">
@@ -197,9 +197,9 @@
 //             </div>
 
 //           </div>
-          
+
 //             <div>
-                
+
 //             </div>
 //         </div>
 //       </div>
@@ -208,8 +208,6 @@
 // };
 
 // export default About;
-
-
 
 import React from "react";
 
@@ -257,12 +255,21 @@ const About = () => {
               <p className="mt-6 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">
                 Elite Wine Selections Inc. is a New York–based importer and
                 wholesaler of premium, award-winning European dealcoholized
-                wines (&lt;0.5% ABV) from Germany, France, Italy, and Spain.
+                wines (&lt; 0.5% ABV) from Germany, France, Italy, and Spain.
+                Many selections are organic and vegan, crafted to closely
+                preserve the authentic aroma, mouthfeel, and character of
+                traditional wines. We serve the fast-growing sober-curious and
+                health-conscious communities seeking sophistication and
+                creative, mindful drinking experiences without alcohol.
               </p>
 
               <p className="mt-4 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">
                 Our partner vineyards combine centuries of heritage and terroir
-                with cutting-edge dealcoholization methods...
+                with cutting-edge dealcoholization methods such as advanced
+                aroma recovery. This ensures that every bottle retains its
+                original complexity, varietal character, and mouthfeel. Some
+                selections are even barrel-aged, underscoring that these are
+                authentic wines— not simply grape juice in disguise.
               </p>
             </div>
           </div>
@@ -273,31 +280,34 @@ const About = () => {
       <div className="w-full bg-gradient-to-b from-[#FFFFFF] to-[#FFF1D2]">
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className="pb-[55px] xl:pb-[100px] pt-0">
-            <div className="flex flex-col md:flex-row justify-between lg:gap-1 xl:gap-20">
+            <div className="flex flex-col md:flex-row justify-between gap-1 sm:gap-6 xl:gap-20">
               <div className="order-2 md:order-1 md:w-1/2 flex flex-col justify-center py-3 lg:py-0">
                 <h2 className="font-cormorant font-bold text-[28px] xl:text-[36px] uppercase text-[#0B0B0B] mb-0 md:mb-2 xl:mb-6">
                   AWARDS & RECOGNITION
                 </h2>
 
                 <p className="mt-2 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">
-                  We proudly showcase wines from Bergdolt-Reif & Nett
-                  (Pfalz, Germany), pioneers in artisanal dealcoholized
-                  winemaking:
+                  We proudly showcase wines from e.g. Bergdolt-Reif & Nett
+                  (Pfalz, Germany), a pioneer in artisanal dealcoholized
+                  winemaking, whose achievements include:
                 </p>
 
                 <ul className="mt-4 space-y-2 text-[#565656] font-medium font-urbanist text-sm xl:text-base list-disc list-inside">
                   <p>
                     Falstaff Alcohol-Free Trophy: Reverse Riesling (90 pts),
-                    Breakaway Pinot Blanc (90 pts), Breakaway Gewürztraminer (91 pts)
+                    Breakaway Pinot Blanc (90 pts), Breakaway Gewürztraminer (91
+                    pts), Reverse Sauvignon Blanc (90.5 pts)
                   </p>
                 </ul>
 
                 <p className="mt-4 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">
-                  These accolades underline our commitment to excellence.
+                  These accolades underline our commitment to offering
+                  award-winning wines that set the benchmark for the
+                  non-alcoholic category.
                 </p>
               </div>
 
-              <div className="order-1 md:order-2 flex w-full md:w-1/2">
+              <div className="order-1 md:order-2 flex w-full md:w-1/2 xl:w-[420px]">
                 <div className="w-full cursor-pointer">
                   <img
                     src={about2}
@@ -317,22 +327,26 @@ const About = () => {
                     className="object-contain object-center w-[538px] xl:h-[538px]"
                   />
                   <div className="w-full">
-                    <p className="font-urbanist font-semibold text-sm md:text-xs xl:text-base text-[#0B0B0B] text-center px-3 md:px-0">
+                    <p className="font-urbanist font-semibold text-md xl:text-base text-[#0B0B0B] text-center px-3 md:px-0">
                       Gold Medal for the Bergdolt-Reif & Nett Breakaway Merlot
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex w-full md:w-[50%] flex-col items-start gap-5 max-w-[600px]">
+              <div className="flex w-full md:w-[50%] flex-col items-start gap-3 max-w-[600px]">
                 <p className="font-cormorant font-bold text-3xl md:text-[22px] lg:text-2xl xl:text-[36px] text-[#0B0B0B] uppercase leading-snug">
-                  Elite Wine Selections – Pure terroir.
-                  <br className="hidden sm:block" /> Zero compromise.
+                  Elite Wine Selections – Pure terroir. Zero compromise.
                 </p>
 
                 <p className="text-[#565656] font-medium font-urbanist text-sm leading-relaxed">
-                  Elite Wine Selections is a New York–based importer specializing
-                  in award-winning European dealcoholized wines (&le; 0.5% ABV).
+                Elite Wine Selections is a New York–based importer and wholesaler specializing in premium,
+award-winning European dealcoholized wines (&lt; 0.5% ABV) primarily from Germany, France,
+Italy, and Spain
+                </p>
+                  <p className="text-[#565656] font-medium font-urbanist text-sm leading-relaxed">
+            We serve the fast-growing sober-curious and health-conscious communities who seek
+sophistication without alcohol.
                 </p>
               </div>
             </div>
@@ -340,7 +354,7 @@ const About = () => {
         </div>
       </div>
 
-{/* 
+      {/* 
                 <section className="py-0 flex flex-col-reverse md:flex-row md:justify-between gap-5 animate-fadeIn delay-200">
             <div className="w-full md:w-1/2 flex flex-col justify-center">
               <h3 className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-semibold mb-4 uppercase font-[Cormorant-Upright-bold] tracking-wider">
@@ -379,8 +393,8 @@ const About = () => {
       {/* WHAT SETS US APART */}
       <div className="w-full bg-gradient-to-b from-[#FFFFFF] via-white via-70% to-[#FFF1D2]">
         <div className="w-[95%] xl:w-[80%] mx-auto">
-          <div className="py-[55px] xl:py-[100px]">
-            <div className="flex flex-col lg:flex-row lg:gap-20 items-start">
+          <div className=" pb-[25px] md:pt-[55px] xl:py-[100px]">
+            <div className="flex flex-col xl:flex-row gap-0 lg:gap-5 xl:gap-20 items-start">
               <div className="w-full order-1 mb-8 lg:mb-0">
                 <img
                   src={about4}
@@ -389,12 +403,12 @@ const About = () => {
                 />
               </div>
 
-              <div className="w-full lg:w-1/2 order-2 flex flex-col pt-0 lg:pt-12">
-                <h3 className="font-cormorant font-bold text-[28px] md:text-[32px] xl:text-[36px] uppercase text-[#0B0B0B] mb-4">
+              <div className="w-full xl:w-1/2 order-2 flex flex-col pt-0 xl:pt-12">
+                <h3 className="font-cormorant font-bold text-[28px] md:text-[28px]  xl:text-[36px] uppercase text-[#0B0B0B] mb-4">
                   WHAT SETS US APART
                 </h3>
 
-                <ul className="space-y-4 font-urbanist text-sm xl:text-base text-[#565656] list-disc list-inside p-0 ms-3">
+                <ul className="space-y-4 font-urbanist text-sm xl:text-base text-[#565656] list-disc list-inside p-0 ms-5">
                   <li>Advanced aroma recovery preserving varietal character</li>
                   <li>Rare barrel-aging in non-alcoholic wines</li>
                   <li>Authentic European terroir</li>
@@ -412,8 +426,11 @@ const About = () => {
             </h2>
 
             <p className="mx-auto text-[#565656] font-medium font-urbanist text-sm md:text-md xl:text-base leading-[26px]">
-           We supply specialty non-alcoholic retailers, fine-dining restaurants, boutique hotels, beverage caterers, social clubs,yacht and golf clubs, and online platforms.
-For partners seeking exclusivity, Elite also offers turnkey private-label solutions with boutique branding and premium packaging.
+              We supply specialty non-alcoholic retailers, fine-dining
+              restaurants, boutique hotels, beverage caterers, social
+              clubs,yacht and golf clubs, and online platforms. For partners
+              seeking exclusivity, Elite also offers turnkey private-label
+              solutions with boutique branding and premium packaging.
             </p>
           </div>
         </div>
@@ -422,7 +439,6 @@ For partners seeking exclusivity, Elite also offers turnkey private-label soluti
       {/* ▶️ NEW SECTION ADDED IN YOUR EMPTY DIV EXACTLY AS REQUESTED */}
       <div className="w-[95%] xl:w-[80%] mx-auto">
         <div className="py-[55px] xl:py-[100px]">
-
           <div className="flex flex-col xl:flex-row items-center gap-y-2 md:gap-y-6 gap-x-20">
             {/* LEFT TEXT */}
             <div className="w-full xl:w-1/2 order-2 xl:order-1">
@@ -431,15 +447,16 @@ For partners seeking exclusivity, Elite also offers turnkey private-label soluti
               </h2>
 
               <p className="mt-4 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">
-                With the U.S. non-alcoholic wine market projected to grow at double-digit rates,
-                Elite Wine Selections positions itself as a pioneer in the premium European segment—
-                bringing terroir-driven, award-winning wines to consumers who refuse to compromise
-                on quality.
+                With the U.S. non-alcoholic wine market projected to grow at
+                double-digit rates, Elite Wine Selections positions itself as a
+                pioneer in the premium European segment— bringing
+                terroir-driven, award-winning wines to consumers who refuse to
+                compromise on quality.
               </p>
 
               <p className="mt-4 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">
-                We believe that enjoying wine is about ritual, elegance, and connection —
-                not necessarily alcohol anymore.
+                We believe that enjoying wine is about ritual, elegance, and
+                connection — not necessarily alcohol anymore.
               </p>
             </div>
 
@@ -452,13 +469,10 @@ For partners seeking exclusivity, Elite also offers turnkey private-label soluti
               />
             </div>
           </div>
-
         </div>
       </div>
-
     </>
   );
 };
 
 export default About;
-

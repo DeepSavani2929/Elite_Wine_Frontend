@@ -9,7 +9,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Shop from "./components/shop/Shop.tsx";
 import About from "./components/about/About.tsx";
-import AboutSecond from "./components/about/AboutSecond.tsx";
+import AboutFirstProduct from "./components/about/AboutFirstProduct.tsx";
+import AboutSecondProduct from "./components/about/AboutSecondProduct.tsx";
+import AboutThirdProduct from "./components/about/AboutThirdProduct.tsx";
+import AboutFourthProduct from "./components/about/AboutFourthProduct.tsx";
+import AboutFifthProduct from "./components/about/AboutFifthProduct.tsx";
 
 const App: React.FC = () => {
   return (
@@ -19,8 +23,13 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/productDetails/:productId" element={<ProductDetails />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/about" element={<About />} />
-           <Route path="/aboutSecond" element={<AboutSecond />} />
+          <Route path="/aboutUs" element={<About />} />
+
+          <Route path="/aboutUs/bergdolt-reif-nett" element={<AboutFirstProduct />} />
+          <Route path="/aboutUs/lamm-jung" element={<AboutSecondProduct />} />
+          <Route path="/aboutUs/kvd-strauch-sektmanufaktur" element={<AboutThirdProduct />} />
+          <Route path="/aboutUs/château-clos-de-boüard" element={<AboutFourthProduct />} />
+          <Route path="/aboutUs/matthias" element={<AboutFifthProduct />} />
         </Route>
       </Routes>
     </>
