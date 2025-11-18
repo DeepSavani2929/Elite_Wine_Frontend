@@ -28,7 +28,7 @@ const AboutSecondProduct = () => {
 
   return (
     <>
-      <div className="bg-[url('images/aboutheader3.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
+      <div className="bg-[url('/images/aboutheader3.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
             Home <span className="font-Poppins"> &gt;</span>About Us Lamm-Jung
@@ -48,15 +48,15 @@ const AboutSecondProduct = () => {
             {/* DESKTOP VERSION (≥1024px) */}
             <div className=" flex flex-col xl:flex-row justify-between items-center gap-6  xl:gap-20">
               {/* RIGHT IMAGES */}
-              <div className="w-full xl:w-1/2  flex items-center justify-center gap-4 md:gap-10 bg-[#F8F8F8] py-8">
+              <div className="w-full xl:w-1/2  flex items-center justify-center gap-4 md:gap-10 bg-[#F8F8F8] py-8 group overflow-hidden cursor-pointer">
                 <div className="flex flex-col gap-2 md:gap-5 items-center">
                   <img
                     src={about1}
                     alt="Gold medal"
-                    className="w-[100px] md:w-[210px] object-cover"
+                    className="w-[100px] md:w-[210px] object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
                   />
 
-                  <p className="text-[#000000] font-urbanist font-semibold text-xs md:text-md">
+                  <p className="text-[#000000] font-urbanist font-semibold text-xs md:text-md ">
                     Merlot Vineyard of the year
                   </p>
                 </div>
@@ -64,7 +64,7 @@ const AboutSecondProduct = () => {
                 <img
                   src={about2}
                   alt="Bottle"
-                  className=" w-[100px] md:w-[176px]  object-cover"
+                  className=" w-[100px] md:w-[176px]  object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
                 />
               </div>
 
@@ -144,8 +144,8 @@ const AboutSecondProduct = () => {
 
       <div className="hidden w-full lg:flex justify-center gap-3  xl:gap-8">
             {aboutGallery.map((item, index) => (
-              <div key={index} className="">
-                  <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover" />
+              <div key={index} className="overflow-hidden cursor-pointer">
+                  <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover transition-all duration-500 ease-in-out hover:scale-105" />
               </div>
             ))}
           </div>
@@ -166,8 +166,8 @@ const AboutSecondProduct = () => {
               className="!pb-10 gap-2 flex "
             >
               {aboutGallery.map((item, index) => (
-                <SwiperSlide key={index} className="flex  items-stretch">
-                  <img src={item.gallery} alt="" />
+                <SwiperSlide key={index} className="flex  items-stretch cursor-pointer">
+                  <img src={item.gallery} alt="" className="transition-all duration-500 ease-in-out hover:scale-105"/>
                 </SwiperSlide>
               ))}
             </Swiper>

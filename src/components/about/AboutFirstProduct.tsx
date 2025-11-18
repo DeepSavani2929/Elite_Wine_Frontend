@@ -178,7 +178,7 @@ const AboutFirstProduct = () => {
   return (
     <>
       {/* TOP BANNER */}
-      <div className="bg-[url('images/aboutheader2.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
+      <div className="bg-[url('/images/aboutheader2.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
             Home <span className="font-Poppins"> &gt;</span>About Us Bergdolt,
@@ -198,11 +198,11 @@ const AboutFirstProduct = () => {
           </p>
           <div className="flex flex-col xl:flex-row items-center gap-6 xl:gap-20">
             {/* LEFT IMAGE */}
-            <div className="w-full xl:w-1/2 hover:scale(1) cursor-pointer">
+            <div className="w-full xl:w-1/2  flex justify-center  bg-[#F8F8F8] pb-5 cursor-pointer overflow-hidden">
               <img
                 src={about1}
                 alt="About section"
-                className="w-full object-cover"
+                className="w-full h-[521px] object-contain transition-all duration-500 ease-in-out hover:scale-105"
               />
             </div>
 
@@ -269,12 +269,12 @@ const AboutFirstProduct = () => {
             Awards & recognition (highlights)
           </p>
           <div className="flex flex-col md:flex-row gap-y-6 gap-x-14 justify-center ">
-            <div className="flex flex-col gap-0 md:gap-6 items-center">
+            <div className="flex flex-col gap-0 md:gap-6 items-center cursor-pointer overflow-hidden">
               <div>
                 <img
                   src={about2}
                   alt="About section"
-                  className=" w-[240px] lg:w-[256px] xl:w-[334px] object-cover mb-5 md:mb-0"
+                  className=" w-[240px] lg:w-[256px] xl:w-[334px] object-cover mb-5 md:mb-0 transition-all duration-500 ease-in-out hover:scale-105"
                 />
               </div>
               <p className="w-[330px] md:w-[320px] lg:w-[416px] text-center font-urbanist font-medium text-base text-[#565656]">
@@ -287,12 +287,12 @@ const AboutFirstProduct = () => {
             </div>
 
             <div>
-              <div className="flex flex-col gap-0 md:gap-6 items-center">
-                <div>
+              <div className="flex flex-col gap-0 md:gap-6 items-center  ">
+                <div className="cursor-pointer overflow-hidden">
                   <img
                     src={about3}
                     alt="About section"
-                    className="w-[335px] lg:w-[360px] xl:w-[473px] object-cover mb-5 md:mb-0"
+                    className="w-[335px] lg:w-[360px] xl:w-[473px] object-cover mb-5 md:mb-0 transition-all duration-500 ease-in-out hover:scale-105"
                   />
                 </div>
                 <p className="w-[350px] md:w-[320px] lg:w-[437px] text-center font-urbanist font-medium text-base text-[#565656]">
@@ -329,25 +329,28 @@ const AboutFirstProduct = () => {
             </div>
 
             {/* RIGHT IMAGES */}
-            <div className="w-full xl:w-1/2 order-1 xl:order-2 flex items-center justify-center gap-4 md:gap-10 bg-[#F8F8F8] py-8">
-              <div className="flex flex-col gap-2 md:gap-5 items-center">
-                <img
-                  src={about3}
-                  alt="Gold medal"
-                  className="w-[100px] md:w-[210px] object-cover"
-                />
+            
+<div className="w-full xl:w-1/2 order-1 xl:order-2 flex items-center justify-center gap-4 md:gap-10 bg-[#F8F8F8] py-8 overflow-hidden group cursor-pointer">
+  {/* LEFT INNER IMAGE + TEXT */}
+  <div className="flex flex-col gap-2 md:gap-5 items-center">
+    <img
+      src={about3}
+      alt="Gold medal"
+      className="w-[100px] md:w-[210px] object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+    />
+    <p className="text-[#000000] font-urbanist font-semibold text-xs md:text-md">
+      Merlot Vineyard of the year
+    </p>
+  </div>
 
-                <p className="text-[#000000] font-urbanist font-semibold text-xs md:text-md">
-                  Merlot Vineyard of the year
-                </p>
-              </div>
+  {/* RIGHT INNER IMAGE */}
+  <img
+    src={productImg}
+    alt="Bottle"
+    className="w-[100px] md:w-[217px] object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+  />
+</div>
 
-              <img
-                src={productImg}
-                alt="Bottle"
-                className=" w-[100px] md:w-[217px]  object-cover"
-              />
-            </div>
           </div>
 
   
@@ -361,11 +364,11 @@ const AboutFirstProduct = () => {
           </p>
           <div className="flex flex-col xl:flex-row items-start gap-6 xl:gap-20">
             {/* LEFT IMAGE */}
-            <div className="w-full xl:w-1/2 hover:scale(1) flex justify-center  bg-[#F8F8F8] py-6 cursor-pointer">
+            <div className="w-full xl:w-1/2 hover:scale(1) flex justify-center  bg-[#F8F8F8] py-6 cursor-pointer overflow-hidden">
               <img
                 src={about4}
                 alt="About section"
-                className="w-[80px] md:w-[180px] xl:w-[140px]  object-contain"
+                className="w-[80px] md:w-[180px] xl:w-[140px]  object-contain transition-all duration-500 ease-in-out hover:scale-105"
               />
             </div>
 
@@ -425,8 +428,8 @@ const AboutFirstProduct = () => {
 
       <div className="hidden w-full lg:flex justify-center gap-3  xl:gap-8">
             {aboutGallery.map((item, index) => (
-              <div key={index} className="">
-                  <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover" />
+              <div key={index} className="overflow-hidden cursor-pointer">
+                  <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover transition-all duration-500 ease-in-out hover:scale-105" />
               </div>
             ))}
           </div>
@@ -444,11 +447,11 @@ const AboutFirstProduct = () => {
                 0: { slidesPerView: 1.5 },
                 768: { slidesPerView: 2.5  }, 
               }}
-              className="!pb-10 gap-2 flex "
+              className="!pb-10 gap-2 flex"
             >
               {aboutGallery.map((item, index) => (
-                <SwiperSlide key={index} className="flex  items-stretch">
-                  <img src={item.gallery} alt="" />
+                <SwiperSlide key={index} className="flex  items-stretch overflow-hidden cursor-pointer">
+                  <img src={item.gallery} alt="" className="transition-all duration-500 ease-in-out hover:scale-105" />
                 </SwiperSlide>
               ))}
             </Swiper>

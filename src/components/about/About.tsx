@@ -221,7 +221,7 @@ const About = () => {
   return (
     <>
       {/* TOP BANNER */}
-      <div className="bg-[url('images/aboutImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
+      <div className="bg-[url('/images/aboutImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
             Home <span className="font-Poppins"> &gt;</span> About Us
@@ -236,13 +236,13 @@ const About = () => {
       <div className="w-full">
         <div className="w-[95%] xl:w-[80%] mx-auto">
           {/* FLEX ROW SECTION */}
-          <div className="py-[55px] xl:py-[100px] flex flex-col xl:flex-row lg:gap-1 xl:gap-20">
+          <div className="py-[55px] xl:py-[100px] flex flex-col xl:flex-row items-center lg:gap-1 xl:gap-20">
             {/* LEFT IMAGE */}
-            <div className="w-full xl:w-1/2 hover:scale(1) cursor-pointer">
+            <div className="w-full xl:w-1/2 overflow-hidden  cursor-pointer">
               <img
                 src={about1}
                 alt="About section"
-                className="w-full object-cover"
+                className="w-full h-[559px] object-cover  transition-all duration-500 ease-in-out hover:scale-105"
               />
             </div>
 
@@ -308,23 +308,23 @@ const About = () => {
               </div>
 
               <div className="order-1 md:order-2 flex w-full md:w-1/2 xl:w-[420px]">
-                <div className="w-full cursor-pointer">
+                <div className="w-full cursor-pointer overflow-hidden">
                   <img
                     src={about2}
                     alt="Falstaff Award Trophy 2025"
-                    className="w-full object-cover"
+                    className="w-full object-cover transition-all duration-500 ease-in-out hover:scale-105"
                   />
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 lg:gap-12">
-              <div className="flex flex-col w-full md:w-[50%] gap-3 items-start justify-center">
-                <div>
+              <div className="flex flex-col w-full md:w-[50%] gap-5 items-start justify-center">
+                <div className="overflow-hidden cursor-pointer" >
                   <img
                     src={about3}
                     alt="Gold Medal Wine"
-                    className="object-contain object-center w-[538px] xl:h-[538px]"
+                    className="object-contain object-center w-[538px] xl:h-[538px] transition-all duration-500 ease-in-out hover:scale-105"
                   />
                   <div className="w-full">
                     <p className="font-urbanist font-semibold text-md xl:text-base text-[#0B0B0B] text-center px-3 md:px-0">
@@ -340,13 +340,14 @@ const About = () => {
                 </p>
 
                 <p className="text-[#565656] font-medium font-urbanist text-sm leading-relaxed">
-                Elite Wine Selections is a New York–based importer and wholesaler specializing in premium,
-award-winning European dealcoholized wines (&lt; 0.5% ABV) primarily from Germany, France,
-Italy, and Spain
+                  Elite Wine Selections is a New York–based importer and
+                  wholesaler specializing in premium, award-winning European
+                  dealcoholized wines (&lt; 0.5% ABV) primarily from Germany,
+                  France, Italy, and Spain
                 </p>
-                  <p className="text-[#565656] font-medium font-urbanist text-sm leading-relaxed">
-            We serve the fast-growing sober-curious and health-conscious communities who seek
-sophistication without alcohol.
+                <p className="text-[#565656] font-medium font-urbanist text-sm leading-relaxed">
+                  We serve the fast-growing sober-curious and health-conscious
+                  communities who seek sophistication without alcohol.
                 </p>
               </div>
             </div>
@@ -395,11 +396,11 @@ sophistication without alcohol.
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className=" pb-[25px] md:pt-[55px] xl:py-[100px]">
             <div className="flex flex-col xl:flex-row gap-0 lg:gap-5 xl:gap-20 items-start">
-              <div className="w-full order-1 mb-8 lg:mb-0">
+              <div className="w-full order-1 mb-8 lg:mb-0 overflow-hidden cursor-pointer">
                 <img
                   src={about4}
                   alt="Couple sampling non-alcoholic wine"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover transition-all duration-500 ease-in-out hover:scale-105"
                 />
               </div>
 
@@ -461,10 +462,10 @@ sophistication without alcohol.
             </div>
 
             {/* RIGHT IMAGE */}
-            <div className="w-full xl:w-1/2 order-1 xl:order-2">
+            <div className="w-full xl:w-1/2 order-1 xl:order-2 overflow-hidden cursor-pointer">
               <img
                 src={about5}
-                className="w-full object-cover "
+                className="w-full object-cover transition-all duration-500 ease-in-out hover:scale-105"
                 alt="Vision people toasting"
               />
             </div>

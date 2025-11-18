@@ -1438,7 +1438,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div className="bg-[url('images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
+      <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-[#FFFFFF] ">
             Home <span className="font-Poppins">&gt; </span>Shop{" "}
@@ -1454,7 +1454,7 @@ const ProductDetails = () => {
         <div className="w-[95%] mx-auto ">
           <div className="flex flex-col py-[55px] xl:py-[100px] md:flex-row gap-6 xl:gap-18 justify-between md:items-start">
             <div
-              className="flex flex-col gap-4 xl:gap-5 Justify-center w-full md:w-auto md:flex-1 sticky top-20"
+              className="flex flex-col gap-4 xl:gap-5 Justify-center w-full md:w-auto md:flex-1 md:sticky md:top-20"
 
             >
               <div className="w-full flex flex-col justify-center md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
@@ -1474,7 +1474,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-1 xl:gap-6 w-full md:flex-1  hide-scrollbar min-h-screen overflow-y-auto" >
+            <div className="flex flex-col gap-1 xl:gap-6 w-full md:flex-1  md:min-h-screen md:overflow-y-auto" >
               <div
              
                 className="flex flex-col gap-1 xl:gap-3 w-full md:flex-1"
@@ -1653,13 +1653,23 @@ const ProductDetails = () => {
                 {activeTab === "description" && (
                   <p>
                     <strong>Sensorik:</strong> This merlot presents a deep,
-                    appealing color…{" "}
+                    appealing color that is nearly indistinguishable from a
+                    conventional red wine. The nose reveals a spicy-fruity
+                    bouquet with notes of dried berries and a hint of red
+                    pepper. On the palate, it is juicy with cherry-like flavors
+                    supported by vibrant acidity. The body remains lean and
+                    completely free of tannins. The finish is smooth and
+                    well-rounded — also enjoyable lightly chilled in summer.{" "}
+                    <br />– A fitting companion to salads, picnics, or mild
+                    cheeses.
                   </p>
                 )}
 
                 {activeTab === "additional" && (
                   <div>
-                    <h3 className="font-semibold mb-2">Product Specifications</h3>
+                    <h3 className="font-semibold mb-2">
+                      Product Specifications
+                    </h3>
                     <ul className="list-disc list-inside mb-4">
                       <li>Volume: 750ml</li>
                       <li>Alcohol Content: 13.5%</li>
@@ -1667,16 +1677,56 @@ const ProductDetails = () => {
                       <li>Closure Type: Natural Cork</li>
                     </ul>
                     <h3 className="font-semibold mb-2">Storage Instructions</h3>
-                    <p>Store in a cool, dark place…</p>
+                    <p>
+                      Store in a cool, dark place away from direct sunlight.
+                      Best consumed within 2 years of purchase for optimal
+                      freshness.
+                    </p>
                   </div>
                 )}
 
                 {activeTab === "shipping" && (
                   <div>
                     <h3 className="font-semibold mb-2">Returns Policy</h3>
-                    <p>You may return most new, unopened items…</p>
+                    <p className="mb-4">
+                      You may return most new, unopened items within 30 days of
+                      delivery for a full refund. We'll also pay the return
+                      shipping costs if the return is a result of our error (you
+                      received an incorrect or defective item, etc.).
+                    </p>
+                    <p className="mb-4">
+                      You should expect to receive your refund within four weeks
+                      of giving your package to the return shipper; however, in
+                      many cases you will receive a refund more quickly.
+                    </p>
+                    <p>
+                      If you need to return an item, simply login to your
+                      account, view your order, and click the "Return Item(s)"
+                      button. We'll notify you via e-mail once we've processed
+                      the returned item.
+                    </p>
+
                     <h3 className="font-semibold mb-2 mt-5">Shipping</h3>
-                    <p>We can ship to virtually any address…</p>
+
+                    <p className="mb-4">
+                      We can ship to virtually any address in the world. Note
+                      that there are restrictions on some products, and some
+                      products cannot be shipped to international destinations.
+                    </p>
+                    <p className="mb-4">
+                      When you place an order, we will estimate shipping and
+                      delivery dates for you based on the availability of your
+                      items and the shipping options you choose. Depending on
+                      the shipping provider you choose, shipping date estimates
+                      may appear on the shipping quotes page.
+                    </p>
+                    <p>
+                      Please also note that the shipping rates for many items we
+                      sell are weight-based. The weight of any such item can be
+                      found on its detail page. To reflect the policies of the
+                      shipping companies we use, all weights will be rounded up
+                      to the next full pound.
+                    </p>
                   </div>
                 )}
               </div>
@@ -1699,7 +1749,7 @@ const ProductDetails = () => {
 
             {/* ===================== MOBILE MODAL ===================== */}
             {modalContent && (
-              <div className="fixed inset-0 bg-white z-50 overflow-y-auto font-urbanist">
+              <div className="fixed inset-0 bg-white z-[999] overflow-y-auto font-urbanist">
                 <div className="flex justify-between items-center px-4 py-1.5 border-b border-gray-300 sticky top-0 bg-[#eed291]">
                   <h2 className="text-lg font-medium uppercase">
                     {modalContent === "description" && "Description"}
@@ -1718,37 +1768,107 @@ const ProductDetails = () => {
                 <div className="p-5 text-sm text-gray-700 leading-relaxed">
                   {modalContent === "description" && (
                     <>
-                      <h3 className="font-semibold mb-4 text-xl">
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
                         Origin & Winery
                       </h3>
-                      <p>Produced by Weingut Lamm-Jung KG…</p>
+                      <p className="mb-4">
+                        Produced by Weingut Lamm-Jung KG, located in Eltville am
+                        Rhein at the heart of the Rheingau — a historic region
+                        renowned for Riesling. The estate follows sustainable
+                        viticulture and specializes in varietal clarity.
+                      </p>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Character
+                      </h3>
+                      <p>
+                        Classic Riesling notes of citrus and stone fruits. The
+                        wine shows fruit-driven freshness with a charming
+                        residual sweetness, delivering balance and easy
+                        drinkability. The vibrant acidity keeps the palate
+                        lively, while the gentle sweetness adds charm and
+                        approachability.
+                      </p>
                     </>
                   )}
 
                   {modalContent === "additional" && (
                     <>
-                      <h3 className="font-semibold mb-4 text-xl">
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
                         Product Specifications
                       </h3>
                       <ul className="list-disc list-inside mb-4">
                         <li>Volume: 750ml</li>
-                        <li>Alcohol: 13.5%</li>
-                        <li>Temperature: 16–18°C</li>
+                        <li>Alcohol Content: 13.5%</li>
+                        <li>Serving Temperature: 16–18°C</li>
+                        <li>Closure Type: Natural Cork</li>
                       </ul>
-                      <h3 className="font-semibold mb-4 text-xl">Storage Instructions</h3>
-                      <p>Store in a cool, dark place…</p>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Storage Instructions
+                      </h3>
+                      <p className="mb-4">
+                        Store in a cool, dark place away from direct sunlight.
+                        Best consumed within 2 years of purchase for optimal
+                        freshness.
+                      </p>
+                      <h3 className="font-semibold mb-4 text-xl text-[#0b0b0b]">
+                        Tasting Notes
+                      </h3>
+                      <p>
+                        A medium-bodied red wine with a pleasant mix of cherry,
+                        plum, and a touch of vanilla oak, creating a balanced
+                        and smooth profile perfect for casual dinners.
+                      </p>
                     </>
                   )}
 
                   {modalContent === "shipping" && (
                     <>
-                      <h3 className="font-semibold text-xl mb-4">
+                      <h3 className="font-semibold text-xl text-[#0b0b0b] mb-4">
                         Returns Policy
                       </h3>
-                      <p>You may return items within 30 days…</p>
+                      <p className="mb-4">
+                        You may return most new, unopened items within 30 days
+                        of delivery for a full refund. We'll also pay the return
+                        shipping costs if the return is a result of our error
+                        (you received an incorrect or defective item, etc.).
+                      </p>
+                      <p className="mb-4">
+                        You should expect to receive your refund within four
+                        weeks of giving your package to the return shipper;
+                        however, in many cases you will receive a refund more
+                        quickly.
+                      </p>
+                      <p>
+                        If you need to return an item, simply login to your
+                        account, view your order, and click the "Return Item(s)"
+                        button. We'll notify you via e-mail once we've processed
+                        the returned item.
+                      </p>
 
-                      <h3 className="font-semibold text-xl mb-4 mt-5">Shipping</h3>
-                      <p>We ship worldwide…</p>
+                      <h3 className="font-semibold mb-4 mt-5 text-xl text-[#0b0b0b]">
+                        Shipping
+                      </h3>
+
+                      <p className="mb-4">
+                        We can ship to virtually any address in the world. Note
+                        that there are restrictions on some products, and some
+                        products cannot be shipped to international
+                        destinations.
+                      </p>
+                      <p className="mb-4">
+                        When you place an order, we will estimate shipping and
+                        delivery dates for you based on the availability of your
+                        items and the shipping options you choose. Depending on
+                        the shipping provider you choose, shipping date
+                        estimates may appear on the shipping quotes page.
+                      </p>
+                      <p>
+                        Please also note that the shipping rates for many items
+                        we sell are weight-based. The weight of any such item
+                        can be found on its detail page. To reflect the policies
+                        of the shipping companies we use, all weights will be
+                        rounded up to the next full pound.
+                      </p>
                     </>
                   )}
                 </div>

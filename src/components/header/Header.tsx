@@ -1020,8 +1020,8 @@
 //                 {showAboutDropdown && (
 //                   <div
 //                     className="
-//                       absolute top-full left-0 mt-3 
-//                       w-[220px] 
+//                       absolute top-full left-0 mt-3
+//                       w-[220px]
 //                       bg-gradient-to-b from-[#121212] to-[#0B0B0B]
 //                       border border-[#EED291]
 //                       z-[999999]
@@ -1260,9 +1260,6 @@
 
 // export default Header;
 
-
-
-
 // ====================== HEADER.TSX — PART 1/3 ======================
 // import React, { useEffect, useRef, useState } from "react";
 // import ews from "../../assets/images/ews.png";
@@ -1356,7 +1353,6 @@
 //     { label: "About Château Clos De Boüard", to: "/aboutUs/château-clos-de-boüard" },
 //     { label: "About Weingut Matthias Anton", to: "/aboutUs/matthias" },
 //   ];
-
 
 //     const aboutItemsForMobile = [
 //     { label: "Go To About Us", to: "/aboutUs" },
@@ -1452,9 +1448,9 @@
 //                   <div
 //                     ref={dropdownRef}
 //                     className="
-//                       absolute top-full left-0 mt-3 
+//                       absolute top-full left-0 mt-3
 //                       w-[210px]
-//                       bg-[#0B0B0B] 
+//                       bg-[#0B0B0B]
 //                       border border-[#EED291]
 //                       shadow-lg
 //                       overflow-hidden
@@ -1530,8 +1526,6 @@
 //         </div>
 //       </header>
 
-
-
 //       {/* ===================== MOBILE SLIDE MENU ===================== */}
 //       <div
 //         className={`fixed inset-0 z-[9999] xl:hidden ${
@@ -1550,8 +1544,8 @@
 
 //         {/* LEFT MENU PANEL */}
 //         <div
-//           className={`absolute top-0 left-0 h-full w-[330px] md:w-[370px] 
-//             bg-[#0B0B0B] text-white overflow-y-auto 
+//           className={`absolute top-0 left-0 h-full w-[330px] md:w-[370px]
+//             bg-[#0B0B0B] text-white overflow-y-auto
 //             transform transition-transform duration-300 ease-out
 //             ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
 //           `}
@@ -1577,7 +1571,7 @@
 //               to="/"
 //               onClick={() => setIsMenuOpen(false)}
 //               className={({ isActive }) =>
-//                 `w-full text-left px-5 pb-3 pt-2.5 border-b border-[#e6e6e673] 
+//                 `w-full text-left px-5 pb-3 pt-2.5 border-b border-[#e6e6e673]
 //                 flex justify-between hover:bg-white/5 ${
 //                   isActive ? "text-[#EED291]" : ""
 //                 }`
@@ -1602,8 +1596,8 @@
 //             {/* OPEN ABOUT PANEL */}
 //             <button
 //               onClick={() => setIsAboutPanelOpen(true)}
-//               className="w-full text-left px-5 pb-3 pt-2.5 
-//               border-b border-[#e6e6e673] flex items-center justify-between 
+//               className="w-full text-left px-5 pb-3 pt-2.5
+//               border-b border-[#e6e6e673] flex items-center justify-between
 //               hover:bg-white/5 font-semibold"
 //             >
 //               <span>About Us</span>
@@ -1626,7 +1620,7 @@
 //             {/* SIGN IN */}
 //             <button
 //               onClick={() => setIsMenuOpen(false)}
-//               className="w-full text-left px-5 pb-3 pt-2.5 
+//               className="w-full text-left px-5 pb-3 pt-2.5
 //               border-b border-[#e6e6e673] hover:bg-white/5 flex items-center gap-2"
 //             >
 //               <span className="w-5 h-5 flex items-center justify-center">
@@ -1639,7 +1633,7 @@
 //           {/* CREATE ACCOUNT */}
 //           <button
 //             onClick={() => setIsMenuOpen(false)}
-//             className="w-full text-left px-5 pb-3 pt-2.5 
+//             className="w-full text-left px-5 pb-3 pt-2.5
 //             hover:bg-white/5 flex items-center gap-2"
 //           >
 //             <span className="w-5 h-5 flex items-center justify-center">
@@ -1673,8 +1667,8 @@
 
 //         {/* ===================== MOBILE ABOUT PANEL ===================== */}
 //         <div
-//           className={`absolute top-0 left-0 h-full w-[330px] md:w-[370px] 
-//             bg-[#0B0B0B] text-white overflow-y-auto 
+//           className={`absolute top-0 left-0 h-full w-[330px] md:w-[370px]
+//             bg-[#0B0B0B] text-white overflow-y-auto
 //             transform transition-transform duration-300 ease-out
 //             ${isAboutPanelOpen ? "translate-x-0" : "-translate-x-full"}
 //           `}
@@ -1701,8 +1695,8 @@
 //                   setIsMenuOpen(false);
 //                   setIsAboutPanelOpen(false);
 //                 }}
-//                 className="block px-5 py-4 border-b border-[#e6e6e673] 
-//                   text-white font-urbanist font-semibold text-sm 
+//                 className="block px-5 py-4 border-b border-[#e6e6e673]
+//                   text-white font-urbanist font-semibold text-sm
 //                   hover:bg-white/5"
 //               >
 //                 {item.label}
@@ -1718,10 +1712,6 @@
 // };
 
 // export default Header;
-
-
-
-
 
 import React, { useEffect, useRef, useState } from "react";
 import ews from "../../assets/images/ews.png";
@@ -1739,6 +1729,9 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [lastOpenedPanel, setLastOpenedPanel] = useState<"main" | "about">(
+    "main"
+  );
   const navigate = useNavigate();
 
   const bannerRef = useRef<HTMLDivElement | null>(null);
@@ -1749,6 +1742,9 @@ const Header = () => {
 
   // Mobile nested About panel
   const [isAboutPanelOpen, setIsAboutPanelOpen] = useState(false);
+
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+
 
   // Prevent dropdown from closing while hovering
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -1795,20 +1791,57 @@ const Header = () => {
     };
   }, []);
 
+  const openHamburger = () => {
+    setIsMenuOpen(true);
+
+    // RE-OPEN LAST PANEL
+    if (lastOpenedPanel === "about") {
+      setIsAboutPanelOpen(true);
+    } else {
+      setIsAboutPanelOpen(false);
+    }
+  };
+
+  const openDropdown = () => {
+  if (closeTimeout.current) clearTimeout(closeTimeout.current);
+  setShowAboutDropdown(true);
+};
+
+const closeDropdown = () => {
+  closeTimeout.current = setTimeout(() => {
+    setShowAboutDropdown(false);
+  }, 150); // delay prevents flicker
+};
+
   const ChevronRight = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="currentColor"
+      className="w-4 h-4"
+    >
       <polyline points="9 18 15 12 9 6" strokeWidth="2"></polyline>
     </svg>
   );
 
   const BackArrow = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#0B0B0B" className="w-6 h-6">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="#0B0B0B"
+      className="w-6 h-6"
+    >
       <polyline points="15 6 9 12 15 18" strokeWidth="2" />
     </svg>
   );
 
   const CloseIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-6 h-6">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
       <line x1="18" y1="6" x2="6" y2="18" strokeWidth="2"></line>
       <line x1="6" y1="6" x2="18" y2="18" strokeWidth="2"></line>
     </svg>
@@ -1816,20 +1849,38 @@ const Header = () => {
 
   // About items (Desktop)
   const aboutItems = [
-    { label: "About Us Bergdolt, Reif & Nett", to: "/aboutUs/bergdolt-reif-nett" },
+    {
+      label: "About Us Bergdolt, Reif & Nett",
+      to: "/aboutUs/bergdolt-reif-nett",
+    },
     { label: "About Us Lamm-Jung", to: "/aboutUs/lamm-jung" },
-    { label: "About Us KvD Strauch Sektmanufaktur", to: "/aboutUs/kvd-strauch-sektmanufaktur" },
-    { label: "About Château Clos De Boüard", to: "/aboutUs/château-clos-de-boüard" },
+    {
+      label: "About Us KvD Strauch Sektmanufaktur",
+      to: "/aboutUs/kvd-strauch-sektmanufaktur",
+    },
+    {
+      label: "About Château Clos De Boüard",
+      to: "/aboutUs/château-clos-de-boüard",
+    },
     { label: "About Weingut Matthias Anton", to: "/aboutUs/matthias" },
   ];
 
   // Mobile About items (including "Go To About Us")
   const aboutItemsForMobile = [
     { label: "Go To About Us", to: "/aboutUs" },
-    { label: "About Us Bergdolt, Reif & Nett", to: "/aboutUs/bergdolt-reif-nett" },
+    {
+      label: "About Us Bergdolt, Reif & Nett",
+      to: "/aboutUs/bergdolt-reif-nett",
+    },
     { label: "About Us Lamm-Jung", to: "/aboutUs/lamm-jung" },
-    { label: "About Us KvD Strauch Sektmanufaktur", to: "/aboutUs/kvd-strauch-sektmanufaktur" },
-    { label: "About Château Clos De Boüard", to: "/aboutUs/château-clos-de-boüard" },
+    {
+      label: "About Us KvD Strauch Sektmanufaktur",
+      to: "/aboutUs/kvd-strauch-sektmanufaktur",
+    },
+    {
+      label: "About Château Clos De Boüard",
+      to: "/aboutUs/château-clos-de-boüard",
+    },
     { label: "About Weingut Matthias Anton", to: "/aboutUs/matthias" },
   ];
 
@@ -1851,25 +1902,26 @@ const Header = () => {
       {/* HEADER */}
       <header
         className={`w-full fixed top-0 pt-2 transition-colors duration-500 z-[999] ${
-          isSticky ? "bg-black" : "bg-transparent"
+          isSticky ? "bg-black py-3" : " pt-14 bg-transparent"
         }`}
       >
-        <div className="w-[95%] mt-10 mx-auto flex justify-between items-center">
-          
+        <div className="w-[95%]  mx-auto flex justify-between items-center">
           {/* LOGO */}
           <div className="flex flex-col items-center gap-3 font-urbanist font-semibold">
             <img
               src={ews}
               className={`duration-500 ${
                 isSticky
-                  ? "xl:w-[50px] h-[60px]"
-                  : "w-[50px] xl:w-[128px] h-[60px] lg:h-[130px] xl:h-[137px]"
+                  ? "   xl:w-[50px] h-[60px]"
+                  : "w-[80px]   xl:w-[128px]  h-[100px] xl:h-[137px]"
               }`}
             />
 
             <p
               className={`text-[#C89D53] duration-500 ${
-                isSticky ? "text-xs" : "text-xs md:text-md lg:text-lg xl:text-xl"
+                isSticky
+                  ? "text-xs"
+                  : "text-xs md:text-md lg:text-lg xl:text-xl"
               }`}
             >
               Pure Terroir.{" "}
@@ -1879,9 +1931,7 @@ const Header = () => {
 
           {/* ================= DESKTOP NAVIGATION (Above 1024px) ================= */}
           <div className="hidden xl:flex gap-10 items-center text-white font-urbanist font-semibold text-md relative">
-
             <ul className="flex items-center gap-8">
-
               {/* HOME */}
               <NavLink
                 to="/"
@@ -1906,10 +1956,13 @@ const Header = () => {
               <li
                 ref={aboutBtnRef}
                 className={`relative cursor-pointer ${underlineClass}`}
-                onMouseEnter={() => setShowAboutDropdown(true)}
-                onMouseLeave={() => setShowAboutDropdown(true)}
+                    onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
               >
-                <span className={showAboutDropdown ? "text-[#EED291]" : ""} onClick = {() => navigate("/aboutUs")}>
+                <span
+                  className={showAboutDropdown ? "text-[#EED291]" : ""}
+                  onClick={() => navigate("/aboutUs")}
+                >
                   About Us
                 </span>
 
@@ -1925,8 +1978,8 @@ const Header = () => {
                       shadow-lg z-[999999]
                 
                     "
-                    onMouseEnter={() => setShowAboutDropdown(true)}
-                    onMouseLeave={() => setShowAboutDropdown(true)}
+                     onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
                   >
                     {aboutItems.map((item, index) => (
                       <Link
@@ -1940,14 +1993,14 @@ const Header = () => {
                           hover:text-[#EED291]
                           
                         "
-                        onClick = {() => setShowAboutDropdown(false)}
+                        onClick={() => setShowAboutDropdown(false)}
                       >
                         {item.label}
 
                         {/* Underline animation inside dropdown */}
                         <span
                           className="
-                            absolute bottom-0 left-0 h-[2px] bg-[#EED291]
+                            absolute bottom-2 left-0 h-[2px] bg-[#EED291]
                             w-0 group-hover:w-full
                             transition-all duration-300
                           "
@@ -1988,8 +2041,8 @@ const Header = () => {
             <img src={user} className="w-[24px] h-[24px]" />
             <img src={cart} className="w-[24px] h-[24px]" />
 
-            <button onClick={() => setIsMenuOpen(true)}>
-              <svg className="w-8 h-8" fill="none" stroke="currentColor">
+            <button onClick={openHamburger}>
+              <svg className="w-8 h-8 mt-2" fill="none" stroke="currentColor">
                 <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" />
                 <line x1="3" y1="12" x2="21" y2="12" strokeWidth="2" />
                 <line x1="3" y1="18" x2="21" y2="18" strokeWidth="2" />
@@ -1998,7 +2051,6 @@ const Header = () => {
           </div>
         </div>
       </header>
-
 
       {/* ===================== MOBILE SLIDE MENU ===================== */}
       <div
@@ -2041,16 +2093,13 @@ const Header = () => {
 
           {/* MENU LIST */}
           <nav className="space-y-0.5">
-
             {/* HOME */}
             <NavLink
               to="/"
               onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `w-full text-left px-5 pb-3 pt-2.5 border-b border-[#e6e6e673]
-                flex justify-between ${
-                  isActive ? "text-[#EED291]" : ""
-                }`
+                flex justify-between ${isActive ? "text-[#EED291]" : ""}`
               }
             >
               Home
@@ -2062,9 +2111,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `w-full text-left px-5 pb-3 pt-2.5 border-b border-[#e6e6e673]
-                flex justify-between ${
-                  isActive ? "text-[#EED291]" : ""
-                }`
+                flex justify-between ${isActive ? "text-[#EED291]" : ""}`
               }
             >
               Shop All
@@ -2072,7 +2119,10 @@ const Header = () => {
 
             {/* OPEN ABOUT PANEL */}
             <button
-              onClick={() => setIsAboutPanelOpen(true)}
+              onClick={() => {
+                setIsAboutPanelOpen(true);
+                setLastOpenedPanel("about"); // REMEMBER THIS
+              }}
               className="w-full text-left px-5 pb-3 pt-2.5 
               border-b border-[#e6e6e673] flex items-center justify-between"
             >
@@ -2086,9 +2136,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `w-full text-left px-5 pb-3 pt-2.5 border-b border-[#e6e6e673]
-                 flex justify-between ${
-                   isActive ? "text-[#EED291]" : ""
-                 }`
+                 flex justify-between ${isActive ? "text-[#EED291]" : ""}`
               }
             >
               Blog
@@ -2152,10 +2200,12 @@ const Header = () => {
         >
           {/* GOLD TOP BAR (matches screenshot) */}
           <div className="w-full bg-[#EED291] h-[56px] flex items-center relative">
-
             {/* BACK ARROW */}
             <button
-              onClick={() => setIsAboutPanelOpen(false)}
+              onClick={() => {
+                setIsAboutPanelOpen(false);
+                setLastOpenedPanel("main");
+              }}
               className="absolute left-4 text-black"
             >
               <svg

@@ -23,7 +23,7 @@ const AboutFourthProduct = () => {
               ]
   return (
     <>
-      <div className="bg-[url('images/aboutheader5.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
+      <div className="bg-[url('/images/aboutheader5.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
             Home <span className="font-Poppins"> &gt;</span> About Château Clos
@@ -42,11 +42,11 @@ const AboutFourthProduct = () => {
           </p>
           <div className="flex flex-col xl:flex-row items-center gap-6 xl:gap-20">
             {/* LEFT IMAGE */}
-            <div className="w-full xl:w-1/2 hover:scale(1) flex justify-center  bg-[#F8F8F8] py-6 cursor-pointer">
+            <div className="w-full xl:w-1/2 hover:scale(1) flex justify-center  bg-[#F8F8F8] py-6 cursor-pointer overflow-hidden">
               <img
                 src={about1}
                 alt="About section"
-                className="w-[80px] md:w-[180px] xl:w-[140px]  object-contain"
+                className="w-[80px] md:w-[180px] xl:w-[140px]  object-contain transition-all duration-500 ease-in-out hover:scale-105"
               />
             </div>
 
@@ -98,11 +98,11 @@ const AboutFourthProduct = () => {
               </div>
             </div>
 
-            <div className="w-full xl:w-1/2 flex justify-center  order-1 xl:order-2 hover:scale(1) bg-[#F8F8F8] py-6  cursor-pointer">
+            <div className="w-full xl:w-1/2 flex justify-center  order-1 xl:order-2 hover:scale(1) bg-[#F8F8F8] py-6  cursor-pointer overflow-hidden">
               <img
                 src={about2}
                 alt="About section"
-                className="w-[80px] md:w-[180px] xl:w-[140px]  object-contain"
+                className="w-[80px] md:w-[180px] xl:w-[140px]  object-contain transition-all duration-500 ease-in-out hover:scale-105"
               />
             </div>
           </div>
@@ -119,8 +119,8 @@ const AboutFourthProduct = () => {
       
             <div className="hidden w-full lg:flex justify-center gap-3  xl:gap-8">
                   {aboutGallery.map((item, index) => (
-                    <div key={index} className="">
-                        <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover" />
+                    <div key={index} className="cursor-pointer overflow-hidden">
+                        <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover transition-all duration-500 ease-in-out hover:scale-105" />
                     </div>
                   ))}
                 </div>
@@ -141,8 +141,8 @@ const AboutFourthProduct = () => {
                     className="!pb-10 gap-2 flex "
                   >
                     {aboutGallery.map((item, index) => (
-                      <SwiperSlide key={index} className="flex  items-stretch">
-                        <img src={item.gallery} alt="" />
+                      <SwiperSlide key={index} className="flex  items-stretch cursor-pointer overflow-hidden">
+                        <img src={item.gallery} alt="" className="transition-all duration-500 ease-in-out hover:scale-105"/>
                       </SwiperSlide>
                     ))}
                   </Swiper>
