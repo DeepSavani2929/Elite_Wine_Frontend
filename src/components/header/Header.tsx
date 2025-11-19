@@ -1717,13 +1717,13 @@ import React, { useEffect, useRef, useState } from "react";
 import ews from "../../assets/images/ews.png";
 import user from "../../assets/images/user.png";
 import cart from "../../assets/images/cart.png";
-import { CircleUserRound, UserRoundPlus } from "lucide-react";
+import { CircleUserRound, MoveLeft, UserRoundPlus } from "lucide-react";
 import search from "../../assets/images/search.png";
 import USA from "../../assets/images/USA.svg";
 import Europe from "../../assets/images/Europe.svg.png";
 import UK from "../../assets/images/UK.svg";
 import switzerland from "../../assets/images/switzerland.jpg";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -1732,7 +1732,7 @@ const Header = () => {
   const [lastOpenedPanel, setLastOpenedPanel] = useState<"main" | "about">(
     "main"
   );
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const bannerRef = useRef<HTMLDivElement | null>(null);
   const bannerHeightRef = useRef<number>(0);
@@ -1851,37 +1851,37 @@ const closeDropdown = () => {
   const aboutItems = [
     {
       label: "About Us Bergdolt, Reif & Nett",
-      to: "/aboutUs/bergdolt-reif-nett",
+      to: "/about-us/bergdolt-reif-nett",
     },
-    { label: "About Us Lamm-Jung", to: "/aboutUs/lamm-jung" },
+    { label: "About Us Lamm-Jung", to: "/about-us/lamm-jung" },
     {
       label: "About Us KvD Strauch Sektmanufaktur",
-      to: "/aboutUs/kvd-strauch-sektmanufaktur",
+      to: "/about-us/kvd-strauch-sektmanufaktur",
     },
     {
       label: "About Château Clos De Boüard",
-      to: "/aboutUs/château-clos-de-boüard",
+      to: "/about-us/château-clos-de-boüard",
     },
-    { label: "About Weingut Matthias Anton", to: "/aboutUs/matthias" },
+    { label: "About Weingut Matthias Anton", to: "/about-us/weingut-matthias-anton" },
   ];
 
   // Mobile About items (including "Go To About Us")
   const aboutItemsForMobile = [
-    { label: "Go To About Us", to: "/aboutUs" },
+    { label: "Go To About Us", to: "/about-us" },
     {
       label: "About Us Bergdolt, Reif & Nett",
-      to: "/aboutUs/bergdolt-reif-nett",
+      to: "/about-us/bergdolt-reif-nett",
     },
-    { label: "About Us Lamm-Jung", to: "/aboutUs/lamm-jung" },
+    { label: "About Us Lamm-Jung", to: "/about-us/lamm-jung" },
     {
       label: "About Us KvD Strauch Sektmanufaktur",
-      to: "/aboutUs/kvd-strauch-sektmanufaktur",
+      to: "/about-us/kvd-strauch-sektmanufaktur",
     },
     {
       label: "About Château Clos De Boüard",
-      to: "/aboutUs/château-clos-de-boüard",
+      to: "/about-us/château-clos-de-boüard",
     },
-    { label: "About Weingut Matthias Anton", to: "/aboutUs/matthias" },
+    { label: "About Weingut Matthias Anton", to: "/about-us/weingut-matthias-anton" },
   ];
 
   // Text-only underline animation
@@ -1936,7 +1936,7 @@ const closeDropdown = () => {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass}`
+                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
                 }
               >
                 <li>Home</li>
@@ -1946,14 +1946,14 @@ const closeDropdown = () => {
               <NavLink
                 to="/shop"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass}`
+                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
                 }
               >
                 <li>Shop All</li>
               </NavLink>
 
               {/* ABOUT US (hover dropdown) */}
-              <li
+              {/* <li
                 ref={aboutBtnRef}
                 className={`relative cursor-pointer ${underlineClass}`}
                     onMouseEnter={openDropdown}
@@ -1961,12 +1961,11 @@ const closeDropdown = () => {
               >
                 <span
                   className={showAboutDropdown ? "text-[#EED291]" : ""}
-                  onClick={() => navigate("/aboutUs")}
+                  onClick={() => navigate("/about-us")}
                 >
                   About Us
                 </span>
 
-                {/* Desktop Dropdown */}
                 {showAboutDropdown && (
                   <div
                     ref={dropdownRef}
@@ -1974,7 +1973,7 @@ const closeDropdown = () => {
                       absolute top-full left-0 mt-3 
                       w-[220px]
                       bg-[#0B0B0B]
-                      border border-[#EED291]
+                      border border-[gray]
                       shadow-lg z-[999999]
                 
                     "
@@ -1986,9 +1985,9 @@ const closeDropdown = () => {
                         key={index}
                         to={item.to}
                         className="
-                          block px-4 py-3
+                          block px-4 py-3 mx-3
                           text-white font-urbanist font-semibold text-sm
-                          border-b border-[#EED291]
+                          border-b border-[gray]
                           relative group
                           hover:text-[#EED291]
                           
@@ -1997,14 +1996,44 @@ const closeDropdown = () => {
                       >
                         {item.label}
 
-                        {/* Underline animation inside dropdown */}
-                        <span
-                          className="
-                            absolute bottom-2 left-0 h-[2px] bg-[#EED291]
-                            w-0 group-hover:w-full
-                            transition-all duration-300
-                          "
-                        ></span>
+                   
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li> */}
+
+
+                            <li
+                ref={aboutBtnRef}
+                className="relative cursor-pointer"
+                onMouseEnter={openDropdown}
+                onMouseLeave={closeDropdown}
+              >
+                <NavLink
+                  to="/about-us"
+                  className={({ isActive }) =>
+                    `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
+                  }
+                >
+                  <span>About Us</span>
+                </NavLink>
+
+                {showAboutDropdown && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute top-full left-0 mt-3 w-[220px] bg-[#0B0B0B] border border-[gray] shadow-lg z-[999999]"
+                    onMouseEnter={openDropdown}
+                    onMouseLeave={closeDropdown}
+                  >
+                    {aboutItems.map((item, index) => (
+                      <Link
+                        key={index}
+                        to={item.to}
+                        className="block px-4 py-3 mx-3 text-white font-urbanist font-semibold text-sm border-b border-[gray] hover:text-[#EED291]"
+                        onClick={() => setShowAboutDropdown(false)}
+                      >
+                        {item.label}
                       </Link>
                     ))}
                   </div>
@@ -2015,7 +2044,7 @@ const closeDropdown = () => {
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass}`
+                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
                 }
               >
                 <li>Blog</li>
@@ -2118,17 +2147,18 @@ const closeDropdown = () => {
             </NavLink>
 
             {/* OPEN ABOUT PANEL */}
-            <button
-              onClick={() => {
-                setIsAboutPanelOpen(true);
-                setLastOpenedPanel("about"); // REMEMBER THIS
-              }}
-              className="w-full text-left px-5 pb-3 pt-2.5 
-              border-b border-[#e6e6e673] flex items-center justify-between"
-            >
-              <span>About Us</span>
-              <ChevronRight />
-            </button>
+         <button
+  onClick={() => {
+    setIsAboutPanelOpen(true);
+    setLastOpenedPanel("about");
+  }}
+  className={`w-full text-left px-5 pb-3 pt-2.5 
+    border-b border-[#e6e6e673] flex items-center justify-between 
+    ${lastOpenedPanel === "main" ? "text-[#EED291]" : ""}`}
+>
+  <span>About Us</span>
+  <ChevronRight />
+</button>
 
             {/* BLOG */}
             <NavLink
@@ -2208,7 +2238,9 @@ const closeDropdown = () => {
               }}
               className="absolute left-4 text-black"
             >
-              <svg
+
+                <MoveLeft />
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
                 height="22"
@@ -2216,7 +2248,7 @@ const closeDropdown = () => {
                 stroke="black"
               >
                 <polyline points="15 18 9 12 15 6" strokeWidth="2"></polyline>
-              </svg>
+              </svg> */}
             </button>
 
             {/* CENTER TITLE */}
@@ -2231,15 +2263,17 @@ const closeDropdown = () => {
               <NavLink
                 key={idx}
                 to={item.to}
+                    end={item.to === "/about-us"}
                 onClick={() => {
                   setIsMenuOpen(false);
                   setIsAboutPanelOpen(false);
                 }}
-                className="
-                  block px-5 py-4
-                  border-b border-[#e6e6e673]
-                  text-white font-urbanist font-semibold text-sm
-                "
+                 className={({ isActive }) =>
+            `block px-5 py-4 border-b border-[#e6e6e673]
+             font-urbanist font-semibold text-sm
+            hover:text-[#EED291]
+            ${isActive ? "text-[#EED291]" : "text-white"}`
+          }
               >
                 {item.label}
               </NavLink>

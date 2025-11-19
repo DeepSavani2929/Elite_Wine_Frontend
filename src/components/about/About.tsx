@@ -224,7 +224,7 @@ const About = () => {
       <div className="bg-[url('/images/aboutImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
-            Home <span className="font-Poppins"> &gt;</span> About Us
+            Home <span className="font-Poppins ms-1 me-1"> &gt;</span> About Us
           </p>
           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
             about us
@@ -280,7 +280,7 @@ const About = () => {
       <div className="w-full bg-gradient-to-b from-[#FFFFFF] to-[#FFF1D2]">
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className="pb-[55px] xl:pb-[100px] pt-0">
-            <div className="flex flex-col md:flex-row justify-between gap-1 sm:gap-6 xl:gap-20">
+            <div className="flex flex-col md:flex-row justify-center gap-1 sm:gap-6 xl:gap-20">
               <div className="order-2 md:order-1 md:w-1/2 flex flex-col justify-center py-3 lg:py-0">
                 <h2 className="font-cormorant font-bold text-[28px] xl:text-[36px] uppercase text-[#0B0B0B] mb-0 md:mb-2 xl:mb-6">
                   AWARDS & RECOGNITION
@@ -395,7 +395,7 @@ const About = () => {
       <div className="w-full bg-gradient-to-b from-[#FFFFFF] via-white via-70% to-[#FFF1D2]">
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className=" pb-[25px] md:pt-[55px] xl:py-[100px]">
-            <div className="flex flex-col xl:flex-row gap-0 lg:gap-5 xl:gap-20 items-start">
+            <div className="flex flex-col xl:flex-row gap-0 lg:gap-5 xl:gap-20 items-center">
               <div className="w-full order-1 mb-8 lg:mb-0 overflow-hidden cursor-pointer">
                 <img
                   src={about4}
@@ -411,10 +411,10 @@ const About = () => {
 
                 <ul className="space-y-4 font-urbanist text-sm xl:text-base text-[#565656] list-disc list-inside p-0 ms-5">
                   <li>Advanced aroma recovery preserving varietal character</li>
-                  <li>Rare barrel-aging in non-alcoholic wines</li>
-                  <li>Authentic European terroir</li>
+                  <li>Barrel-aging for depth and structure (rare in NA wine)</li>
+                  <li>Terroir-driven authenticity with European pedigree</li>
                   <li>Vegan selections</li>
-                  <li>No added sugar</li>
+                  <li>No added sugar for purity and wellness</li>
                 </ul>
               </div>
             </div>

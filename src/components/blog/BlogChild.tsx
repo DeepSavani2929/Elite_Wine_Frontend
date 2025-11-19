@@ -93,7 +93,7 @@ const BlogChild = ({ blog }) => {
   return (
     <div className="flex flex-col gap-3 font-urbanist w-full lg:h-full bg-white rounded-lg p-2">
       {/* Fixed-height image container */}
-      <div className="w-full lg:h-[300px] xl:h-[360px] overflow-hidden rounded-md">
+      <div className="w-full lg:h-[300px] xl:h-[360px] overflow-hidden rounded-md cursor-pointer">
         <img
           src={blog.blogImg}
           alt="blog"

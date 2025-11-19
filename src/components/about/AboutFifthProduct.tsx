@@ -26,13 +26,13 @@ const AboutFifthProduct = () => {
   return (
     <>
           <div className="bg-[url('/images/aboutheader6.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
-        <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
+        <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-43 md:mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
-            Home <span className="font-Poppins"> &gt;</span> About Us KvD
+            Home <span className="font-Poppins ms-1 me-1"> &gt;</span> About Us KvD
             Strauch Sektmanufaktur
           </p>
-          <p className="font-cormorant font-bold text-[32px] md:text-[34px] lg:text-[48px] uppercase text-white">
-            about us KvD Strauch Sektmanufaktur
+          <p className="font-cormorant font-bold text-[28px] md:text-[32px] lg:text-[34px] xl:text-[48px] uppercase text-white">
+            About Weingut Matthias Anton
           </p>
         </div>
       </div>
@@ -59,7 +59,7 @@ const AboutFifthProduct = () => {
                         Weingut Matthias Anton is a fourth-generation family estate in Herxheim bei Landau in the Southern Palatinate—one of Germany’s sunniest wine regions—farming roughly 20 hectares with a close-to-nature, sustainable approach that blends tradition and innovation.
                       </p>
 
-                      <p>Alongside its classic Palatinate wines, the estate crafts a growing range of dealcoholized ($lt;0.5% ABV) wines under the Anton free label, including Sauvignon Blanc, Pinot Grigio, Rosé, and a Blanc de Blancs sparkling. Using aroma-recovery technology and gentle, low-temperature dealcoholization, the team captures and reintegrates varietal aromas to retain authentic character, texture, and freshness—delivering a true wine experience without the alcohol.</p>
+                      <p className="mb-3 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">Alongside its classic Palatinate wines, the estate crafts a growing range of dealcoholized ($lt;0.5% ABV) wines under the Anton free label, including Sauvignon Blanc, Pinot Grigio, Rosé, and a Blanc de Blancs sparkling. Using aroma-recovery technology and gentle, low-temperature dealcoholization, the team captures and reintegrates varietal aromas to retain authentic character, texture, and freshness—delivering a true wine experience without the alcohol.</p>
                     </div>
                   </div>
                 </div>

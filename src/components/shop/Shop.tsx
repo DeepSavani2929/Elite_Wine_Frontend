@@ -3479,7 +3479,7 @@ const Shop: React.FC = () => {
       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
-            Home <span className="font-Poppins">&gt; </span>Shop
+            Home <span className="font-Poppins me-1 ms-1">&gt; </span>Shop
           </p>
           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
             Products

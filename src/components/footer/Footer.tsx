@@ -714,7 +714,7 @@ const Footer = () => {
                 <p className="font-cormorant font-semibold text-2xl uppercase">
                   OUR NEWSLETTER
                 </p>
-                <p className="font-urbanist font-medium text-base leading-[20px] capitalize">
+                <p className="font-urbanist font-medium text-base leading-[20px] text-[#FFFFFFB3] capitalize">
                   Sign Up For Our Newsletter
                 </p>
               </div>

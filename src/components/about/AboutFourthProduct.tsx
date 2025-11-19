@@ -24,12 +24,12 @@ const AboutFourthProduct = () => {
   return (
     <>
       <div className="bg-[url('/images/aboutheader5.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
-        <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
+        <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-42 md:mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
-            Home <span className="font-Poppins"> &gt;</span> About Château Clos
+            Home <span className="font-Poppins ms-1 me-1"> &gt;</span> About Château Clos
             de Boüard
           </p>
-          <p className="font-cormorant font-bold text-[32px] md:text-[34px] lg:text-[48px] uppercase text-white">
+          <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
             About Château Clos de Boüard
           </p>
         </div>
@@ -135,7 +135,7 @@ const AboutFourthProduct = () => {
                      loop={true} 
                     spaceBetween={30}
                     breakpoints={{
-                      648: { slidesPerView: 0.5 },
+                      0: { slidesPerView: 1.5 },
                       768: { slidesPerView: 2  }, 
                     }}
                     className="!pb-10 gap-2 flex "

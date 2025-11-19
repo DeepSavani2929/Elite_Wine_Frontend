@@ -14,22 +14,25 @@ import AboutSecondProduct from "./components/about/AboutSecondProduct.tsx";
 import AboutThirdProduct from "./components/about/AboutThirdProduct.tsx";
 import AboutFourthProduct from "./components/about/AboutFourthProduct.tsx";
 import AboutFifthProduct from "./components/about/AboutFifthProduct.tsx";
+import ScrollToTop from "./components/scrollToTop/ScrollToTop.tsx";
+import CartDetails from "./components/cart/CartDetails.tsx";
 
 const App: React.FC = () => {
   return (
     <>
+    <ScrollToTop/>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/productDetails/:productId" element={<ProductDetails />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/aboutUs" element={<About />} />
-
-          <Route path="/aboutUs/bergdolt-reif-nett" element={<AboutFirstProduct />} />
-          <Route path="/aboutUs/lamm-jung" element={<AboutSecondProduct />} />
-          <Route path="/aboutUs/kvd-strauch-sektmanufaktur" element={<AboutThirdProduct />} />
-          <Route path="/aboutUs/château-clos-de-boüard" element={<AboutFourthProduct />} />
-          <Route path="/aboutUs/matthias" element={<AboutFifthProduct />} />
+          <Route path="/about-us" element={<About />} />
+          <Route path="/about-us/bergdolt-reif-nett" element={<AboutFirstProduct />} />
+          <Route path="/about-us/lamm-jung" element={<AboutSecondProduct />} />
+          <Route path="/about-us/kvd-strauch-sektmanufaktur" element={<AboutThirdProduct />} />
+          <Route path="/about-us/château-clos-de-boüard" element={<AboutFourthProduct />} />
+          <Route path="/about-us/weingut-matthias-anton" element={<AboutFifthProduct />} />
+          <Route path="/cartDetails" element={<CartDetails />} />
         </Route>
       </Routes>
     </>
