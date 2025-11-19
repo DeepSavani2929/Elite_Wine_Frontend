@@ -3026,11 +3026,14 @@ import fifthtabproduct2 from "../../assets/images/fifthtabproduct2.png";
 import fifthtabproduct3 from "../../assets/images/fifthtabproduct3.png";
 import fifthtabproduct4 from "../../assets/images/fifthtabproduct4.png";
 import fifthtabproduct5 from "../../assets/images/fifthtabproduct5.png";
+import relatedproduct1 from "../../assets/images/relatedproduct1.png";
+import relatedproduct2 from "../../assets/images/relatedproduct2.png";
 import verietyImg from "../../assets/images/variety.png";
 import productmedal from "../../assets/images/productmedal.png";
 
 import ProductsChild from "../products/productsChild";
 import FilterDropdown from "../ui/FilterDropDown";
+import { useSelector } from "react-redux";
 
 interface Product {
   type: string;
@@ -3067,231 +3070,268 @@ const Shop: React.FC = () => {
   const [limit, setLimit] = useState(itemsPerPageOptions[0]);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const shopDetails = useSelector((state) => state.cart.productsDetails);
+
   const handleOpenSidebar = () => {
     if (typeof window !== "undefined" && window.innerWidth > 1024) return;
     setSidebarOpen(true);
   };
 
-  const priceToNumber = (price: string) => {
-    const parsed = parseFloat(price.replace(/[^0-9.]/g, ""));
-    return Number.isNaN(parsed) ? 0 : parsed;
-  };
+  // const priceToNumber = (price: string) => {
+  //   const parsed = parseFloat(price.replace(/[^0-9.]/g, ""));
+  //   return Number.isNaN(parsed) ? 0 : parsed;
+  // };
 
-  const shopDetails: Product[] = useMemo(
-    () => [
-      {
-        id: 1,
-        type: "Bergdolt, Reif & Nett",
-        productImg: product1,
-        productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$29.76",
-        medal: productmedal,
-        flavour: "Merlot",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Featured",
-      },
-      {
-        id: 2,
-        type: "Bergdolt, Reif & Nett",
-        productImg: product2,
-        productName:
-          "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$29.38",
-        flavour: "Pinot Noir",
-        size: randomSize(),
-        inStock: false,
-        categoryType: "Popular",
-      },
-      {
-        id: 3,
-        type: "Bergdolt, Reif & Nett",
-        productImg: product3,
-        productName: "Reverse Sauvignon Blanc Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$25.76",
-        flavour: "Sauvignon Blanc",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "New Arrivals",
-      },
-      {
-        id: 4,
-        type: "Bergdolt, Reif & Nett",
-        productImg: product4,
-        productName: "Reverse Gewurztraminer Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$29.38",
-        flavour: "Gewurztraminer",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Popular",
-      },
-      {
-        id: 5,
-        type: "Bergdolt, Reif & Nett",
-        productImg: product5,
-        productName: "Reverse Rosé Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$25.76",
-        flavour: "Rosé",
-        size: randomSize(),
-        inStock: false,
-        categoryType: "Featured",
-      },
-      {
-        id: 6,
-        type: "Bergdolt, Reif & Nett",
-        productImg: product6,
-        productName: "Reverse Riesling Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$27.16",
-        flavour: "Riesling",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "New Arrivals",
-      },
+  const priceToNumber = (price: any) => {
+  if (typeof price === "number") return price; 
+  if (typeof price === "string") return parseFloat(price.replace("$", ""));
+  return 0; // fallback to avoid crash
+};
 
-      {
-        id: 7,
-        type: "Lamm Jung",
-        productImg: secondtabproduct,
-        productName: "Lamm-Jung Riesling Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$26.97",
-        medal: productmedal,
-        flavour: "Riesling",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Popular",
-      },
 
-      {
-        id: 8,
-        type: "KvD Strauch",
-        productImg: thirdtabproduct,
-        productName: "Rouge Pur Alkoholfrei",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$28.91",
-        medal: productmedal,
-        flavour: "Rouge Pur",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Featured",
-      },
+  // const shopDetails: Product[] = useMemo(
+  //   () => [
+  //     {
+  //       id: 1,
+  //       type: "Bergdolt, Reif & Nett",
+  //       productImg: product1,
+  //       productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$29.76",
+  //       medal: productmedal,
+  //       flavour: "Merlot",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Featured",
+  //     },
+  //     {
+  //       id: 2,
+  //       type: "Bergdolt, Reif & Nett",
+  //       productImg: product2,
+  //       productName:
+  //         "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$29.38",
+  //       flavour: "Pinot Noir",
+  //       size: randomSize(),
+  //       inStock: false,
+  //       categoryType: "Popular",
+  //     },
+  //     {
+  //       id: 3,
+  //       type: "Bergdolt, Reif & Nett",
+  //       productImg: product3,
+  //       productName: "Reverse Sauvignon Blanc Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$25.76",
+  //       flavour: "Sauvignon Blanc",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "New Arrivals",
+  //     },
+  //     {
+  //       id: 4,
+  //       type: "Bergdolt, Reif & Nett",
+  //       productImg: product4,
+  //       productName: "Reverse Gewurztraminer Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$29.38",
+  //       flavour: "Gewurztraminer",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Popular",
+  //     },
+  //     {
+  //       id: 5,
+  //       type: "Bergdolt, Reif & Nett",
+  //       productImg: product5,
+  //       productName: "Reverse Rosé Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$25.76",
+  //       flavour: "Rosé",
+  //       size: randomSize(),
+  //       inStock: false,
+  //       categoryType: "Featured",
+  //     },
+  //     {
+  //       id: 6,
+  //       type: "Bergdolt, Reif & Nett",
+  //       productImg: product6,
+  //       productName: "Reverse Riesling Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$27.16",
+  //       flavour: "Riesling",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "New Arrivals",
+  //     },
 
-      {
-        id: 9,
-        type: "Château Clos de Boüard",
-        productImg: fourthtabproduct1,
-        productName: "Sauvignon Blanc Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$25.61",
-        flavour: "Sauvignon Blanc",
-        size: randomSize(),
-        inStock: false,
-        categoryType: "New Arrivals",
-      },
-      {
-        id: 10,
-        type: "Château Clos de Boüard",
-        productImg: fourthtabproduct2,
-        productName: "Rosé Sparkling Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$28.19",
-        flavour: "Pinot Noir",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Featured",
-      },
+  //     {
+  //       id: 7,
+  //       type: "Lamm Jung",
+  //       productImg: secondtabproduct,
+  //       productName: "Lamm-Jung Riesling Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$26.97",
+  //       medal: productmedal,
+  //       flavour: "Riesling",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Popular",
+  //     },
 
-      {
-        id: 11,
-        type: "Matthias Anton",
-        productImg: fifthtabproduct1,
-        productName: "Sauvignon Blanc (vegan)",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$33.61",
-        medal: productmedal,
-        flavour: "Sauvignon Blanc",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Popular",
-      },
-      {
-        id: 12,
-        type: "Matthias Anton",
-        productImg: fifthtabproduct2,
-        productName: "Rosé Sparkling",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$28.19",
-        medal: productmedal,
-        flavour: "Pinot Noir",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "New Arrivals",
-      },
-      {
-        id: 13,
-        type: "Matthias Anton",
-        productImg: fifthtabproduct3,
-        productName: "Rosé Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$25.61",
-        flavour: "Rosé",
-        size: randomSize(),
-        inStock: false,
-        categoryType: "Featured",
-      },
-      {
-        id: 14,
-        type: "Matthias Anton",
-        productImg: fifthtabproduct4,
-        productName: "Pinot Grigio Dealalcoolized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$25.61",
-        flavour: "Pinot Grigio",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Popular",
-      },
-      {
-        id: 15,
-        type: "Matthias Anton",
-        productImg: fifthtabproduct5,
-        productName: "Blanc de Blancs Sparkling",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$28.19",
-        flavour: "Pinot Noir",
-        size: randomSize(),
-        inStock: true,
-        categoryType: "Featured",
-      },
-    ],
-    []
-  );
+  //     {
+  //       id: 8,
+  //       type: "KvD Strauch",
+  //       productImg: thirdtabproduct,
+  //       productName: "Rouge Pur Alkoholfrei",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$28.91",
+  //       medal: productmedal,
+  //       flavour: "Rouge Pur",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Featured",
+  //     },
+
+  //     {
+  //       id: 9,
+  //       type: "Château Clos de Boüard",
+  //       productImg: fourthtabproduct1,
+  //       productName: "Sauvignon Blanc Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$25.61",
+  //       flavour: "Sauvignon Blanc",
+  //       size: randomSize(),
+  //       inStock: false,
+  //       categoryType: "New Arrivals",
+  //     },
+  //     {
+  //       id: 10,
+  //       type: "Château Clos de Boüard",
+  //       productImg: fourthtabproduct2,
+  //       productName: "Rosé Sparkling Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$28.19",
+  //       flavour: "Pinot Noir",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Featured",
+  //     },
+
+  //     {
+  //       id: 11,
+  //       type: "Matthias Anton",
+  //       productImg: fifthtabproduct1,
+  //       productName: "Sauvignon Blanc (vegan)",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$33.61",
+  //       medal: productmedal,
+  //       flavour: "Sauvignon Blanc",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Popular",
+  //     },
+  //     {
+  //       id: 12,
+  //       type: "Matthias Anton",
+  //       productImg: fifthtabproduct2,
+  //       productName: "Rosé Sparkling",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$28.19",
+  //       medal: productmedal,
+  //       flavour: "Pinot Noir",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "New Arrivals",
+  //     },
+  //     {
+  //       id: 13,
+  //       type: "Matthias Anton",
+  //       productImg: fifthtabproduct3,
+  //       productName: "Rosé Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$25.61",
+  //       flavour: "Rosé",
+  //       size: randomSize(),
+  //       inStock: false,
+  //       categoryType: "Featured",
+  //     },
+  //     {
+  //       id: 14,
+  //       type: "Matthias Anton",
+  //       productImg: fifthtabproduct4,
+  //       productName: "Pinot Grigio Dealalcoolized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$25.61",
+  //       flavour: "Pinot Grigio",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Popular",
+  //     },
+  //     {
+  //       id: 15,
+  //       type: "Matthias Anton",
+  //       productImg: fifthtabproduct5,
+  //       productName: "Blanc de Blancs Sparkling",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$28.19",
+  //       flavour: "Pinot Noir",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Featured",
+  //     },
+
+  //     {
+  //       id: 16,
+  //       productImg: relatedproduct1,
+  //       productName: "Reverse Gewurztraminer Dealcoholized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$29.38",
+  //       flavour: "Gewurztraminer",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Featured",
+  //     },
+  //     {
+  //       id: 17,
+  //       productImg: relatedproduct2,
+  //       productName: "Reverse Rose (vegan) Dealcoholized",
+  //       variety: "Grape variety",
+  //       varietylogo: verietyImg,
+  //       price: "$25.76",
+  //       flavour: "Rose",
+  //       size: randomSize(),
+  //       inStock: true,
+  //       categoryType: "Popular",
+  //     },
+  //   ],
+  //   []
+  // );
+
+
+
 
   /** FILTER + SORT LOGIC **/
   const filteredProducts = useMemo(() => {
     const filtered = shopDetails.filter((p) => {
-      const priceNum = parseFloat(p.price.replace("$", ""));
+      const priceNum = parseFloat(p.price);
 
       if (filters.size !== "Size" && p.size !== filters.size) return false;
 

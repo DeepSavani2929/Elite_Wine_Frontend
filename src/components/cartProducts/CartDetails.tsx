@@ -7,55 +7,70 @@ import relatedproduct1 from "../../assets/images/relatedproduct1.png";
 import relatedproduct2 from "../../assets/images/relatedproduct2.png";
 import verietyImg from "../../assets/images/variety.png";
 import ProductsChild from "../products/productsChild";
+import { useDispatch, useSelector } from "react-redux";
+import { increaseQuantity } from "../../redux/cart/cartSlice";
 
 const CartDetails = () => {
-  const cartItems = [
-    {
-      image: product1,
-      productName: "Bergdolt, Reif & Nett Reverse Riesling (Vegan)",
-      price: 24.97,
-      qty: 1,
-    },
-    {
-      image: product2,
-      productName: "Bergdolt, Reif & Nett Reverse Gewurztraminer",
-      price: 25.38,
-      qty: 1,
-    },
-  ];
 
-  const relatedProductsList = [
-    {
-      productImg: relatedproduct1,
-      productName: "Reverse Gewurztraminer Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$29.38",
-      flavour: "Gewurztraminer",
-    },
-    {
-      productImg: relatedproduct2,
-      productName: "Reverse Rose (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.76",
-      flavour: "Rose",
-    },
-    {
-      productImg: secondtabproduct,
-      productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$26.97",
-      flavour: "Riesling",
-    },
-  ];
+    const relatedProductsList = useSelector(
+    (state) => state.cart.relatedProducts
+  );
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.qty,
+    const cartItems = useSelector(
+    (state) => state.cart.cartItems
+  );
+
+  const dispatch = useDispatch()
+  
+  // const cartItems = [
+  //   {
+  //     image: product1,
+  //     productName: "Bergdolt, Reif & Nett Reverse Riesling (Vegan)",
+  //     price: 24.97,
+  //     qty: 1,
+  //   },
+  //   {
+  //     image: product2,
+  //     productName: "Bergdolt, Reif & Nett Reverse Gewurztraminer",
+  //     price: 25.38,
+  //     qty: 1,
+  //   },
+  // ];
+
+  // const relatedProductsList = [
+  //   {
+  //     productImg: relatedproduct1,
+  //     productName: "Reverse Gewurztraminer Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.38",
+  //     flavour: "Gewurztraminer",
+  //   },
+  //   {
+  //     productImg: relatedproduct2,
+  //     productName: "Reverse Rose (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.76",
+  //     flavour: "Rose",
+  //   },
+  //   {
+  //     productImg: secondtabproduct,
+  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$26.97",
+  //     flavour: "Riesling",
+  //   },
+  // ];
+
+  const subTotal = cartItems.reduce(
+    (sum, item) => sum + Number(item.price) * item.quantity,
     0
   );
-  const total = subtotal;
+  const total = subTotal;
+  console.log(subTotal)
+  console.log(total)
 
   return (
     <>
@@ -99,7 +114,7 @@ const CartDetails = () => {
           {/* ===================== GRID LAYOUT ===================== */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-30 mt-10">
             {/* ================================= LEFT CART TABLE ================================= */}
-            <div className="col-span-2">
+            <div className="xl:col-span-2">
               {/* TABLE HEADER */}
               <table className="w-full border-collapse">
                 <thead className="bg-[#F8F8F8]">
@@ -120,7 +135,7 @@ const CartDetails = () => {
                 </thead>
 
                 <tbody>
-                  {cartItems.map((item, index) => (
+                  {cartItems.map((product, index) => (
                     <>
                       <tr className="border-b border-[#E5E5E5]">
                         <td className="py-6">
@@ -129,7 +144,7 @@ const CartDetails = () => {
 
                             <div className="border border-[#CCCCCC] py-2 px-5">
                               <img
-                                src={item.image}
+                                src={product.productImg}
                                 className="w-20 h-28 object-contain"
                                 alt="product"
                               />
@@ -137,7 +152,7 @@ const CartDetails = () => {
 
                             <div>
                               <p className="font-urbanist text-[#641026] font-semibold text-[18px] ">
-                                {item.productName}
+                                {product.productName}
                               </p>
                             </div>
                           </div>
@@ -145,21 +160,21 @@ const CartDetails = () => {
 
                         {/* PRICE */}
                         <td className="font-urbanist font-semibold text-[#0B0B0B] text-[15px]">
-                          {item.price}
+                          ${product.price}
                         </td>
 
                         {/* QUANTITY */}
                         <td>
                           <div className="flex items-center gap-3 border border-[#EED291] rounded-full px-5 py-2 w-fit">
-                            <Minus size={16} className="cursor-pointer" />
-                            <span className="font-semibold text-md">1</span>
-                            <Plus size={16} className="cursor-pointer" />
+                            <Minus size={16} className="cursor-pointer"  onClick={() => dispatch(increaseQuantity(product))}/>
+                            <span className="font-semibold text-md">{product.quantity}</span>
+                            <Plus size={16} className="cursor-pointer"  onClick={() => dispatch(increaseQuantity(product))} />
                           </div>
                         </td>
 
                         {/* TOTAL */}
                         <td className="font-urbanist font-semibold text-[#0B0B0B] text-[15px]">
-                          {total.toFixed(2)}
+                          ${total.toFixed(2)}
                         </td>
                       </tr>
                     </>
@@ -283,6 +298,12 @@ const CartDetails = () => {
                 <ProductsChild key={index} product={product} />
               ))}
             </div>
+          </div>
+
+          <div className="text-center">
+            <button className="bg-[#EED291] rounded-full px-8 py-2.5 mt-6 font-urbanist font-semibold text-base text-[#0B0B0B] text-center ">
+              VIEW MORE
+            </button>
           </div>
         </div>
       </div>

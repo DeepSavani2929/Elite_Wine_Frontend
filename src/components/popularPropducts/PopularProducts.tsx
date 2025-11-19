@@ -1252,12 +1252,15 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const PopularProducts = () => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const [showNav, setShowNav] = useState(true);
 
+  const productsDetails = useSelector((state) => state.cart.popularProducts);
+ 
   const handleNavigationVisibility = (swiper) => {
     if (swiper.slides.length <= swiper.params.slidesPerView) {
       setShowNav(false);
@@ -1275,40 +1278,40 @@ const PopularProducts = () => {
     setIsEnd(swiper.isEnd);
   };
 
-  const productDetails = [
-    {
-         id: 7,
-      type: "Lamm Jung",
-      productImg: secondtabproduct,
-      productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$26.97",
-      flavour: "Riesling",
-    },
-    {
-        id: 1,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product1,
-      productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$29.76",
-      medal: productmedal,
-      flavour: "Merlot",
-    },
-    {
-      id: 8,
-      type: "KvD Strauch Sektmanufaktur",
-      productImg: thirdtabproduct,
-      productName:
-        "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealalcoolized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$28.91",
-      flavour: "Rouge Pur",
-    },
-  ];
+  // const productDetails = [
+  //   {
+  //        id: 7,
+  //     type: "Lamm Jung",
+  //     productImg: secondtabproduct,
+  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$26.97",
+  //     flavour: "Riesling",
+  //   },
+  //   {
+  //       id: 1,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product1,
+  //     productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealalcoolized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.76",
+  //     medal: productmedal,
+  //     flavour: "Merlot",
+  //   },
+  //   {
+  //     id: 8,
+  //     type: "KvD Strauch Sektmanufaktur",
+  //     productImg: thirdtabproduct,
+  //     productName:
+  //       "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealalcoolized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$28.91",
+  //     flavour: "Rouge Pur",
+  //   },
+  // ];
 
   return (
     <section className="w-full bg-[#F8F8F8] py-10 md:py-20">
@@ -1345,7 +1348,7 @@ const PopularProducts = () => {
               setIsEnd(swiper.isEnd);
             }}
           >
-            {productDetails.map((product, index) => (
+            {productsDetails?.map((product, index) => (
               <SwiperSlide key={index}>
             <ProductsChild key={index} product={product} />
               </SwiperSlide>

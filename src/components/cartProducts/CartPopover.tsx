@@ -924,15 +924,13 @@ import {
 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { decreaseQuantity, increaseQuantity, removeFromCart } from "../../redux/cart/cartSlice";
 
 const CartPopover = ({
   isOpen,
   onClose,
-  cartItems = [],
-  relatedItems = [],
-  subtotal = 0,
-  total = 0,
 }) => {
   const swiperRef = useRef(null);
 
@@ -944,6 +942,21 @@ const CartPopover = ({
 
   // FIXED: only one sheet active
   const [activeSheet, setActiveSheet] = useState(null);
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+      const relatedProductsList = useSelector(
+    (state) => state.cart.relatedProducts
+  );
+
+        const cartItems = useSelector(
+    (state) => state.cart.cartItems
+  );
+
+  console.log(cartItems)
+
+  const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const total = subtotal;
 
   useEffect(() => {
     document.body.style.overflow =
@@ -1033,34 +1046,34 @@ const CartPopover = ({
 
         {/* CART ITEMS */}
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
-          {cartItems.map((item, index) => (
+          {cartItems.map((product, index) => (
             <div key={index} className="border-b border-[#CCCCCC] pb-6">
-              <div className="flex gap-8 items-center">
+              <div className="flex gap-8 items-center" onClick={() => navigate(`/productDetails/${product.id}`)}>
                 <img
-                  src={item.image}
+                  src={product.productImg}
                   className="w-16 h-20 object-contain"
-                  alt={item.name}
+                  alt={product.name}
                 />
 
                 <div className="flex flex-col flex-1">
                   <p className="font-semibold text-md mb-2 leading-5 font-urbanist  text-[#641026]">
-                    {item.name}
+                    {product.productName}
                   </p>
                   <p className="font-urbanist font-bold text-base text-[#0B0B0B] pt-1 pb-1.5">
-                    ${item.price}
+                    ${product.price}
                   </p>
 
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-6 border border-[#EED291] rounded-full px-5 py-1 w-fit shadow-sm">
-                      <Minus className="w-4 h-4 cursor-pointer" />
+                      <Minus className="w-4 h-4 cursor-pointer" onClick={() => dispatch(decreaseQuantity(product))} />
                       <span className="font-semibold text-base leading-[140%]">
-                        {item.qty}
+                        {product.quantity}
                       </span>
-                      <Plus className="w-4 h-4 cursor-pointer" />
+                      <Plus className="w-4 h-4 cursor-pointer" onClick={() => dispatch(increaseQuantity(product))} />
                     </div>
 
-                    <button className="text-[#0B0B0B]">
-                      <X className="w-6 h-6 mt-3" />
+                    <button className="text-[#0B0B0B]"  onClick={() => dispatch(removeFromCart(product.id))} >
+                      <X className="w-6 h-6 mt-3 cursor-pointer"  />
                     </button>
                   </div>
                 </div>
@@ -1069,7 +1082,7 @@ const CartPopover = ({
           ))}
 
           {/* YOU MAY ALSO LIKE */}
-          {relatedItems.length > 0 && (
+          {relatedProductsList.length > 0 && (
             <div className="pt-1">
               <div className="flex justify-between items-center mb-3">
                 <p className="font-semibold text-[#0B0B0B] text-[24px] font-urbanist">
@@ -1113,9 +1126,9 @@ const CartPopover = ({
                 allowTouchMove={true}
                 className="w-full"
               >
-                {relatedItems.map((product, idx) => (
+                {relatedProductsList.map((product, idx) => (
                   <SwiperSlide key={idx}>
-                    <div className="flex gap-10 items-start ps-12 justify-center">
+                    <div className="flex gap-10 items-start ps-12 justify-center" onClick={() => navigate(`/productDetails/${product.id}`)} >
                       <img
                         src={product.productImg}
                         className="w-[60px] h-[100px] object-contain"
@@ -1127,7 +1140,7 @@ const CartPopover = ({
                           {product.productName}
                         </p>
                         <p className="font-urbanist font-bold text-base text-[#0B0B0B] pt-1 pb-1.5">
-                          {product.price}
+                          ${product.price}
                         </p>
                       </div>
                     </div>
@@ -1185,12 +1198,12 @@ const CartPopover = ({
             Tax included and shipping calculated at checkout
           </p>
 
-          <button className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] text-base font-semibold py-3 rounded-full">
+          <button className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B]  cursor-poiinter  text-base font-semibold py-3 rounded-full">
             Checkout
           </button>
 
          <NavLink to="/cartDetails">
-            <button className="w-full border border-[#EED291] text-[#0B0B0B] text-base font-semibold py-3 rounded-full mt-3">
+            <button className="w-full border border-[#EED291] text-[#0B0B0B] cursor-poiinter text-base font-semibold py-3 rounded-full mt-3">
             View Cart
           </button>
             </NavLink> 

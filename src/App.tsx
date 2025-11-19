@@ -15,7 +15,7 @@ import AboutThirdProduct from "./components/about/AboutThirdProduct.tsx";
 import AboutFourthProduct from "./components/about/AboutFourthProduct.tsx";
 import AboutFifthProduct from "./components/about/AboutFifthProduct.tsx";
 import ScrollToTop from "./components/scrollToTop/ScrollToTop.tsx";
-import CartDetails from "./components/cart/CartDetails.tsx";
+import CartDetails from "./components/cartProducts/CartDetails.tsx";
 
 const App: React.FC = () => {
   return (

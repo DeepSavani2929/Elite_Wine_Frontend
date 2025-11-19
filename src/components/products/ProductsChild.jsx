@@ -68,21 +68,34 @@
 
 
 
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addToCart } from "../../redux/cart/cartSlice";
+import CartPopover from "../cartProducts/CartPopover";
 
 const ProductsChild = ({ product }) => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+
 
   return (
     <>
+
+          <CartPopover
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+          />
+
       <div
         className="group flex h-full flex-col gap-6 cursor-pointer rounded-[32px] transition-all duration-300"
         onClick={() => navigate(`/productDetails/${product.id}`)} 
       >
         {/* Image Wrapper */}
-        <div className="relative flex items-center justify-center rounded-[24px] overflow-hidden">
-          <div className="w-full rounded-md bg-[#FFFFFF] py-10">
+        <div className="relative flex items-center justify-center  overflow-hidden">
+          <div className="w-full  bg-[#FFFFFF] py-10">
             <img
               src={product.productImg}
               alt={product.productName}
@@ -90,7 +103,6 @@ const ProductsChild = ({ product }) => {
             />
           </div>
 
-          {/* ADD TO CART Button */}
           <button
             className="
               absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-6
@@ -101,8 +113,9 @@ const ProductsChild = ({ product }) => {
               
               group-hover:flex group-hover:items-center group-hover:justify-center
               group-hover:opacity-100 group-hover:pointer-events-auto
-              group-hover:translate-y-0
+              group-hover:translate-y-0 cursor-pointer
             "
+            onClick={(e) => { e.stopPropagation(); setIsCartOpen(true); dispatch(addToCart(product)); }}
           >
             ADD TO CART
           </button>

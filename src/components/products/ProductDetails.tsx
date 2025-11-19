@@ -1134,8 +1134,6 @@
 
 // export default ProductDetails;
 
-
-
 // import { Heart, Minus, Plus } from "lucide-react";
 // import product from "../../assets/images/product.png";
 // import productDetails1 from "../../assets/images/productDetails1.png";
@@ -1476,7 +1474,7 @@
 
 //             <div className="flex flex-col gap-1 xl:gap-6 w-full md:flex-1  md:min-h-screen md:overflow-y-auto" >
 //               <div
-             
+
 //                 className="flex flex-col gap-1 xl:gap-3 w-full md:flex-1"
 //               >
 //                 <p className="font-cormorant font-semibold text-[24px] lg:text-[36px] text-[#641026]">
@@ -1898,13 +1896,7 @@
 
 // export default ProductDetails;
 
-
-
-
-
-
-
-import { Heart, Minus, Plus } from "lucide-react";
+import { Heart, Minus, Plus, Share2 } from "lucide-react";
 import product from "../../assets/images/product.png";
 import productDetails1 from "../../assets/images/productDetails1.png";
 import productDetails2 from "../../assets/images/productDetails2.png";
@@ -1935,10 +1927,18 @@ import fifthtabproduct2 from "../../assets/images/fifthtabproduct2.png";
 import fifthtabproduct3 from "../../assets/images/fifthtabproduct3.png";
 import fifthtabproduct4 from "../../assets/images/fifthtabproduct4.png";
 import fifthtabproduct5 from "../../assets/images/fifthtabproduct5.png";
+import payoption1 from "../../assets/images/payoption1.png";
+import payoption2 from "../../assets/images/payoption2.png";
+import payoption3 from "../../assets/images/payoption3.png";
+import payoption4 from "../../assets/images/payoption4.png";
+import payoption5 from "../../assets/images/payoption5.png";
+import payoption6 from "../../assets/images/payoption6.png";
 import { useParams } from "react-router-dom";
 
 // ⭐ ADDED FOR POPOVER
-import CartPopover from "../cart/CartPopover";
+import CartPopover from "../cartProducts/CartPopover";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, decreaseQuantity, increaseQuantity } from "../../redux/cart/cartSlice";
 
 const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState("description");
@@ -1950,6 +1950,18 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const rightRef = useRef(null);
   const leftRef = useRef(null);
+
+ const dispatch = useDispatch()
+  const productsDetails = useSelector((state) => state.cart.productsDetails);
+  console.log(productsDetails)
+  const relatedProductsList = useSelector(
+    (state) => state.cart.relatedProducts
+  );
+
+          const cartItems = useSelector(
+      (state) => state.cart.cartItems
+    );
+
 
   const tabs = [
     { id: "description", label: "Description" },
@@ -1977,237 +1989,257 @@ const ProductDetails = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [modalContent]);
 
-    const relatedProductsList = [
-      {
-        productImg: relatedproduct1,
-        productName: "Reverse Gewurztraminer Dealcoholized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$29.38",
-        flavour: "Gewurztraminer",
-      },
-      {
-        productImg: relatedproduct2,
-        productName: "Reverse Rose (vegan) Dealcoholized",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$25.76",
-        flavour: "Rose",
-      },
-      {
-        productImg: secondtabproduct,
-        productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-        variety: "Grape variety",
-        varietylogo: verietyImg,
-        price: "$26.97",
-        flavour: "Riesling",
-      },
-    ];
+  // const relatedProductsList = [
+  //   {
+  //     id:16,
+  //     productImg: relatedproduct1,
+  //     productName: "Reverse Gewurztraminer Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.38",
+  //     flavour: "Gewurztraminer",
+  //   },
+  //   {
+  //     id:17,
+  //     productImg: relatedproduct2,
+  //     productName: "Reverse Rose (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.76",
+  //     flavour: "Rose",
+  //   },
+  //   {
+  //     id:7,
+  //     productImg: secondtabproduct,
+  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$26.97",
+  //     flavour: "Riesling",
+  //   },
+  // ];
 
-  const productsDetails = [
-    {
-      id: 1,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product1,
-      productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$29.76",
-      flavour: "Merlot",
-    },
-    {
-      id: 2,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product2,
-      productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$29.38",
-      flavour: "Pinot Noir",
-    },
-    {
-      id: 3,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product3,
-      productName:
-        "Bergdolt, Reif & Nett Reverse Sauvignon Blanc (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.76",
-      flavour: "Sauvignon Blanc",
-    },
-    {
-      id: 4,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product4,
-      productName: "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$29.38",
-      flavour: "Gewurztraminer",
-    },
-    {
-      id: 5,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product5,
-      productName: "Bergdolt, Reif & Nett Reverse Rosé (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.76",
-      flavour: "Rosé",
-    },
-    {
-      id: 6,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product6,
-      productName:
-        "Bergdolt, Reif & Nett Reverse Riesling (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$27.16",
-      flavour: "Riesling",
-    },
+  // const productsDetails = [
+  //   {
+  //     id: 1,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product1,
+  //     productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.76",
+  //     flavour: "Merlot",
+  //   },
+  //   {
+  //     id: 2,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product2,
+  //     productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.38",
+  //     flavour: "Pinot Noir",
+  //   },
+  //   {
+  //     id: 3,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product3,
+  //     productName:
+  //       "Bergdolt, Reif & Nett Reverse Sauvignon Blanc (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.76",
+  //     flavour: "Sauvignon Blanc",
+  //   },
+  //   {
+  //     id: 4,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product4,
+  //     productName: "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.38",
+  //     flavour: "Gewurztraminer",
+  //   },
+  //   {
+  //     id: 5,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product5,
+  //     productName: "Bergdolt, Reif & Nett Reverse Rosé (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.76",
+  //     flavour: "Rosé",
+  //   },
+  //   {
+  //     id: 6,
+  //     type: "Bergdolt, Reif & Nett",
+  //     productImg: product6,
+  //     productName:
+  //       "Bergdolt, Reif & Nett Reverse Riesling (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$27.16",
+  //     flavour: "Riesling",
+  //   },
 
-    // ... Remaining product list (unchanged)
-    {
-      id: 7,
-      type: "Lamm Jung",
-      productImg: secondtabproduct,
-      productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$26.97",
-      flavour: "Riesling",
-    },
-    {
-      id: 8,
-      type: "KvD Strauch Sektmanufaktur",
-      productImg: thirdtabproduct,
-      productName:
-        "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$28.91",
-      flavour: "Rouge Pur",
-    },
-    {
-      id: 9,
-      type: "Château Clos de Boüard",
-      productImg: fourthtabproduct1,
-      productName: "Château Clos de Boüard Sauvignon Blanc Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.61",
-      flavour: "Sauvignon Blanc",
-    },
-    {
-      id: 10,
-      type: "Château Clos de Boüard",
-      productImg: fourthtabproduct2,
-      productName: "Château Clos de Boüard Rosé Sparkling Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$28.19",
-      flavour: "Pinot Noir",
-    },
-    {
-      id: 11,
-      type: "Matthias Anton",
-      productImg: fifthtabproduct1,
-      productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$33.61",
-      flavour: "Sauvignon Blanc",
-    },
-    {
-      id: 12,
-      type: "Matthias Anton",
-      productImg: fifthtabproduct2,
-      productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$28.19",
-      flavour: "Pinot Noir",
-    },
-    {
-      id: 13,
-      type: "Matthias Anton",
-      productImg: fifthtabproduct3,
-      productName: "Matthias Anton Rosé (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.61",
-      flavour: "Rosé",
-    },
-    {
-      id: 14,
-      type: "Matthias Anton",
-      productImg: fifthtabproduct4,
-      productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.61",
-      flavour: "Pinot Grigio",
-    },
-    {
-      id: 15,
-      type: "Matthias Anton",
-      productImg: fifthtabproduct5,
-      productName:
-        "Matthias Anton Blanc de Blancs Sparkling (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$28.19",
-      flavour: "Pinot Noir",
-    },
-  ];
+  //   {
+  //     id: 7,
+  //     type: "Lamm Jung",
+  //     productImg: secondtabproduct,
+  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$26.97",
+  //     flavour: "Riesling",
+  //   },
+  //   {
+  //     id: 8,
+  //     type: "KvD Strauch Sektmanufaktur",
+  //     productImg: thirdtabproduct,
+  //     productName:
+  //       "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$28.91",
+  //     flavour: "Rouge Pur",
+  //   },
+  //   {
+  //     id: 9,
+  //     type: "Château Clos de Boüard",
+  //     productImg: fourthtabproduct1,
+  //     productName: "Château Clos de Boüard Sauvignon Blanc Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.61",
+  //     flavour: "Sauvignon Blanc",
+  //   },
+  //   {
+  //     id: 10,
+  //     type: "Château Clos de Boüard",
+  //     productImg: fourthtabproduct2,
+  //     productName: "Château Clos de Boüard Rosé Sparkling Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$28.19",
+  //     flavour: "Pinot Noir",
+  //   },
+  //   {
+  //     id: 11,
+  //     type: "Matthias Anton",
+  //     productImg: fifthtabproduct1,
+  //     productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$33.61",
+  //     flavour: "Sauvignon Blanc",
+  //   },
+  //   {
+  //     id: 12,
+  //     type: "Matthias Anton",
+  //     productImg: fifthtabproduct2,
+  //     productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$28.19",
+  //     flavour: "Pinot Noir",
+  //   },
+  //   {
+  //     id: 13,
+  //     type: "Matthias Anton",
+  //     productImg: fifthtabproduct3,
+  //     productName: "Matthias Anton Rosé (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.61",
+  //     flavour: "Rosé",
+  //   },
+  //   {
+  //     id: 14,
+  //     type: "Matthias Anton",
+  //     productImg: fifthtabproduct4,
+  //     productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.61",
+  //     flavour: "Pinot Grigio",
+  //   },
+  //   {
+  //     id: 15,
+  //     type: "Matthias Anton",
+  //     productImg: fifthtabproduct5,
+  //     productName:
+  //       "Matthias Anton Blanc de Blancs Sparkling (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$28.19",
+  //     flavour: "Pinot Noir",
+  //   },
 
-  // ⭐ ADDED FOR POPOVER EXAMPLE DATA
-  const cartItems = [
-    {
-      image: product1,
-      name: "Bergdolt, Reif & Nett Reverse Riesling (Vegan)",
-      price: 24.97,
-      qty: 1,
-    },
-    {
-      image: product2,
-      name: "Bergdolt, Reif & Nett Reverse Gewurztraminer",
-      price: 25.38,
-      qty: 1,
-    },
-  ];
+  //       {
+  //         id:16,
+  //     productImg: relatedproduct1,
+  //     productName: "Reverse Gewurztraminer Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.38",
+  //     flavour: "Gewurztraminer",
+  //   },
+  //   {
+  //     id:17,
+  //     productImg: relatedproduct2,
+  //     productName: "Reverse Rose (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.76",
+  //     flavour: "Rose",
+  //   },
+  // ];
 
-  const relatedItems = [
-    {
-      productImg: relatedproduct1,
-      productName: "Reverse Gewurztraminer Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$29.38",
-      flavour: "Gewurztraminer",
-    },
-    {
-      productImg: relatedproduct2,
-      productName: "Reverse Rose (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$25.76",
-      flavour: "Rose",
-    },
-    {
-      productImg: secondtabproduct,
-      productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: "$26.97",
-      flavour: "Riesling",
-    },
-  ];
+  // const cartItems = [
+  //   {
+  //     image: product1,
+  //     name: "Bergdolt, Reif & Nett Reverse Riesling (Vegan)",
+  //     price: 24.97,
+  //     qty: 1,
+  //   },
+  //   {
+  //     image: product2,
+  //     name: "Bergdolt, Reif & Nett Reverse Gewurztraminer",
+  //     price: 25.38,
+  //     qty: 1,
+  //   },
+  // ];
 
-  const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const total = subtotal;
+  // const relatedItems = [
+  //   {
+  //     productImg: relatedproduct1,
+  //     productName: "Reverse Gewurztraminer Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$29.38",
+  //     flavour: "Gewurztraminer",
+  //   },
+  //   {
+  //     productImg: relatedproduct2,
+  //     productName: "Reverse Rose (vegan) Dealcoholized",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$25.76",
+  //     flavour: "Rose",
+  //   },
+  //   {
+  //     id: 7,
+  //     productImg: secondtabproduct,
+  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
+  //     variety: "Grape variety",
+  //     varietylogo: verietyImg,
+  //     price: "$26.97",
+  //     flavour: "Riesling",
+  //   },
+  // ];
+
+
 
   // scroll logic (unchanged)
   useEffect(() => {
@@ -2253,16 +2285,16 @@ const ProductDetails = () => {
     (product) => product.id === Number(productId)
   );
 
+  const availableProductInCart = cartItems.find((item) => item.id === Number(productId))
+
+  console.log(currentProduct)
+
   return (
     <>
       {/* ⭐ ADDED: Cart Popover */}
       <CartPopover
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
-        cartItems={cartItems}
-        relatedItems={relatedItems}
-        subtotal={subtotal}
-        total={total}
       />
 
       {/* ------- YOUR ORIGINAL PAGE CONTENT BELOW (unchanged) ------- */}
@@ -2282,12 +2314,8 @@ const ProductDetails = () => {
       <div className="w-full">
         <div className="w-[95%] mx-auto ">
           <div className="flex flex-col py-[55px] xl:py-[100px] md:flex-row gap-6 xl:gap-18 justify-between md:items-start">
-            
             {/* LEFT SIDE — unchanged */}
-            <div
-  
-              className="flex flex-col gap-4 xl:gap-5 Justify-center w-full md:w-auto md:flex-1 md:sticky md:top-20"
-            >
+            <div className="flex flex-col gap-4 xl:gap-5 Justify-center w-full md:w-auto md:flex-1 md:sticky md:top-20">
               <div className="w-full flex flex-col justify-center md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
                 <img
                   src={currentProduct?.productImg}
@@ -2306,71 +2334,100 @@ const ProductDetails = () => {
             </div>
 
             {/* RIGHT SIDE — ONLY BUY NOW updated */}
-            <div
-  
-              className="flex flex-col gap-1 xl:gap-6 w-full md:flex-1 md:min-h-screen md:overflow-y-auto"
-            >
+            <div className="flex flex-col gap-1 xl:gap-6 w-full md:flex-1 md:min-h-screen md:overflow-y-auto">
               <div className="flex flex-col gap-1 xl:gap-3 w-full md:flex-1">
                 <p className="font-cormorant font-semibold text-[24px] lg:text-[36px] text-[#641026]">
                   {currentProduct?.productName}
                 </p>
                 <p className="font-urbanist font-semibold text-md text-[#0B0B0B] pb-3">
-                  <span className="capitalize">De</span>-<span>Alcoholized</span>
+                  <span className="capitalize">De</span>-
+                  <span>Alcoholized</span>
                 </p>
                 <p className="font-urbanist font-bold text-2xl text-[#0B0B0B]">
                   {currentProduct?.price}
                 </p>
               </div>
 
-                              {/* PRODUCT INFO GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 xl:gap-5 font-urbanist">
-                  <div className="flex items-center gap-5">
-                    <img src={productDetails1} />
-                    <p><span className="font-semibold text-[#641026]">Alcohol &lt;</span> 0.5% abv</p>
-                  </div>
-
-                  <div className="flex items-center gap-5">
-                    <img src={productDetails2} />
-                    <p><span className="font-semibold text-[#641026]">Residual Sugar</span> 20.9G/L</p>
-                  </div>
-
-                  <div className="flex items-center gap-5">
-                    <img src={productDetails3} />
-                    <p><span className="font-semibold text-[#641026]">Grape Variety</span> Merlot</p>
-                  </div>
-
-                  <div className="flex items-center gap-5">
-                    <img src={productDetails4} />
-                    <p><span className="font-semibold text-[#641026]">Total Acidity</span> 5.5G/L</p>
-                  </div>
-
-                  <div className="flex items-center gap-5">
-                    <img src={productDetails5} />
-                    <p><span className="font-semibold text-[#641026]">Maturation</span> In wooden barrels</p>
-                  </div>
+              {/* PRODUCT INFO GRID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 xl:gap-5 font-urbanist">
+                <div className="flex items-center gap-5">
+                  <img src={productDetails1} />
+                  <p>
+                    <span className="font-semibold text-[#641026]">
+                      Alcohol &lt;
+                    </span>{" "}
+                    0.5% abv
+                  </p>
                 </div>
 
-                {/* TEXT CONTENT */}
-                <div className="mt-3 flex flex-col gap-3 font-urbanist">
+                <div className="flex items-center gap-5">
+                  <img src={productDetails2} />
                   <p>
-                    <span className="text-[#641026] font-semibold">Sensory Characteristics:</span>
-                      This merlot presents a deep, appealing color that is nearly
+                    <span className="font-semibold text-[#641026]">
+                      Residual Sugar
+                    </span>{" "}
+                    20.9G/L
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <img src={productDetails3} />
+                  <p>
+                    <span className="font-semibold text-[#641026]">
+                      Grape Variety
+                    </span>{" "}
+                    Merlot
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <img src={productDetails4} />
+                  <p>
+                    <span className="font-semibold text-[#641026]">
+                      Total Acidity
+                    </span>{" "}
+                    5.5G/L
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <img src={productDetails5} />
+                  <p>
+                    <span className="font-semibold text-[#641026]">
+                      Maturation
+                    </span>{" "}
+                    In wooden barrels
+                  </p>
+                </div>
+              </div>
+
+              {/* TEXT CONTENT */}
+              <div className="mt-3 flex flex-col gap-3 font-urbanist">
+                <p>
+                  <span className="text-[#641026] font-semibold">
+                    Sensory Characteristics:
+                  </span>
+                  This merlot presents a deep, appealing color that is nearly
                   indistinguishable From a conventional red wine. The nose
                   reveals a spicy-fruity bouquet with notes of dried berries and
                   a Hint of red pepper.
-                  </p>
+                </p>
 
-                  <p>
-                    <span className="text-[#641026] font-semibold">Tasting Notes:</span>
-                                     A smooth, fruit-driven merlot with deep notes of dark berries,
+                <p>
+                  <span className="text-[#641026] font-semibold">
+                    Tasting Notes:
+                  </span>
+                  A smooth, fruit-driven merlot with deep notes of dark berries,
                   plum, and a hint of spice.On the palate, it's soft and
                   rounded, with gentle tannins and a pleasantly dry finish.A
                   refined and full-bodied red - without the alcohol.
-                  </p>
+                </p>
 
-                  <p className="text-[#641026] font-semibold">Serving Suggestions</p>
+                <p className="text-[#641026] font-semibold">
+                  Serving Suggestions
+                </p>
 
-                      <ul className="flex flex-col gap-1 font-urbanist font-regular text-sm  md:text-base lg:text-md  text-[#0B0B0B] ps-4 mb-2 list-disc list-inside">
+                <ul className="flex flex-col gap-1 font-urbanist font-regular text-sm  md:text-base lg:text-md  text-[#0B0B0B] ps-4 mb-2 list-disc list-inside">
                   <li>Best enjoyed slightly chilled at 14-16°C / 57.2-59°F.</li>
                   <li>
                     Pair with roasted vegetables, grilled dishes, or hearty
@@ -2382,40 +2439,92 @@ const ProductDetails = () => {
                   </li>
                 </ul>
 
-                  <p><span className="text-[#641026] font-semibold">Serving temperature</span> 10°-12°C</p>
-                  <p><span className="text-[#641026] font-semibold">Bottle Size</span> 0.75l</p>
-                  <p><span className="text-[#641026] font-semibold">Made in Germany</span></p>
-                </div>
+                <p>
+                  <span className="text-[#641026] font-semibold">
+                    Serving temperature
+                  </span>{" "}
+                  10°-12°C
+                </p>
+                <p>
+                  <span className="text-[#641026] font-semibold">
+                    Bottle Size
+                  </span>{" "}
+                  0.75l
+                </p>
+                <p>
+                  <span className="text-[#641026] font-semibold">
+                    Made in Germany
+                  </span>
+                </p>
+              </div>
 
               <div className="flex flex-col gap-4 font-urbanist">
                 <p className="font-semibold text-md text-[#0B0B0B]">Quantity</p>
                 <button className="flex items-center gap-7 px-6 py-1.5 font-semibold rounded-full border border-[#EED291] w-fit">
-                  <Minus className="w-4 h-4 text-[#0B0B0B]" />
-                  <p className="text-[#0B0B0B] font-semibold text-xl">1</p>
-                  <Plus className="w-4 h-4 text-[#0B0B0B]" />
+                  <Minus className="w-4 h-4 text-[#0B0B0B] cursor-pointer" onClick={() => dispatch(decreaseQuantity(currentProduct))}/>
+
+                  <p className="text-[#0B0B0B] font-semibold text-xl">{availableProductInCart ? availableProductInCart.quantity : 1}</p>
+                  <Plus className="w-4 h-4 text-[#0B0B0B] cursor-pointer" onClick={() => dispatch(increaseQuantity(currentProduct))}/>
                 </button>
 
                 <div className="flex gap-4 items-center">
-                  
                   {/* ⭐ BUY NOW — ADDED POPUP OPEN */}
                   <button
-                    onClick={() => setIsCartOpen(true)}
+                    onClick={() => { setIsCartOpen(true); dispatch(addToCart(currentProduct));}}
                     className="font-urbanist font-semibold cursor-pointer text-base text-[#0B0B0B] bg-[#EED291] w-full rounded-full py-3"
                   >
-                    BUY NOW
+                    Add To Cart
                   </button>
 
                   <div className="w-12 h-11 flex items-center justify-center rounded-full bg-[#EED291]">
                     <Heart className="w-5 h-5 text-[#0B0B0B]" />
                   </div>
+
+                  <div>
+                    <Share2 />
+                  </div>
                 </div>
 
                 {/* Rest buttons unchanged */}
-                <button className="font-urbanist cursor-pointer font-semibold text-base border border-[#EED291] text-[#0B0B0B] bg-transparent w-full rounded-full py-2.5 mb-2">
-                  BUY IT NOW
-                </button>
 
-                 <img src={paymentcard} alt="" className="h-[31px]" />
+                <div>
+                  <button className="font-urbanist cursor-pointer font-semibold text-base border border-[#EED291] text-[#0B0B0B] bg-transparent w-full rounded-full py-2.5 ">
+                    BUY IT NOW
+                  </button>
+
+                  <div className="flex gap-2 xl:gap-3 items-center mt-3 lg:mt-0">
+                    <img
+                      src={payoption1}
+                      className="   w-10  lg:w-[100px] h-5 lg:h-[31px]"
+                      alt=""
+                    />
+                    <img
+                      src={payoption2}
+                      className=" w-12 lg:w-[50px] h-5 lg:h-[31px]"
+                      alt=""
+                    />
+                    <img
+                      src={payoption3}
+                      className=" w-12 lg:w-[50px] h-5 lg:h-[31px]"
+                      alt=""
+                    />
+                    <img
+                      src={payoption4}
+                      className=" w-12  lg:w-[50px] h-5 lg:h-[31px]"
+                      alt=""
+                    />
+                    <img
+                      src={payoption5}
+                      className=" w-18   lg:w-[60px] h-8 lg:h-[60px]"
+                      alt=""
+                    />
+                    <img
+                      src={payoption6}
+                      className="w-22   lg:w-[130px] h-12 lg:h-[90px]"
+                      alt=""
+                    />
+                  </div>
+                </div>
 
                 <div className="flex flex-col font-[urbanist] font-medium gap-2">
                   <div className="flex items-center gap-5">
@@ -2427,7 +2536,9 @@ const ProductDetails = () => {
 
                   <div className="flex items-center gap-5">
                     <img src={shipping2} className="w-[40px] h-[40px]" alt="" />
-                    <p className="text-[#565656] text-md">Free shipping at $99+</p>
+                    <p className="text-[#565656] text-md">
+                      Free shipping at $99+
+                    </p>
                   </div>
                 </div>
               </div>
@@ -2455,7 +2566,7 @@ const ProductDetails = () => {
 
               <div className="mt-4 text-md text-gray-700 leading-relaxed font-urbanist font-semibold">
                 {activeTab === "description" && (
-                  <p>
+                  <p className="font-urbanist">
                     <strong>Sensorik:</strong> This merlot presents a deep,
                     appealing color that is nearly indistinguishable from a
                     conventional red wine. The nose reveals a spicy-fruity
@@ -2471,17 +2582,19 @@ const ProductDetails = () => {
 
                 {activeTab === "additional" && (
                   <div>
-                    <h3 className="font-semibold mb-2">
+                    <h3 className="font-medium font-cormoran mb-2 text-[#0b0b0b] text-2xl ">
                       Product Specifications
                     </h3>
-                    <ul className="list-disc list-inside mb-4">
+                    <ul className="list-disc list-inside mb-4 font-urbanist">
                       <li>Volume: 750ml</li>
                       <li>Alcohol Content: 13.5%</li>
                       <li>Serving Temperature: 16–18°C</li>
                       <li>Closure Type: Natural Cork</li>
                     </ul>
-                    <h3 className="font-semibold mb-2">Storage Instructions</h3>
-                    <p>
+                    <h3 className="font-medium font-cormoran mb-2 text-[#0b0b0b] text-2xl mt-8">
+                      Storage Instructions
+                    </h3>
+                    <p className="font-urbanist">
                       Store in a cool, dark place away from direct sunlight.
                       Best consumed within 2 years of purchase for optimal
                       freshness.
@@ -2491,40 +2604,44 @@ const ProductDetails = () => {
 
                 {activeTab === "shipping" && (
                   <div>
-                    <h3 className="font-semibold mb-2">Returns Policy</h3>
-                    <p className="mb-4">
+                    <h3 className="font-medium font-cormoran mb-2 text-[#0b0b0b] text-2xl">
+                      Returns Policy
+                    </h3>
+                    <p className="mb-4 font-urbanist">
                       You may return most new, unopened items within 30 days of
                       delivery for a full refund. We'll also pay the return
                       shipping costs if the return is a result of our error (you
                       received an incorrect or defective item, etc.).
                     </p>
-                    <p className="mb-4">
+                    <p className="mb-4 font-urbanist">
                       You should expect to receive your refund within four weeks
                       of giving your package to the return shipper; however, in
                       many cases you will receive a refund more quickly.
                     </p>
-                    <p>
+                    <p className="font-urbanist">
                       If you need to return an item, simply login to your
                       account, view your order, and click the "Return Item(s)"
                       button. We'll notify you via e-mail once we've processed
                       the returned item.
                     </p>
 
-                    <h3 className="font-semibold mb-2 mt-5">Shipping</h3>
+                    <h3 className="font-medium font-cormoran mb-2 text-[#0b0b0b] text-2xl mt-8">
+                      Shipping
+                    </h3>
 
-                    <p className="mb-4">
+                    <p className="mb-4 font-urbanist">
                       We can ship to virtually any address in the world. Note
                       that there are restrictions on some products, and some
                       products cannot be shipped to international destinations.
                     </p>
-                    <p className="mb-4">
+                    <p className="mb-4 font-urbanist">
                       When you place an order, we will estimate shipping and
                       delivery dates for you based on the availability of your
                       items and the shipping options you choose. Depending on
                       the shipping provider you choose, shipping date estimates
                       may appear on the shipping quotes page.
                     </p>
-                    <p>
+                    <p className="font-urbanist">
                       Please also note that the shipping rates for many items we
                       sell are weight-based. The weight of any such item can be
                       found on its detail page. To reflect the policies of the
@@ -2681,16 +2798,24 @@ const ProductDetails = () => {
           </div>
 
           {/* ===================== RELATED PRODUCTS ===================== */}
-          <div className="w-[95%] xl:w-[80%] mx-auto py-[55px] xl:py-[100px]">
-            <div className="flex flex-col items-center gap-8 text-center w-full">
-              <p className="font-cormorant font-bold text-[28px] lg:text-[36px] uppercase">
-                Related Products
-              </p>
+          <div className="w-full bg-[#F8F8F8]">
+            <div className="w-[95%] xl:w-[80%] mx-auto py-[55px] xl:py-[100px]">
+              <div className="flex flex-col items-center gap-8 text-center w-full">
+                <p className="font-cormorant font-bold text-[28px] lg:text-[36px] uppercase">
+                  Related Products
+                </p>
 
-              <div className="grid w-full gap-8 md:gap-8 xl:gap-10 grid-cols-2 md:grid-cols-3">
-                {relatedProductsList.map((product, index) => (
-                  <ProductsChild key={index} product={product} />
-                ))}
+                <div className="grid w-full gap-8 md:gap-8 xl:gap-10 grid-cols-2 md:grid-cols-3">
+                  {relatedProductsList.map((product, index) => (
+                    <ProductsChild key={index} product={product} />
+                  ))}
+                </div>
+              </div>
+
+              <div className="text-center">
+                <button className="bg-[#EED291] rounded-full px-8 py-2.5 mt-6 font-urbanist font-semibold text-base text-[#0B0B0B] text-center ">
+                  VIEW MORE
+                </button>
               </div>
             </div>
           </div>
