@@ -103,13 +103,13 @@ const Blog = () => {
           </div>
 
      
-          <div className="hidden lg:flex justify-between gap-8">
-            {blogDetails.map((blog, index) => (
-              <div key={index} className="flex-1">
-                <BlogChild blog={blog} />
-              </div>
-            ))}
-          </div>
+            <div className="hidden lg:flex justify-between gap-8">
+              {blogDetails.map((blog, index) => (
+                <div key={index} className="flex-1">
+                  <BlogChild blog={blog} />
+                </div>
+              ))}
+            </div>
 
 
           <div className="block lg:hidden">

@@ -1723,8 +1723,10 @@ import USA from "../../assets/images/USA.svg";
 import Europe from "../../assets/images/Europe.svg.png";
 import UK from "../../assets/images/UK.svg";
 import switzerland from "../../assets/images/switzerland.jpg";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import CartPopover from "../cartProducts/CartPopover";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -1733,6 +1735,19 @@ const Header = () => {
     "main"
   );
   // const navigate = useNavigate();
+    const [isCartOpen, setIsCartOpen] = useState(false);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+
+    const location = useLocation();
+  const isCartPage = location.pathname === "/cartDetails"
+
+  const textColor = isCartPage ? "text-[#0B0B0B]" : "text-white";
+  const iconColor = isCartPage ? "brightness-0" : ""; // makes PNG icons black
+  
+
+  // Show number of unique products
+  const itemCount = cartItems.length;
 
   const bannerRef = useRef<HTMLDivElement | null>(null);
   const bannerHeightRef = useRef<number>(0);
@@ -1892,6 +1907,9 @@ const closeDropdown = () => {
 
   return (
     <>
+
+          <CartPopover isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+
       {/* Banner */}
       <div className="w-full" ref={bannerRef}>
         <p className="text-[#0B0B0B] py-2 font-urbanist font-semibold text-base bg-[#EED291] text-center">
@@ -1933,20 +1951,25 @@ const closeDropdown = () => {
           <div className="hidden xl:flex gap-10 items-center text-white font-urbanist font-semibold text-md relative">
             <ul className="flex items-center gap-8">
               {/* HOME */}
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
-                }
-              >
-                <li>Home</li>
-              </NavLink>
+       <NavLink
+  to="/"
+  className={({ isActive }) =>
+    `
+      ${isActive ? "text-[#EED291]" : textColor}
+      ${underlineClass}
+      hover:text-[#EED291]
+      ${isSticky ? "text-white" : ""}
+    `
+  }
+>
+  <li>Home</li>
+</NavLink>
 
               {/* SHOP ALL */}
               <NavLink
                 to="/shop"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
+                  `${isActive ? "text-[#EED291]" : textColor} ${underlineClass} hover:text-[#EED291]      ${isSticky ? "text-white" : ""}`
                 }
               >
                 <li>Shop All</li>
@@ -2013,7 +2036,7 @@ const closeDropdown = () => {
                 <NavLink
                   to="/about-us"
                   className={({ isActive }) =>
-                    `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
+                    `${isActive ? "text-[#EED291]" : textColor} ${underlineClass} hover:text-[#EED291]  ${isSticky ? "text-white" : ""}`
                   }
                 >
                   <span>About Us</span>
@@ -2044,7 +2067,7 @@ const closeDropdown = () => {
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : ""} ${underlineClass} hover:text-[#EED291]`
+                  `${isActive ? "text-[#EED291]" : textColor} ${underlineClass} hover:text-[#EED291]      ${isSticky ? "text-white" : ""}`
                 }
               >
                 <li>Blog</li>
@@ -2053,9 +2076,28 @@ const closeDropdown = () => {
 
             {/* RIGHT ICONS */}
             <div className="flex items-center gap-4 text-white">
-              <img src={search} className="w-[18px] h-[18px]" alt="search" />
-              <img src={user} className="w-[18px] h-[18px]" alt="user" />
-              <img src={cart} className="w-[18px] h-[18px]" alt="cart" />
+              <img src={search}   className={`w-[20px] h-[20px] ${iconColor}         ${isSticky ? "brightness-0 invert" : ""}` } alt="search" />
+              <img src={user}    className={`w-[24px] h-[24px] ${iconColor}           ${isSticky ? "brightness-0 invert" : ""}`} alt="user" />
+              {/* <img src={cart} className="w-[18px] h-[18px]" alt="cart" /> */}
+              
+       <div className="relative">
+                <img src={cart}   className={`w-[24px] h-[24px] cursor-pointer ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`} alt="cart" onClick = {() => setIsCartOpen(true)} />
+
+                {itemCount > 0 && (
+                  <span
+                    className="
+                      absolute -top-3 -right-3
+                      bg-[#EED291] text-[#0B0B0B]
+                      text-[11px] font-bold
+                      w-[20px] h-[20px]
+                      rounded-full flex items-center justify-center
+                      border border-[#0B0B0B]
+                    "
+                  >
+                    {itemCount}
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* CONTACT US BUTTON */}
@@ -2066,12 +2108,29 @@ const closeDropdown = () => {
 
           {/* ================= MOBILE HEADER ICONS ================= */}
           <div className="flex xl:hidden items-center gap-5 text-white">
-            <img src={search} className="w-[20px] h-[20px]" />
-            <img src={user} className="w-[24px] h-[24px]" />
-            <img src={cart} className="w-[24px] h-[24px]" />
+            <img src={search}  className={`w-[20px] h-[20px] ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`} />
+            <img src={user} className={`w-[24px] h-[24px] ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`}  />
+                 <div className="relative">
+                <img src={cart}   className={`w-[22px] h-[22px] cursor-pointer ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`}alt="cart" onClick = {() => setIsCartOpen(true)} />
+
+                {itemCount > 0 && (
+                  <span
+                    className="
+                      absolute -top-3 -right-3
+                      bg-[#EED291] text-[#0B0B0B]
+                      text-[11px] font-bold
+                      w-[20px] h-[20px]
+                      rounded-full flex items-center justify-center
+                      border border-[#0B0B0B]
+                    "
+                  >
+                    {itemCount}
+                  </span>
+                )}
+              </div>
 
             <button onClick={openHamburger}>
-              <svg className="w-8 h-8 mt-2" fill="none" stroke="currentColor">
+              <svg className={`w-8 h-8 mt-2 ${iconColor} ${isSticky ? "brightness-0 invert" : ""}`} fill="none" stroke="currentColor">
                 <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" />
                 <line x1="3" y1="12" x2="21" y2="12" strokeWidth="2" />
                 <line x1="3" y1="18" x2="21" y2="18" strokeWidth="2" />
@@ -2147,14 +2206,15 @@ const closeDropdown = () => {
             </NavLink>
 
             {/* OPEN ABOUT PANEL */}
-         <button
+<button
   onClick={() => {
     setIsAboutPanelOpen(true);
     setLastOpenedPanel("about");
   }}
   className={`w-full text-left px-5 pb-3 pt-2.5 
     border-b border-[#e6e6e673] flex items-center justify-between 
-    ${lastOpenedPanel === "main" ? "text-[#EED291]" : ""}`}
+    ${location.pathname.includes("/about-us") ? "text-[#EED291]" : ""}
+  `}
 >
   <span>About Us</span>
   <ChevronRight />

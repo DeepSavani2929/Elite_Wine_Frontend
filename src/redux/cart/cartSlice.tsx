@@ -19,6 +19,7 @@ import relatedproduct2 from "../../assets/images/relatedproduct2.png";
 import verietyImg from "../../assets/images/variety.png";
 import productmedal from "../../assets/images/productmedal.png";
 import PopularProducts from "../../components/popularPropducts/PopularProducts";
+import { toast } from "react-toastify";
 
 const randomSize = () => {
   const arr = ["Small", "Medium", "Large", "Extra Large"];
@@ -337,16 +338,22 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     
-    addToCart: (state, action) => {
-       const item = action.payload;
-      const existingItem = state.cartItems.find((ele) => ele.id === item.id);
-      if (existingItem) {
-        return
-      }
-      else{
-          state.cartItems.push({ ...item, quantity: 1 });
-      }
-    },
+  addToCart: (state, action) => {
+  const item = action.payload;
+  const existingItem = state.cartItems.find(i => i.id === item.id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+    toast.info("Item quantity updated in cart!", {
+      style: { background: "#EED291", color: "#0B0B0B", fontWeight: 600 }
+    });
+  } else {
+    state.cartItems.push({ ...item, quantity: 1 });
+    toast.success("Added to cart", {
+      style: { background: "#EED291", color: "#0B0B0B", fontWeight: 600 }
+    });
+  }
+},  
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter((ele) => ele.id !== action.payload);
     },
@@ -355,6 +362,9 @@ export const cartSlice = createSlice({
       const item = state.cartItems.find((ele) => ele.id === action.payload.id);
       if (item) {
         item.quantity += 1;
+          toast.info("Item quantity updated in cart!", {
+      style: { background: "#FFF4D0", color: "#0B0B0B" }
+    });
       } else {
         state.cartItems.push({ ...action.payload, quantity: 1 });
       }
@@ -363,6 +373,9 @@ export const cartSlice = createSlice({
       const item = state.cartItems.find((ele) => ele.id === action.payload.id);
       if (item && item.quantity > 1) {
         item.quantity -= 1;
+            toast.info("Item quantity decreased in cart!", {
+      style: { background: "#FFF4D0", color: "#0B0B0B" }
+    });
       } else if (item && item.quantity === 1) {
         state.cartItems = state.cartItems.filter((ele) => ele.id !== action.payload);
       }

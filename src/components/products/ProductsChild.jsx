@@ -105,15 +105,16 @@ const ProductsChild = ({ product }) => {
 
           <button
             className="
-              absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-6
+              absolute bottom-1 left-1/2 w-full -translate-x-1/2 translate-y-6
               rounded-full bg-[#EED291] py-4 text-center font-urbanist text-sm
-              font-semibold text-[#0B0B0B] shadow-[0px_12px_24px_rgba(0,0,0,0.15)]
+              font-semibold text-[#641026] 
               
               opacity-0 pointer-events-none transition-all duration-500 ease-out
               
               group-hover:flex group-hover:items-center group-hover:justify-center
               group-hover:opacity-100 group-hover:pointer-events-auto
               group-hover:translate-y-0 cursor-pointer
+              hover:bg-[#641026] hover:text-[#EED291] transition-all duration-800
             "
             onClick={(e) => { e.stopPropagation(); setIsCartOpen(true); dispatch(addToCart(product)); }}
           >

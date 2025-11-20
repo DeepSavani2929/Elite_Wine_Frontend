@@ -1938,7 +1938,11 @@ import { useParams } from "react-router-dom";
 // ⭐ ADDED FOR POPOVER
 import CartPopover from "../cartProducts/CartPopover";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseQuantity, increaseQuantity } from "../../redux/cart/cartSlice";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "../../redux/cart/cartSlice";
 
 const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState("description");
@@ -1951,17 +1955,14 @@ const ProductDetails = () => {
   const rightRef = useRef(null);
   const leftRef = useRef(null);
 
- const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const productsDetails = useSelector((state) => state.cart.productsDetails);
-  console.log(productsDetails)
+  console.log(productsDetails);
   const relatedProductsList = useSelector(
     (state) => state.cart.relatedProducts
   );
 
-          const cartItems = useSelector(
-      (state) => state.cart.cartItems
-    );
-
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const tabs = [
     { id: "description", label: "Description" },
@@ -1989,259 +1990,6 @@ const ProductDetails = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [modalContent]);
 
-  // const relatedProductsList = [
-  //   {
-  //     id:16,
-  //     productImg: relatedproduct1,
-  //     productName: "Reverse Gewurztraminer Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$29.38",
-  //     flavour: "Gewurztraminer",
-  //   },
-  //   {
-  //     id:17,
-  //     productImg: relatedproduct2,
-  //     productName: "Reverse Rose (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.76",
-  //     flavour: "Rose",
-  //   },
-  //   {
-  //     id:7,
-  //     productImg: secondtabproduct,
-  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$26.97",
-  //     flavour: "Riesling",
-  //   },
-  // ];
-
-  // const productsDetails = [
-  //   {
-  //     id: 1,
-  //     type: "Bergdolt, Reif & Nett",
-  //     productImg: product1,
-  //     productName: "Bergdolt, Reif & Nett Breakaway Merlot Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$29.76",
-  //     flavour: "Merlot",
-  //   },
-  //   {
-  //     id: 2,
-  //     type: "Bergdolt, Reif & Nett",
-  //     productImg: product2,
-  //     productName: "Bergdolt, Reif & Nett Breakaway Pinot Noir Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$29.38",
-  //     flavour: "Pinot Noir",
-  //   },
-  //   {
-  //     id: 3,
-  //     type: "Bergdolt, Reif & Nett",
-  //     productImg: product3,
-  //     productName:
-  //       "Bergdolt, Reif & Nett Reverse Sauvignon Blanc (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.76",
-  //     flavour: "Sauvignon Blanc",
-  //   },
-  //   {
-  //     id: 4,
-  //     type: "Bergdolt, Reif & Nett",
-  //     productImg: product4,
-  //     productName: "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$29.38",
-  //     flavour: "Gewurztraminer",
-  //   },
-  //   {
-  //     id: 5,
-  //     type: "Bergdolt, Reif & Nett",
-  //     productImg: product5,
-  //     productName: "Bergdolt, Reif & Nett Reverse Rosé (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.76",
-  //     flavour: "Rosé",
-  //   },
-  //   {
-  //     id: 6,
-  //     type: "Bergdolt, Reif & Nett",
-  //     productImg: product6,
-  //     productName:
-  //       "Bergdolt, Reif & Nett Reverse Riesling (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$27.16",
-  //     flavour: "Riesling",
-  //   },
-
-  //   {
-  //     id: 7,
-  //     type: "Lamm Jung",
-  //     productImg: secondtabproduct,
-  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$26.97",
-  //     flavour: "Riesling",
-  //   },
-  //   {
-  //     id: 8,
-  //     type: "KvD Strauch Sektmanufaktur",
-  //     productImg: thirdtabproduct,
-  //     productName:
-  //       "KvD Strauch Sektmanufaktur Rouge Pur Alkoholfrei Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$28.91",
-  //     flavour: "Rouge Pur",
-  //   },
-  //   {
-  //     id: 9,
-  //     type: "Château Clos de Boüard",
-  //     productImg: fourthtabproduct1,
-  //     productName: "Château Clos de Boüard Sauvignon Blanc Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.61",
-  //     flavour: "Sauvignon Blanc",
-  //   },
-  //   {
-  //     id: 10,
-  //     type: "Château Clos de Boüard",
-  //     productImg: fourthtabproduct2,
-  //     productName: "Château Clos de Boüard Rosé Sparkling Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$28.19",
-  //     flavour: "Pinot Noir",
-  //   },
-  //   {
-  //     id: 11,
-  //     type: "Matthias Anton",
-  //     productImg: fifthtabproduct1,
-  //     productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$33.61",
-  //     flavour: "Sauvignon Blanc",
-  //   },
-  //   {
-  //     id: 12,
-  //     type: "Matthias Anton",
-  //     productImg: fifthtabproduct2,
-  //     productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$28.19",
-  //     flavour: "Pinot Noir",
-  //   },
-  //   {
-  //     id: 13,
-  //     type: "Matthias Anton",
-  //     productImg: fifthtabproduct3,
-  //     productName: "Matthias Anton Rosé (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.61",
-  //     flavour: "Rosé",
-  //   },
-  //   {
-  //     id: 14,
-  //     type: "Matthias Anton",
-  //     productImg: fifthtabproduct4,
-  //     productName: "Matthias Anton Pinot Grigio (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.61",
-  //     flavour: "Pinot Grigio",
-  //   },
-  //   {
-  //     id: 15,
-  //     type: "Matthias Anton",
-  //     productImg: fifthtabproduct5,
-  //     productName:
-  //       "Matthias Anton Blanc de Blancs Sparkling (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$28.19",
-  //     flavour: "Pinot Noir",
-  //   },
-
-  //       {
-  //         id:16,
-  //     productImg: relatedproduct1,
-  //     productName: "Reverse Gewurztraminer Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$29.38",
-  //     flavour: "Gewurztraminer",
-  //   },
-  //   {
-  //     id:17,
-  //     productImg: relatedproduct2,
-  //     productName: "Reverse Rose (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.76",
-  //     flavour: "Rose",
-  //   },
-  // ];
-
-  // const cartItems = [
-  //   {
-  //     image: product1,
-  //     name: "Bergdolt, Reif & Nett Reverse Riesling (Vegan)",
-  //     price: 24.97,
-  //     qty: 1,
-  //   },
-  //   {
-  //     image: product2,
-  //     name: "Bergdolt, Reif & Nett Reverse Gewurztraminer",
-  //     price: 25.38,
-  //     qty: 1,
-  //   },
-  // ];
-
-  // const relatedItems = [
-  //   {
-  //     productImg: relatedproduct1,
-  //     productName: "Reverse Gewurztraminer Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$29.38",
-  //     flavour: "Gewurztraminer",
-  //   },
-  //   {
-  //     productImg: relatedproduct2,
-  //     productName: "Reverse Rose (vegan) Dealcoholized",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$25.76",
-  //     flavour: "Rose",
-  //   },
-  //   {
-  //     id: 7,
-  //     productImg: secondtabproduct,
-  //     productName: "Lamm-Jung Riesling Dealcoholized (Vegan)",
-  //     variety: "Grape variety",
-  //     varietylogo: verietyImg,
-  //     price: "$26.97",
-  //     flavour: "Riesling",
-  //   },
-  // ];
-
-
-
-  // scroll logic (unchanged)
   useEffect(() => {
     const handleScroll = () => {
       if (!leftRef.current || !rightRef.current) return;
@@ -2285,17 +2033,16 @@ const ProductDetails = () => {
     (product) => product.id === Number(productId)
   );
 
-  const availableProductInCart = cartItems.find((item) => item.id === Number(productId))
+  const availableProductInCart = cartItems.find(
+    (item) => item.id === Number(productId)
+  );
 
-  console.log(currentProduct)
+  console.log(currentProduct);
 
   return (
     <>
       {/* ⭐ ADDED: Cart Popover */}
-      <CartPopover
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-      />
+      <CartPopover isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
       {/* ------- YOUR ORIGINAL PAGE CONTENT BELOW (unchanged) ------- */}
 
@@ -2344,7 +2091,7 @@ const ProductDetails = () => {
                   <span>Alcoholized</span>
                 </p>
                 <p className="font-urbanist font-bold text-2xl text-[#0B0B0B]">
-                  {currentProduct?.price}
+                  ${currentProduct?.price}
                 </p>
               </div>
 
@@ -2461,34 +2208,67 @@ const ProductDetails = () => {
               <div className="flex flex-col gap-4 font-urbanist">
                 <p className="font-semibold text-md text-[#0B0B0B]">Quantity</p>
                 <button className="flex items-center gap-7 px-6 py-1.5 font-semibold rounded-full border border-[#EED291] w-fit">
-                  <Minus className="w-4 h-4 text-[#0B0B0B] cursor-pointer" onClick={() => dispatch(decreaseQuantity(currentProduct))}/>
+                  <Minus
+                    className="w-4 h-4 text-[#0B0B0B] cursor-pointer"
+                    onClick={() => dispatch(decreaseQuantity(currentProduct))}
+                  />
 
-                  <p className="text-[#0B0B0B] font-semibold text-xl">{availableProductInCart ? availableProductInCart.quantity : 1}</p>
-                  <Plus className="w-4 h-4 text-[#0B0B0B] cursor-pointer" onClick={() => dispatch(increaseQuantity(currentProduct))}/>
+                  <p className="text-[#0B0B0B] font-semibold text-xl">
+                    {availableProductInCart
+                      ? availableProductInCart.quantity
+                      : 1}
+                  </p>
+                  <Plus
+                    className="w-4 h-4 text-[#0B0B0B] cursor-pointer"
+                    onClick={() => dispatch(increaseQuantity(currentProduct))}
+                  />
                 </button>
 
                 <div className="flex gap-4 items-center">
                   {/* ⭐ BUY NOW — ADDED POPUP OPEN */}
-                  <button
-                    onClick={() => { setIsCartOpen(true); dispatch(addToCart(currentProduct));}}
-                    className="font-urbanist font-semibold cursor-pointer text-base text-[#0B0B0B] bg-[#EED291] w-full rounded-full py-3"
+                  {/* <button
+                    onClick={() => {
+                      if (!availableProductInCart) {
+                       
+                        dispatch(addToCart(currentProduct));
+                      }
+                       setIsCartOpen(true);
+                    }}
+                 
+                    disabled={!!availableProductInCart}
+                    className={`font-urbanist font-semibold text-base w-full rounded-full py-3 
+    ${
+      availableProductInCart
+        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+        : "bg-[#EED291] text-[#0B0B0B] cursor-pointer"
+    }`}
                   >
-                    Add To Cart
+                  Add To Cart
+                  </button> */}
+
+                  <button
+                    onClick={() => {
+                      setIsCartOpen(true);
+                      dispatch(addToCart(currentProduct));
+                    }}
+                    className="font-urbanist font-semibold cursor-pointer text-base text-[#0B0B0B] bg-[#EED291] w-full rounded-full py-3 hover:bg-[#0B0B0B] hover:text-[#EED291] transition-all duration-800"
+                  >
+                    ADD TO CART
                   </button>
 
-                  <div className="w-12 h-11 flex items-center justify-center rounded-full bg-[#EED291]">
-                    <Heart className="w-5 h-5 text-[#0B0B0B]" />
+                  <div className="w-14 xl:w-12 h-10 lg:h-11 flex items-center hover:bg-[#EED291] transition-all duration-800 justify-center rounded-full bg-white border  border-[gray] cursor-pointer">
+                    <Heart className=" w-5 h-5 text-[#0B0B0B]" />
                   </div>
 
                   <div>
-                    <Share2 />
+                    <Share2 className="cursor-pointer" />
                   </div>
                 </div>
 
                 {/* Rest buttons unchanged */}
 
                 <div>
-                  <button className="font-urbanist cursor-pointer font-semibold text-base border border-[#EED291] text-[#0B0B0B] bg-transparent w-full rounded-full py-2.5 ">
+                  <button className="font-urbanist cursor-pointer font-semibold text-base border border-[#EED291] text-[#0B0B0B] bg-transparent w-full rounded-full py-2.5 hover:bg-[#0B0B0B] hover:text-white transition-all duration-800 ">
                     BUY IT NOW
                   </button>
 

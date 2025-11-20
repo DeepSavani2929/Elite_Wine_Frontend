@@ -16,11 +16,22 @@ import AboutFourthProduct from "./components/about/AboutFourthProduct.tsx";
 import AboutFifthProduct from "./components/about/AboutFifthProduct.tsx";
 import ScrollToTop from "./components/scrollToTop/ScrollToTop.tsx";
 import CartDetails from "./components/cartProducts/CartDetails.tsx";
+import BlogSection from "./components/blogPage/BlogSection.tsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App: React.FC = () => {
   return (
     <>
     <ScrollToTop/>
+       <ToastContainer
+        position="top-center"
+        autoClose={1800}
+        pauseOnHover={false}
+        draggable={false}
+        closeOnClick
+        theme="light"
+      />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -33,6 +44,7 @@ const App: React.FC = () => {
           <Route path="/about-us/château-clos-de-boüard" element={<AboutFourthProduct />} />
           <Route path="/about-us/weingut-matthias-anton" element={<AboutFifthProduct />} />
           <Route path="/cartDetails" element={<CartDetails />} />
+          <Route path="/blog" element={<BlogSection />} />
         </Route>
       </Routes>
     </>
