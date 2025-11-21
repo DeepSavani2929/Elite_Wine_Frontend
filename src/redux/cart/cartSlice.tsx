@@ -328,6 +328,7 @@ const initialState = {
 
 
          cartItems: [],
+         isDrawerOpen: false,
 
 
 }
@@ -380,9 +381,15 @@ export const cartSlice = createSlice({
         state.cartItems = state.cartItems.filter((ele) => ele.id !== action.payload);
       }
     },
+
+    setDrawerOpen:(state, action) =>  {
+    state.isDrawerOpen = action.payload;
+}
   },
+
+
 });
 
-export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
+export const { addToCart, removeFromCart, setDrawerOpen, increaseQuantity, decreaseQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

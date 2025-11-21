@@ -19,6 +19,8 @@ import CartDetails from "./components/cartProducts/CartDetails.tsx";
 import BlogSection from "./components/blogPage/BlogSection.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BlogDetails from "./components/blogPage/BlogDetails.tsx";
+import ContactUs from "./components/contactUs/ContactUs.tsx";
 
 const App: React.FC = () => {
   return (
@@ -45,6 +47,8 @@ const App: React.FC = () => {
           <Route path="/about-us/weingut-matthias-anton" element={<AboutFifthProduct />} />
           <Route path="/cartDetails" element={<CartDetails />} />
           <Route path="/blog" element={<BlogSection />} />
+            <Route path="/blog/blogDetails/:blogId" element={<BlogDetails />} />
+              <Route path="/contact-us" element={<ContactUs />} />
         </Route>
       </Routes>
     </>

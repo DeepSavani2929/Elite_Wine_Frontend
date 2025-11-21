@@ -864,7 +864,7 @@ const Footer = () => {
                 <li className="hover:text-[#EED291] cursor-pointer">
                   Refund Policy
                 </li>
-                <li className="hover:text-[#EED291] cursor-pointer">Contact</li>
+                <NavLink to = "/contact-us"><li className="hover:text-[#EED291] cursor-pointer">Contact</li></NavLink>
               </ul>
             </div>
 
@@ -901,9 +901,11 @@ const Footer = () => {
                   <li className="hover:text-[#EED291] cursor-pointer">
                     Refund Policy
                   </li>
-                  <li className="hover:text-[#EED291] cursor-pointer">
+                <NavLink to = "/contact-us">
+                   <li className="hover:text-[#EED291] cursor-pointer">
                     Contact
                   </li>
+                  </NavLink> 
                 </ul>
               </div>
             </div>

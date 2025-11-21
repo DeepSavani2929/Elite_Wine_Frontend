@@ -1942,6 +1942,7 @@ import {
   addToCart,
   decreaseQuantity,
   increaseQuantity,
+  setDrawerOpen,
 } from "../../redux/cart/cartSlice";
 
 const ProductDetails = () => {
@@ -1957,6 +1958,12 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
   const productsDetails = useSelector((state) => state.cart.productsDetails);
+
+  const isOpen = useSelector(state => state.cart.isDrawerOpen);
+
+
+
+
   console.log(productsDetails);
   const relatedProductsList = useSelector(
     (state) => state.cart.relatedProducts
@@ -2042,7 +2049,7 @@ const ProductDetails = () => {
   return (
     <>
       {/* ⭐ ADDED: Cart Popover */}
-      <CartPopover isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      {/* <CartPopover isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} /> */}
 
       {/* ------- YOUR ORIGINAL PAGE CONTENT BELOW (unchanged) ------- */}
 
@@ -2248,7 +2255,7 @@ const ProductDetails = () => {
 
                   <button
                     onClick={() => {
-                      setIsCartOpen(true);
+                     dispatch(setDrawerOpen(true));
                       dispatch(addToCart(currentProduct));
                     }}
                     className="font-urbanist font-semibold cursor-pointer text-base text-[#0B0B0B] bg-[#EED291] w-full rounded-full py-3 hover:bg-[#0B0B0B] hover:text-[#EED291] transition-all duration-800"

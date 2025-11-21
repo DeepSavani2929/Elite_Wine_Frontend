@@ -70,32 +70,29 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addToCart } from "../../redux/cart/cartSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addToCart, setDrawerOpen } from "../../redux/cart/cartSlice";
 import CartPopover from "../cartProducts/CartPopover";
 
 const ProductsChild = ({ product }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch()
-
+const location = useLocation();
+const isBlogDetailsPage = location.pathname.startsWith("/blog/blogDetails");
 
 
   return (
     <>
 
-          <CartPopover
-            isOpen={isCartOpen}
-            onClose={() => setIsCartOpen(false)}
-          />
+
 
       <div
-        className="group flex h-full flex-col gap-6 cursor-pointer rounded-[32px] transition-all duration-300"
+        className={`group flex h-full flex-col gap-6 cursor-pointer ${isBlogDetailsPage ? "rounded-none" : "rounded-[32px]"}  transition-all duration-300`}
         onClick={() => navigate(`/productDetails/${product.id}`)} 
       >
         {/* Image Wrapper */}
         <div className="relative flex items-center justify-center  overflow-hidden">
-          <div className="w-full  bg-[#FFFFFF] py-10">
+          <div className={`w-full py-10 ${isBlogDetailsPage ? "" : "bg-[#FFFFFF]"}`}>
             <img
               src={product.productImg}
               alt={product.productName}
@@ -116,7 +113,7 @@ const ProductsChild = ({ product }) => {
               group-hover:translate-y-0 cursor-pointer
               hover:bg-[#641026] hover:text-[#EED291] transition-all duration-800
             "
-            onClick={(e) => { e.stopPropagation(); setIsCartOpen(true); dispatch(addToCart(product)); }}
+            onClick={(e) => { e.stopPropagation();  dispatch(setDrawerOpen(true)); dispatch(addToCart(product)); }}
           >
             ADD TO CART
           </button>
@@ -157,7 +154,7 @@ const ProductsChild = ({ product }) => {
             </div>
 
             <p className="font-urbanist text-md font-semibold text-[#641026]">
-              {product.price}
+              ${product.price}
             </p>
           </div>
         </div>
@@ -167,3 +164,8 @@ const ProductsChild = ({ product }) => {
 };
 
 export default ProductsChild;
+
+
+
+
+
