@@ -21,6 +21,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BlogDetails from "./components/blogPage/BlogDetails.tsx";
 import ContactUs from "./components/contactUs/ContactUs.tsx";
+import Faqs from "./components/faqs/Faqs.tsx";
+import Register from "./components/auth/Register.tsx";
+import Login from "./components/auth/Login.tsx";
+import ResetPassword from "./components/auth/resetPassword.tsx";
+import Collections from "./components/collections/Collections.tsx";
+import FilteredCollections from "./components/collections/filteredCollections.tsx";
 
 const App: React.FC = () => {
   return (
@@ -49,6 +55,15 @@ const App: React.FC = () => {
           <Route path="/blog" element={<BlogSection />} />
             <Route path="/blog/blogDetails/:blogId" element={<BlogDetails />} />
               <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/faq" element={<Faqs />} />
+           <Route path="/register" element={<Register />} />                   
+            <Route path="/login" element={<Login />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/collections" element={<Collections />} />
+            <Route path="/collections/matthias-anton/:collectionType" element={<FilteredCollections />} />
+            <Route path="/collections/bergdolt-reif-nett/:collectionType" element={<FilteredCollections />} />
+                 <Route path="/collections/matthias-anton/:collectionType" element={<FilteredCollections />} />
+      
         </Route>
       </Routes>
     </>

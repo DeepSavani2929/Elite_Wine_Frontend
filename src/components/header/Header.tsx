@@ -1740,7 +1740,7 @@ const Header = () => {
 
 
     const location = useLocation();
-  const isCartPage = location.pathname === "/cartDetails"
+  const isCartPage = location.pathname === "/cartDetails" || location.pathname === "/register" ||  location.pathname === "/login" ||  location.pathname === "/resetPassword";
 
   const textColor = isCartPage ? "text-[#0B0B0B]" : "text-white";
   const iconColor = isCartPage ? "brightness-0" : ""; // makes PNG icons black
@@ -1939,7 +1939,7 @@ const closeDropdown = () => {
               className={`text-[#C89D53] duration-500 ${
                 isSticky
                   ? "text-xs"
-                  : "text-xs md:text-md lg:text-lg xl:text-xl"
+                  : `text-xs md:text-md lg:text-lg xl:text-xl`
               }`}
             >
               Pure Terroir.{" "}
@@ -2101,9 +2101,11 @@ const closeDropdown = () => {
             </div>
 
             {/* CONTACT US BUTTON */}
-            <button className="text-[#0B0B0B] bg-[#EED291] border border-[#EED291] rounded-full px-8 pt-3 py-2.5 hover:bg-transparent hover:text-[#EED291] transition">
+           <NavLink to = "/contact-us">
+             <button className="text-[#0B0B0B] bg-[#EED291] cursor-pointer border border-[#EED291] rounded-full px-8 pt-3 py-2.5 hover:bg-transparent hover:text-[#EED291] transition">
               CONTACT US
             </button>
+            </NavLink>
           </div>
 
           {/* ================= MOBILE HEADER ICONS ================= */}
@@ -2205,7 +2207,6 @@ const closeDropdown = () => {
               Shop All
             </NavLink>
 
-            {/* OPEN ABOUT PANEL */}
 <button
   onClick={() => {
     setIsAboutPanelOpen(true);
@@ -2220,7 +2221,7 @@ const closeDropdown = () => {
   <ChevronRight />
 </button>
 
-            {/* BLOG */}
+         
             <NavLink
               to="/blog"
               onClick={() => setIsMenuOpen(false)}
@@ -2232,7 +2233,7 @@ const closeDropdown = () => {
               Blog
             </NavLink>
 
-            {/* SIGN IN */}
+  
             <button
               onClick={() => setIsMenuOpen(false)}
               className="w-full text-left px-5 pb-3 pt-2.5 
@@ -2241,11 +2242,13 @@ const closeDropdown = () => {
               <span className="w-5 h-5 flex items-center justify-center">
                 <CircleUserRound />
               </span>
-              <span>Sign In</span>
+              <NavLink to = "/login">
+                      <span>Sign In</span>
+              </NavLink>
+
             </button>
           </nav>
 
-          {/* CREATE ACCOUNT */}
           <button
             onClick={() => setIsMenuOpen(false)}
             className="w-full text-left px-5 pb-3 pt-2.5 
@@ -2254,7 +2257,9 @@ const closeDropdown = () => {
             <span className="w-5 h-5 flex items-center justify-center">
               <UserRoundPlus />
             </span>
-            <span>Create an account</span>
+            <NavLink to = "/register">
+              <span>Create an account</span>
+              </NavLink>
           </button>
 
           {/* CURRENCY */}

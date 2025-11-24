@@ -800,8 +800,12 @@ const Footer = () => {
                </NavLink>
 
                    <NavLink to="/faq">
-                            <li className="hover:text-[#EED291] cursor-pointer">FAQ</li>
+                        <li className="hover:text-[#EED291] cursor-pointer">FAQ</li>
                </NavLink>
+
+                               <NavLink to="/collections">
+                          <li className="hover:text-[#EED291] cursor-pointer">Collections</li>
+                  </NavLink>
             
       
               </ul>
@@ -842,7 +846,13 @@ const Footer = () => {
                     </li>
                   </NavLink>
                   <li className="hover:text-[#EED291] cursor-pointer">Blog</li>
-                  <li className="hover:text-[#EED291] cursor-pointer">FAQ</li>
+                  <NavLink to="/faq">
+                          <li className="hover:text-[#EED291] cursor-pointer">FAQ</li>
+                  </NavLink>
+                     <NavLink to="/collections">
+                          <li className="hover:text-[#EED291] cursor-pointer">Collections</li>
+                  </NavLink>
+          
                 </ul>
               </div>
             </div>
