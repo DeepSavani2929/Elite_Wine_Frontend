@@ -865,9 +865,13 @@ const Footer = () => {
                 <li className="hover:text-[#EED291] cursor-pointer">
                   Shipping & Payment
                 </li>
-                <li className="hover:text-[#EED291] cursor-pointer">
+                <NavLink to = "/privacy">
+
+                    <li className="hover:text-[#EED291] cursor-pointer">
                   Privacy Policy
                 </li>
+                </NavLink>
+       
                 <li className="hover:text-[#EED291] cursor-pointer">
                   Terms Of Service
                 </li>
@@ -902,9 +906,13 @@ const Footer = () => {
                   <li className="hover:text-[#EED291] cursor-pointer">
                     Shipping & Payment
                   </li>
-                  <li className="hover:text-[#EED291] cursor-pointer">
+
+                  <NavLink to = "/privacy">
+                                        <li className="hover:text-[#EED291] cursor-pointer">
                     Privacy Policy
                   </li>
+                  </NavLink>
+
                   <li className="hover:text-[#EED291] cursor-pointer">
                     Terms Of Service
                   </li>

@@ -1400,7 +1400,7 @@ import {
 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { NavLink, useNavigate } from "react-router";
+import { Navigate, NavLink, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { decreaseQuantity, increaseQuantity, removeFromCart } from "../../redux/cart/cartSlice";
 
@@ -1678,13 +1678,15 @@ const CartPopover = ({ isOpen, onClose }) => {
                 Tax included and shipping calculated at checkout
               </p>
 
-              <button className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] text-base font-semibold py-3 rounded-full">
+              <NavLink to = "/checkout">
+                <button className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] cursor-pointer text-base font-semibold py-3 rounded-full">
                 Checkout
               </button>
+                </NavLink>
 
               <NavLink to="/cartDetails">
                 <button
-                  className="w-full border border-[#EED291] text-[#0B0B0B] text-base font-semibold py-3 rounded-full mt-3"
+                  className="w-full border border-[#EED291] text-[#0B0B0B] text-base font-semibold cursor-pointer py-3 rounded-full mt-3"
                   onClick={() => onClose()}
                 >
                   View Cart

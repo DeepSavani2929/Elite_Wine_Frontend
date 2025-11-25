@@ -27,6 +27,8 @@ import Login from "./components/auth/Login.tsx";
 import ResetPassword from "./components/auth/resetPassword.tsx";
 import Collections from "./components/collections/Collections.tsx";
 import FilteredCollections from "./components/collections/filteredCollections.tsx";
+import Checkout from "./components/checkout/Checkout.tsx";
+import Privacy from "./components/privacy/Privacy.tsx";
 
 const App: React.FC = () => {
   return (
@@ -60,10 +62,11 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/collections" element={<Collections />} />
-            <Route path="/collections/matthias-anton/:collectionType" element={<FilteredCollections />} />
+            <Route path="/collections/kvd/:collectionType" element={<FilteredCollections />} />
             <Route path="/collections/bergdolt-reif-nett/:collectionType" element={<FilteredCollections />} />
-                 <Route path="/collections/matthias-anton/:collectionType" element={<FilteredCollections />} />
-      
+            <Route path="/collections/matthias-anton/:collectionType" element={<FilteredCollections />} />
+            <Route path="/checkout" element={<Checkout />} />
+               <Route path="/privacy" element={<Privacy />} />
         </Route>
       </Routes>
     </>

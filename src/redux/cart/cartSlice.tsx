@@ -5,6 +5,15 @@ import product3 from "../../assets/images/product3.png";
 import product4 from "../../assets/images/product4.png";
 import product5 from "../../assets/images/product5.png";
 import product6 from "../../assets/images/product6.png";
+import product7 from "../../assets/images/product7.png";
+import product8 from "../../assets/images/product8.png";
+import product9 from "../../assets/images/product9.png";
+import product10 from "../../assets/images/product10.png";
+import product11 from "../../assets/images/product11.png";
+import product12 from "../../assets/images/product12.png";
+import product13 from "../../assets/images/product13.png";
+import product14 from "../../assets/images/product14.png";
+import product15 from "../../assets/images/product15.png";
 import secondtabproduct from "../../assets/images/secondtabproduct.png";
 import thirdtabproduct from "../../assets/images/thirdtabproduct.png";
 import fourthtabproduct1 from "../../assets/images/fourthtabproduct1.png";
@@ -60,7 +69,7 @@ const initialState = {
           },
           {
             id: 3,
-            type: "Bergdolt, Reif & Nett",
+            type: "Château Clos de Boüard",
             productImg: product3,
             productName: "Reverse Sauvignon Blanc Dealalcoolized",
             variety: "Grape variety",
@@ -73,7 +82,7 @@ const initialState = {
           },
           {
             id: 4,
-            type: "Bergdolt, Reif & Nett",
+            type: "Château Clos de Boüard",
             productImg: product4,
             productName: "Reverse Gewurztraminer Dealalcoolized",
             variety: "Grape variety",
@@ -86,7 +95,7 @@ const initialState = {
           },
           {
             id: 5,
-            type: "Bergdolt, Reif & Nett",
+            type: "Château Clos de Boüard",
             productImg: product5,
             productName: "Reverse Rosé Dealalcoolized",
             variety: "Grape variety",
@@ -99,7 +108,7 @@ const initialState = {
           },
           {
             id: 6,
-            type: "Bergdolt, Reif & Nett",
+            type: "Château Clos de Boüard",
             productImg: product6,
             productName: "Reverse Riesling Dealalcoolized",
             variety: "Grape variety",
@@ -170,7 +179,7 @@ const initialState = {
     
           {
             id: 11,
-            type: "Matthias Anton",
+            type: "KvD Strauch Sektmanufaktur",
             productImg: fifthtabproduct1,
             productName: "Sauvignon Blanc (vegan)",
             variety: "Grape variety",
@@ -184,7 +193,7 @@ const initialState = {
           },
           {
             id: 12,
-            type: "Matthias Anton",
+            type: "KvD Strauch Sektmanufaktur",
             productImg: fifthtabproduct2,
             productName: "Rosé Sparkling",
             variety: "Grape variety",
@@ -198,7 +207,7 @@ const initialState = {
           },
           {
             id: 13,
-            type: "Matthias Anton",
+            type: "KvD Strauch Sektmanufaktur",
             productImg: fifthtabproduct3,
             productName: "Rosé Dealalcoolized",
             variety: "Grape variety",
@@ -211,7 +220,7 @@ const initialState = {
           },
           {
             id: 14,
-            type: "Matthias Anton",
+            type: "KvD Strauch Sektmanufaktur",
             productImg: fifthtabproduct4,
             productName: "Pinot Grigio Dealalcoolized",
             variety: "Grape variety",
@@ -224,7 +233,7 @@ const initialState = {
           },
           {
             id: 15,
-            type: "Matthias Anton",
+            type: "KvD Strauch Sektmanufaktur",
             productImg: fifthtabproduct5,
             productName: "Blanc de Blancs Sparkling",
             variety: "Grape variety",
@@ -260,6 +269,156 @@ const initialState = {
             inStock: true,
             categoryType: "Popular",
           },
+
+          {
+            id: 18,
+            type: "Bergdolt, Reif & Nett",
+            productImg: product2,
+            productName:
+              "Bergdolt, Reif & Nett Reverse Sauvignon Blanc  (vegan) Dealcoholized",
+            variety: "Grape variety",
+            varietylogo: verietyImg,
+            price: 25.76,
+            flavour: "Sauvignon Blanc",
+            size: randomSize(),
+            inStock: false,
+            categoryType: "Popular",
+          },
+
+
+                 {
+            id: 18,
+            type: "Bergdolt, Reif & Nett",
+            productImg: product7,
+            productName:
+              "Bergdolt, Reif & Nett Reverse Sauvignon Blanc  (vegan) Dealcoholized",
+            variety: "Grape variety",
+            varietylogo: verietyImg,
+            price: 25.76,
+            flavour: "Sauvignon Blanc",
+            size: randomSize(),
+            inStock: false,
+            categoryType: "Popular",
+          },
+
+
+                 {
+            id: 19,
+            type: "Bergdolt, Reif & Nett",
+            productImg: product8,
+            productName:
+              "Bergdolt, Reif & Nett Reverse Gewurztraminer Dealcoholized",
+            variety: "Grape variety",
+            varietylogo: verietyImg,
+            price:  29.38,
+            flavour: "Gewurztraminer",
+            size: randomSize(),
+            inStock: false,
+            categoryType: "Popular",
+          },
+
+
+                      {
+            id: 20,
+            type: "Bergdolt, Reif & Nett",
+            productImg: product9,
+            productName:
+              "Bergdolt, Reif & Nett Reverse Rose (vegan) Dealcoholized",
+            variety: "Grape variety",
+            varietylogo: verietyImg,
+            price:  25.76,
+            flavour: "Rose",
+            size: randomSize(),
+            inStock: false,
+            categoryType: "Popular",
+          },
+
+                           {
+            id: 21,
+            type: "Bergdolt, Reif & Nett",
+            productImg: product10,
+            productName:
+              "Bergdolt, Reif & Nett Reverse Riesling (vegan) Dealcoholized",
+            variety: "Grape variety",
+            varietylogo: verietyImg,
+            price: 27.16,
+            flavour: "Riesling",
+            size: randomSize(),
+            inStock: false,
+            categoryType: "Popular",
+          },
+
+
+
+          {
+            id: 22,
+            type: "Matthias Anton",
+            productImg: product11,
+            productName: "Matthias Anton Blanc de Blancs sparkling (vegan) Dealcoholized",
+            variety: "Grape variety",
+            price:  27.19,
+            flavour: "Riesling",
+            size: randomSize(),
+            inStock: true,
+            categoryType: "Featured",
+          },
+
+          
+          {
+            id: 23,
+            type: "Matthias Anton",
+            productImg: product12,
+            productName: "Matthias Anton Pinot Grigio (vegan) - Dealcoholized",
+            variety: "Grape variety",
+            price: 25.61,
+            flavour: "Pinot Grigio",
+            size: randomSize(),
+            inStock: true,
+            categoryType: "Featured",
+          },
+
+          
+          {
+            id: 24,
+            type: "Matthias Anton",
+            productImg: product13,
+            productName: "Matthias Anton Rosé (vegan) Dealcoholized",
+            variety: "Grape variety",
+            price:  25.61,
+            flavour: "Pinot Noir",
+            size: randomSize(),
+            inStock: true,
+            categoryType: "Featured",
+          },
+
+          
+          {
+            id: 25,
+            type: "Matthias Anton",
+            productImg: product14,
+            productName: "Matthias Anton Rosé Sparkling (vegan) Dealcoholized",
+            variety: "Grape variety",
+            price: 28.19,
+            flavour: "Pinot Noir",
+            size: randomSize(),
+            inStock: true,
+            categoryType: "Featured",
+          },
+
+          
+          {
+            id: 26,
+            type: "Matthias Anton",
+            productImg: product15,
+            productName: "Matthias Anton Sauvignon Blanc (vegan) Dealcoholized",
+            variety: "Grape variety",
+            price:  25.61,
+            flavour: "Sauvignon Blanc",
+            size: randomSize(),
+            inStock: true,
+            categoryType: "Featured",
+          },
+
         ],
 
         relatedProducts:    [{
@@ -290,6 +449,8 @@ const initialState = {
               flavour: "Riesling",
             },
           ],
+
+
 
           popularProducts: [
               {

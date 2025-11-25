@@ -1,25 +1,30 @@
-import React from "react";
 import Header from "../components/header/Header";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/footer/Footer";
 import CartPopover from "../components/cartProducts/CartPopover";
 import { setDrawerOpen } from "../redux/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Layout = () => {
-    const isOpen = useSelector(state => state.cart.isDrawerOpen);
-
+  const isOpen = useSelector((state) => state.cart.isDrawerOpen);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  // Hide header ONLY on /checkout
+  const hideHeader = pathname === "/checkout";
 
   return (
     <>
-        <CartPopover
+      <CartPopover
         isOpen={isOpen}
         onClose={() => dispatch(setDrawerOpen(false))}
       />
-      <Header />
+
+      {!hideHeader && <Header />}
+
       <Outlet />
-      <Footer />
+
+       {!hideHeader && <Footer />}
     </>
   );
 };

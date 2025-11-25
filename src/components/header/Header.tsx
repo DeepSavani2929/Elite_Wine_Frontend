@@ -1740,7 +1740,7 @@ const Header = () => {
 
 
     const location = useLocation();
-  const isCartPage = location.pathname === "/cartDetails" || location.pathname === "/register" ||  location.pathname === "/login" ||  location.pathname === "/resetPassword";
+  const isCartPage = location.pathname === "/cartDetails" || location.pathname === "/register" ||  location.pathname === "/login" ||  location.pathname === "/resetPassword" || location.pathname === "/privacy";
 
   const textColor = isCartPage ? "text-[#0B0B0B]" : "text-white";
   const iconColor = isCartPage ? "brightness-0" : ""; // makes PNG icons black

@@ -51,10 +51,13 @@ const FilteredCollections: React.FC = () => {
     setSidebarOpen(true);
   };
 
-    const baseFiltered = shopDetails.filter((product) => {
-    if (collectionType && product.type !== collectionType) return false;
-    return true;
-  });
+  const slugify = (str = "") =>
+  str.toLowerCase().replace(/\s+/g, "-");
+
+const baseFiltered = shopDetails.filter((product) => {
+  if (collectionType && slugify(product.type) !== collectionType) return false;
+  return true;
+});
 
   // const priceToNumber = (price: string) => {
   //   const parsed = parseFloat(price.replace(/[^0-9.]/g, ""));
