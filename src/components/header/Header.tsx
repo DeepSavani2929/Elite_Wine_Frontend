@@ -1727,6 +1727,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CartPopover from "../cartProducts/CartPopover";
+import ProfileDrawer from "../profileDrower/ProfileDrower";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -1735,16 +1736,20 @@ const Header = () => {
     "main"
   );
   // const navigate = useNavigate();
-    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-
-    const location = useLocation();
-  const isCartPage = location.pathname === "/cartDetails" || location.pathname === "/register" ||  location.pathname === "/login" ||  location.pathname === "/resetPassword" || location.pathname === "/privacy";
+  const location = useLocation();
+  const isCartPage =
+    location.pathname === "/cartDetails" ||
+    location.pathname === "/register" ||
+    location.pathname === "/login" ||
+    location.pathname === "/resetPassword" ||
+    location.pathname === "/privacy";
 
   const textColor = isCartPage ? "text-[#0B0B0B]" : "text-white";
   const iconColor = isCartPage ? "brightness-0" : ""; // makes PNG icons black
-  
 
   // Show number of unique products
   const itemCount = cartItems.length;
@@ -1759,7 +1764,6 @@ const Header = () => {
   const [isAboutPanelOpen, setIsAboutPanelOpen] = useState(false);
 
   const closeTimeout = useRef<NodeJS.Timeout | null>(null);
-
 
   // Prevent dropdown from closing while hovering
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -1818,15 +1822,15 @@ const Header = () => {
   };
 
   const openDropdown = () => {
-  if (closeTimeout.current) clearTimeout(closeTimeout.current);
-  setShowAboutDropdown(true);
-};
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setShowAboutDropdown(true);
+  };
 
-const closeDropdown = () => {
-  closeTimeout.current = setTimeout(() => {
-    setShowAboutDropdown(false);
-  }, 150); // delay prevents flicker
-};
+  const closeDropdown = () => {
+    closeTimeout.current = setTimeout(() => {
+      setShowAboutDropdown(false);
+    }, 150); // delay prevents flicker
+  };
 
   const ChevronRight = () => (
     <svg
@@ -1877,7 +1881,10 @@ const closeDropdown = () => {
       label: "About Château Clos De Boüard",
       to: "/about-us/château-clos-de-boüard",
     },
-    { label: "About Weingut Matthias Anton", to: "/about-us/weingut-matthias-anton" },
+    {
+      label: "About Weingut Matthias Anton",
+      to: "/about-us/weingut-matthias-anton",
+    },
   ];
 
   // Mobile About items (including "Go To About Us")
@@ -1896,7 +1903,10 @@ const closeDropdown = () => {
       label: "About Château Clos De Boüard",
       to: "/about-us/château-clos-de-boüard",
     },
-    { label: "About Weingut Matthias Anton", to: "/about-us/weingut-matthias-anton" },
+    {
+      label: "About Weingut Matthias Anton",
+      to: "/about-us/weingut-matthias-anton",
+    },
   ];
 
   // Text-only underline animation
@@ -1907,8 +1917,7 @@ const closeDropdown = () => {
 
   return (
     <>
-
-          <CartPopover isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartPopover isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
       {/* Banner */}
       <div className="w-full" ref={bannerRef}>
@@ -1951,25 +1960,29 @@ const closeDropdown = () => {
           <div className="hidden xl:flex gap-10 items-center text-white font-urbanist font-semibold text-md relative">
             <ul className="flex items-center gap-8">
               {/* HOME */}
-       <NavLink
-  to="/"
-  className={({ isActive }) =>
-    `
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `
       ${isActive ? "text-[#EED291]" : textColor}
       ${underlineClass}
       hover:text-[#EED291]
       ${isSticky ? "text-white" : ""}
     `
-  }
->
-  <li>Home</li>
-</NavLink>
+                }
+              >
+                <li>Home</li>
+              </NavLink>
 
               {/* SHOP ALL */}
               <NavLink
                 to="/shop"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : textColor} ${underlineClass} hover:text-[#EED291]      ${isSticky ? "text-white" : ""}`
+                  `${
+                    isActive ? "text-[#EED291]" : textColor
+                  } ${underlineClass} hover:text-[#EED291]      ${
+                    isSticky ? "text-white" : ""
+                  }`
                 }
               >
                 <li>Shop All</li>
@@ -2026,8 +2039,7 @@ const closeDropdown = () => {
                 )}
               </li> */}
 
-
-                            <li
+              <li
                 ref={aboutBtnRef}
                 className="relative cursor-pointer"
                 onMouseEnter={openDropdown}
@@ -2036,7 +2048,11 @@ const closeDropdown = () => {
                 <NavLink
                   to="/about-us"
                   className={({ isActive }) =>
-                    `${isActive ? "text-[#EED291]" : textColor} ${underlineClass} hover:text-[#EED291]  ${isSticky ? "text-white" : ""}`
+                    `${
+                      isActive ? "text-[#EED291]" : textColor
+                    } ${underlineClass} hover:text-[#EED291]  ${
+                      isSticky ? "text-white" : ""
+                    }`
                   }
                 >
                   <span>About Us</span>
@@ -2067,7 +2083,11 @@ const closeDropdown = () => {
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  `${isActive ? "text-[#EED291]" : textColor} ${underlineClass} hover:text-[#EED291]      ${isSticky ? "text-white" : ""}`
+                  `${
+                    isActive ? "text-[#EED291]" : textColor
+                  } ${underlineClass} hover:text-[#EED291]      ${
+                    isSticky ? "text-white" : ""
+                  }`
                 }
               >
                 <li>Blog</li>
@@ -2076,12 +2096,32 @@ const closeDropdown = () => {
 
             {/* RIGHT ICONS */}
             <div className="flex items-center gap-4 text-white">
-              <img src={search}   className={`w-[20px] h-[20px] ${iconColor}         ${isSticky ? "brightness-0 invert" : ""}` } alt="search" />
-              <img src={user}    className={`w-[24px] h-[24px] ${iconColor}           ${isSticky ? "brightness-0 invert" : ""}`} alt="user" />
+              <img
+                src={search}
+                className={`w-[20px] h-[20px] cursor-pointer ${iconColor}         ${
+                  isSticky ? "brightness-0 invert" : ""
+                }`}
+                alt="search"
+              />
+              <img
+                src={user}
+                className={`w-[24px] h-[24px] cursor-pointer ${iconColor}           ${
+                  isSticky ? "brightness-0 invert" : ""
+                }`}
+                alt="user"
+                onClick={() => setIsProfileOpen(true)}  
+              />
               {/* <img src={cart} className="w-[18px] h-[18px]" alt="cart" /> */}
-              
-       <div className="relative">
-                <img src={cart}   className={`w-[24px] h-[24px] cursor-pointer ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`} alt="cart" onClick = {() => setIsCartOpen(true)} />
+
+              <div className="relative">
+                <img
+                  src={cart}
+                  className={`w-[24px] h-[24px] cursor-pointer ${iconColor}       ${
+                    isSticky ? "brightness-0 invert" : ""
+                  }`}
+                  alt="cart"
+                  onClick={() => setIsCartOpen(true)}
+                />
 
                 {itemCount > 0 && (
                   <span
@@ -2101,23 +2141,41 @@ const closeDropdown = () => {
             </div>
 
             {/* CONTACT US BUTTON */}
-           <NavLink to = "/contact-us">
-             <button className="text-[#0B0B0B] bg-[#EED291] cursor-pointer border border-[#EED291] rounded-full px-8 pt-3 py-2.5 hover:bg-transparent hover:text-[#EED291] transition">
-              CONTACT US
-            </button>
+            <NavLink to="/contact-us">
+              <button className="text-[#0B0B0B] bg-[#EED291] cursor-pointer border border-[#EED291] rounded-full px-8 pt-3 py-2.5 hover:bg-transparent hover:text-[#EED291] transition">
+                CONTACT US
+              </button>
             </NavLink>
           </div>
 
           {/* ================= MOBILE HEADER ICONS ================= */}
           <div className="flex xl:hidden items-center gap-5 text-white">
-            <img src={search}  className={`w-[20px] h-[20px] ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`} />
-            <img src={user} className={`w-[24px] h-[24px] ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`}  />
-                 <div className="relative">
-                <img src={cart}   className={`w-[22px] h-[22px] cursor-pointer ${iconColor}       ${isSticky ? "brightness-0 invert" : ""}`}alt="cart" onClick = {() => setIsCartOpen(true)} />
+            <img
+              src={search}
+              className={`w-[20px] h-[20px] cursor-pointer ${iconColor}       ${
+                isSticky ? "brightness-0 invert" : ""
+              }`}
+            />
+            <img
+              src={user}
+              className={`w-[24px] h-[24px] cursor-pointer ${iconColor}       ${
+                isSticky ? "brightness-0 invert" : ""
+              }`}
+               onClick={() => setIsProfileOpen(true)}  
+            />
+            <div className="relative">
+              <img
+                src={cart}
+                className={`w-[22px] h-[22px] cursor-pointer ${iconColor}       ${
+                  isSticky ? "brightness-0 invert" : ""
+                }`}
+                alt="cart"
+                onClick={() => setIsCartOpen(true)}
+              />
 
-                {itemCount > 0 && (
-                  <span
-                    className="
+              {itemCount > 0 && (
+                <span
+                  className="
                       absolute -top-3 -right-3
                       bg-[#EED291] text-[#0B0B0B]
                       text-[11px] font-bold
@@ -2125,14 +2183,20 @@ const closeDropdown = () => {
                       rounded-full flex items-center justify-center
                       border border-[#0B0B0B]
                     "
-                  >
-                    {itemCount}
-                  </span>
-                )}
-              </div>
+                >
+                  {itemCount}
+                </span>
+              )}
+            </div>
 
             <button onClick={openHamburger}>
-              <svg className={`w-8 h-8 mt-2 ${iconColor} ${isSticky ? "brightness-0 invert" : ""}`} fill="none" stroke="currentColor">
+              <svg
+                className={`w-8 h-8 mt-2 ${iconColor} ${
+                  isSticky ? "brightness-0 invert" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+              >
                 <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" />
                 <line x1="3" y1="12" x2="21" y2="12" strokeWidth="2" />
                 <line x1="3" y1="18" x2="21" y2="18" strokeWidth="2" />
@@ -2207,21 +2271,20 @@ const closeDropdown = () => {
               Shop All
             </NavLink>
 
-<button
-  onClick={() => {
-    setIsAboutPanelOpen(true);
-    setLastOpenedPanel("about");
-  }}
-  className={`w-full text-left px-5 pb-3 pt-2.5 
+            <button
+              onClick={() => {
+                setIsAboutPanelOpen(true);
+                setLastOpenedPanel("about");
+              }}
+              className={`w-full text-left px-5 pb-3 pt-2.5 
     border-b border-[#e6e6e673] flex items-center justify-between 
     ${location.pathname.includes("/about-us") ? "text-[#EED291]" : ""}
   `}
->
-  <span>About Us</span>
-  <ChevronRight />
-</button>
+            >
+              <span>About Us</span>
+              <ChevronRight />
+            </button>
 
-         
             <NavLink
               to="/blog"
               onClick={() => setIsMenuOpen(false)}
@@ -2233,7 +2296,6 @@ const closeDropdown = () => {
               Blog
             </NavLink>
 
-  
             <button
               onClick={() => setIsMenuOpen(false)}
               className="w-full text-left px-5 pb-3 pt-2.5 
@@ -2242,10 +2304,9 @@ const closeDropdown = () => {
               <span className="w-5 h-5 flex items-center justify-center">
                 <CircleUserRound />
               </span>
-              <NavLink to = "/login">
-                      <span>Sign In</span>
+              <NavLink to="/login">
+                <span>Sign In</span>
               </NavLink>
-
             </button>
           </nav>
 
@@ -2257,9 +2318,9 @@ const closeDropdown = () => {
             <span className="w-5 h-5 flex items-center justify-center">
               <UserRoundPlus />
             </span>
-            <NavLink to = "/register">
+            <NavLink to="/register">
               <span>Create an account</span>
-              </NavLink>
+            </NavLink>
           </button>
 
           {/* CURRENCY */}
@@ -2303,8 +2364,7 @@ const closeDropdown = () => {
               }}
               className="absolute left-4 text-black"
             >
-
-                <MoveLeft />
+              <MoveLeft />
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -2328,17 +2388,17 @@ const closeDropdown = () => {
               <NavLink
                 key={idx}
                 to={item.to}
-                    end={item.to === "/about-us"}
+                end={item.to === "/about-us"}
                 onClick={() => {
                   setIsMenuOpen(false);
                   setIsAboutPanelOpen(false);
                 }}
-                 className={({ isActive }) =>
-            `block px-5 py-4 border-b border-[#e6e6e673]
+                className={({ isActive }) =>
+                  `block px-5 py-4 border-b border-[#e6e6e673]
              font-urbanist font-semibold text-sm
             hover:text-[#EED291]
             ${isActive ? "text-[#EED291]" : "text-white"}`
-          }
+                }
               >
                 {item.label}
               </NavLink>
@@ -2348,6 +2408,12 @@ const closeDropdown = () => {
       </div>
 
       {/* END MOBILE MENU */}
+
+
+            <ProfileDrawer 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)} 
+      />
     </>
   );
 };

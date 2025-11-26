@@ -157,9 +157,9 @@
 //                      <img
 //                        src={ews}
 //                        className="not-[]:duration-500 w-[80px]   xl:w-[128px]  h-[100px] xl:h-[137px]"
-                       
+
 //                      />
-         
+
 //                      <p
 //                        className="text-[#C89D53] duration-500 text-xs"
 //                      >
@@ -414,11 +414,6 @@
 //     },
 //   },
 // };
-
-
-
-
-
 
 // Updated Checkout.tsx with requested styling adjustments.
 // Only requested changes applied: left background (#CCCCCC), Contact + Sign In in one line, Shipping Method title.
@@ -787,8 +782,6 @@
 //   },
 // };
 
-
-
 // Updated Checkout.tsx with requested styling adjustments.
 // Only requested changes applied: left background (#CCCCCC), Contact + Sign In in one line, Shipping Method title.
 
@@ -940,7 +933,7 @@
 //     <div className="text-[#641026]">
 //       {/* lucide-react Cart Icon */}
 //       {/* {React.createElement(require("lucide-react").ShoppingCart, { size: 22, strokeWidth: 1.5 })} */}
-    
+
 //         <NavLink to = "/cartDetails"><Handbag className="h-14 text-[#005BD1] cursor-pointer" /></NavLink>
 
 //     </div>
@@ -949,10 +942,8 @@
 //   </div>
 // </header>
 
-
 // <div className="bg-[#F8F8F8]">
 //             <main className=" grid grid-cols-1 lg:grid-cols-2 gap-8">
-       
 
 //         <div className="flex bg-white justify-end w-[80%]">
 //           <div className="py-6  rounded">
@@ -1101,7 +1092,6 @@
 //           </div>
 //         </div>
 
-
 //           {/* RIGHT SUMMARY */}
 //           <aside className="lg:col-span-1 bg-[#F8F8F8] border-l border-gray-100 w-[30%]  py-6">
 //             <div className="space-y-4">
@@ -1141,7 +1131,6 @@
 
 // </div>
 
-
 //         {success && (
 //           <div className="fixed inset-0 flex items-center justify-center bg-black/40">
 //             <div className="bg-white p-8 rounded shadow-lg max-w-md w-full text-center">
@@ -1177,10 +1166,6 @@
 //     },
 //   },
 // };
-
-
-
-
 
 // import React, { useMemo, useState } from "react";
 // import {
@@ -1339,7 +1324,6 @@
 //       <main className=" w-[70%] mx-auto grid grid-cols-1 font-urbanist lg:grid-cols-[70%_30%] gap-0 items-start min-h-[calc(100vh-80px)]">
 
 //         {/* ---------------- LEFT WHITE FORM ---------------- */}
-
 
 //         <div className="bg-white py-10 pr-10 lg:min-h-screen lg:overflow-y-auto">
 //           {/* Contact */}
@@ -1517,7 +1501,6 @@
 //               <div className="w-16 h-16 bg-white border border-gray rounded flex items-center justify-center">
 //                 <img src={product1} className="max-h-12" />
 //               </div>
-               
 
 //                <div className="flex items-start ">
 
@@ -1604,8 +1587,6 @@
 //     invalid: { color: "#9e2146" },
 //   },
 // };
-
-
 
 // FULL CODE HERE (FLEXBOX VERSION)
 // import React, { useMemo, useState } from "react";
@@ -1892,7 +1873,6 @@
 //         </div>
 
 //         {/* LEFT SECTION — SEPARATE CONTAINER */}
-   
 
 //         {/* RIGHT SECTION — SEPARATE CONTAINER */}
 
@@ -1988,8 +1968,6 @@
 //     },
 //   },
 // };
-
-
 
 // import React, { useMemo, useState } from "react";
 // import {
@@ -2132,7 +2110,6 @@
 
 //         {/* LEFT SECTION */}
 
-      
 //     <div className=" ms-2.5 md:ms-28 lg:ms-28 xl:ms-61 xl:w-[86%] bg-white pe-4 lg:px-10 xl:pe-30  py-10 lg:min-h-screen lg:overflow-y-auto items-stretch">
 
 //           {/* ---------------- CONTACT ---------------- */}
@@ -2282,9 +2259,6 @@
 //           </section>
 //         </div>
 
-
-
-
 //         {/* ---------------------- RIGHT SUMMARY SECTION ---------------------- */}
 // {/* ---------------------- RIGHT SUMMARY SECTION ---------------------- */}
 // <div className="w-full min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">   {/* UPDATED */}
@@ -2374,8 +2348,6 @@
 //     invalid: { color: "#9e2146" },
 //   },
 // };
-
-
 
 // import React, { useMemo, useState } from "react";
 // import {
@@ -2708,11 +2680,10 @@
 //               </div>
 
 //               <div className="flex justify-between items-center gap-9 md:gap-7 lg:gap-5 xl:gap-8 mt-0 xl:mt-10">
-//                 <p className="text-sm xl:text-md font-semibold text-[#641026]">{order.items[0].name}</p>   
+//                 <p className="text-sm xl:text-md font-semibold text-[#641026]">{order.items[0].name}</p>
 //                <p className="text-md font-semibold">${order.items[0].price.toFixed(2)}</p>
 //               </div>
 
-   
 //             </div>
 
 //             {/* DISCOUNT - responsive: stack on small, row on md+ */}
@@ -2778,10 +2749,1319 @@
 //   },
 // };
 
+// import React, { useMemo, useState } from "react";
+// import {
+//   CardNumberElement,
+//   Elements,
+//   useStripe,
+//   useElements,
+// } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import ews from "../../assets/images/ews.png";
+// import { ChevronDown, ChevronUp, Handbag } from "lucide-react";
+// import { NavLink } from "react-router";
+// import product1 from "../../assets/images/product1.png";
+// import payoption1 from "../../assets/images/payoption1.png";
+// import payoption2 from "../../assets/images/payoption2.png";
+// import payoption4 from "../../assets/images/payoption4.png";
+// import payoption5 from "../../assets/images/payoption5.png";
+// import  { useRef,  useEffect } from "react";
+
+// const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLIC_KEY);
+
+// const Checkout: React.FC = () => {
+//   return (
+//     <Elements stripe={stripePromise}>
+//       <CheckoutInner />
+//     </Elements>
+//   );
+// };
+
+// export default Checkout;
+
+// const CheckoutInner: React.FC = () => {
+//   const stripe = useStripe();
+//   const elements = useElements();
+
+//   const order = useMemo(
+//     () => ({
+//       items: [
+//         {
+//           id: 1,
+//           name: "Breakaway Merlot Dealcoholized - Bergdolt, Reif & Nett",
+//           qty: 1,
+//           price: 29.76,
+//           img: "/images/sample-bottle.png",
+//         },
+//       ],
+//       subtotal: 29.76,
+//       shipping: 0,
+//       discount: 0,
+//       currency: "usd",
+//     }),
+//     []
+//   );
+
+//   const [email, setEmail] = useState("");
+//   const [billingName, setBillingName] = useState("");
+//   const [address, setAddress] = useState({
+//     line1: "",
+//     city: "",
+//     state: "",
+//     postal_code: "",
+//     country: "US",
+//   });
+
+//   const [cardExpiry, setCardExpiry] = useState("");
+//   const [cardCvc, setCardCvc] = useState("");
+
+//   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
+//   const [loading, setLoading] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+//   const [success, setSuccess] = useState(false);
+
+//   // NEW: mobile summary toggle state (Option A)
+//   const [summaryOpen, setSummaryOpen] = useState(false);
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setErrorMessage(null);
+
+//     if (!stripe || !elements) {
+//       setErrorMessage("Stripe has not loaded yet.");
+//       return;
+//     }
+
+//     setLoading(true);
+
+//     try {
+//       const resp = await fetch("/api/create-payment-intent", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           currency: order.currency,
+//           items: order.items,
+//           customer_email: email,
+//           shipping: {
+//             name: billingName,
+//             address,
+//           },
+//         }),
+//       });
+
+//       const data = await resp.json();
+//       if (!resp.ok) throw new Error(data.message || "Failed to create payment intent");
+
+//       const clientSecret = data.clientSecret as string;
+
+//       // get card number element (we're using CardNumberElement for only card number)
+//       const cardNumberEl = elements.getElement(CardNumberElement);
+//       if (!cardNumberEl) throw new Error("Card number element not found");
+
+//       // confirm payment using card details + additional billing info
+//       const confirmResult = await stripe.confirmCardPayment(clientSecret, {
+//         payment_method: {
+//           card: cardNumberEl,
+//           billing_details: {
+//             name: billingName,
+//             email,
+//             address: {
+//               line1: address.line1,
+//               city: address.city,
+//               state: address.state,
+//               postal_code: address.postal_code,
+//               country: address.country,
+//             },
+//           },
+//         },
+//       });
+
+//       if ((confirmResult as any).error) {
+//         setErrorMessage((confirmResult as any).error.message || "Payment failed");
+//         setLoading(false);
+//         return;
+//       }
+
+//       if ((confirmResult as any).paymentIntent?.status === "succeeded") setSuccess(true);
+//       else setErrorMessage("Payment processing. Please check your email for confirmation.");
+//     } catch (err: any) {
+//       setErrorMessage(err.message || "Unexpected error");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const summaryRef = useRef(null);
+// const summaryContentRef = useRef(null);
+// const [contentHeight, setContentHeight] = useState(0);
+
+// useEffect(() => {
+//   if (summaryContentRef.current) {
+//     setContentHeight(summaryContentRef.current.scrollHeight);
+//   }
+// }, [summaryOpen]);
+
+//   return (
+//     <div className="min-h-screen bg-white text-[#0B0B0B]">
+//       {/* ---------------------- HEADER ---------------------- */}
+//       <header className="w-full border-b border-[#CCCCCC] bg-white py-2.5 flex justify-center">
+//         <div className="w-[95%] md:w-[70%] flex justify-between items-center">
+//           <div className="flex flex-col items-center gap-2">
+//             <img src={ews} className="w-[70px] h-[60px]" />
+//             <p className="text-[#641026] text-[12px]">
+//               Pure Terroir. <span className="text-[#641026]">Zero Compromise.</span>
+//             </p>
+//           </div>
+
+//           <NavLink to="/cartDetails">
+//             <Handbag className="h-10 text-[#005BD1] cursor-pointer" />
+//           </NavLink>
+//         </div>
+//       </header>
+
+//       {/* ---------------------- TWO COLUMN FLEX LAYOUT ---------------------- */}
+//       <main className="w-full  flex flex-col lg:flex-row items-start min-h-screen">
+
+//         <div className="w-full bg-[#F8F8F8] ps-0 md:ps-25 lg:ms-0 md:block lg:hidden">
+
+// <div className="w-[95%] md:w-[85%] mx-auto md:mx-0">
+// <button
+//   type="button"
+//   onClick={() => setSummaryOpen((s) => !s)}
+//   aria-expanded={summaryOpen}
+//   className="w-full flex items-center justify-between font-semibold font-urbanist py-5 md:px-4 rounded bg-[#F8F8F8]"
+// >
+//   <div className="flex items-center gap-2">
+//     <span className="text-md font-medium">Order summary</span>
+
+//     {/* ARROW CLOSER TO TEXT (LIKE YOUR IMAGE) */}
+//     <span className="text-sm text-[#0B0B0B]">
+//       {summaryOpen ? <ChevronUp /> : <ChevronDown />}
+//     </span>
+//   </div>
+
+//   <span className="text-md font-semibold">
+//     ${order.subtotal.toFixed(2)}
+//   </span>
+// </button>
+
+//   {/* Smooth Animated Dropdown */}
+//   <div
+//     ref={summaryRef}
+//     style={{
+//       maxHeight: summaryOpen ? `${contentHeight}px` : "0px",
+//       transition: "max-height 0.35s ease",
+//       overflow: "hidden",
+//     }}
+//     className={summaryOpen ? "mt-4" : ""}
+//   >
+//     <div ref={summaryContentRef}>
+//       <div className="bg-[#F8F8F8] font-urbanist p-0 md:px-4 py-4 rounded">
+//         {/* ITEM */}
+//         <div className="flex items-center gap-4">
+//           <div className="relative">
+//             <div className="w-20 h-20 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+//               <img src={product1} className="max-h-16" />
+//             </div>
+//             <span
+//               className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+//               style={{
+//                 width: 22,
+//                 height: 22,
+//                 borderRadius: 9999,
+//                 background: "#565656",
+//                 boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+//               }}
+//             >
+//               {order.items[0].qty}
+//             </span>
+//           </div>
+
+//           <div className="flex-1">
+//             <p className="text-sm md:text-md font-urbanist font-semibold text-[#641026]">
+//               {order.items[0].name}
+//             </p>
+//           </div>
+
+//           <p className="text-md font-urbanist font-semibold">
+//             ${order.items[0].price.toFixed(2)}
+//           </p>
+//         </div>
+
+//         {/* DISCOUNT */}
+//         <div className="mt-4">
+//           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+//             <input
+//               placeholder="Discount Code"
+//               className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full"
+//             />
+//             <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">
+//               Apply
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* SUMMARY TOTALS */}
+//         <div className="mt-4">
+//           <div className="flex justify-between py-2">
+//             <span className="text-[#565656] font-semibold">Subtotal</span>
+//             <span className="font-semibold text-[#565656] text-md">
+//               ${order.subtotal.toFixed(2)}
+//             </span>
+//           </div>
+
+//           <div className="flex justify-between py-2">
+//             <span className="text-[#0B0B0B] font-semibold">Shipping</span>
+//             <span className="text-[#565656] font-semibold">
+//               Enter Shipping Address
+//             </span>
+//           </div>
+
+//           <div className="flex justify-between py-2">
+//             <span className="text-2xl font-semibold">Total</span>
+//             <span className="text-xl font-semibold">
+//               ${(order.subtotal + order.shipping - order.discount).toFixed(2)}
+//             </span>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+
+//         </div>
+
+//         {/* LEFT (main form) */}
+//         <div className="ms-2.5 order-2 lg:order-1 md:ms-28 lg:ms-28 xl:ms-61 xl:w-[86%] bg-white pe-3 md:pe-28 lg:px-10 xl:pe-30 py-10 lg:min-h-screen lg:overflow-y-auto items-stretch font-urbanist">
+//           {/* CONTACT */}
+//           <section className="mb-8">
+//             <div className="flex justify-between items-center mb-3">
+//               <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B]">Contact</h3>
+//               <span className="text-sm underline">Sign In</span>
+//             </div>
+
+//             <input
+//               placeholder="Email or Mobile Phone Number"
+//               className="w-full border border-gray-200 font-medium rounded px-3 py-3 text-md  placeholder-[#565656]"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//             />
+
+//             <label className="flex items-center gap-2 mt-4 text-sm">
+//               <input type="checkbox" className="accent-[#E5C97A] h-5 w-5" />
+//               <span>Email me with news and offers</span>
+//             </label>
+//           </section>
+
+//           {/* DELIVERY */}
+//           <section className="mb-8">
+//             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-4">Delivery</h3>
+
+//             <select className="w-full border border-gray-200 rounded-lg px-3 py-4">
+//               <option>United States</option>
+//               <option>United Kingdom</option>
+//             </select>
+
+//             <div className="grid grid-cols-2 gap-3 mt-3">
+//               <input placeholder="First Name" className="border border-gray-200 font-medium rounded-lg px-3 py-3 placeholder-[#565656]" />
+//               <input placeholder="Last Name" className="border border-gray-200 font-medium rounded-lg px-3 py-3 placeholder-[#565656]" />
+//             </div>
+
+//             <input
+//               placeholder="Address"
+//               className="w-full border font-medium border-gray-200 rounded-lg px-3 py-3 mt-3 placeholder-[#565656]"
+//               onChange={(e) => setAddress((p) => ({ ...p, line1: e.target.value }))}
+//             />
+
+//             <input placeholder="Apartment, Suite, Etc. (Optional)" className="w-full border border-gray-200 rounded-lg px-3 py-3 mt-3 placeholder-[#565656]" />
+
+//             <div className="grid grid-cols-4 gap-3 mt-3">
+//               <input placeholder="City" className="col-span-2 border border-gray-200  font-medium rounded-lg px-3 py-3 placeholder-[#565656]" onChange={(e) => setAddress((p) => ({ ...p, city: e.target.value }))} />
+//               <select className="border border-gray-200 rounded-lg px-3 py-3  placeholder-[#565656]" onChange={(e) => setAddress((p) => ({ ...p, state: e.target.value }))}>
+//                 <option>State</option>
+//                 <option>CA</option>
+//               </select>
+//               <input placeholder="ZIP Code" className="border border-gray-200 font-medium rounded-lg px-3 py-3 placeholder-[#565656]" onChange={(e) => setAddress((p) => ({ ...p, postal_code: e.target.value }))} />
+//             </div>
+
+//             <label className="flex items-center gap-2 mt-5 text-sm">
+//               <input type="checkbox" className="accent-[#E5C97A] h-5 w-5" />
+//               <span>Save this information for next time</span>
+//             </label>
+//           </section>
+
+//           {/* SHIPPING */}
+//           <section className="mb-8">
+//             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-3">Shipping Method</h3>
+//             <div className="bg-gray-50 rounded-lg px-3 py-3 text-[#565656]">Enter your shipping address to view available shipping methods.</div>
+//           </section>
+
+//           {/* PAYMENT */}
+//           <section className="mt-6">
+//             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-3">Payment</h3>
+//             <p className="text-[#565656] mb-4">All transactions are secure and encrypted.</p>
+
+//             <form onSubmit={handleSubmit}>
+//               {/* Payment box with blue top border (matches screenshot) */}
+//               <div className="rounded-lg overflow-hidden bg-[#F5F6FF] border border-gray-300 ">
+//                 {/* Blue top border area with Credit Card label + logos */}
+//                 <div className="flex items-center justify-between border border-[#005BD1] px-4 py-2 bg-transparent">
+//                   <div className="text-sm font-medium">Credit Card</div>
+//                   <div className="flex gap-2">
+//                     <img src={payoption1} className="w-[34px] md:w-[38px] h-[20px]" alt="" />
+//                     <img src={payoption2} className="w-[34px] md:w-[38px] h-[20px]" alt="" />
+//                     <img src={payoption4} className="w-[34px] md:w-[38px] h-[20px]" alt="" />
+//                     <img src={payoption5} className="w-[34px] md:w-[42px] h-[24px]" alt="" />
+//                   </div>
+//                 </div>
+
+//                 {/* Inner white box with inputs */}
+//                 <div className="p-4 bg-[#F4F4F4] border-t border-gray-100 font-urbanist">
+//                   {/* Card Number (Stripe CardNumberElement) */}
+//                   <div className="mb-3">
+//                     <div>
+//                       {/* retained your style but using a normal input placeholder for UI (you can swap to CardNumberElement if you wish) */}
+//                       <input
+//                         value={cardExpiry}
+//                         onChange={(e) => setCardExpiry(e.target.value)}
+//                         placeholder="Card Number"
+//                         className="w-full border bg-[#FFFFFF] font-medium border-[#CCCCCC] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Expiration & CVC in two columns */}
+//                   <div className="grid grid-cols-2 gap-3 mb-3">
+//                     <div>
+//                       <input
+//                         value={cardExpiry}
+//                         onChange={(e) => setCardExpiry(e.target.value)}
+//                         placeholder="Expiration Date (MM / YY)"
+//                         className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       />
+//                     </div>
+//                     <div>
+//                       <input
+//                         value={cardCvc}
+//                         onChange={(e) => setCardCvc(e.target.value)}
+//                         placeholder="Security Code"
+//                         className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Name on Card */}
+//                   <div className="mb-3">
+//                     <label className="text-xs mb-1 block text-[#6B7280]">Name on Card</label>
+//                     <input
+//                       placeholder="Name on Card"
+//                       className="w-full border font-urbanist font-medium border-[#CCCCCC] bg-[#FFFFFF] rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       value={billingName}
+//                       onChange={(e) => setBillingName(e.target.value)}
+//                     />
+//                   </div>
+
+//                   {/* Checkbox */}
+//                   <label className="flex items-center gap-2 text-sm">
+//                     <input type="checkbox" checked={useShippingAsBilling} onChange={() => setUseShippingAsBilling((s) => !s)} className="accent-[#0B7AFF] h-5 w-5" />
+//                     <span className="text-[#0B0B0B] text-sm">Use shipping address as billing address</span>
+//                   </label>
+//                 </div>
+//               </div>
+
+//               {errorMessage && <div className="text-red-600 mt-3">{errorMessage}</div>}
+
+//               <button type="submit" disabled={!stripe || loading} className="w-full bg-[#005BD1] text-white py-3 rounded-xl font-semibold mt-8">
+//                 {loading ? "Processing..." : "Pay Now"}
+//               </button>
+//             </form>
+
+//                  <div className="mt-8 text-xs text-[#005BD1] flex gap-3 border-t border-[#CCCCCC] pt-5">
+//               <a href="#" className="underline text-sm font-medium">Refund Policy</a>
+//               <a href="#"  className="underline text-sm font-medium">Privacy Policy</a>
+//               <a href="#"  className="underline text-sm font-medium">Terms of Service</a>
+//              <a href="#"  className="underline text-sm font-medium">Contact</a>
+//            </div>
+//           </section>
+//         </div>
+
+//         {/* ---------------------- RIGHT SUMMARY SECTION (desktop) ---------------------- */}
+//         <div className="w-full hidden  border-l font-urbanist border-[#CCCCCC] lg:block order-1 lg:order-2 lg:min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">
+//           <aside className="lg:w-[70%] px-3 md:px-28 lg:px-5 py-10 overflow-y-auto relative">
+//             {/* ITEM with badge */}
+//             <div className="flex items-center  gap-4">
+//               <div className="relative">
+//                 <div className="w-24 h-24 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+//                   <img src={product1} className="max-h-20" />
+//                 </div>
+//                 <span
+//                   className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+//                   style={{
+//                     width: 22,
+//                     height: 22,
+//                     borderRadius: 9999,
+//                     background: "#565656",
+//                     boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+//                   }}
+//                 >
+//                   {order.items[0].qty}
+//                 </span>
+//               </div>
+
+//               <div className="flex justify-between items-start gap-9 md:gap-7 lg:gap-5 xl:gap-8  w-full">
+//                 <div className="flex-1">
+//                   <p className="text-sm md:text-md xl:text-md font-semibold text-[#641026]">{order.items[0].name}</p>
+//                 </div>
+//                 <p className="text-md font-semibold">${order.items[0].price.toFixed(2)}</p>
+//               </div>
+//             </div>
+
+//             {/* DISCOUNT - responsive: stack on small, row on md+ */}
+//             <div className="mt-5">
+//               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+//                 <input placeholder="Discount Code" className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full" />
+//                 <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">Apply</button>
+//               </div>
+//             </div>
+
+//             {/* SUMMARY */}
+//             <div className="mt-6">
+//               <div className="flex justify-between py-2">
+//                 <span className="text-[#565656] font-semibold">Subtotal</span>
+//                 <span className="font-semibold text-[#565656] text-md">${order.subtotal.toFixed(2)}</span>
+//               </div>
+
+//               <div className="flex justify-between py-2">
+//                 <span className="text-[#0B0B0B] font-semibold">Shipping</span>
+//                 <span className="text-[#565656] font-semibold">Enter Shipping Address</span>
+//               </div>
+
+//               <div className="flex justify-between py-2">
+//                 <span className="text-2xl font-semibold">Total</span>
+//                 <span className="text-2xl font-semibold">${(order.subtotal + order.shipping - order.discount).toFixed(2)}</span>
+//               </div>
+//             </div>
+//           </aside>
+//         </div>
+//       </main>
+
+//       {/* SUCCESS POPUP */}
+//       {success && (
+//         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
+//           <div className="bg-white p-8 rounded shadow-lg max-w-md w-full text-center">
+//             <h2 className="text-xl font-semibold mb-2">Payment successful</h2>
+//             <p className="mb-4">Thank you! Your payment was processed successfully.</p>
+//             <button
+//               onClick={() => {
+//                 setSuccess(false);
+//                 window.location.href = "/";
+//               }}
+//               className="bg-[#0B7AFF] text-white px-6 py-2 rounded"
+//             >
+//               Continue shopping
+//             </button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// const cardStyle: any = {
+//   style: {
+//     base: {
+//       fontSize: "14px",
+//       color: "#0B0B0B",
+//       fontFamily: "inherit",
+//       "::placeholder": { color: "#9CA3AF" },
+//     },
+//     invalid: { color: "#9e2146" },
+//   },
+// };
+
+// import React, { useMemo, useState, useRef, useEffect } from "react";
+// import {
+//   CardNumberElement,
+//   Elements,
+//   useStripe,
+//   useElements,
+// } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import ews from "../../assets/images/ews.png";
+// import { ChevronDown, ChevronUp, Handbag } from "lucide-react";
+// import { NavLink } from "react-router";
+// import product1 from "../../assets/images/product1.png";
+// import payoption1 from "../../assets/images/payoption1.png";
+// import payoption2 from "../../assets/images/payoption2.png";
+// import payoption4 from "../../assets/images/payoption4.png";
+// import payoption5 from "../../assets/images/payoption5.png";
+
+// const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLIC_KEY);
+
+// const Checkout: React.FC = () => {
+//   return (
+//     <Elements stripe={stripePromise}>
+//       <CheckoutInner />
+//     </Elements>
+//   );
+// };
+
+// export default Checkout;
+
+// const CheckoutInner: React.FC = () => {
+//   const stripe = useStripe();
+//   const elements = useElements();
+
+//   const order = useMemo(
+//     () => ({
+//       items: [
+//         {
+//           id: 1,
+//           name: "Breakaway Merlot Dealcoholized - Bergdolt, Reif & Nett",
+//           qty: 1,
+//           price: 29.76,
+//           img: "/images/sample-bottle.png",
+//         },
+//       ],
+//       subtotal: 29.76,
+//       shipping: 0,
+//       discount: 0,
+//       currency: "usd",
+//     }),
+//     []
+//   );
+
+//   const [email, setEmail] = useState("");
+//   const [billingName, setBillingName] = useState("");
+//   const [address, setAddress] = useState({
+//     line1: "",
+//     city: "",
+//     state: "",
+//     postal_code: "",
+//     country: "US",
+//   });
+
+//   const [cardExpiry, setCardExpiry] = useState("");
+//   const [cardCvc, setCardCvc] = useState("");
+
+//   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
+//   const [loading, setLoading] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+//   const [success, setSuccess] = useState(false);
+
+//   // top dropdown state (original)
+//   const [summaryOpenTop, setSummaryOpenTop] = useState(false);
+//   const topRef = useRef<HTMLDivElement | null>(null);
+//   const topContentRef = useRef<HTMLDivElement | null>(null);
+//   const [topContentHeight, setTopContentHeight] = useState(0);
+
+//   useEffect(() => {
+//     if (topContentRef.current) {
+//       setTopContentHeight(topContentRef.current.scrollHeight);
+//     }
+//   }, [summaryOpenTop]);
+
+//   // bottom dropdown state (GIF-style)
+//   const [summaryOpenBottom, setSummaryOpenBottom] = useState(false);
+//   const bottomRef = useRef<HTMLDivElement | null>(null);
+//   const bottomContentRef = useRef<HTMLDivElement | null>(null);
+//   const [bottomContentHeight, setBottomContentHeight] = useState(0);
+
+//   useEffect(() => {
+//     if (bottomContentRef.current) {
+//       setBottomContentHeight(bottomContentRef.current.scrollHeight);
+//     }
+//   }, [summaryOpenBottom]);
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setErrorMessage(null);
+
+//     if (!stripe || !elements) {
+//       setErrorMessage("Stripe has not loaded yet.");
+//       return;
+//     }
+
+//     setLoading(true);
+
+//     try {
+//       const resp = await fetch("/api/create-payment-intent", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           currency: order.currency,
+//           items: order.items,
+//           customer_email: email,
+//           shipping: {
+//             name: billingName,
+//             address,
+//           },
+//         }),
+//       });
+
+//       const data = await resp.json();
+//       if (!resp.ok)
+//         throw new Error(data.message || "Failed to create payment intent");
+
+//       const clientSecret = data.clientSecret as string;
+
+//       // get card number element (we're using CardNumberElement for only card number)
+//       const cardNumberEl = elements.getElement(CardNumberElement);
+//       if (!cardNumberEl) throw new Error("Card number element not found");
+
+//       // confirm payment using card details + additional billing info
+//       const confirmResult = await stripe.confirmCardPayment(clientSecret, {
+//         payment_method: {
+//           card: cardNumberEl,
+//           billing_details: {
+//             name: billingName,
+//             email,
+//             address: {
+//               line1: address.line1,
+//               city: address.city,
+//               state: address.state,
+//               postal_code: address.postal_code,
+//               country: address.country,
+//             },
+//           },
+//         },
+//       });
+
+//       if ((confirmResult as any).error) {
+//         setErrorMessage(
+//           (confirmResult as any).error.message || "Payment failed"
+//         );
+//         setLoading(false);
+//         return;
+//       }
+
+//       if ((confirmResult as any).paymentIntent?.status === "succeeded")
+//         setSuccess(true);
+//       else
+//         setErrorMessage(
+//           "Payment processing. Please check your email for confirmation."
+//         );
+//     } catch (err: any) {
+//       setErrorMessage(err.message || "Unexpected error");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-white text-[#0B0B0B]">
+//       {/* ---------------------- HEADER ---------------------- */}
+//       <header className="w-full border-b border-[#CCCCCC] bg-white py-2.5 flex justify-center">
+//         <div className="w-[95%] md:w-[70%] flex justify-between items-center">
+//           <div className="flex flex-col items-center gap-2">
+//             <img src={ews} className="w-[70px] h-[60px]" />
+//             <p className="text-[#641026] text-[12px]">
+//               Pure Terroir.{" "}
+//               <span className="text-[#641026]">Zero Compromise.</span>
+//             </p>
+//           </div>
+
+//           <NavLink to="/cartDetails">
+//             <Handbag className="h-10 text-[#005BD1] cursor-pointer" />
+//           </NavLink>
+//         </div>
+//       </header>
+
+//       {/* ---------------------- TWO COLUMN FLEX LAYOUT ---------------------- */}
+//       <main className="w-full  flex flex-col lg:flex-row items-start min-h-screen">
+//         {/* TOP DROPDOWN (original position) - show on sm and md, hide on lg */}
+//         <div className="w-full bg-[#F8F8F8] ps-0 md:ps-25 lg:ms-0 md:block lg:hidden">
+//           <div className="w-[95%] md:w-[85%] mx-auto md:mx-0">
+//             <button
+//               type="button"
+//               onClick={() => setSummaryOpenTop((s) => !s)}
+//               aria-expanded={summaryOpenTop}
+//               className="w-full flex items-center justify-between font-semibold font-urbanist py-5 md:px-4 rounded bg-[#F8F8F8]"
+//             >
+//               <div className="flex items-center gap-2">
+//                 <span className="text-md font-medium">Order summary</span>
+
+//                 {/* ARROW CLOSER TO TEXT (LIKE YOUR IMAGE) */}
+//                 <span className="text-sm text-[#0B0B0B]">
+//                   {summaryOpenTop ? <ChevronUp /> : <ChevronDown />}
+//                 </span>
+//               </div>
+
+//               <span className="text-md font-semibold">
+//                 ${order.subtotal.toFixed(2)}
+//               </span>
+//             </button>
+
+//             {/* Smooth Animated Dropdown */}
+//             <div
+//               ref={topRef}
+//               style={{
+//                 maxHeight: summaryOpenTop ? `${topContentHeight}px` : "0px",
+//                 transition: "max-height 0.35s ease",
+//                 overflow: "hidden",
+//               }}
+//               className={summaryOpenTop ? "mt-4" : ""}
+//             >
+//               <div ref={topContentRef}>
+//                 <div className="bg-[#F8F8F8] font-urbanist p-0 md:px-4 py-4 rounded">
+//                   {/* ITEM */}
+//                   <div className="flex items-center gap-4">
+//                     <div className="relative">
+//                       <div className="w-20 h-20 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+//                         <img src={product1} className="max-h-16" />
+//                       </div>
+//                       <span
+//                         className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+//                         style={{
+//                           width: 22,
+//                           height: 22,
+//                           borderRadius: 9999,
+//                           background: "#565656",
+//                           boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+//                         }}
+//                       >
+//                         {order.items[0].qty}
+//                       </span>
+//                     </div>
+
+//                     <div className="flex-1">
+//                       <p className="text-sm md:text-md font-urbanist font-semibold text-[#641026]">
+//                         {order.items[0].name}
+//                       </p>
+//                     </div>
+
+//                     <p className="text-md font-urbanist font-semibold">
+//                       ${order.items[0].price.toFixed(2)}
+//                     </p>
+//                   </div>
+
+//                   {/* DISCOUNT */}
+//                   <div className="mt-4">
+//                     <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+//                       <input
+//                         placeholder="Discount Code"
+//                         className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full"
+//                       />
+//                       <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">
+//                         Apply
+//                       </button>
+//                     </div>
+//                   </div>
+
+//                   {/* SUMMARY TOTALS */}
+//                   <div className="mt-4">
+//                     <div className="flex justify-between py-2">
+//                       <span className="text-[#565656] font-semibold">
+//                         Subtotal
+//                       </span>
+//                       <span className="font-semibold text-[#565656] text-md">
+//                         ${order.subtotal.toFixed(2)}
+//                       </span>
+//                     </div>
+
+//                     <div className="flex justify-between py-2">
+//                       <span className="text-[#0B0B0B] font-semibold">
+//                         Shipping
+//                       </span>
+//                       <span className="text-[#565656] font-semibold">
+//                         Enter Shipping Address
+//                       </span>
+//                     </div>
+
+//                     <div className="flex justify-between py-2">
+//                       <span className="text-2xl font-semibold">Total</span>
+//                       <span className="text-xl font-semibold">
+//                         $
+//                         {(
+//                           order.subtotal +
+//                           order.shipping -
+//                           order.discount
+//                         ).toFixed(2)}
+//                       </span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* LEFT (main form) */}
+//         <div className="ms-2.5 order-2 lg:order-1 md:ms-28 lg:ms-28 xl:ms-61 xl:w-[86%] bg-white pe-3 md:pe-28 lg:px-10 xl:pe-30 py-10 lg:min-h-screen lg:overflow-y-auto items-stretch font-urbanist">
+//           {/* CONTACT */}
+//           <section className="mb-8">
+//             <div className="flex justify-between items-center mb-3">
+//               <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B]">
+//                 Contact
+//               </h3>
+//               <span className="text-sm underline">Sign In</span>
+//             </div>
+
+//             <input
+//               placeholder="Email or Mobile Phone Number"
+//               className="w-full border border-gray-200 font-medium rounded px-3 py-3 text-md  placeholder-[#565656]"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//             />
+
+//             <label className="flex items-center gap-2 mt-4 text-sm">
+//               <input type="checkbox" className="accent-[#E5C97A] h-5 w-5" />
+//               <span>Email me with news and offers</span>
+//             </label>
+//           </section>
+
+//           {/* DELIVERY */}
+//           <section className="mb-8">
+//             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-4">
+//               Delivery
+//             </h3>
+
+//             <select className="w-full border border-gray-200 rounded-lg px-3 py-4">
+//               <option>United States</option>
+//               <option>United Kingdom</option>
+//             </select>
+
+//             <div className="grid grid-cols-2 gap-3 mt-3">
+//               <input
+//                 placeholder="First Name"
+//                 className="border border-gray-200 font-medium rounded-lg px-3 py-3 placeholder-[#565656]"
+//               />
+//               <input
+//                 placeholder="Last Name"
+//                 className="border border-gray-200 font-medium rounded-lg px-3 py-3 placeholder-[#565656]"
+//               />
+//             </div>
+
+//             <input
+//               placeholder="Address"
+//               className="w-full border font-medium border-gray-200 rounded-lg px-3 py-3 mt-3 placeholder-[#565656]"
+//               onChange={(e) =>
+//                 setAddress((p) => ({ ...p, line1: e.target.value }))
+//               }
+//             />
+
+//             <input
+//               placeholder="Apartment, Suite, Etc. (Optional)"
+//               className="w-full border border-gray-200 rounded-lg px-3 py-3 mt-3 placeholder-[#565656]"
+//             />
+
+//             <div className="grid grid-cols-4 gap-3 mt-3">
+//               <input
+//                 placeholder="City"
+//                 className="col-span-2 border border-gray-200  font-medium rounded-lg px-3 py-3 placeholder-[#565656]"
+//                 onChange={(e) =>
+//                   setAddress((p) => ({ ...p, city: e.target.value }))
+//                 }
+//               />
+//               <select
+//                 className="border border-gray-200 rounded-lg px-3 py-3  placeholder-[#565656]"
+//                 onChange={(e) =>
+//                   setAddress((p) => ({ ...p, state: e.target.value }))
+//                 }
+//               >
+//                 <option>State</option>
+//                 <option>CA</option>
+//               </select>
+//               <input
+//                 placeholder="ZIP Code"
+//                 className="border border-gray-200 font-medium rounded-lg px-3 py-3 placeholder-[#565656]"
+//                 onChange={(e) =>
+//                   setAddress((p) => ({ ...p, postal_code: e.target.value }))
+//                 }
+//               />
+//             </div>
+
+//             <label className="flex items-center gap-2 mt-5 text-sm">
+//               <input type="checkbox" className="accent-[#E5C97A] h-5 w-5" />
+//               <span>Save this information for next time</span>
+//             </label>
+//           </section>
+
+//           {/* SHIPPING */}
+//           <section className="mb-8">
+//             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-3">
+//               Shipping Method
+//             </h3>
+//             <div className="bg-gray-50 rounded-lg px-3 py-3 text-[#565656]">
+//               Enter your shipping address to view available shipping methods.
+//             </div>
+//           </section>
+
+//           {/* PAYMENT */}
+//           <section className="mt-6">
+//             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-3">
+//               Payment
+//             </h3>
+//             <p className="text-[#565656] mb-4">
+//               All transactions are secure and encrypted.
+//             </p>
+
+//             <form onSubmit={handleSubmit}>
+//               {/* Payment box with blue top border (matches screenshot) */}
+//               <div className="rounded-lg overflow-hidden bg-[#F5F6FF] border border-gray-300 ">
+//                 {/* Blue top border area with Credit Card label + logos */}
+//                 <div className="flex items-center justify-between border border-[#005BD1] px-4 py-2 bg-transparent">
+//                   <div className="text-sm font-medium">Credit Card</div>
+//                   <div className="flex gap-2">
+//                     <img
+//                       src={payoption1}
+//                       className="w-[34px] md:w-[38px] h-[20px]"
+//                       alt=""
+//                     />
+//                     <img
+//                       src={payoption2}
+//                       className="w-[34px] md:w-[38px] h-[20px]"
+//                       alt=""
+//                     />
+//                     <img
+//                       src={payoption4}
+//                       className="w-[34px] md:w-[38px] h-[20px]"
+//                       alt=""
+//                     />
+//                     <img
+//                       src={payoption5}
+//                       className="w-[34px] md:w-[42px] h-[24px]"
+//                       alt=""
+//                     />
+//                   </div>
+//                 </div>
+
+//                 {/* Inner white box with inputs */}
+//                 <div className="p-4 bg-[#F4F4F4] border-t border-gray-100 font-urbanist">
+//                   {/* Card Number (Stripe CardNumberElement) */}
+//                   <div className="mb-3">
+//                     <div>
+//                       {/* retained your style but using a normal input placeholder for UI (you can swap to CardNumberElement if you wish) */}
+//                       <input
+//                         value={cardExpiry}
+//                         onChange={(e) => setCardExpiry(e.target.value)}
+//                         placeholder="Card Number"
+//                         className="w-full border bg-[#FFFFFF] font-medium border-[#CCCCCC] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Expiration & CVC in two columns */}
+//                   <div className="grid grid-cols-2 gap-3 mb-3">
+//                     <div>
+//                       <input
+//                         value={cardExpiry}
+//                         onChange={(e) => setCardExpiry(e.target.value)}
+//                         placeholder="Expiration Date (MM / YY)"
+//                         className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       />
+//                     </div>
+//                     <div>
+//                       <input
+//                         value={cardCvc}
+//                         onChange={(e) => setCardCvc(e.target.value)}
+//                         placeholder="Security Code"
+//                         className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       />
+//                     </div>
+//                   </div>
+
+//                   {/* Name on Card */}
+//                   <div className="mb-3">
+//                     <label className="text-xs mb-1 block text-[#6B7280]">
+//                       Name on Card
+//                     </label>
+//                     <input
+//                       placeholder="Name on Card"
+//                       className="w-full border font-urbanist font-medium border-[#CCCCCC] bg-[#FFFFFF] rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+//                       value={billingName}
+//                       onChange={(e) => setBillingName(e.target.value)}
+//                     />
+//                   </div>
+
+//                   {/* Checkbox */}
+//                   <label className="flex items-center gap-2 text-sm">
+//                     <input
+//                       type="checkbox"
+//                       checked={useShippingAsBilling}
+//                       onChange={() => setUseShippingAsBilling((s) => !s)}
+//                       className="accent-[#0B7AFF] h-5 w-5"
+//                     />
+//                     <span className="text-[#0B0B0B] text-sm">
+//                       Use shipping address as billing address
+//                     </span>
+//                   </label>
+//                 </div>
+//               </div>
+
+//               {errorMessage && (
+//                 <div className="text-red-600 mt-3">{errorMessage}</div>
+//               )}
+
+//               <button
+//                 type="submit"
+//                 disabled={!stripe || loading}
+//                 className="w-full bg-[#005BD1] text-white py-3 rounded-xl font-semibold mt-8"
+//               >
+//                 {loading ? "Processing..." : "Pay Now"}
+//               </button>
+//             </form>
+
+//             <div className="mt-8 text-xs text-[#005BD1] flex gap-3 border-t border-[#CCCCCC] pt-5">
+//               <a href="#" className="underline text-sm font-medium">
+//                 Refund Policy
+//               </a>
+//               <a href="#" className="underline text-sm font-medium">
+//                 Privacy Policy
+//               </a>
+//               <a href="#" className="underline text-sm font-medium">
+//                 Terms of Service
+//               </a>
+//               <a href="#" className="underline text-sm font-medium">
+//                 Contact
+//               </a>
+//             </div>
+//           </section>
+
+//           {/* ---------------------- BOTTOM DROPDOWN (GIF style header, uses TOP content) ---------------------- */}
+//           <div className="w-full mt-6 md:block lg:hidden">
+//             <div className=" mx-auto md:mx-0">
+//               {/* GIF-style header: left label, right 'Show'/'Hide' text (matches gif) */}
+//               <div
+//                 className="w-full flex items-center justify-between py-4  bg-white  "
+//                 onClick={() => setSummaryOpenBottom((s) => !s)}
+//                 aria-expanded={summaryOpenBottom}
+//               >
+//                 <div className="flex items-center gap-2">
+//                   <span className="text-sm font-semibold">Order summary</span>
+//                 </div>
+
+//                 <button
+//                   type="button"
+//                   className="flex items-center gap-2 text-sm text-[#6B7280] hover:underline"
+//                 >
+//                   <span>{summaryOpenBottom ? "Hide" : "Show"}</span>
+//                   {/* small chevron to mirror gif feel */}
+//                   {summaryOpenBottom ? (
+//                     <ChevronUp className="h-4 w-4" />
+//                   ) : (
+//                     <ChevronDown className="h-4 w-4" />
+//                   )}
+//                 </button>
+//               </div>
+
+//               <div
+//                 ref={bottomRef}
+//                 style={{
+//                   maxHeight: summaryOpenBottom
+//                     ? `${bottomContentHeight}px`
+//                     : "0px",
+//                   transition: "max-height 0.35s ease",
+//                   overflow: "hidden",
+//                 }}
+//                 className={summaryOpenBottom ? "mt-3" : ""}
+//               >
+//                 <div ref={bottomContentRef}>
+//                   {/* Use the exact same content as top dropdown (item, discount, totals) */}
+//                   <div className="bg-white font-urbanist pt-3 rounded ">
+//                     {/* ITEM */}
+//                     <div className="flex items-center gap-4">
+//                       <div className="relative">
+//                         <div className="w-20 h-20 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+//                           <img src={product1} className="max-h-16" />
+//                         </div>
+//                         <span
+//                           className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+//                           style={{
+//                             width: 22,
+//                             height: 22,
+//                             borderRadius: 9999,
+//                             background: "#565656",
+//                             boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+//                           }}
+//                         >
+//                           {order.items[0].qty}
+//                         </span>
+//                       </div>
+
+//                       <div className="flex-1">
+//                         <p className="text-sm md:text-md font-urbanist font-semibold text-[#641026]">
+//                           {order.items[0].name}
+//                         </p>
+//                       </div>
+
+//                       <p className="text-md font-urbanist font-semibold">
+//                         ${order.items[0].price.toFixed(2)}
+//                       </p>
+//                     </div>
+
+//                     {/* DISCOUNT */}
+//                     <div className="mt-4">
+//                       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+//                         <input
+//                           placeholder="Discount Code"
+//                           className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full"
+//                         />
+//                         <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">
+//                           Apply
+//                         </button>
+//                       </div>
+//                     </div>
+
+//                     {/* SUMMARY TOTALS */}
+//                     <div className="mt-4">
+//                       <div className="flex justify-between py-2">
+//                         <span className="text-[#565656] font-semibold">
+//                           Subtotal
+//                         </span>
+//                         <span className="font-semibold text-[#565656] text-md">
+//                           ${order.subtotal.toFixed(2)}
+//                         </span>
+//                       </div>
+
+//                       <div className="flex justify-between py-2">
+//                         <span className="text-[#0B0B0B] font-semibold">
+//                           Shipping
+//                         </span>
+//                         <span className="text-[#565656] font-semibold">
+//                           Enter Shipping Address
+//                         </span>
+//                       </div>
+
+//                       <div className="flex justify-between py-2">
+//                         <span className="text-2xl font-semibold">Total</span>
+//                         <span className="text-xl font-semibold">
+//                           $
+//                           {(
+//                             order.subtotal +
+//                             order.shipping -
+//                             order.discount
+//                           ).toFixed(2)}
+//                         </span>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           {/* ---------------------- END BOTTOM DROPDOWN ---------------------- */}
+//         </div>
+
+//         {/* ---------------------- RIGHT SUMMARY SECTION (desktop) ---------------------- */}
+//         <div className="w-full hidden  border-l font-urbanist border-[#CCCCCC] lg:block order-1 lg:order-2 lg:min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">
+//           <aside className="lg:w-[70%] px-3 md:px-28 lg:px-5 py-10 overflow-y-auto relative">
+//             {/* ITEM with badge */}
+//             <div className="flex items-center  gap-4">
+//               <div className="relative">
+//                 <div className="w-24 h-24 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+//                   <img src={product1} className="max-h-20" />
+//                 </div>
+//                 <span
+//                   className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+//                   style={{
+//                     width: 22,
+//                     height: 22,
+//                     borderRadius: 9999,
+//                     background: "#565656",
+//                     boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+//                   }}
+//                 >
+//                   {order.items[0].qty}
+//                 </span>
+//               </div>
+
+//               <div className="flex justify-between items-start gap-9 md:gap-7 lg:gap-5 xl:gap-8  w-full">
+//                 <div className="flex-1">
+//                   <p className="text-sm md:text-md xl:text-md font-semibold text-[#641026]">
+//                     {order.items[0].name}
+//                   </p>
+//                 </div>
+//                 <p className="text-md font-semibold">
+//                   ${order.items[0].price.toFixed(2)}
+//                 </p>
+//               </div>
+//             </div>
+
+//             {/* DISCOUNT - responsive: stack on small, row on md+ */}
+//             <div className="mt-5">
+//               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+//                 <input
+//                   placeholder="Discount Code"
+//                   className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full"
+//                 />
+//                 <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">
+//                   Apply
+//                 </button>
+//               </div>
+//             </div>
+
+//             {/* SUMMARY */}
+//             <div className="mt-6">
+//               <div className="flex justify-between py-2">
+//                 <span className="text-[#565656] font-semibold">Subtotal</span>
+//                 <span className="font-semibold text-[#565656] text-md">
+//                   ${order.subtotal.toFixed(2)}
+//                 </span>
+//               </div>
+
+//               <div className="flex justify-between py-2">
+//                 <span className="text-[#0B0B0B] font-semibold">Shipping</span>
+//                 <span className="text-[#565656] font-semibold">
+//                   Enter Shipping Address
+//                 </span>
+//               </div>
+
+//               <div className="flex justify-between py-2">
+//                 <span className="text-2xl font-semibold">Total</span>
+//                 <span className="text-2xl font-semibold">
+//                   $
+//                   {(order.subtotal + order.shipping - order.discount).toFixed(
+//                     2
+//                   )}
+//                 </span>
+//               </div>
+//             </div>
+//           </aside>
+//         </div>
+//       </main>
+
+//       {/* SUCCESS POPUP */}
+//       {success && (
+//         <div className="fixed inset-0 flex items-center justify-center bg-black/40">
+//           <div className="bg-white p-8 rounded shadow-lg max-w-md w-full text-center">
+//             <h2 className="text-xl font-semibold mb-2">Payment successful</h2>
+//             <p className="mb-4">
+//               Thank you! Your payment was processed successfully.
+//             </p>
+//             <button
+//               onClick={() => {
+//                 setSuccess(false);
+//                 window.location.href = "/";
+//               }}
+//               className="bg-[#0B7AFF] text-white px-6 py-2 rounded"
+//             >
+//               Continue shopping
+//             </button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// const cardStyle: any = {
+//   style: {
+//     base: {
+//       fontSize: "14px",
+//       color: "#0B0B0B",
+//       fontFamily: "inherit",
+//       "::placeholder": { color: "#9CA3AF" },
+//     },
+//     invalid: { color: "#9e2146" },
+//   },
+// };     
 
 
 
-import React, { useMemo, useState } from "react";
+
+
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import {
   CardNumberElement,
   Elements,
@@ -2797,7 +4077,8 @@ import payoption1 from "../../assets/images/payoption1.png";
 import payoption2 from "../../assets/images/payoption2.png";
 import payoption4 from "../../assets/images/payoption4.png";
 import payoption5 from "../../assets/images/payoption5.png";
-import  { useRef,  useEffect } from "react";
+
+/* GIF file you provided (local): /mnt/data/Checkout-elitewineselections-GoogleChrome2025-11-2523-24-53-ezgif.com-video-to-gif-converter.gif */
 
 const stripePromise = loadStripe(import.meta.env.STRIPE_PUBLIC_KEY);
 
@@ -2852,8 +4133,27 @@ const CheckoutInner: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // NEW: mobile summary toggle state (Option A)
-  const [summaryOpen, setSummaryOpen] = useState(false);
+  // Top dropdown (unchanged)
+  const [summaryOpenTop, setSummaryOpenTop] = useState(false);
+  const topRef = useRef<HTMLDivElement | null>(null);
+  const topContentRef = useRef<HTMLDivElement | null>(null);
+  const [topContentHeight, setTopContentHeight] = useState(0);
+  useEffect(() => {
+    if (topContentRef.current) {
+      setTopContentHeight(topContentRef.current.scrollHeight);
+    }
+  }, [summaryOpenTop]);
+
+  // Bottom GIF-style dropdown (only product row inside)
+  const [summaryOpenBottom, setSummaryOpenBottom] = useState(false);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const bottomContentRef = useRef<HTMLDivElement | null>(null);
+  const [bottomContentHeight, setBottomContentHeight] = useState(0);
+  useEffect(() => {
+    if (bottomContentRef.current) {
+      setBottomContentHeight(bottomContentRef.current.scrollHeight);
+    }
+  }, [summaryOpenBottom]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -2886,11 +4186,9 @@ const CheckoutInner: React.FC = () => {
 
       const clientSecret = data.clientSecret as string;
 
-      // get card number element (we're using CardNumberElement for only card number)
       const cardNumberEl = elements.getElement(CardNumberElement);
       if (!cardNumberEl) throw new Error("Card number element not found");
 
-      // confirm payment using card details + additional billing info
       const confirmResult = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardNumberEl,
@@ -2923,20 +4221,9 @@ const CheckoutInner: React.FC = () => {
     }
   };
 
-  const summaryRef = useRef(null);
-const summaryContentRef = useRef(null);
-const [contentHeight, setContentHeight] = useState(0);
-
-useEffect(() => {
-  if (summaryContentRef.current) {
-    setContentHeight(summaryContentRef.current.scrollHeight);
-  }
-}, [summaryOpen]);
-
-
   return (
     <div className="min-h-screen bg-white text-[#0B0B0B]">
-      {/* ---------------------- HEADER ---------------------- */}
+      {/* HEADER */}
       <header className="w-full border-b border-[#CCCCCC] bg-white py-2.5 flex justify-center">
         <div className="w-[95%] md:w-[70%] flex justify-between items-center">
           <div className="flex flex-col items-center gap-2">
@@ -2952,119 +4239,104 @@ useEffect(() => {
         </div>
       </header>
 
-      {/* ---------------------- TWO COLUMN FLEX LAYOUT ---------------------- */}
-      <main className="w-full  flex flex-col lg:flex-row items-start min-h-screen">
-    
+      {/* LAYOUT */}
+      <main className="w-full flex flex-col lg:flex-row items-start min-h-screen">
+        {/* TOP DROPDOWN (original) - visible sm+md, hidden lg */}
         <div className="w-full bg-[#F8F8F8] ps-0 md:ps-25 lg:ms-0 md:block lg:hidden">
-
-<div className="w-[95%] md:w-[85%] mx-auto md:mx-0">
-<button
-  type="button"
-  onClick={() => setSummaryOpen((s) => !s)}
-  aria-expanded={summaryOpen}
-  className="w-full flex items-center justify-between font-semibold font-urbanist py-5 md:px-4 rounded bg-[#F8F8F8]"
->
-  <div className="flex items-center gap-2">
-    <span className="text-md font-medium">Order summary</span>
-
-    {/* ARROW CLOSER TO TEXT (LIKE YOUR IMAGE) */}
-    <span className="text-sm text-[#0B0B0B]">
-      {summaryOpen ? <ChevronUp /> : <ChevronDown />}
-    </span>
-  </div>
-
-  <span className="text-md font-semibold">
-    ${order.subtotal.toFixed(2)}
-  </span>
-</button>
-
-  {/* Smooth Animated Dropdown */}
-  <div
-    ref={summaryRef}
-    style={{
-      maxHeight: summaryOpen ? `${contentHeight}px` : "0px",
-      transition: "max-height 0.35s ease",
-      overflow: "hidden",
-    }}
-    className={summaryOpen ? "mt-4" : ""}
-  >
-    <div ref={summaryContentRef}>
-      <div className="bg-[#F8F8F8] font-urbanist p-0 md:px-4 py-4 rounded">
-        {/* ITEM */}
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <div className="w-20 h-20 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
-              <img src={product1} className="max-h-16" />
-            </div>
-            <span
-              className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
-              style={{
-                width: 22,
-                height: 22,
-                borderRadius: 9999,
-                background: "#565656",
-                boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
-              }}
+          <div className="w-[95%] md:w-[85%] mx-auto md:mx-0">
+            <button
+              type="button"
+              onClick={() => setSummaryOpenTop((s) => !s)}
+              aria-expanded={summaryOpenTop}
+              className="w-full flex items-center justify-between font-semibold font-urbanist py-5 md:px-4 rounded bg-[#F8F8F8]"
             >
-              {order.items[0].qty}
-            </span>
-          </div>
+              <div className="flex items-center gap-2">
+                <span className="text-md font-medium">Order summary</span>
+                <span className="text-sm text-[#0B0B0B]">
+                  {summaryOpenTop ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
 
-          <div className="flex-1">
-            <p className="text-sm md:text-md font-urbanist font-semibold text-[#641026]">
-              {order.items[0].name}
-            </p>    
-          </div>
-
-          <p className="text-md font-urbanist font-semibold">
-            ${order.items[0].price.toFixed(2)}
-          </p>
-        </div>
-
-        {/* DISCOUNT */}
-        <div className="mt-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <input
-              placeholder="Discount Code"
-              className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full"
-            />
-            <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">
-              Apply
+              <span className="text-md font-semibold">${order.subtotal.toFixed(2)}</span>
             </button>
+
+            <div
+              ref={topRef}
+              style={{
+                maxHeight: summaryOpenTop ? `${topContentHeight}px` : "0px",
+                transition: "max-height 0.35s ease",
+                overflow: "hidden",
+              }}
+              className={summaryOpenTop ? "mt-4" : ""}
+            >
+              <div ref={topContentRef}>
+                <div className="bg-[#F8F8F8] font-urbanist p-0 md:px-4 py-4 rounded">
+                  {/* ITEM (same as before) */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="w-20 h-20 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+                        <img src={product1} className="max-h-16" />
+                      </div>
+                      <span
+                        className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+                        style={{
+                          width: 22,
+                          height: 22,
+                          borderRadius: 9999,
+                          background: "#565656",
+                          boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+                        }}
+                      >
+                        {order.items[0].qty}
+                      </span>
+                    </div>
+
+                    <div className="flex-1">
+                      <p className="text-sm md:text-md font-urbanist font-semibold text-[#641026]">
+                        {order.items[0].name}
+                      </p>
+                    </div>
+
+                    <p className="text-md font-urbanist font-semibold">
+                      ${order.items[0].price.toFixed(2)}
+                    </p>
+                  </div>
+
+                  {/* Top dropdown keeps discount/subtotal/shipping/total (unchanged) */}
+                  <div className="mt-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <input
+                        placeholder="Discount Code"
+                        className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full"/>
+                      <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap cursor-pointer">
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="flex justify-between py-2">
+                      <span className="text-[#565656] font-semibold">Subtotal</span>
+                      <span className="font-semibold text-[#565656] text-md">${order.subtotal.toFixed(2)}</span>
+                    </div>
+
+                    <div className="flex justify-between py-2">
+                      <span className="text-[#0B0B0B] font-semibold">Shipping</span>
+                      <span className="text-[#565656] font-semibold">Enter Shipping Address</span>
+                    </div>
+
+                    <div className="flex justify-between py-2">
+                      <span className="text-2xl font-semibold">Total</span>
+                      <span className="text-xl font-semibold">${(order.subtotal + order.shipping - order.discount).toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* SUMMARY TOTALS */}
-        <div className="mt-4">
-          <div className="flex justify-between py-2">
-            <span className="text-[#565656] font-semibold">Subtotal</span>
-            <span className="font-semibold text-[#565656] text-md">
-              ${order.subtotal.toFixed(2)}
-            </span>
-          </div>
-
-          <div className="flex justify-between py-2">
-            <span className="text-[#0B0B0B] font-semibold">Shipping</span>
-            <span className="text-[#565656] font-semibold">
-              Enter Shipping Address
-            </span>
-          </div>
-
-          <div className="flex justify-between py-2">
-            <span className="text-2xl font-semibold">Total</span>
-            <span className="text-xl font-semibold">
-              ${(order.subtotal + order.shipping - order.discount).toFixed(2)}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-        </div>
-
-        {/* LEFT (main form) */}
+        {/* LEFT FORM (main) */}
         <div className="ms-2.5 order-2 lg:order-1 md:ms-28 lg:ms-28 xl:ms-61 xl:w-[86%] bg-white pe-3 md:pe-28 lg:px-10 xl:pe-30 py-10 lg:min-h-screen lg:overflow-y-auto items-stretch font-urbanist">
           {/* CONTACT */}
           <section className="mb-8">
@@ -3123,7 +4395,7 @@ useEffect(() => {
             </label>
           </section>
 
-          {/* SHIPPING */}
+          {/* SHIPPING METHOD */}
           <section className="mb-8">
             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-3">Shipping Method</h3>
             <div className="bg-gray-50 rounded-lg px-3 py-3 text-[#565656]">Enter your shipping address to view available shipping methods.</div>
@@ -3134,11 +4406,10 @@ useEffect(() => {
             <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B] mb-3">Payment</h3>
             <p className="text-[#565656] mb-4">All transactions are secure and encrypted.</p>
 
+            {/* Keep the form open — we'll place the Pay Now button AFTER the bottom dropdown */}
             <form onSubmit={handleSubmit}>
-              {/* Payment box with blue top border (matches screenshot) */}
               <div className="rounded-lg overflow-hidden bg-[#F5F6FF] border border-gray-300 ">
-                {/* Blue top border area with Credit Card label + logos */}
-                <div className="flex items-center justify-between border border-[#005BD1] px-4 py-2 bg-transparent">
+                <div className="flex items-center justify-between !border !border-[#005BD1] px-4 py-2 bg-transparent">
                   <div className="text-sm font-medium">Credit Card</div>
                   <div className="flex gap-2">
                     <img src={payoption1} className="w-[34px] md:w-[38px] h-[20px]" alt="" />
@@ -3148,42 +4419,32 @@ useEffect(() => {
                   </div>
                 </div>
 
-                {/* Inner white box with inputs */}
                 <div className="p-4 bg-[#F4F4F4] border-t border-gray-100 font-urbanist">
-                  {/* Card Number (Stripe CardNumberElement) */}
+                  {/* Card Number (placeholder input kept) */}
                   <div className="mb-3">
-                    <div>
-                      {/* retained your style but using a normal input placeholder for UI (you can swap to CardNumberElement if you wish) */}
-                      <input
-                        value={cardExpiry}
-                        onChange={(e) => setCardExpiry(e.target.value)}
-                        placeholder="Card Number"
-                        className="w-full border bg-[#FFFFFF] font-medium border-[#CCCCCC] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
-                      />
-                    </div>
+                    <input
+                      value={cardExpiry}
+                      onChange={(e) => setCardExpiry(e.target.value)}
+                      placeholder="Card Number"
+                      className="w-full border bg-[#FFFFFF] font-medium border-[#CCCCCC] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+                    />
                   </div>
 
-                  {/* Expiration & CVC in two columns */}
                   <div className="grid grid-cols-2 gap-3 mb-3">
-                    <div>
-                      <input
-                        value={cardExpiry}
-                        onChange={(e) => setCardExpiry(e.target.value)}
-                        placeholder="Expiration Date (MM / YY)"
-                        className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        value={cardCvc}
-                        onChange={(e) => setCardCvc(e.target.value)}
-                        placeholder="Security Code"
-                        className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
-                      />
-                    </div>
+                    <input
+                      value={cardExpiry}
+                      onChange={(e) => setCardExpiry(e.target.value)}
+                      placeholder="Expiration Date (MM / YY)"
+                      className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+                    />
+                    <input
+                      value={cardCvc}
+                      onChange={(e) => setCardCvc(e.target.value)}
+                      placeholder="Security Code"
+                      className="w-full border font-medium border-[#CCCCCC] bg-[#FFFFFF] font-urbanist rounded-lg px-3 py-2 text-md placeholder-[#565656]"
+                    />
                   </div>
 
-                  {/* Name on Card */}
                   <div className="mb-3">
                     <label className="text-xs mb-1 block text-[#6B7280]">Name on Card</label>
                     <input
@@ -3194,35 +4455,157 @@ useEffect(() => {
                     />
                   </div>
 
-                  {/* Checkbox */}
                   <label className="flex items-center gap-2 text-sm">
                     <input type="checkbox" checked={useShippingAsBilling} onChange={() => setUseShippingAsBilling((s) => !s)} className="accent-[#0B7AFF] h-5 w-5" />
-                    <span className="text-[#0B0B0B] text-sm">Use shipping address as billing address</span>
+                    <span className="text-[#0B0B0B] font-urbanist font-medium text-md">Use shipping address as billing address</span>
                   </label>
+
+    
+                </div>
+
+
+              </div>
+
+              {/* Display any payment errors here (stays inside form) */}
+              {errorMessage && <div className="text-red-600 mt-3">{errorMessage}</div>}
+
+           
+
+              {/* === BOTTOM DROPDOWN (GIF-style header). Only product row is revealed inside === */}
+              <div className="w-full mt-6 md:block lg:hidden">
+                <div className="mx-auto">
+                  {/* GIF-style header: left label, right 'Show'/'Hide' text */}
+                  <div
+                    className="w-full flex items-center justify-between py-3  bg-white  cursor-pointer"
+                    onClick={() => setSummaryOpenBottom((s) => !s)}
+                    aria-expanded={summaryOpenBottom}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-semibold">Order summary</span>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-md text-[#0B0B0B]">
+                      <span>{summaryOpenBottom ? "Hide" : "Show"}</span>
+                      {summaryOpenBottom ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </div>
+                  </div>
+
+                  <div
+                    ref={bottomRef}
+                    style={{
+                      maxHeight: summaryOpenBottom ? `${bottomContentHeight}px` : "0px",
+                      transition: "max-height 0.35s ease",
+                      overflow: "hidden",
+                    }}
+                    className={summaryOpenBottom ? "mt-3" : ""}
+                  >
+                    <div ref={bottomContentRef}>
+                      {/* ONLY the product row should be inside the opened bottom dropdown (per GIF) */}
+                      <div className="bg-white pt-4 pb-3">
+                        <div className="flex items-center gap-4">
+                          <div className="relative">
+                            <div className="w-20 h-20 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+                              <img src={product1} className="max-h-16" />
+                            </div>
+                            <span
+                              className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-[#FFFFFF]"
+                              style={{
+                                width: 22,
+                                height: 22,
+                                borderRadius: 9999,
+                                background: "#565656",
+                                boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+                              }}
+                            >
+                              {order.items[0].qty}
+                            </span>
+                          </div>
+
+                          <div className="flex-1">
+                            <p className="text-sm md:text-md font-urbanist font-semibold text-[#641026]">
+                              {order.items[0].name}
+                            </p>
+                          </div>
+
+                          <p className="text-md font-urbanist font-semibold">
+                            ${order.items[0].price.toFixed(2)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {errorMessage && <div className="text-red-600 mt-3">{errorMessage}</div>}
+                            <div className=" md:block lg:hidden w-full">
+                <div className=" mx-auto">
+                  <div className="bg-white pt-4 ">
+                    {/* Discount row */}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <input placeholder="Discount Code" className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] rounded-lg px-4 py-2" />
+                      <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap cursor-pointer">Apply</button>
+                    </div>
 
-              <button type="submit" disabled={!stripe || loading} className="w-full bg-[#005BD1] text-white py-3 rounded-xl font-semibold mt-8">
-                {loading ? "Processing..." : "Pay Now"}
-              </button>
+                    {/* Totals (outside bottom dropdown) */}
+                    <div className="mt-4">
+                      <div className="flex justify-between py-2">
+                        <span className="text-[#565656] font-semibold">Subtotal</span>
+                        <span className="font-semibold text-[#565656] text-md">${order.subtotal.toFixed(2)}</span>
+                      </div>
+
+                      <div className="flex justify-between py-2">
+                        <span className="text-[#0B0B0B] font-semibold">Shipping</span>
+                        <span className="text-[#565656] font-semibold">Enter Shipping Address</span>
+                      </div>
+
+                      <div className="flex justify-between py-2">
+                        <span className="text-2xl font-semibold">Total</span>
+                        <span className="text-xl font-semibold">${(order.subtotal + order.shipping - order.discount).toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* === Place Pay Now button and footer links BELOW bottom dropdown (sm+md) === */}
+              <div className="w-full md:block lg:hidden">
+                <div className=" mx-auto">
+                  <button type="submit" disabled={!stripe || loading} className="w-full bg-[#005BD1] text-white py-3 rounded-xl font-semibold mt-2 cursor-pointer">
+                    {loading ? "Processing..." : "Pay Now"}
+                  </button>
+
+                  <div className="mt-6 text-xs text-[#005BD1] flex gap-3 border-t border-[#CCCCCC] pt-5">
+                    <a href="#" className="underline text-sm font-medium">Refund Policy</a>
+                    <a href="#" className="underline text-sm font-medium">Privacy Policy</a>
+                    <a href="#" className="underline text-sm font-medium">Terms of Service</a>
+                    <a href="#" className="underline text-sm font-medium">Contact</a>
+                  </div>
+                </div>
+              </div>
             </form>
 
-                 <div className="mt-8 text-xs text-[#005BD1] flex gap-3 border-t border-[#CCCCCC] pt-5">
-              <a href="#" className="underline text-sm font-medium">Refund Policy</a>
-              <a href="#"  className="underline text-sm font-medium">Privacy Policy</a>
-              <a href="#"  className="underline text-sm font-medium">Terms of Service</a>
-             <a href="#"  className="underline text-sm font-medium">Contact</a>
-           </div>
+                                <div className="w-full hidden lg:block">
+                <div className="mt-6 mx-auto">
+                  <button type="submit" disabled={!stripe || loading} className="w-full  bg-[#005BD1] text-white py-3 rounded-xl font-semibold cursor-pointer">
+                    {loading ? "Processing..." : "Pay Now"}
+                  </button>
+
+                  <div className="mt-6 text-xs text-[#005BD1] flex gap-3 border-t border-[#CCCCCC] pt-5">
+                    <a href="#" className="underline text-sm font-medium">Refund Policy</a>
+                    <a href="#" className="underline text-sm font-medium">Privacy Policy</a>
+                    <a href="#" className="underline text-sm font-medium">Terms of Service</a>
+                    <a href="#" className="underline text-sm font-medium">Contact</a>
+                  </div>
+                </div>
+              </div>
           </section>
         </div>
 
-        {/* ---------------------- RIGHT SUMMARY SECTION (desktop) ---------------------- */}
-        <div className="w-full hidden  border-l font-urbanist border-[#CCCCCC] lg:block order-1 lg:order-2 lg:min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">
+        {/* RIGHT (desktop summary) */}
+        <div className="w-full hidden border-l font-urbanist border-[#CCCCCC] lg:block order-1 lg:order-2 lg:min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">
           <aside className="lg:w-[70%] px-3 md:px-28 lg:px-5 py-10 overflow-y-auto relative">
             {/* ITEM with badge */}
-            <div className="flex items-center  gap-4">
+            <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="w-24 h-24 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
                   <img src={product1} className="max-h-20" />
@@ -3241,7 +4624,7 @@ useEffect(() => {
                 </span>
               </div>
 
-              <div className="flex justify-between items-start gap-9 md:gap-7 lg:gap-5 xl:gap-8  w-full">
+              <div className="flex justify-between items-start gap-9 md:gap-7 lg:gap-5 xl:gap-8 w-full">
                 <div className="flex-1">
                   <p className="text-sm md:text-md xl:text-md font-semibold text-[#641026]">{order.items[0].name}</p>
                 </div>
@@ -3249,15 +4632,15 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* DISCOUNT - responsive: stack on small, row on md+ */}
+            {/* DISCOUNT - desktop */}
             <div className="mt-5">
               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 <input placeholder="Discount Code" className="flex-1 border border-[#CCCCCC] bg-[#FFFFFF] placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 text-base w-full" />
-                <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap">Apply</button>
+                <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap cursor-pointer">Apply</button>
               </div>
             </div>
 
-            {/* SUMMARY */}
+            {/* SUMMARY - desktop */}
             <div className="mt-6">
               <div className="flex justify-between py-2">
                 <span className="text-[#565656] font-semibold">Subtotal</span>
@@ -3284,15 +4667,7 @@ useEffect(() => {
           <div className="bg-white p-8 rounded shadow-lg max-w-md w-full text-center">
             <h2 className="text-xl font-semibold mb-2">Payment successful</h2>
             <p className="mb-4">Thank you! Your payment was processed successfully.</p>
-            <button
-              onClick={() => {
-                setSuccess(false);
-                window.location.href = "/";
-              }}
-              className="bg-[#0B7AFF] text-white px-6 py-2 rounded"
-            >
-              Continue shopping
-            </button>
+            <button onClick={() => { setSuccess(false); window.location.href = "/"; }} className="bg-[#0B7AFF] text-white px-6 py-2 rounded">Continue shopping</button>
           </div>
         </div>
       )}
