@@ -30,10 +30,10 @@ import productmedal from "../../assets/images/productmedal.png";
 import PopularProducts from "../../components/popularPropducts/PopularProducts";
 import { toast } from "react-toastify";
 
-const randomSize = () => {
-  const arr = ["Small", "Medium", "Large", "Extra Large"];
-  return arr[Math.floor(Math.random() * arr.length)];
-};
+// const randomSize = () => {
+//   const arr = ["Small", "Medium", "Large", "Extra Large"];
+//   return arr[Math.floor(Math.random() * arr.length)];
+// };
 
 const initialState = {
   productsDetails: [
@@ -46,10 +46,10 @@ const initialState = {
       varietylogo: verietyImg,
       price: 29.76,
       medal: productmedal,
-      flavour: "Merlot",
-      size: randomSize(),
+      flavour: "  ",
+      size: "Small",
       inStock: true,
-      categoryType: "Featured",
+      categoryType: "Popular",
     },
     {
       id: 2,
@@ -60,9 +60,9 @@ const initialState = {
       varietylogo: verietyImg,
       price: 29.38,
       flavour: "Pinot Noir",
-      size: randomSize(),
+      size:"Medium",
       inStock: false,
-      categoryType: "Popular",
+      categoryType: "Featured",
     },
     {
       id: 3,
@@ -73,7 +73,7 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.76,
       flavour: "Sauvignon Blanc",
-      size: randomSize(),
+      size: "Large",
       inStock: true,
       categoryType: "New Arrivals",
     },
@@ -86,9 +86,10 @@ const initialState = {
       varietylogo: verietyImg,
       price: 29.38,
       flavour: "Gewurztraminer",
-      size: randomSize(),
+      size: "Medium",
       inStock: true,
-      categoryType: "Popular",
+      categoryType: "New Arrivals",
+  
     },
     {
       id: 5,
@@ -99,9 +100,10 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.76,
       flavour: "Rosé",
-      size: randomSize(),
+      size: "Large",
       inStock: false,
       categoryType: "Featured",
+    
     },
     {
       id: 6,
@@ -112,7 +114,7 @@ const initialState = {
       varietylogo: verietyImg,
       price: 27.16,
       flavour: "Riesling",
-      size: randomSize(),
+      size: "Medium",
       inStock: true,
       categoryType: "New Arrivals",
     },
@@ -127,9 +129,10 @@ const initialState = {
       price: 26.97,
       medal: productmedal,
       flavour: "Riesling",
-      size: randomSize(),
+      size: "Large",
       inStock: true,
       categoryType: "Popular",
+      isReleted: true
     },
 
     {
@@ -142,7 +145,7 @@ const initialState = {
       price: 28.91,
       medal: productmedal,
       flavour: "Rouge Pur",
-      size: randomSize(),
+      size: "Medium",
       inStock: true,
       categoryType: "Featured",
     },
@@ -156,7 +159,7 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.61,
       flavour: "Sauvignon Blanc",
-      size: randomSize(),
+      size: "Large",
       inStock: false,
       categoryType: "New Arrivals",
     },
@@ -169,7 +172,7 @@ const initialState = {
       varietylogo: verietyImg,
       price: 28.19,
       flavour: "Pinot Noir",
-      size: randomSize(),
+      size: "Medium",
       inStock: true,
       categoryType: "Featured",
     },
@@ -184,9 +187,9 @@ const initialState = {
       price: 33.61,
       medal: productmedal,
       flavour: "Sauvignon Blanc",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: true,
-      categoryType: "Popular",
+      categoryType: "New Arrivals",
     },
     {
       id: 12,
@@ -198,7 +201,7 @@ const initialState = {
       price: 28.19,
       medal: productmedal,
       flavour: "Pinot Noir",
-      size: randomSize(),
+      size: "Medium",
       inStock: true,
       categoryType: "New Arrivals",
     },
@@ -211,7 +214,7 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.61,
       flavour: "Rosé",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: false,
       categoryType: "Featured",
     },
@@ -224,9 +227,9 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.61,
       flavour: "Pinot Grigio",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: true,
-      categoryType: "Popular",
+      categoryType: "Featured",
     },
     {
       id: 15,
@@ -237,7 +240,7 @@ const initialState = {
       varietylogo: verietyImg,
       price: 28.19,
       flavour: "Pinot Noir",
-      size: randomSize(),
+      size:  "Medium",
       inStock: true,
       categoryType: "Featured",
     },
@@ -250,9 +253,10 @@ const initialState = {
       varietylogo: verietyImg,
       price: 29.38,
       flavour: "Gewurztraminer",
-      size: randomSize(),
+      size:  "Medium",
       inStock: true,
-      categoryType: "Featured",
+      categoryType: "New Arrivals",
+      isReleted: true
     },
     {
       id: 17,
@@ -262,25 +266,26 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.76,
       flavour: "Rose",
-      size: randomSize(),
+      size: "Small",
       inStock: true,
-      categoryType: "Popular",
+      categoryType: "New Arrivals",
+      isReleted: true
     },
 
-    {
-      id: 18,
-      type: "Bergdolt, Reif & Nett",
-      productImg: product2,
-      productName:
-        "Bergdolt, Reif & Nett Reverse Sauvignon Blanc  (vegan) Dealcoholized",
-      variety: "Grape variety",
-      varietylogo: verietyImg,
-      price: 25.76,
-      flavour: "Sauvignon Blanc",
-      size: randomSize(),
-      inStock: false,
-      categoryType: "Popular",
-    },
+    // {
+    //   id: 18,
+    //   type: "Bergdolt, Reif & Nett",
+    //   productImg: product2,
+    //   productName:
+    //     "Bergdolt, Reif & Nett Reverse Sauvignon Blanc  (vegan) Dealcoholized",
+    //   variety: "Grape variety",
+    //   varietylogo: verietyImg,
+    //   price: 25.76,
+    //   flavour: "Sauvignon Blanc",
+    //   size:  "Medium",
+    //   inStock: false,
+    //   categoryType: "Featured",
+    // },
 
     {
       id: 18,
@@ -292,9 +297,9 @@ const initialState = {
       varietylogo: verietyImg,
       price: 25.76,
       flavour: "Sauvignon Blanc",
-      size: randomSize(),
+      size: "Small",
       inStock: false,
-      categoryType: "Popular",
+      categoryType: "Featured",
     },
 
     {
@@ -306,24 +311,24 @@ const initialState = {
       varietylogo: verietyImg,
       price: 29.38,
       flavour: "Gewurztraminer",
-      size: randomSize(),
+      size: "Small",
+      inStock: false,
+      categoryType: "Featured",
+    },
+
+    {
+      id: 20,
+      type: "Bergdolt, Reif & Nett",
+      productImg: product9,
+      productName: "Bergdolt, Reif & Nett Reverse Rose (vegan) Dealcoholized",
+      variety: "Grape variety",
+      varietylogo: verietyImg,
+      price: 25.76,
+      flavour: "Rose",
+      size: "Small",
       inStock: false,
       categoryType: "Popular",
     },
-
-    // {
-    //   id: 20,
-    //   type: "Bergdolt, Reif & Nett",
-    //   productImg: product9,
-    //   productName: "Bergdolt, Reif & Nett Reverse Rose (vegan) Dealcoholized",
-    //   variety: "Grape variety",
-    //   varietylogo: verietyImg,
-    //   price: 25.76,
-    //   flavour: "Rose",
-    //   size: randomSize(),
-    //   inStock: false,
-    //   categoryType: "Popular",
-    // },
 
     {
       id: 21,
@@ -335,9 +340,9 @@ const initialState = {
       varietylogo: verietyImg,
       price: 27.16,
       flavour: "Riesling",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: false,
-      categoryType: "Popular",
+      categoryType: "Featured",
     },
 
     {
@@ -349,7 +354,7 @@ const initialState = {
       variety: "Grape variety",
       price: 27.19,
       flavour: "Riesling",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: true,
       categoryType: "Featured",
     },
@@ -362,7 +367,7 @@ const initialState = {
       variety: "Grape variety",
       price: 25.61,
       flavour: "Pinot Grigio",
-      size: randomSize(),
+      size: "Small",
       inStock: true,
       categoryType: "Featured",
     },
@@ -375,7 +380,7 @@ const initialState = {
       variety: "Grape variety",
       price: 25.61,
       flavour: "Pinot Noir",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: true,
       categoryType: "Featured",
     },
@@ -388,7 +393,7 @@ const initialState = {
       variety: "Grape variety",
       price: 28.19,
       flavour: "Pinot Noir",
-      size: randomSize(),
+      size:"Small",
       inStock: true,
       categoryType: "Featured",
     },
@@ -401,7 +406,7 @@ const initialState = {
       variety: "Grape variety",
       price: 25.61,
       flavour: "Sauvignon Blanc",
-      size: randomSize(),
+      size: "Extra Large",
       inStock: true,
       categoryType: "Featured",
     },
