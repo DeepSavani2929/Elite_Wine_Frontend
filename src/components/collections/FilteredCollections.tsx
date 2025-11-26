@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { X, Filter, Plus, Minus } from "lucide-react";
 
-
 import ProductsChild from "../products/productsChild";
 import FilterDropdown from "../ui/FilterDropDown";
 import { useSelector } from "react-redux";
@@ -36,7 +35,7 @@ const FilteredCollections: React.FC = () => {
     sortBy: "Alphabetically Z-A",
   });
 
-  const {collectionType} =  useParams()
+  const { collectionType } = useParams();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -51,31 +50,20 @@ const FilteredCollections: React.FC = () => {
     setSidebarOpen(true);
   };
 
-  const slugify = (str = "") =>
-  str.toLowerCase().replace(/\s+/g, "-");
+  const slugify = (str = "") => str.toLowerCase().replace(/\s+/g, "-");
 
-const baseFiltered = shopDetails.filter((product) => {
-  if (collectionType && slugify(product.type) !== collectionType) return false;
-  return true;
-});
-
-  // const priceToNumber = (price: string) => {
-  //   const parsed = parseFloat(price.replace(/[^0-9.]/g, ""));
-  //   return Number.isNaN(parsed) ? 0 : parsed;
-  // };
+  const baseFiltered = shopDetails.filter((product) => {
+    if (collectionType && slugify(product.type) !== collectionType)
+      return false;
+    return true;
+  });
 
   const priceToNumber = (price: any) => {
-  if (typeof price === "number") return price; 
-  if (typeof price === "string") return parseFloat(price.replace("$", ""));
-  return 0; // fallback to avoid crash
-};
+    if (typeof price === "number") return price;
+    if (typeof price === "string") return parseFloat(price.replace("$", ""));
+    return 0;
+  };
 
-
-
-
-
-
-  /** FILTER + SORT LOGIC **/
   const filteredProducts = useMemo(() => {
     const filtered = baseFiltered.filter((p) => {
       const priceNum = parseFloat(p.price);
@@ -145,7 +133,6 @@ const baseFiltered = shopDetails.filter((product) => {
     return sorted;
   }, [filters, shopDetails]);
 
-  /** PAGINATION **/
   const totalItems = filteredProducts.length;
   const totalPages = Math.ceil(totalItems / limit);
   const start = (currentPage - 1) * limit;
@@ -156,7 +143,6 @@ const baseFiltered = shopDetails.filter((product) => {
     setCurrentPage(p);
   };
 
-  /** OPTIONS **/
   const sizeOptions = ["Small", "Medium", "Large", "Extra Large"];
   const grapeOptions = [
     "Merlot",
@@ -181,13 +167,11 @@ const baseFiltered = shopDetails.filter((product) => {
     "Date, new to old",
   ];
 
-  /** UPDATE FILTER **/
   const handleFilterChange = (name: string, value: any) => {
     setFilters((prev) => ({ ...prev, [name]: value }));
     setCurrentPage(1);
   };
 
-  /** REMOVE CHIP **/
   const removeChip = (type: string, value: string) => {
     if (type === "size") {
       setFilters((prev) => ({ ...prev, size: "Size" }));
@@ -229,7 +213,6 @@ const baseFiltered = shopDetails.filter((product) => {
     );
   };
 
-  /** CLEAR ALL **/
   const clearAll = () => {
     setFilters({
       size: "Size",
@@ -241,7 +224,6 @@ const baseFiltered = shopDetails.filter((product) => {
     });
   };
 
-  /** CLOSE SIDEBAR ON RESIZE **/
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) setSidebarOpen(false);
@@ -250,7 +232,6 @@ const baseFiltered = shopDetails.filter((product) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  /** CHIP COMPONENT **/
   const Chip = ({ label, onRemove }: any) => (
     <div className="bg-[#EED291] text-[#0B0B0B] px-3 py-1 rounded-md flex items-center gap-2 font-urbanist text-sm">
       {label}
@@ -262,7 +243,6 @@ const baseFiltered = shopDetails.filter((product) => {
 
   return (
     <>
-      {/* BANNER */}
       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
@@ -271,18 +251,13 @@ const baseFiltered = shopDetails.filter((product) => {
           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
             Products
           </p>
-          {/* <p className="font-urbanist font-semibold text-base text-white">
-            Non-alcoholic (&lt;0.5% ABV). Intended for adults.
-          </p> */}
         </div>
       </div>
 
       <div className="w-full">
         <div className="w-[95%] mx-auto pt-[55px] xl:pt-[100px]">
-          {/* FILTER BAR */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
             <div className="flex items-center flex-wrap gap-3">
-              {/* MOBILE FILTER BUTTON */}
               <button
                 onClick={handleOpenSidebar}
                 className="flex items-center gap-2 w-[60px] h-[40px] rounded-lg font-urbanist font-semibold text-sm text-[#0B0B0B]"
@@ -291,7 +266,6 @@ const baseFiltered = shopDetails.filter((product) => {
                 <span>Filter</span>
               </button>
 
-              {/* DESKTOP FILTERS */}
               <div className="hidden xl:flex items-center gap-3">
                 <div className="w-[150px]">
                   <FilterDropdown
@@ -360,9 +334,7 @@ const baseFiltered = shopDetails.filter((product) => {
             </div>
           </div>
 
-          {/* FILTER CHIPS */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            {/* CLEAR ALL */}
             {(filters.size !== "Size" ||
               filters.price.min !== 0 ||
               filters.price.max !== 100 ||
@@ -385,7 +357,6 @@ const baseFiltered = shopDetails.filter((product) => {
               />
             )}
 
-            {/* PRICE */}
             {(filters.price.min !== 0 || filters.price.max !== 100) && (
               <Chip
                 label={`$${filters.price.min} - $${filters.price.max}`}
@@ -393,12 +364,10 @@ const baseFiltered = shopDetails.filter((product) => {
               />
             )}
 
-            {/* GRAPES */}
             {filters.grape.map((g) => (
               <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
             ))}
 
-            {/* AVAILABILITY */}
             {filters.availability.map((a) => (
               <Chip
                 key={a}
@@ -407,7 +376,6 @@ const baseFiltered = shopDetails.filter((product) => {
               />
             ))}
 
-            {/* CATEGORY */}
             {filters.all !== "All" && (
               <Chip
                 label={filters.all}
@@ -417,14 +385,11 @@ const baseFiltered = shopDetails.filter((product) => {
           </div>
         </div>
 
-        {/* MOBILE SIDEBAR */}
-        {/* SIDEBAR */}
         <div
           className={`fixed top-0 left-0 h-full w-[72%] sm:w-[40%] md:w-[38%] lg:w-[28%] z-[9999] bg-white shadow-xl transform transition-all duration-300 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          {/* HEADER */}
           <div className="flex justify-between items-center px-4 py-4">
             <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
             <button onClick={() => setSidebarOpen(false)}>
@@ -432,9 +397,7 @@ const baseFiltered = shopDetails.filter((product) => {
             </button>
           </div>
 
-          {/* SIDEBAR CONTENT */}
           <div className="p-4 overflow-y-auto h-[calc(100%-60px)] font-urbanist">
-            {/* SHOW FILTER HEADER + CLEAR ALL ONLY IF ANY FILTER IS ACTIVE */}
             {(filters.size !== "Size" ||
               filters.price.min !== 0 ||
               filters.price.max !== 100 ||
@@ -452,7 +415,6 @@ const baseFiltered = shopDetails.filter((product) => {
               </div>
             )}
 
-            {/* CHIPS (SHOW ONLY IF ANY FILTER ACTIVE) */}
             {(filters.size !== "Size" ||
               filters.price.min !== 0 ||
               filters.price.max !== 100 ||
@@ -499,7 +461,6 @@ const baseFiltered = shopDetails.filter((product) => {
               </div>
             )}
 
-            {/* SIDEBAR ACCORDIONS */}
             <Accordion title="Size">
               {sizeOptions.map((opt) => (
                 <label key={opt} className="flex items-center gap-3 py-1">
@@ -510,7 +471,7 @@ const baseFiltered = shopDetails.filter((product) => {
                     checked={filters.size === opt}
                     onChange={() => {
                       handleFilterChange("size", opt);
-                      setSidebarOpen(false); // CLOSE SIDEBAR
+                      setSidebarOpen(false);
                     }}
                     className="accent-[#E5C97A]"
                   />
@@ -637,7 +598,7 @@ const baseFiltered = shopDetails.filter((product) => {
                         : [...filters.availability, opt];
 
                       handleFilterChange("availability", u);
-                      setSidebarOpen(false); // CLOSE SIDEBAR
+                      setSidebarOpen(false);
                     }}
                     className="w-4 h-4 accent-[#E5C97A]"
                   />
@@ -648,7 +609,6 @@ const baseFiltered = shopDetails.filter((product) => {
           </div>
         </div>
 
-        {/* BACKDROP */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[900] xl:hidden"
@@ -656,14 +616,12 @@ const baseFiltered = shopDetails.filter((product) => {
           />
         )}
 
-        {/* PRODUCTS GRID */}
         <div className="w-[95%] xl:w-[80%] pb-[55px] xl:pb-[100px] mx-auto grid gap-8 grid-cols-2 md:grid-cols-3 mt-10">
           {currentProducts.map((product, index) => (
             <ProductsChild key={index} product={product} />
           ))}
         </div>
 
-        {/* PAGINATION */}
         <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
           <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
             <p className="text-sm">Showing</p>

@@ -9,25 +9,22 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
 const AboutFourthProduct = () => {
+  const aboutGallery = [
+    {
+      gallery: about3,
+    },
 
-    
-              const aboutGallery = [
-                  {
-                    gallery: about3
-                  },
-            
-                 {
-                   gallery: about4
-                 },
-            
-              ]
+    {
+      gallery: about4,
+    },
+  ];
   return (
     <>
       <div className="bg-[url('/images/aboutheader5.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-42 md:mt-40 md:mt-50 xl:mt-62 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
-            Home <span className="font-Poppins ms-1 me-1"> &gt;</span> About Château Clos
-            de Boüard
+            Home <span className="font-Poppins ms-1 me-1"> &gt;</span> About
+            Château Clos de Boüard
           </p>
           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
             About Château Clos de Boüard
@@ -109,46 +106,52 @@ const AboutFourthProduct = () => {
         </div>
       </div>
 
-                   <div className="w-[95%] xl:w-[80%] mx-auto">
-              <div className="pb-3 lg:pb-[55px] xl:pb-[100px] ">
-                <p className="font-bold font-cormorant px-8 md:px-16 text-[24px] md:text-[28px] xl:text-[36px] uppercase text-center mb-6 xl:mb-8">
-                Vineyards
-                </p>
-              
-      
-      
-            <div className="hidden w-full lg:flex justify-center gap-3  xl:gap-8">
-                  {aboutGallery.map((item, index) => (
-                    <div key={index} className="cursor-pointer overflow-hidden">
-                        <img src={item.gallery} alt="" className="lg:w-[250px] xl:w-full object-cover transition-all duration-500 ease-in-out hover:scale-105" />
-                    </div>
-                  ))}
-                </div>
-             
-      
-      
-      
-                <div className="block lg:hidden">
-                  <Swiper
-                    modules={[Pagination]}
-                    pagination={{ clickable: true }}
-                     loop={true} 
-                    spaceBetween={30}
-                    breakpoints={{
-                      0: { slidesPerView: 1.5 },
-                      768: { slidesPerView: 2  }, 
-                    }}
-                    className="!pb-10 gap-2 flex "
-                  >
-                    {aboutGallery.map((item, index) => (
-                      <SwiperSlide key={index} className="flex  items-stretch cursor-pointer overflow-hidden">
-                        <img src={item.gallery} alt="" className="transition-all duration-500 ease-in-out hover:scale-105"/>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
+      <div className="w-[95%] xl:w-[80%] mx-auto">
+        <div className="pb-3 lg:pb-[55px] xl:pb-[100px] ">
+          <p className="font-bold font-cormorant px-8 md:px-16 text-[24px] md:text-[28px] xl:text-[36px] uppercase text-center mb-6 xl:mb-8">
+            Vineyards
+          </p>
+
+          <div className="hidden w-full lg:flex justify-center gap-3  xl:gap-8">
+            {aboutGallery.map((item, index) => (
+              <div key={index} className="cursor-pointer overflow-hidden">
+                <img
+                  src={item.gallery}
+                  alt=""
+                  className="lg:w-[250px] xl:w-full object-cover transition-all duration-500 ease-in-out hover:scale-105"
+                />
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="block lg:hidden">
+            <Swiper
+              modules={[Pagination]}
+              pagination={{ clickable: true }}
+              loop={true}
+              spaceBetween={30}
+              breakpoints={{
+                0: { slidesPerView: 1.5 },
+                768: { slidesPerView: 2 },
+              }}
+              className="!pb-10 gap-2 flex "
+            >
+              {aboutGallery.map((item, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="flex  items-stretch cursor-pointer overflow-hidden"
+                >
+                  <img
+                    src={item.gallery}
+                    alt=""
+                    className="transition-all duration-500 ease-in-out hover:scale-105"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

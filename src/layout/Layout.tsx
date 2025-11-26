@@ -10,7 +10,6 @@ const Layout = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  // Hide header ONLY on /checkout
   const hideHeader = pathname === "/checkout";
 
   return (
@@ -24,7 +23,7 @@ const Layout = () => {
 
       <Outlet />
 
-       {!hideHeader && <Footer />}
+      {!hideHeader && <Footer />}
     </>
   );
 };

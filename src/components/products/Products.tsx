@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import product1 from "../../assets/images/product1.png";
 import product2 from "../../assets/images/product2.png";
@@ -31,12 +29,9 @@ const Products = () => {
     "Matthias Anton",
   ];
 
+  const productsDetails = useSelector((state) => state.cart.productsDetails);
 
-    const productsDetails = useSelector((state) => state.cart.productsDetails);
-
-
-  const params = useParams()
-
+  const params = useParams();
 
   const [activeTab, setActiveTab] = useState(wineries[0]);
 
@@ -49,13 +44,11 @@ const Products = () => {
       <div className="w-full bg-[#F8F8F8]">
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className="py-[55px] xl:py-[100px] flex flex-col items-center justify-between gap-12">
-            {/* Title + Winery Buttons */}
             <div className="flex flex-col items-center justify-between gap-8 text-center w-full">
               <p className="font-cormorant font-bold text-[28px] xl:text-[36px] uppercase leading-tight">
                 Products
               </p>
 
-              {/* Responsive Winery Tabs */}
               <div
                 className="
                   flex items-center gap-4 md:gap-3 xl:gap-8 
@@ -87,30 +80,28 @@ const Products = () => {
               </div>
             </div>
 
-            {/* Product Grid */}
-              <div className="grid w-full gap-8 md:gap-8 xl:gap-10  grid-cols-2 md:grid-cols-3 transition-all duration-500">
-                {filteredProducts.map((product, index) => (
-                  <ProductsChild key={index} product={product} />
-                ))}
-              </div>
+            <div className="grid w-full gap-8 md:gap-8 xl:gap-10  grid-cols-2 md:grid-cols-3 transition-all duration-500">
+              {filteredProducts.map((product, index) => (
+                <ProductsChild key={index} product={product} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Custom Scrollbar */}
-  <style jsx>{`
-  .scrollbar-thin::-webkit-scrollbar {
-    height: 6px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: #eed291; /* gold thumb */
-    border-radius: 10px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: #f2f2f2; /* very light gray track */
-    border-radius: 10px;
-  }
-`}</style>
+      <style jsx>{`
+        .scrollbar-thin::-webkit-scrollbar {
+          height: 6px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+          background-color: #eed291; /* gold thumb */
+          border-radius: 10px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+          background: #f2f2f2; /* very light gray track */
+          border-radius: 10px;
+        }
+      `}</style>
     </>
   );
 };

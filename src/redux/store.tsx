@@ -5,6 +5,6 @@ import blogReducer from "./blog/blogSlice.tsx";
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
-    blog: blogReducer
+    blog: blogReducer,
   },
 });

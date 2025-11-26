@@ -4,9 +4,9 @@ import Layout from "./layout/Layout";
 import Home from "./home/Home";
 import ProductDetails from "./components/products/ProductDetails.tsx";
 import React from "react";
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Shop from "./components/shop/Shop.tsx";
 import About from "./components/about/About.tsx";
 import AboutFirstProduct from "./components/about/AboutFirstProduct.tsx";
@@ -33,8 +33,8 @@ import Privacy from "./components/privacy/Privacy.tsx";
 const App: React.FC = () => {
   return (
     <>
-    <ScrollToTop/>
-       <ToastContainer
+      <ScrollToTop />
+      <ToastContainer
         position="top-center"
         autoClose={1800}
         pauseOnHover={false}
@@ -45,28 +45,52 @@ const App: React.FC = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/productDetails/:productId" element={<ProductDetails />} />
+          <Route
+            path="/productDetails/:productId"
+            element={<ProductDetails />}
+          />
           <Route path="/shop" element={<Shop />} />
           <Route path="/about-us" element={<About />} />
-          <Route path="/about-us/bergdolt-reif-nett" element={<AboutFirstProduct />} />
+          <Route
+            path="/about-us/bergdolt-reif-nett"
+            element={<AboutFirstProduct />}
+          />
           <Route path="/about-us/lamm-jung" element={<AboutSecondProduct />} />
-          <Route path="/about-us/kvd-strauch-sektmanufaktur" element={<AboutThirdProduct />} />
-          <Route path="/about-us/château-clos-de-boüard" element={<AboutFourthProduct />} />
-          <Route path="/about-us/weingut-matthias-anton" element={<AboutFifthProduct />} />
+          <Route
+            path="/about-us/kvd-strauch-sektmanufaktur"
+            element={<AboutThirdProduct />}
+          />
+          <Route
+            path="/about-us/château-clos-de-boüard"
+            element={<AboutFourthProduct />}
+          />
+          <Route
+            path="/about-us/weingut-matthias-anton"
+            element={<AboutFifthProduct />}
+          />
           <Route path="/cartDetails" element={<CartDetails />} />
           <Route path="/blog" element={<BlogSection />} />
-            <Route path="/blog/blogDetails/:blogId" element={<BlogDetails />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/faq" element={<Faqs />} />
-           <Route path="/register" element={<Register />} />                   
-            <Route path="/login" element={<Login />} />
-            <Route path="/resetPassword" element={<ResetPassword />} />
-            <Route path="/collections" element={<Collections />} />
-            <Route path="/collections/kvd/:collectionType" element={<FilteredCollections />} />
-            <Route path="/collections/bergdolt-reif-nett/:collectionType" element={<FilteredCollections />} />
-            <Route path="/collections/matthias-anton/:collectionType" element={<FilteredCollections />} />
-            <Route path="/checkout" element={<Checkout />} />
-               <Route path="/privacy" element={<Privacy />} />
+          <Route path="/blog/blogDetails/:blogId" element={<BlogDetails />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faq" element={<Faqs />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/collections" element={<Collections />} />
+          <Route
+            path="/collections/kvd/:collectionType"
+            element={<FilteredCollections />}
+          />
+          <Route
+            path="/collections/bergdolt-reif-nett/:collectionType"
+            element={<FilteredCollections />}
+          />
+          <Route
+            path="/collections/matthias-anton/:collectionType"
+            element={<FilteredCollections />}
+          />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Route>
       </Routes>
     </>

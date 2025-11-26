@@ -1,21 +1,18 @@
 @import "tailwindcss";
 @layer utilities {
-    .font-urbanist {
-      font-family: 'Urbanist', sans-serif;
-    }
+  .font-urbanist {
+    font-family: "Urbanist", sans-serif;
   }
-  
-  @layer utilities {
-    .font-cormorant {
-      font-family: 'Cormorant Upright', serif;
-    }
-  }
-  
+}
 
-    @layer utilities {
- 
-   .font-Poppins {
-    font-family: 'Poppins', sans-serif;
+@layer utilities {
+  .font-cormorant {
+    font-family: "Cormorant Upright", serif;
   }
+}
+
+@layer utilities {
+  .font-Poppins {
+    font-family: "Poppins", sans-serif;
   }
-  
+}
