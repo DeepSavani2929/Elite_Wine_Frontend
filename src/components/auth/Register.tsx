@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios"
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -51,6 +53,17 @@ const Register = () => {
       console.log("REGISTER FORM SUBMITTED:", formData);
     }
   };
+
+  const {subscribed, ...userData} = formData
+
+  const handleOnRegister = async() => {
+      try{
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, userData)
+      }
+      catch(error){
+        toast.error(error.message) 
+      }
+  }
 
   return (
     <>
@@ -175,6 +188,7 @@ const Register = () => {
 
             <button
               type="submit"
+              onClick = {handleOnRegister}
               className="w-full xl:w-[550px] mx-auto bg-[#EED291] border border-[#EED291] mt-1.5 md:mt-0 cursor-pointer text-[#0B0B0B] font-urbanist font-semibold text-base py-2.5 xl:py-3 rounded-full hover:bg-transparent transition-all duration-600"
             >
               CREATE AN ACCOUNT

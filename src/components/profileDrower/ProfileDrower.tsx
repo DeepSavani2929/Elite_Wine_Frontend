@@ -1,6 +1,6 @@
 import { CircleX } from "lucide-react";
 import React, { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const ProfileDrawer = ({ isOpen, onClose }) => {
   const [login, setLogin] = useState({
@@ -126,9 +126,12 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           </NavLink>
 
           <div className="text-center mt-4">
-            <a className="underline text-base font-semibold text-[#565656] cursor-pointer">
-              Forgot Your Password?
-            </a>
+      <NavLink 
+  to="/reset-password"
+  className="underline text-base font-semibold text-[#565656] cursor-pointer"
+>
+  Forgot Your Password?
+</NavLink>
           </div>
 
           <NavLink to="/register">
