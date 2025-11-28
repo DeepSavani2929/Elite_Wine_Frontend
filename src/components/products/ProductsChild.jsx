@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addToCart, setDrawerOpen } from "../../redux/cart/cartSlice";
-import CartPopover from "../cartProducts/CartPopover";
+import verietyImg from "../../assets/images/variety.png";
+import productmedal from "../../assets/images/productmedal.png";
 
 const ProductsChild = ({ product }) => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const ProductsChild = ({ product }) => {
         className={`group flex h-full flex-col gap-6 cursor-pointer ${
           isBlogDetailsPage ? "rounded-none" : "rounded-[32px]"
         }  transition-all duration-300`}
-        onClick={() => navigate(`/productDetails/${product.id}`)}
+        onClick={() => navigate(`/productDetails/${product._id}`)}
       >
         <div className="relative flex items-center justify-center  overflow-hidden">
           <div
@@ -25,7 +26,7 @@ const ProductsChild = ({ product }) => {
             }`}
           >
             <img
-              src={product.productImg}
+              src={`${import.meta.env.VITE_IMG_URL}/${product.productImg}`}
               alt={product.productName}
               className="mx-auto h-[200px] xl:h-[438px] w-auto object-cover"
             />
@@ -66,8 +67,8 @@ const ProductsChild = ({ product }) => {
                   {product.variety}
                 </span>
                 <img
-                  src={product.varietylogo}
-                  alt={`${product.variety} icon`}
+                  src={verietyImg}
+                  alt= "icon"
                   className="h-6 w-6 object-contain"
                 />
               </div>
@@ -75,7 +76,7 @@ const ProductsChild = ({ product }) => {
               <div className="flex items-center gap-0.5 text-[#0B0B0B] min-h-[32px]">
                 {product.medal && (
                   <img
-                    src={product.medal}
+                    src={productmedal}
                     alt="Medal"
                     className="h-8 w-8 object-contain"
                   />

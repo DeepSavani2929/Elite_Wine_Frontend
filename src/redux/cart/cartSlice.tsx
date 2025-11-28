@@ -30,11 +30,6 @@ import productmedal from "../../assets/images/productmedal.png";
 import PopularProducts from "../../components/popularPropducts/PopularProducts";
 import { toast } from "react-toastify";
 
-// const randomSize = () => {
-//   const arr = ["Small", "Medium", "Large", "Extra Large"];
-//   return arr[Math.floor(Math.random() * arr.length)];
-// };
-
 const initialState = {
   productsDetails: [
     {
@@ -89,7 +84,7 @@ const initialState = {
       size: "Medium",
       inStock: true,
       categoryType: "New Arrivals",
-  
+
     },
     {
       id: 5,
@@ -103,7 +98,7 @@ const initialState = {
       size: "Large",
       inStock: false,
       categoryType: "Featured",
-    
+
     },
     {
       id: 6,
@@ -547,3 +542,183 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+
+
+
+// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+
+// import {
+//   getGuestCartId,
+//   createGuestCartId,
+//   getUserCartId,
+//   getUserId,
+// } from "../../utils/cartIdManager";
+
+// const getActiveCartId = (): string => {
+//   const userCartId = getUserCartId();
+//   if (userCartId) return userCartId;
+
+//   let guestId = getGuestCartId();
+//   if (!guestId) {
+//     guestId = createGuestCartId();
+//   }
+//   return guestId;
+// };
+
+// export const addToCartAPI = createAsyncThunk(
+//   "cart/addToCart",
+//   async (
+//     { productId, quantity = 1 }: { productId: string; quantity?: number },
+//     { dispatch, rejectWithValue }
+//   ) => {
+//     try {
+//       const cartId = getActiveCartId();
+//       const userId = getUserId();
+
+//       const res = await axios.post(
+//         `${import.meta.env.VITE_API_URL}/cart/addToCart`,
+//         {
+//           cartId,
+//           productId,
+//           quantity,
+//           userId: userId || null,
+//         }
+//       );
+
+//       if (res.data.success) {
+//         toast.success("Added to cart");
+//         await dispatch(fetchCartItemsAPI());
+//       }
+
+//       return true;
+//     } catch (error: any) {
+//       toast.error(error.response?.data?.message || "Add to cart failed");
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+
+// export const fetchCartItemsAPI = createAsyncThunk(
+//   "cart/fetchCartItems",
+//   async (_, { dispatch, rejectWithValue }) => {
+//     try {
+//       const cartId = getActiveCartId();
+//       const userId = getUserId();
+
+//       const url = `${
+//         import.meta.env.VITE_API_URL
+//       }/cart/getCartProducts/${cartId}${userId ? `?userId=${userId}` : ""}`;
+
+//       const res = await axios.get(url);
+
+//       dispatch(getAllCartItems(res.data.data || []));
+
+//       return true;
+//     } catch (error) {
+//       return rejectWithValue("Unable to fetch cart items");
+//     }
+//   }
+// );
+
+// export const incrementQuantityAPI = createAsyncThunk(
+//   "cart/incrementQuantity",
+//   async (productId: string, { dispatch, rejectWithValue }) => {
+//     try {
+//       const cartId = getActiveCartId();
+
+//       const res = await axios.put(
+//         `${
+//           import.meta.env.VITE_API_URL
+//         }/cart/incrementQuantity/${cartId}/${productId}`
+//       );
+
+//       if (res.data.success) {
+//         await dispatch(fetchCartItemsAPI());
+//       }
+
+//       return true;
+//     } catch (error) {
+//       return rejectWithValue("Failed to increase quantity");
+//     }
+//   }
+// );
+
+// export const decrementQuantityAPI = createAsyncThunk(
+//   "cart/decrementQuantity",
+//   async (productId: string, { dispatch, rejectWithValue }) => {
+//     try {
+//       const cartId = getActiveCartId();
+
+//       const res = await axios.put(
+//         `${
+//           import.meta.env.VITE_API_URL
+//         }/cart/decrementQuantity/${cartId}/${productId}`
+//       );
+
+//       if (res.data.success) {
+//         await dispatch(fetchCartItemsAPI());
+//       }
+
+//       return true;
+//     } catch (error) {
+//       return rejectWithValue("Failed to decrease quantity");
+//     }
+//   }
+// );
+
+// export const deleteCartProductAPI = createAsyncThunk(
+//   "cart/deleteCartProduct",
+//   async (productId: string, { dispatch, rejectWithValue }) => {
+//     try {
+//       const cartId = getActiveCartId();
+
+//       const res = await axios.get(
+//         `${
+//           import.meta.env.VITE_API_URL
+//         }/cart/deteleCartProduct/${cartId}/${productId}`
+//       );
+
+//       if (res.data.success) {
+//         toast.info("Item removed");
+//         await dispatch(fetchCartItemsAPI());
+//       }
+
+//       return true;
+//     } catch (error) {
+//       return rejectWithValue("Failed to delete product");
+//     }
+//   }
+// );
+
+// const initialState = {
+//   cartItems: [] as any[],
+//   isDrawerOpen: false,
+// };
+
+// const cartSlice = createSlice({
+//   name: "cart",
+//   initialState,
+//   reducers: {
+//     setDrawerOpen: (state, action) => {
+//       state.isDrawerOpen = action.payload;
+//     },
+
+//     clearCartItems: (state) => {
+//       state.cartItems = [];
+//     },
+
+//     getAllCartItems: (state, action) => {
+//       state.cartItems = action.payload;
+//     },
+//   },
+// });
+
+
+// export const { setDrawerOpen, clearCartItems, getAllCartItems } =
+//   cartSlice.actions;
+
+
+// export default cartSlice.reducer;

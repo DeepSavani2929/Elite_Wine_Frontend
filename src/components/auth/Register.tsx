@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios"
+import { clearGuestCartId, storeUserCartId, storeUserId } from "../../utils/cartIdManager";
+import { useNavigate } from "react-router";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const Register = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate =  useNavigate()
 
   const validate = () => {
     let validationErrors = {};
@@ -47,23 +50,51 @@ const Register = () => {
     return Object.keys(validationErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      console.log("REGISTER FORM SUBMITTED:", formData);
-    }
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validate()) {
+  //     console.log("REGISTER FORM SUBMITTED:", formData);
+  //   }
+  // };
 
   const {subscribed, ...userData} = formData
 
-  const handleOnRegister = async() => {
-      try{
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, userData)
+  const handleOnRegister = async (e) => {
+      e.preventDefault();  
+    if (!validate()) return;
+
+    try {
+      const guestCartId = localStorage.getItem("guestCartId");
+
+      const payload = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        guestCartId: guestCartId || null
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        payload
+      );
+
+      if (res.data.success) {
+        toast.success("Registered successfully!");
+
+    
+        storeUserCartId(res.data.cartId);
+
+        clearGuestCartId();
+
+        localStorage.setItem("userId", res.data.data._id);
+        navigate("/")
       }
-      catch(error){
-        toast.error(error.message) 
-      }
-  }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Register failed");
+    }
+  };
+
 
   return (
     <>
@@ -87,7 +118,7 @@ const Register = () => {
           </p>
 
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleOnRegister}
             className="w-full flex flex-col gap-3 md:gap-6"
           >
             <div>
@@ -188,7 +219,6 @@ const Register = () => {
 
             <button
               type="submit"
-              onClick = {handleOnRegister}
               className="w-full xl:w-[550px] mx-auto bg-[#EED291] border border-[#EED291] mt-1.5 md:mt-0 cursor-pointer text-[#0B0B0B] font-urbanist font-semibold text-base py-2.5 xl:py-3 rounded-full hover:bg-transparent transition-all duration-600"
             >
               CREATE AN ACCOUNT
