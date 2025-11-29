@@ -2,9 +2,9 @@ import React from "react";
 import { Minus, Plus, ShieldCheck, CircleX, Gift } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  decreaseQuantity,
-  increaseQuantity,
-  removeFromCart,
+  decrementQuantity,
+  incrementQuantity,
+  deleteCartProduct,
 } from "../../redux/cart/cartSlice";
 import ProductsChild from "../products/productsChild";
 
@@ -93,7 +93,7 @@ const CartDetails = () => {
                         <div className="flex gap-4 items-center">
                           <CircleX
                             className=" w-8 h-8 text-[#0B0B0B] cursor-pointer mt-1"
-                            onClick={() => dispatch(removeFromCart(product.id))}
+                            onClick={() => dispatch(deleteCartProduct(product.productId))}
                           />
 
                           <div className="border border-[#CCCCCC] p-2 w-[75px] h-[90px] flex-shrink-0">
@@ -120,7 +120,7 @@ const CartDetails = () => {
                                 <Minus
                                   size={16}
                                   onClick={() =>
-                                    dispatch(decreaseQuantity(product))
+                                    dispatch(decrementQuantity(product.productId))
                                   }
                                   className="cursor-pointer"
                                 />
@@ -130,7 +130,7 @@ const CartDetails = () => {
                                 <Plus
                                   size={16}
                                   onClick={() =>
-                                    dispatch(increaseQuantity(product))
+                                    dispatch(incrementQuantity(product.productId))
                                   }
                                   className="cursor-pointer"
                                 />

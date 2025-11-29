@@ -718,12 +718,11 @@ import payoption6 from "../../assets/images/payoption6.png";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import CartPopover from "../cartProducts/CartPopover";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addToCart,
-  decreaseQuantity,
-  increaseQuantity,
+  addToCartAPI,
+  decrementQuantity,
+  incrementQuantity,
   setDrawerOpen,
 } from "../../redux/cart/cartSlice";
 
@@ -752,9 +751,7 @@ const ProductDetails = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  // ----------------------
-  // ADDED: PRODUCT API FETCH
-  // ----------------------
+
   const [currentProduct, setCurrentProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -843,7 +840,7 @@ const ProductDetails = () => {
 
 
   const availableProductInCart = cartItems.find(
-    (item) => item._id === currentProduct?._id
+    (item) => item.productId === currentProduct?._id
   );
 
   if (loading) {
@@ -1042,7 +1039,7 @@ const ProductDetails = () => {
                 <button className="flex items-center gap-7 px-6 py-1.5 font-semibold rounded-full border border-[#EED291] w-fit">
                   <Minus
                     className="w-4 h-4 text-[#0B0B0B] cursor-pointer"
-                    onClick={() => dispatch(decreaseQuantity(currentProduct))}
+                    onClick={() => dispatch(decrementQuantity(currentProduct._id))}
                   />
 
                   <p className="text-[#0B0B0B] font-semibold text-xl">
@@ -1052,7 +1049,7 @@ const ProductDetails = () => {
                   </p>
                   <Plus
                     className="w-4 h-4 text-[#0B0B0B] cursor-pointer"
-                    onClick={() => dispatch(increaseQuantity(currentProduct))}
+                    onClick={() => dispatch(incrementQuantity(currentProduct._id))}
                   />
                 </button>
 
@@ -1060,7 +1057,7 @@ const ProductDetails = () => {
                   <button
                     onClick={() => {
                       dispatch(setDrawerOpen(true));
-                      dispatch(addToCart(currentProduct));
+                      dispatch(addToCartAPI(currentProduct._id));
                     }}
                     className="font-urbanist font-semibold cursor-pointer text-base text-[#0B0B0B] bg-[#EED291] w-full rounded-full py-3 hover:bg-[#0B0B0B] hover:text-[#EED291] transition-all duration-800"
                   >

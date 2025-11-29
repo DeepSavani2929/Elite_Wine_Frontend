@@ -116,9 +116,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProductsChild from "./productsChild";
 
-// ----------------------------------------------
-// WINERIES WITH SLUG
-// ----------------------------------------------
 const wineries = [
   { name: "Bergdolt, Reif & Nett", slug: "bergdolt-reif-nett" },
   { name: "Lamm Jung", slug: "lamm-jung" },

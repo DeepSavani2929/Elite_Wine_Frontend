@@ -14,9 +14,10 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
 import {
-  addToCart,
+  addToCartAPI,
   setDrawerOpen as setCartDrawer,
 } from "../../redux/cart/cartSlice";
+import axios from "axios";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -24,6 +25,7 @@ const BlogDetails = () => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   const desktopSwiperRef = useRef<any>(null);
   const drawerSwiperRef = useRef<any>(null);
@@ -32,17 +34,44 @@ const BlogDetails = () => {
   const navigate = useNavigate();
 
   const blogDetails = useSelector((state: any) => state.blog.blogDetails);
-  const products = useSelector((state: any) => state.cart.productsDetails);
+  // const products = useSelector((state: any) => state.cart.productsDetails);
 
   const blog = blogDetails.find((item: any) => item.id === Number(blogId));
 
-  const featuredProducts = products
-    .filter((p: any) => p.categoryType === "Featured")
-    .slice(0, 3);
+  // const featuredProducts = products
+  //   .filter((p: any) => p.categoryType === "Featured")
+  //   .slice(0, 3);
 
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? "hidden" : "";
   }, [drawerOpen]);
+
+
+const fetchFilteredProducts = async () => {
+  try {
+    // Always filter only categoryType = "Featured"
+    const queryParams = new URLSearchParams({
+      categoryType: "Featured",
+      limit: "3",    
+      page: "1"       
+    });
+
+    const url = `${import.meta.env.VITE_API_URL}/products/getFilteredProducts?${queryParams.toString()}`;
+
+    const res = await axios.get(url);
+
+    if (res.data.success) {
+      setFilteredProducts(res.data.data);
+    }
+  } catch (error) {
+    console.error("FILTER API FAILED:", error);
+  }
+};
+
+
+useEffect(() => {
+  fetchFilteredProducts();
+}, []);
 
   if (!blog) return <div className="py-10 text-center">Blog Not Found</div>;
 
@@ -127,7 +156,7 @@ const BlogDetails = () => {
                   setIsEnd(swiper.isEnd);
                 }}
               >
-                {featuredProducts.map((product: any) => (
+                {filteredProducts.map((product: any) => (
                   <SwiperSlide key={product.id}>
                     <ProductsChild product={product} />
                   </SwiperSlide>
@@ -272,11 +301,11 @@ const BlogDetails = () => {
                 drawerSwiperRef.current = swiper;
               }}
             >
-              {featuredProducts.map((product: any) => (
-                <SwiperSlide key={product.id}>
+              {filteredProducts.map((product: any) => (
+                <SwiperSlide key={product._id}>
                   <div
                     className="group flex h-full flex-col gap-6 cursor-pointer transition-all duration-300"
-                    onClick={() => navigate(`/productDetails/${product.id}`)}
+                    onClick={() => navigate(`/productDetails/${product._id}`)}
                   >
                     <div className="relative flex items-center justify-center overflow-hidden">
                       <div className="w-full py-10">
@@ -301,7 +330,7 @@ const BlogDetails = () => {
                         onClick={(e) => {
                           e.stopPropagation();
                           dispatch(setCartDrawer(true));
-                          dispatch(addToCart(product));
+                          dispatch(addToCartAPI(product._id));
                         }}
                       >
                         ADD TO CART

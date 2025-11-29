@@ -14,9 +14,9 @@ import "swiper/css";
 import { Navigate, NavLink, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  decreaseQuantity,
-  increaseQuantity,
-  removeFromCart,
+  decrementQuantity,
+  deleteCartProduct,
+  incrementQuantity,
 } from "../../redux/cart/cartSlice";
 
 const CartPopover = ({ isOpen, onClose }) => {
@@ -35,10 +35,13 @@ const CartPopover = ({ isOpen, onClose }) => {
   const relatedProductsList = useSelector(
     (state) => state.cart.relatedProducts
   );
+
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const total = subtotal;
+
+
 
   useEffect(() => {
     document.body.style.overflow = isOpen || activeSheet ? "hidden" : "auto";
@@ -59,6 +62,23 @@ const CartPopover = ({ isOpen, onClose }) => {
       </button>
     </div>
   );
+
+
+      const getReletedProducts = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/products/getReletedProducts`
+      );
+
+      if (res.data.success) {
+        setReletedProductsList(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to load product:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -139,7 +159,7 @@ const CartPopover = ({ isOpen, onClose }) => {
                     <img
                       onClick={() => {
                         onClose();
-                        navigate(`/productDetails/${product.id}`);
+                        navigate(`/productDetails/${product.productId}`);
                       }}
                       src={product.productImg}
                       className="w-16 h-20 object-contain cursor-pointer"
@@ -150,7 +170,7 @@ const CartPopover = ({ isOpen, onClose }) => {
                         className="font-semibold text-md mb-2 leading-5 font-urbanist text-[#641026] cursor-pointer"
                         onClick={() => {
                           onClose();
-                          navigate(`/productDetails/${product.id}`);
+                          navigate(`/productDetails/${product.productId}`);
                         }}
                       >
                         {product.productName}
@@ -164,20 +184,26 @@ const CartPopover = ({ isOpen, onClose }) => {
                         <div className="flex items-center gap-6 border border-[#EED291] rounded-full px-5 py-1 w-fit shadow-sm">
                           <Minus
                             className="w-4 h-4 cursor-pointer"
-                            onClick={() => dispatch(decreaseQuantity(product))}
+                            onClick={() =>
+                              dispatch(decrementQuantity(product.productId))
+                            }
                           />
                           <span className="font-semibold text-base">
                             {product.quantity}
                           </span>
                           <Plus
                             className="w-4 h-4 cursor-pointer"
-                            onClick={() => dispatch(increaseQuantity(product))}
+                            onClick={() =>
+                              dispatch(incrementQuantity(product.productId))
+                            }
                           />
                         </div>
 
                         <button
                           className="text-[#0B0B0B]"
-                          onClick={() => dispatch(removeFromCart(product.id))}
+                          onClick={() =>
+                            dispatch(deleteCartProduct(product.productId))
+                          }
                         >
                           <X className="w-6 h-6 mt-3 cursor-pointer" />
                         </button>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addToCart, setDrawerOpen } from "../../redux/cart/cartSlice";
+import { addToCartAPI, setDrawerOpen } from "../../redux/cart/cartSlice";
 import verietyImg from "../../assets/images/variety.png";
 import productmedal from "../../assets/images/productmedal.png";
 
@@ -10,6 +10,7 @@ const ProductsChild = ({ product }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const isBlogDetailsPage = location.pathname.startsWith("/blog/blogDetails");
+
 
   return (
     <>
@@ -48,7 +49,7 @@ const ProductsChild = ({ product }) => {
             onClick={(e) => {
               e.stopPropagation();
               dispatch(setDrawerOpen(true));
-              dispatch(addToCart(product));
+              dispatch(addToCartAPI({productId:product._id}));
             }}
           >
             ADD TO CART
