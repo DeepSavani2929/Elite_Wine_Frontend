@@ -675,9 +675,6 @@
 
 // export default ProductDetails;
 
-
-
-
 import { Heart, Minus, Plus, Share2 } from "lucide-react";
 import product from "../../assets/images/product.png";
 import productDetails1 from "../../assets/images/productDetails1.png";
@@ -729,17 +726,14 @@ import {
 const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState("description");
   const [modalContent, setModalContent] = useState(null);
-  const [relatedProductsList, setReletedProductsList] = useState([])
-
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
+  const [relatedProductsList, setReletedProductsList] = useState([]);
   const { productId } = useParams();
-  
+
   useEffect(() => {
     fetchProduct();
     getReletedProducts();
   }, [productId]);
-  
+
   const rightRef = useRef(null);
   const leftRef = useRef(null);
 
@@ -751,12 +745,10 @@ const ProductDetails = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-
   const [currentProduct, setCurrentProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && modalContent) {
         closeModal();
@@ -821,8 +813,7 @@ const ProductDetails = () => {
     }
   };
 
-
-    const getReletedProducts = async () => {
+  const getReletedProducts = async () => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_API_URL}/products/getReletedProducts`
@@ -837,7 +828,6 @@ const ProductDetails = () => {
       setLoading(false);
     }
   };
-
 
   const availableProductInCart = cartItems.find(
     (item) => item.productId === currentProduct?._id
@@ -875,8 +865,6 @@ const ProductDetails = () => {
     document.body.style.overflow = "auto";
   };
 
-
-
   return (
     <>
       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
@@ -897,7 +885,9 @@ const ProductDetails = () => {
             <div className="flex flex-col gap-4 xl:gap-5 Justify-center w-full md:w-auto md:flex-1 md:sticky md:top-20">
               <div className="w-full flex flex-col justify-center md:flex-1 border border-[#CCCCCC] h-[849px] py-5">
                 <img
-                  src={`${import.meta.env.VITE_IMG_URL}/${currentProduct.productImg}`}
+                  src={`${import.meta.env.VITE_IMG_URL}/${
+                    currentProduct.productImg
+                  }`}
                   alt={currentProduct.productName}
                   className="object-contain object-center w-full h-[788px]"
                 />
@@ -905,7 +895,9 @@ const ProductDetails = () => {
 
               <div className="w-full flex justify-center">
                 <img
-                  src={`${import.meta.env.VITE_IMG_URL}/${currentProduct.productImg}`}
+                  src={`${import.meta.env.VITE_IMG_URL}/${
+                    currentProduct.productImg
+                  }`}
                   alt={currentProduct.productName}
                   className="w-[160px] border border-[#CCCCCC] py-2 h-[160px] object-contain"
                 />
@@ -1039,7 +1031,9 @@ const ProductDetails = () => {
                 <button className="flex items-center gap-7 px-6 py-1.5 font-semibold rounded-full border border-[#EED291] w-fit">
                   <Minus
                     className="w-4 h-4 text-[#0B0B0B] cursor-pointer"
-                    onClick={() => dispatch(decrementQuantity(currentProduct._id))}
+                    onClick={() =>
+                      dispatch(decrementQuantity(currentProduct._id))
+                    }
                   />
 
                   <p className="text-[#0B0B0B] font-semibold text-xl">
@@ -1049,7 +1043,9 @@ const ProductDetails = () => {
                   </p>
                   <Plus
                     className="w-4 h-4 text-[#0B0B0B] cursor-pointer"
-                    onClick={() => dispatch(incrementQuantity(currentProduct._id))}
+                    onClick={() =>
+                      dispatch(incrementQuantity(currentProduct._id))
+                    }
                   />
                 </button>
 
@@ -1057,7 +1053,7 @@ const ProductDetails = () => {
                   <button
                     onClick={() => {
                       dispatch(setDrawerOpen(true));
-                      dispatch(addToCartAPI(currentProduct._id));
+                      dispatch(addToCartAPI({ productId: currentProduct._id }));
                     }}
                     className="font-urbanist font-semibold cursor-pointer text-base text-[#0B0B0B] bg-[#EED291] w-full rounded-full py-3 hover:bg-[#0B0B0B] hover:text-[#EED291] transition-all duration-800"
                   >
@@ -1257,8 +1253,7 @@ const ProductDetails = () => {
                 <div className="flex justify-between items-center px-4 py-1.5 border-b border-gray-300 sticky top-0 bg-[#eed291]">
                   <h2 className="text-lg font-medium uppercase">
                     {modalContent === "description" && "Description"}
-                    {modalContent === "additional" &&
-                      "Additional Information"}
+                    {modalContent === "additional" && "Additional Information"}
                     {modalContent === "shipping" && "Shipping & Return"}
                   </h2>
 

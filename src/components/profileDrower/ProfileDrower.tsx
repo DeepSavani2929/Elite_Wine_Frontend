@@ -1,6 +1,9 @@
 import { CircleX } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
+import axios from "axios";
 
 const ProfileDrawer = ({ isOpen, onClose }) => {
   const [login, setLogin] = useState({
@@ -13,6 +16,19 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
     password: "",
   });
 
+    useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  
   const isValidEmail = (value: string) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
 
@@ -28,22 +44,48 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleLoginSubmit = () => {
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
     if (!validateLogin()) return;
 
-    console.log("Login submitted:", login);
+    try {
+      const guestCartId = localStorage.getItem("guestCartId");
 
-    onClose();
+      const payload = {
+        email: login.email,
+        password: login.password,
+        guestCartId: guestCartId || null,
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        payload
+      );
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+
+        storeUserCartId(res.data.cartId);
+
+        clearGuestCartId();
+
+        localStorage.setItem("userId", res.data.data._id);
+        localStorage.setItem("userName", res.data.firstName);
+        onClose();
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Register failed");
+    }
   };
 
   return (
-    <>
+    <div className={`fixed inset-0 z-[999999] ${
+        isOpen ? "pointer-events-auto" : "pointer-events-none"
+      }`}>
+ 
       <div
-        className={`fixed inset-0 bg-black/60 z-[9998] transition-opacity duration-300
-        ${
-          isOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+         className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}
       />
@@ -117,8 +159,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
               font-semibold mt-6 cursor-pointer uppercase hover:bg-transparent transition-all duration-600
             "
               onClick={(e) => {
-                e.preventDefault();
-                handleLoginSubmit();
+                handleLoginSubmit(e);
               }}
             >
               Log In
@@ -126,12 +167,12 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           </NavLink>
 
           <div className="text-center mt-4">
-      <NavLink 
-  to="/reset-password"
-  className="underline text-base font-semibold text-[#565656] cursor-pointer"
->
-  Forgot Your Password?
-</NavLink>
+            <NavLink
+              to="/reset-password"
+              className="underline text-base font-semibold text-[#565656] cursor-pointer"
+            >
+              Forgot Your Password?
+            </NavLink>
           </div>
 
           <NavLink to="/register">
@@ -147,7 +188,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           </NavLink>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

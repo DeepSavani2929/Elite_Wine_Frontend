@@ -3,8 +3,14 @@ import blog1 from "../../assets/images/blog1.png";
 import blog2 from "../../assets/images/blog2.png";
 import blog3 from "../../assets/images/blog3.png";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getBlogs } from "../../redux/blog/blogSlice";
 
 const BlogSection = () => {
+
+  useEffect(() => {
+    getBlogs()
+  },[])
   const blogDetails = useSelector((state) => state.blog.blogDetails);
   console.log("Blog Details from Redux:", blogDetails);
 

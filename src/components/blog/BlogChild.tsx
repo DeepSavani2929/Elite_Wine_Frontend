@@ -6,11 +6,11 @@ const BlogChild = ({ blog, index }) => {
   return (
     <div
       className="flex flex-col gap-3 font-urbanist w-full lg:h-full bg-white p-2"
-      onClick={() => navigate(`/blog/blogDetails/${blog.id}`)}
+      onClick={() => navigate(`/blog/blogDetails/${blog._id}`)}
     >
       <div className="w-full  lg:h-[300px] xl:h-[360px] overflow-hidden  cursor-pointer">
         <img
-          src={blog.blogImg}
+          src={`${import.meta.env.VITE_IMG_URL}/${blog.blogImg}`}
           alt="blog"
           className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
         />

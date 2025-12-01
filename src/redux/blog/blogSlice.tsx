@@ -1,46 +1,65 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import blog1 from "../../assets/images/blog1.png";
 import blog2 from "../../assets/images/blog2.png";
 import blog3 from "../../assets/images/blog3.png";
+import axios from "axios";
 
 const initialState = {
-  blogDetails: [
-    {
-      id: 1,
-      blogImg: blog1,
-      blogTitle:
-        "“How non-alcoholic wine is made without losing the taste” Gentle Dealcoholization: How LTVD and Aroma Recovery Work",
-      blogDesc:
-        "For a long time, non-alcoholic wines carried a reputation for being overly sweet, flat, or marked by cooked flavors......",
-      blogContent: `<img src='/images/blogImages/blog1.png' class="w-full h-[560px] object-cover"/><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Wine Has Always Been Part Of Life’s Most Memorable Moments — Toasting Newlyweds, Sharing A Sunday Brunch, Or Opening A Bottle At A Family Gathering. But Today, More And More People Want The Full Wine Experience Without The Alcohol. Whether It’s For Health, Lifestyle, Or Simply To Feel Included, Non-Alcoholic Wines Are Making Celebrations More Inclusive Than Ever.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Weddings</h2><p class="text-[#565656] text-base leading-relaxed mb-6">A Wedding Toast Should Be Unforgettable — For Everyone. Sparkling Non-Alcoholic Wines Like A Crisp Riesling &lt;0.5% Or A Refined Blanc De Blancs &lt;0.5%, Bring All The Elegance Of Champagne Without The Limits. Guests Can Raise A Glass, And Remember The Night For All The Right Reasons.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Brunches</h2><p class="text-[#565656] text-base leading-relaxed mb-6">From Eggs Benedict To Fresh Pastries, Brunch Deserves A Pairing. A Delicately Balanced Rosé &lt;0.5% With Bright Red-Fruit Notes Makes A Refreshing Companion To Lighter Dishes, While An Aromatic Sauvignon Blanc &lt;0.5% Complements Anything With Herbs Or Greens. It Feels Indulgent But Keeps The Day Easy And Bright.</p><h2 class=" font-semibold text-[#641026] text-2xl mb-2">Picnics</h2><p class="text-[#565656] text-base leading-relaxed mb-6">Nothing Says Summer Like A Picnic In The Park. A Chilled Non-Alcoholic Pinot Noir Rosé &lt;0.5% Or A Fruit-Forward Chardonnay &lt;0.5% Travels Beautifully, Pairs With Everything From Cheese To Grilled Vegetables, And Keeps The Moment Relaxed. No Worries About Overindulging — Just Pure Enjoyment Under The Sun.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">Family Celebrations</h2><p class="text-[#565656] text-base leading-relaxed mb-6">From Birthdays To Baby Showers, Family Events Are More Inclusive When Everyone Can Raise A Glass. Non-Alcoholic Wines Provide That Special Sense Of Occasion While Ensuring Grandparents, Expectant Mothers, And Even The Designated Driver Feel Part Of The Toast. Try A Merlot &lt;0.5% With Roast Meats Or A Sparkling Rosé &lt;0.5% With Cake And Desserts.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Nights Out</h2><p class="text-[#565656] text-base leading-relaxed mb-6">Everyone Doesn’t Always Need Alcohol To Feel Exciting. A Lively Sparkling Blanc &lt;0.5% With Citrus Lift, Or A Red Blend &lt;0.5% Brings Sophistication To Dinners, Rooftop Parties, Or Cocktail Bars With Balanced Acidity And Authentic Vinous Character. Those Wines Let You Join In The Ritual Of Ordering, Sipping, And Celebrating Without Compromise.</p><h2 class=" font-semibold text-[#641026] text-2xl mb-2">A New Way To Celebrate</h2><p class="text-[#565656 ] text-base leading-relaxed mb-6">Non-Alcoholic Wines Are Not About Giving Something Up — They’re About Opening The Door Wider. They Let Everyone At The Table Share The Same Experience, With The Same Aromas, Flavors, And Sense Of Joy. From Wedding Bells To Lazy Brunches. From Laughter In The Park To Big Family Dinners. The Right Bottle Ensures No One Has To Sit Out The Toast.</p><p class="text-[#565656] text-base leading-relaxed">Explore Our Curated Collection Of Award-Winning Non-Alcoholic Wines (&lt;0.5% ABV) And Find The Perfect Match For Your Next Celebration.</p>`,
-      createdDate: "25 September 2025",
-    },
-
-    {
-      id: 2,
-      blogImg: blog2,
-      blogTitle:
-        "The Perfect Non-Alcoholic Wines for Weddings, Brunches, Picnics, Family Celebrations, and Nights Out",
-      blogDesc:
-        "Wine has always been part of life’s most memorable moments — toasting newlyweds, sharing a Sunday brunch, or opening a bottle.....",
-      blogContent: `<img src='/images/blogImages/blog2.png'  alt="Wine glasses celebration" class="w-full h-[560px] object-cover"/><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Celebrations Have Evolved Over Time, And More People Today Are Choosing Drinks That Let Them Enjoy Every Moment Without The Effects Of Alcohol. Whether Youre Hosting A Dinner Party, Spending Time With Friends, Or Simply Want A Flavorful  That Fits A Balanced Lifestyle, Non-Alcoholic Wines Offer A Sophisticated And Enjoyable Alternative.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Weddings</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Weddings Are About Togetherness, And Non-Alcoholic Wines Ensure That Everyone Can Take Part In The Toast. From Crisp Whites To Smooth Reds, These Options Add Elegance To The Celebration Without Compromising On Taste Or Experience.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Brunches</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Brunch Moments Become Even More Enjoyable With A Refreshing Glass Of Non-Alcoholic Wine. Light, Fruity, And Perfectly Balanced, These Wines Pair Beautifully With Everything From Fresh Pastries To Savory Dishes.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">Picnics</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Sunny Days And Outdoor Gatherings Call For Drinks That Keep You Hydrated And Happy. A Chilled Bottle Of Non-Alcoholic Rosé Or Sparkling White Adds A Bright, Flavorful Touch To Any Picnic Without Weighing You Down.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">Family Celebrations</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">From Birthdays To Holidays, Family Events Become More Inclusive With Non-Alcoholic Wine Options. Grandparents, Teenagers, Expecting Mothers, And Anyone Avoiding Alcohol Can Still Enjoy A Special Toast.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Nights Out</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Whether You're Out With Friends Or Enjoying A Quiet Dinner, Non-Alcoholic Wines Bring Sophistication Without The Aftereffects. Smooth Reds, Sparkling Whites, And Refreshing Rosés Let You Stay Present And Enjoy Every Sip.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">A New Way To Celebrate</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Celebrating Doesn't Always Require Alcohol. With Their Complex Aromas, Balanced Flavors, And Refined Character, Non-Alcoholic Wines Offer A Modern Way To Enjoy Life’s Biggest Moments.</p><p class="text-[#565656] text-base font-medium leading-relaxed">Explore Our Selection Of Premium Non-Alcoholic Wines And Find The Perfect Option For Every Occasion.</p>`,
-      createdDate: "18 Octomber 2023",
-    },
-    {
-      id: 3,
-      blogImg: blog3,
-      blogTitle: "Hosting a Dinner Party with Wine Pairings for Everyone",
-      blogDesc:
-        "There’s something magical about gathering friends and family around the table. The laughter, the conversation, the aroma of home-cooked dishes — and of course, the wine......",
-      blogContent: `<img src='/images/blogImages/blog3.png'  alt="Wine glasses celebration" class="w-full h-[560px] object-cover"/><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">In A World That’s Becoming More Health-Conscious, People Are Looking For Refreshing Alternatives That Don’t Compromise On Taste. Non-Alcoholic Wines Provide A Stylish, Flavor-Packed Option That Fits Perfectly Into Modern Lifestyles, Whether You're Hosting Or Relaxing.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Weddings</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">From Grand Ceremonies To Intimate Gatherings, Non-Alcoholic Wines Add A Graceful Touch To Wedding Toasts. With Their Refined Notes And Smooth Finish, They Allow Everyone To Celebrate Without Limits.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Brunches</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Brunch Is All About Indulgence And Relaxation. A Crisp, Non-Alcoholic White Or A Soft Rosé Elevates The Meal, Offering A Refreshing Contrast To Savory Breakfast Plates And Sweet Treats.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">Picnics</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Outdoor Lunches Become More Enjoyable With Light, Refreshing Non-Alcoholic Wines. Their Bright Flavors And Gentle Acidity Make Them Perfect For Pairing With Fruits, Salads, And Charcuterie Boards.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">Family Celebrations</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Family Gatherings Should Feel Warm And Inclusive. Non-Alcoholic Wines Make Every Member Feel Considered, Offering A Special Drink For Those Who Want To Celebrate Without Alcohol.</p><h2 class="text-2xl font-semibold text-[#641026] mb-2">Nights Out</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">When You’re Out For A Good Time, Non-Alcoholic Wines Provide A Classy Alternative That Keeps You Energized. Whether You're Enjoying A Romantic Dinner Or A Night With Friends, These Wines Fit Seamlessly Into Any Setting.</p><h2 class="font-semibold text-[#641026] text-2xl mb-2">A New Way To Celebrate</h2><p class="text-[#565656] text-base font-medium leading-relaxed mb-6">Non-Alcoholic Wines Bring A Fresh Perspective To Special Moments. They Offer Rich Aromas, Balanced Flavors, And A Mature, Elevated Experience Without The Alcohol.</p><p class="text-[#565656] text-base font-medium leading-relaxed">Discover Our Handpicked Range Of Non-Alcoholic Wines Designed To Bring Joy And Taste To Every Celebration.</p>`,
-      createdDate: "5 January 2019",
-    },
-  ],
+  blogDetails: [],
+  perticularBlog: {}
 };
 
 export const blogSlice = createSlice({
   name: "blog",
   initialState,
+
+  reducers:{
+      
+      getAllBlogs: (state, action) => {
+    state.blogDetails = action.payload;
+  },
+
+   getPerticularBlog: (state, action) => {
+    state.perticularBlog = action.payload;
+  },
+
+  }
+
 });
 
+export const getBlogs = createAsyncThunk(
+  "cart/fetchCartItems",
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/blogs/getBlogs`;
+
+      const res = await axios.get(url);
+
+      dispatch(getAllBlogs(res.data.data || []));
+
+      return true;
+    } catch (error) {
+      return rejectWithValue("Unable to fetch cart items");
+    }
+  }
+);
+
+export const getBlog = createAsyncThunk(
+  "cart/fetchCartItems",
+  async (blogId, { dispatch, rejectWithValue }) => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/blogs/getBlog/${blogId}`;
+
+      const res = await axios.get(url);
+
+      dispatch(getPerticularBlog(res.data.data || []));
+
+      return true;
+    } catch (error) {
+      return rejectWithValue("Unable to fetch cart items");
+    }
+  }
+);
+
+export const { getAllBlogs, getPerticularBlog } = blogSlice.actions;
 export default blogSlice.reducer;

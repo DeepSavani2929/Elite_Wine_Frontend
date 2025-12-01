@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Login = () => {
   const [login, setLogin] = useState({
@@ -16,6 +19,7 @@ const Login = () => {
     subscribed: false,
   });
   const [regErrors, setRegErrors] = useState({});
+  const navigate = useNavigate()
 
   const isValidEmail = (value) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
@@ -31,12 +35,42 @@ const Login = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+
+    const handleLoginSubmit = async (e) => {
+      e.preventDefault();  
     if (!validateLogin()) return;
 
-    console.log("Login submitted:", login);
+    try {
+      const guestCartId = localStorage.getItem("guestCartId");
+
+      const payload = {
+        email: login.email,
+        password: login.password,
+        guestCartId: guestCartId || null
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        payload
+      );
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+
+    
+        storeUserCartId(res.data.cartId);
+
+        clearGuestCartId();
+
+        localStorage.setItem("userId", res.data.data._id);
+        localStorage.setItem("userName", res.data.firstName)
+    
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Register failed");
+    }
   };
+
 
   const validateRegister = () => {
     const errs = {};
@@ -57,12 +91,45 @@ const Login = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
+
+
+    const handleRegisterSubmit = async (e) => {
+      e.preventDefault();  
     if (!validateRegister()) return;
 
-    console.log("Register submitted:", reg);
+    try {
+      const guestCartId = localStorage.getItem("guestCartId");
+
+      const payload = {
+        firstName: reg.firstName,
+        lastName: reg.lastName,
+        email: reg.email,
+        password: reg.password,
+        guestCartId: guestCartId || null
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        payload
+      );
+
+      if (res.data.success) {
+        toast.success("Registered successfully!");
+
+    
+        storeUserCartId(res.data.cartId);
+
+        clearGuestCartId();
+
+        localStorage.setItem("userId", res.data.data._id);
+        localStorage.setItem("userName", res.data.firstName)
+        navigate("/")
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Register failed");
+    }
   };
+
 
   return (
     <>
@@ -141,7 +208,8 @@ const Login = () => {
                 </button>
 
                 <NavLink
-                  to="/resetPassword"
+                  to="/reset-password"
+            
                   className="text-base font-urbanist underline text-[#0B0B0B] hover:text-[#641026]"
                 >
                   Lost your password?

@@ -88,6 +88,7 @@ const Register = () => {
         clearGuestCartId();
 
         localStorage.setItem("userId", res.data.data._id);
+        localStorage.setItem("userName", res.data.firstName)
         navigate("/")
       }
     } catch (err) {

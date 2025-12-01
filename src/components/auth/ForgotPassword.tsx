@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 const ForgotPassword = () => {
-  const [login, setLogin] = useState({
+  const [userData, setUserData] = useState({
     email: "",
-    password: "",
   });
-  const [loginErrors, setLoginErrors] = useState({});
+  const [userDataErrors, setUserDataErrors] = useState({});
 
   const [reg, setReg] = useState({
     firstName: "",
@@ -15,24 +18,44 @@ const ForgotPassword = () => {
     subscribed: false,
   });
   const [regErrors, setRegErrors] = useState({});
+  const navigate = useNavigate()
 
   const isValidEmail = (value) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
 
   const validateLogin = () => {
     const errs = {};
-    if (!login.email.trim()) errs.email = "Email is required";
-    else if (!isValidEmail(login.email)) errs.email = "Invalid email address";
+    if (!userData.email.trim()) errs.email = "Email is required";
+    else if (!isValidEmail(userData.email)) errs.email = "Invalid email address";
 
-    setLoginErrors(errs);
+    setUserDataErrors(errs);
     return Object.keys(errs).length === 0;
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleOnForgotPassword = async(e) => {
     e.preventDefault();
     if (!validateLogin()) return;
 
-    console.log("Login submitted:", login);
+    try{
+          const payload = {
+             email :  userData.email
+          }
+
+          const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/emailVerify`, payload)
+
+          if(res.data.success){
+              toast.success(res.data.message)
+              navigate("/login")
+          }
+          else{
+            toast.error(res.data.message)
+          }
+    }
+    catch(error) {
+          toast.error(error.response?.data?.message || "Register failed");
+    }
+
+
   };
 
   const validateRegister = () => {
@@ -54,12 +77,44 @@ const ForgotPassword = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
+
+    const handleRegisterSubmit = async (e) => {
+      e.preventDefault();  
     if (!validateRegister()) return;
 
-    console.log("Register submitted:", reg);
+    try {
+      const guestCartId = localStorage.getItem("guestCartId");
+
+      const payload = {
+        firstName: reg.firstName,
+        lastName: reg.lastName,
+        email: reg.email,
+        password: reg.password,
+        guestCartId: guestCartId || null
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        payload
+      );
+
+      if (res.data.success) {
+        toast.success("Registered successfully!");
+
+    
+        storeUserCartId(res.data.cartId);
+
+        clearGuestCartId();
+
+        localStorage.setItem("userId", res.data.data._id);
+        localStorage.setItem("userName", res.data.firstName)
+        navigate("/")
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Register failed");
+    }
   };
+
 
   return (
     <>
@@ -87,32 +142,30 @@ const ForgotPassword = () => {
               </p>
 
               <form
-                onSubmit={handleLoginSubmit}
+                onSubmit={handleOnForgotPassword}
                 className="flex flex-col gap-2 lg:gap-2 xl:gap-8"
               >
                 <div>
                   <input
                     type="email"
                     placeholder="Email Address"
-                    value={login.email}
+                    value={userData.email}
                     onChange={(e) => {
-                      setLogin((s) => ({ ...s, email: e.target.value }));
-                      setLoginErrors((p) => ({ ...p, email: "" }));
+                      setUserData((s) => ({ ...s, email: e.target.value }));
+                      setUserDataErrors((p) => ({ ...p, email: "" }));
                     }}
                     className="w-full border-b border-[#CCCCCC] text-base font-medium py-3 placeholder:text-[#565656] focus:outline-none font-urbanist"
                   />
-                  {loginErrors.email && (
+                  {userDataErrors.email && (
                     <p className="text-red-600 text-left text-sm mt-1">
-                      {loginErrors.email}
+                      {userDataErrors.email}
                     </p>
                   )}
                 </div>
-              </form>
 
               <div className="flex items-center gap-5 pt-1 mt-5">
                 <button
                   type="submit"
-                  onClick={handleLoginSubmit}
                   className="bg-[#EED291] py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:border-[#0B0B0B] text-[#0B0B0B] font-urbanist font-semibold shadow-sm hover:bg-transparent transition-all duration-600 uppercase"
                 >
                   submit
@@ -120,11 +173,16 @@ const ForgotPassword = () => {
 
                 <button
                   type="submit"
+                              onClick={() => navigate("/login")}
                   className="bg-transparent py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:bg-[#EED291] text-[#0B0B0B] font-urbanist font-semibold shadow-sm      transition-all duration-600 uppercase"
                 >
                   Cancel
                 </button>
               </div>
+                
+              </form>
+
+
             </div>
           </div>
 

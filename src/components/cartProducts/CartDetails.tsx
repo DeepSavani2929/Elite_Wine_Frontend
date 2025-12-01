@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Minus, Plus, ShieldCheck, CircleX, Gift } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   decrementQuantity,
   incrementQuantity,
   deleteCartProduct,
 } from "../../redux/cart/cartSlice";
 import ProductsChild from "../products/productsChild";
+import axios from "axios";
 
 const CartDetails = () => {
-  const relatedProductsList = useSelector(
-    (state) => state.cart.relatedProducts
-  );
+  const [relatedProductsList, setReletedProductsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    getReletedProducts();
+  }, []);
   const subTotal = cartItems.reduce(
     (sum, item) => sum + Number(item.price) * item.quantity,
     0
   );
+
+  const getReletedProducts = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/products/getReletedProducts`
+      );
+
+      if (res.data.success) {
+        setReletedProductsList(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to load product:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const total = subTotal;
 
@@ -85,7 +106,7 @@ const CartDetails = () => {
                   </div>
 
                   <div className="md:hidden flex flex-col gap-6">
-                    {cartItems.map((product, index) => (
+                    {cartItems?.map((product, index) => (
                       <div
                         key={index}
                         className="border-b border-[#E5E5E5] pb-4"
@@ -93,12 +114,16 @@ const CartDetails = () => {
                         <div className="flex gap-4 items-center">
                           <CircleX
                             className=" w-8 h-8 text-[#0B0B0B] cursor-pointer mt-1"
-                            onClick={() => dispatch(deleteCartProduct(product.productId))}
+                            onClick={() =>
+                              dispatch(deleteCartProduct(product.productId))
+                            }
                           />
 
                           <div className="border border-[#CCCCCC] p-2 w-[75px] h-[90px] flex-shrink-0">
                             <img
-                              src={product.productImg}
+                              src={`${import.meta.env.VITE_IMG_URL}/${
+                                product.productImg
+                              }`}
                               className="w-full h-full object-contain"
                               alt="product"
                             />
@@ -120,7 +145,9 @@ const CartDetails = () => {
                                 <Minus
                                   size={16}
                                   onClick={() =>
-                                    dispatch(decrementQuantity(product.productId))
+                                    dispatch(
+                                      decrementQuantity(product.productId)
+                                    )
                                   }
                                   className="cursor-pointer"
                                 />
@@ -130,7 +157,9 @@ const CartDetails = () => {
                                 <Plus
                                   size={16}
                                   onClick={() =>
-                                    dispatch(incrementQuantity(product.productId))
+                                    dispatch(
+                                      incrementQuantity(product.productId)
+                                    )
                                   }
                                   className="cursor-pointer"
                                 />
@@ -162,20 +191,24 @@ const CartDetails = () => {
                       </thead>
 
                       <tbody>
-                        {cartItems.map((product, index) => (
+                        {cartItems?.map((product, index) => (
                           <tr key={index} className="border-b border-[#E5E5E5]">
                             <td className="py-6">
                               <div className="flex items-center gap-6">
                                 <CircleX
                                   className="text-[#0B0B0B] cursor-pointer"
                                   onClick={() =>
-                                    dispatch(removeFromCart(product.id))
+                                    dispatch(
+                                      deleteCartProduct(product.productId)
+                                    )
                                   }
                                 />
 
                                 <div className="border border-[#CCCCCC] py-2 px-5">
                                   <img
-                                    src={product.productImg}
+                                    src={`${import.meta.env.VITE_IMG_URL}/${
+                                      product.productImg
+                                    }`}
                                     className="w-24 h-28 object-contain"
                                     alt="product"
                                   />
@@ -200,7 +233,9 @@ const CartDetails = () => {
                                     size={16}
                                     className="cursor-pointer"
                                     onClick={() =>
-                                      dispatch(decreaseQuantity(product))
+                                      dispatch(
+                                        decrementQuantity(product.productId)
+                                      )
                                     }
                                   />
                                   <span className="text-xl font-semibold">
@@ -210,7 +245,9 @@ const CartDetails = () => {
                                     size={16}
                                     className="cursor-pointer"
                                     onClick={() =>
-                                      dispatch(increaseQuantity(product))
+                                      dispatch(
+                                        incrementQuantity(product.productId)
+                                      )
                                     }
                                   />
                                 </div>
@@ -335,11 +372,17 @@ const CartDetails = () => {
                   </div>
 
                   <div className="flex bg-[#F8F8F8] pb-7 md:pb-0 xl:pb-7 px-4 md:px-0 xl:px-6 flex-col justify-start md:pt-15 xl:pt-0 gap-y-2 md:w-full">
-                    <button className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] text-base font-semibold py-3 rounded-full cursor-pointer hover:bg-[#0B0B0B] hover:text-white transition-all duration-800">
+                    <button
+                      className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] text-base font-semibold py-3 rounded-full cursor-pointer hover:bg-[#0B0B0B] hover:text-white transition-all duration-800"
+                      onClick={() => navigate("/checkout  ")}
+                    >
                       PROCEED TO CHECKOUT
                     </button>
 
-                    <button className="w-full border border-[#EED291] bg-[#FFFFFF] text-[#0B0B0B] text-base font-semibold py-3 rounded-full mt-3 cursor-pointer hover:bg-[#0B0B0B] hover:text-white transition-all duration-800">
+                    <button
+                      className="w-full border border-[#EED291] bg-[#FFFFFF] text-[#0B0B0B] text-base font-semibold py-3 rounded-full mt-3 cursor-pointer hover:bg-[#0B0B0B] hover:text-white transition-all duration-800"
+                      onClick={() => navigate("/shop")}
+                    >
                       CONTINUE SHOPPING
                     </button>
                   </div>

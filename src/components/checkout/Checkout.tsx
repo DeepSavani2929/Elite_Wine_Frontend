@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
 import ews from "../../assets/images/ews.png";
 import { ChevronDown, ChevronUp, Handbag } from "lucide-react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import product1 from "../../assets/images/product1.png";
 import payoption1 from "../../assets/images/payoption1.png";
 import payoption2 from "../../assets/images/payoption2.png";
@@ -51,10 +52,12 @@ const CheckoutInner: React.FC = () => {
   const [cardExpiry, setCardExpiry] = useState("");
   const [cardCvc, setCardCvc] = useState("");
   const [billingName, setBillingName] = useState("");
-
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
+  const cartDetails = useSelector((state) => state.cart.cartItems);
+  console.log(cartDetails);
 
   const [errors, setErrors] = useState<any>({});
+  const naviagte = useNavigate();
 
   const validateCheckout = () => {
     const err: any = {};
@@ -322,7 +325,12 @@ const CheckoutInner: React.FC = () => {
               <h3 className="font-semibold font-urbanist text-2xl text-[#0B0B0B]">
                 Contact
               </h3>
-              <span className="text-sm underline">Sign In</span>
+              <span
+                className="text-sm underline cursor-pointer"
+                onClick={() => naviagte("/login")}
+              >
+                Sign In
+              </span>
             </div>
 
             <input
@@ -789,7 +797,7 @@ const CheckoutInner: React.FC = () => {
             </div>
           </div>
         </form>
-
+        {/* 
         <div className="w-full hidden border-l font-urbanist border-[#CCCCCC] lg:block order-1 lg:order-2 lg:min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">
           <aside className="lg:w-[70%] px-3 md:px-28 lg:px-5 py-10 overflow-y-auto relative">
             <div className="flex items-center gap-4">
@@ -844,7 +852,7 @@ const CheckoutInner: React.FC = () => {
                   ${order.subtotal.toFixed(2)}
                 </span>
               </div>
-
+                  
               <div className="flex justify-between py-2">
                 <span className="text-[#0B0B0B] font-semibold">Shipping</span>
                 <span className="text-[#565656] font-semibold">
@@ -859,6 +867,93 @@ const CheckoutInner: React.FC = () => {
                   {(order.subtotal + order.shipping - order.discount).toFixed(
                     2
                   )}
+                </span>
+              </div>
+            </div>
+          </aside>
+        </div> */}
+
+        <div className="w-full hidden border-l font-urbanist border-[#CCCCCC] lg:block order-1 lg:order-2 lg:min-h-screen bg-[#F8F8F8] flex lg:sticky lg:top-0">
+          <aside
+            className="lg:w-[70%] px-3 md:px-28 lg:px-5 py-10 overflow-y-auto relative"
+            style={{ maxHeight: "100vh", overflowY: "auto" }}
+          >
+            {/* CART ITEMS LOOP */}
+            {cartDetails.map((product, index) => (
+              <div key={index} className="flex items-center gap-4 mb-6">
+                <div className="relative">
+                  <div className="w-24 h-24 bg-white border border-[#CCCCCC] rounded-lg flex items-center justify-center">
+                    <img
+                      src={`${import.meta.env.VITE_IMG_URL}/${
+                        product.productImg
+                      }`}
+                      className="max-h-20 object-contain"
+                    />
+                  </div>
+
+                  {/* QUANTITY BADGE */}
+                  <span
+                    className="absolute -top-2 -right-2 inline-flex items-center justify-center text-xs font-semibold text-white"
+                    style={{
+                      width: 22,
+                      height: 22,
+                      borderRadius: 9999,
+                      background: "#565656",
+                    }}
+                  >
+                    {product.quantity}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-start gap-4 w-full">
+                  <p className="text-sm font-semibold text-[#641026] flex-1">
+                    {product.productName}
+                  </p>
+                  <p className="text-md font-semibold">
+                    ${(product.price * product.quantity).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* DISCOUNT + TOTAL */}
+            <div className="mt-5">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <input
+                  placeholder="Discount Code"
+                  className="flex-1 border border-[#CCCCCC] bg-white placeholder:text-[#0B0B0B] rounded-lg px-4 py-2 w-full"
+                />
+                <button className="bg-[#EED291] px-6 py-2.5 rounded-lg font-semibold whitespace-nowrap cursor-pointer">
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <div className="flex justify-between py-2">
+                <span className="text-[#565656] font-semibold">Subtotal</span>
+                <span className="font-semibold text-[#565656] text-md">
+                  $
+                  {cartDetails
+                    .reduce((a, b) => a + b.price * b.qty, 0)
+                    .toFixed(2)}
+                </span>
+              </div>
+
+              <div className="flex justify-between py-2">
+                <span className="text-[#0B0B0B] font-semibold">Shipping</span>
+                <span className="text-[#565656] font-semibold">
+                  Enter Shipping Address
+                </span>
+              </div>
+
+              <div className="flex justify-between py-2">
+                <span className="text-2xl font-semibold">Total</span>
+                <span className="text-2xl font-semibold">
+                  $
+                  {cartDetails
+                    .reduce((a, b) => a + b.price * b.qty, 0)
+                    .toFixed(2)}
                 </span>
               </div>
             </div>

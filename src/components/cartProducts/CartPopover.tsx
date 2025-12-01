@@ -18,6 +18,7 @@ import {
   deleteCartProduct,
   incrementQuantity,
 } from "../../redux/cart/cartSlice";
+import axios from "axios";
 
 const CartPopover = ({ isOpen, onClose }) => {
   const swiperRef = useRef(null);
@@ -26,22 +27,26 @@ const CartPopover = ({ isOpen, onClose }) => {
   const slideRight = () => swiperRef.current?.slideNext();
 
   const [isBeginning, setIsBeginning] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   const [activeSheet, setActiveSheet] = useState(null);
+  const [relatedProductsList, setReletedProductsList] = useState([]);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const relatedProductsList = useSelector(
-    (state) => state.cart.relatedProducts
-  );
+  // const relatedProductsList = useSelector(
+  //   (state) => state.cart.relatedProducts
+  // );
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const total = subtotal;
 
-
+  useEffect(() => {
+    getReletedProducts();
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isOpen || activeSheet ? "hidden" : "auto";
@@ -63,8 +68,7 @@ const CartPopover = ({ isOpen, onClose }) => {
     </div>
   );
 
-
-      const getReletedProducts = async () => {
+  const getReletedProducts = async () => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_API_URL}/products/getReletedProducts`
@@ -86,7 +90,6 @@ const CartPopover = ({ isOpen, onClose }) => {
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
-      {/* Overlay */}
       <div
         onClick={() => {
           if (activeSheet) closeSheet();
@@ -122,7 +125,7 @@ const CartPopover = ({ isOpen, onClose }) => {
                 else onClose();
               }}
             >
-              <X className="w-6 h-6 text-black" />
+              <X className="w-6 h-6 text-black cursor-pointer" />
             </button>
           </div>
         </div>
@@ -161,7 +164,9 @@ const CartPopover = ({ isOpen, onClose }) => {
                         onClose();
                         navigate(`/productDetails/${product.productId}`);
                       }}
-                      src={product.productImg}
+                      src={`${import.meta.env.VITE_IMG_URL}/${
+                        product.productImg
+                      }`}
                       className="w-16 h-20 object-contain cursor-pointer"
                     />
 
@@ -265,7 +270,9 @@ const CartPopover = ({ isOpen, onClose }) => {
                           }
                         >
                           <img
-                            src={product.productImg}
+                            src={`${import.meta.env.VITE_IMG_URL}/${
+                              product.productImg
+                            }`}
                             className="w-[60px] h-[100px] object-contain cursor-pointer"
                           />
 

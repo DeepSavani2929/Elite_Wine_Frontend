@@ -12,12 +12,16 @@ import BlogChild from "../blog/BlogChild";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import verietyImg from "../../assets/images/variety.png";
+import productmedal from "../../assets/images/productmedal.png";
 
 import {
   addToCartAPI,
   setDrawerOpen as setCartDrawer,
 } from "../../redux/cart/cartSlice";
 import axios from "axios";
+import Blog from "../blog/Blog";
+import { getBlog, getBlogs } from "../../redux/blog/blogSlice";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -26,17 +30,24 @@ const BlogDetails = () => {
   const [isEnd, setIsEnd] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      dispatch(getBlogs())
+      dispatch(getBlog(blogId))
+  }, [blogId])
 
   const desktopSwiperRef = useRef<any>(null);
   const drawerSwiperRef = useRef<any>(null);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const blogDetails = useSelector((state: any) => state.blog.blogDetails);
+  const perticularBlog = useSelector((state: any) => state.blog.perticularBlog)
   // const products = useSelector((state: any) => state.cart.productsDetails);
 
-  const blog = blogDetails.find((item: any) => item.id === Number(blogId));
+ 
 
   // const featuredProducts = products
   //   .filter((p: any) => p.categoryType === "Featured")
@@ -73,7 +84,7 @@ useEffect(() => {
   fetchFilteredProducts();
 }, []);
 
-  if (!blog) return <div className="py-10 text-center">Blog Not Found</div>;
+  if (!perticularBlog) return <div className="py-10 text-center">Blog Not Found</div>;
 
   return (
     <>
@@ -96,26 +107,26 @@ useEffect(() => {
         </div>
       </div>
 
-      <div className="w-[95%] py-[55px] xl:py-[100px] mx-auto mt-30 md:mt-20 xl:mt-0 flex flex-col xl:flex-row gap-22 relative">
-        <div className="hidden xl:flex w-[18%] flex-col gap-10">
+      <div className="w-[95%] py-[55px] xl:py-[100px] mx-auto mt-30 md:mt-20 xl:mt-0 flex flex-col xl:flex-row gap-22 relative md:items-start">
+        <div className="hidden xl:flex w-[18%] flex-col gap-10 md:sticky md:top-20">
           <div>
             <h3 className="font-urbanist font-bold text-2xl border-[#CCCCCC] border-b pb-1 text-[#641026] mb-3">
               Recent Post
             </h3>
 
             <div className="flex flex-col gap-4">
-              {blogDetails.slice(0, 3).map((b: any) => (
+              {blogDetails.slice(0, 3).map((blog: any) => (
                 <div
-                  key={b.id}
+                  key={blog._id}
                   className="border-b border-[#CCCCCC] pb-5 last:border-b-0"
                 >
                   <Link
-                    to={`/blog/blogDetails/${b.id}`}
+                    to={`/blog/blogDetails/${blog._id}`}
                     className="font-urbanist text-lg font-medium text-[#0B0B0B] hover:text-[#641026]"
                   >
-                    {b.blogTitle}
+                    {blog.blogTitle}
                   </Link>
-                  <p className="text-base text-[#565656]">{b.createdDate}</p>
+                  <p className="text-base text-[#565656]">{blog.createdDate}</p>
                 </div>
               ))}
             </div>
@@ -166,9 +177,9 @@ useEffect(() => {
           </div>
         </div>
 
-        <div className="w-full xl:w-[80%]">
+        <div className="w-full xl:w-[80%] md:min-h-screen md:overflow-y-auto">
           <h1 className="font-urbanist font-semibold text-2xl text-[#641026]">
-            {blog.blogTitle}
+            {perticularBlog.blogTitle}
           </h1>
 
           <p className="font-urbanist text-base text-[#565656] mt-2 mb-5">
@@ -177,7 +188,7 @@ useEffect(() => {
 
           <div
             className="blog-content font-urbanist text-[17px] leading-[26px] text-[#3D3D3D] space-y-5"
-            dangerouslySetInnerHTML={{ __html: blog.blogContent }}
+            dangerouslySetInnerHTML={{ __html: perticularBlog.blogContent }}
           />
         </div>
       </div>
@@ -190,9 +201,9 @@ useEffect(() => {
 
           {/* Desktop Grid */}
           <div className="hidden lg:flex justify-between gap-8">
-            {blogDetails.map((b, index) => (
+            {blogDetails.map((blog, index) => (
               <div key={index} className="flex-1">
-                <BlogChild blog={b} />
+                <BlogChild blog={blog} />
               </div>
             ))}
           </div>
@@ -209,9 +220,9 @@ useEffect(() => {
               }}
               className="!pb-10"
             >
-              {blogDetails.map((b, index) => (
+              {blogDetails.map((blog, index) => (
                 <SwiperSlide key={index}>
-                  <BlogChild blog={b} />
+                  <BlogChild blog={blog} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -253,20 +264,20 @@ useEffect(() => {
         </h2>
 
         <div className="border-t border-[#CCCCCC] pt-4">
-          {blogDetails.slice(0, 6).map((b: any) => (
+          {blogDetails.slice(0, 6).map((blog: any) => (
             <div
-              key={b.id}
+              key={blog._id}
               className="py-3 border-b border-[#CCCCCC] last:border-b-0"
             >
               <Link
-                to={`/blog/blogDetails/${b.id}`}
+                to={`/blog/blogDetails/${blog._id}`}
                 onClick={() => setDrawerOpen(false)}
                 className="font-urbanist text-sm md:text-md xl:text-lg font-medium text-[#0B0B0B] hover:text-[#641026]"
               >
-                {b.blogTitle}
+                {blog.blogTitle}
               </Link>
               <p className="text-sm lg:text-base text-[#565656] mt-1">
-                {b.createdDate}
+                {blog.createdDate}
               </p>
             </div>
           ))}
@@ -310,7 +321,7 @@ useEffect(() => {
                     <div className="relative flex items-center justify-center overflow-hidden">
                       <div className="w-full py-10">
                         <img
-                          src={product.productImg}
+                          src={`${import.meta.env.VITE_IMG_URL}/${product.productImg}`}
                           alt={product.productName}
                           className="w-full h-[400px] md:h-[650px] object-contain"
                         />
@@ -349,7 +360,7 @@ useEffect(() => {
                               {product.variety}
                             </span>
                             <img
-                              src={product.varietylogo}
+                              src={verietyImg}
                               className="h-6 w-6 md:h-8 md:w-8 object-contain"
                             />
                           </div>
@@ -357,7 +368,7 @@ useEffect(() => {
                           <div className="flex items-center gap-0.5 text-[#0B0B0B] min-h-[32px]">
                             {product.medal && (
                               <img
-                                src={product.medal}
+                                src={productmedal}
                                 className="h-6 w-6 md:h-10 md:w-10 object-contain"
                               />
                             )}

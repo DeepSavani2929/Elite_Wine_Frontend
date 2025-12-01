@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CartPopover from "../cartProducts/CartPopover";
 import ProfileDrawer from "../profileDrower/ProfileDrower";
+import LogoutDrawer from "../profileDrower/LogoutDrower";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,19 +23,35 @@ const Header = () => {
   );
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const userId = localStorage.getItem("userId");
 
   const location = useLocation();
   const isCartPage =
     location.pathname === "/cartDetails" ||
     location.pathname === "/register" ||
     location.pathname === "/login" ||
-    location.pathname === "/resetPassword" ||
+    location.pathname === "/reset-password" || 
     location.pathname === "/privacy";
 
+  const isResetPasswordPage = location.pathname.startsWith("/reset-password/");
+
+// Existing iconColor logic (unchanged)
+const iconColor =
+  isCartPage ? "brightness-0" : "";
+
+// ⭐ NEW LOGIC → ONLY Cart icon becomes GRAY on resetPassword page when NOT sticky
+const cartIconColor =
+  isResetPasswordPage && !isSticky
+    ? "grayscale brightness-[0.40]"
+    : iconColor;
+
+
   const textColor = isCartPage ? "text-[#0B0B0B]" : "text-white";
-  const iconColor = isCartPage ? "brightness-0" : "";
+  
 
   const itemCount = cartItems.length;
 
@@ -235,7 +252,7 @@ const Header = () => {
                 to="/"
                 className={({ isActive }) =>
                   `
-      ${isActive ? "text-[#EED291]" : textColor}
+      ${isActive ? "!text-[#EED291]" : textColor}
       ${underlineClass}
       hover:text-[#EED291]
       ${isSticky ? "text-white" : ""}
@@ -249,7 +266,7 @@ const Header = () => {
                 to="/shop"
                 className={({ isActive }) =>
                   `${
-                    isActive ? "text-[#EED291]" : textColor
+                    isActive ? "!text-[#EED291]" : textColor
                   } ${underlineClass} hover:text-[#EED291]      ${
                     isSticky ? "text-white" : ""
                   }`
@@ -268,7 +285,7 @@ const Header = () => {
                   to="/about-us"
                   className={({ isActive }) =>
                     `${
-                      isActive ? "text-[#EED291]" : textColor
+                      isActive ? "!text-[#EED291]" : textColor
                     } ${underlineClass} hover:text-[#EED291]  ${
                       isSticky ? "text-white" : ""
                     }`
@@ -302,7 +319,7 @@ const Header = () => {
                 to="/blog"
                 className={({ isActive }) =>
                   `${
-                    isActive ? "text-[#EED291]" : textColor
+                    isActive ? "!text-[#EED291]" : textColor
                   } ${underlineClass} hover:text-[#EED291]      ${
                     isSticky ? "text-white" : ""
                   }`
@@ -326,20 +343,26 @@ const Header = () => {
                   isSticky ? "brightness-0 invert" : ""
                 }`}
                 alt="user"
-                onClick={() => setIsProfileOpen(true)}
+                onClick={() => {
+                  if (userId) {
+                    setIsLogoutOpen(true);
+                  } else {
+                    setIsProfileOpen(true);
+                  }
+                }}
               />
 
               <div className="relative">
                 <img
                   src={cart}
-                  className={`w-[24px] h-[24px] cursor-pointer ${iconColor}       ${
+                  className={`w-[24px] h-[24px] cursor-pointer ${cartIconColor}   ${
                     isSticky ? "brightness-0 invert" : ""
                   }`}
                   alt="cart"
                   onClick={() => setIsCartOpen(true)}
                 />
 
-                {itemCount > 0 && (
+                {itemCount >= 0 && (
                   <span
                     className="
                       absolute -top-3 -right-3
@@ -350,7 +373,7 @@ const Header = () => {
                       border border-[#0B0B0B]
                     "
                   >
-                    {itemCount}
+                    {itemCount ?? 0}
                   </span>
                 )}
               </div>
@@ -387,7 +410,7 @@ const Header = () => {
                 onClick={() => setIsCartOpen(true)}
               />
 
-              {itemCount > 0 && (
+              {itemCount >= 0 && (
                 <span
                   className="
                       absolute -top-3 -right-3
@@ -398,7 +421,7 @@ const Header = () => {
                       border border-[#0B0B0B]
                     "
                 >
-                  {itemCount}
+                  {itemCount ?? 0}
                 </span>
               )}
             </div>
@@ -599,10 +622,20 @@ const Header = () => {
         </div>
       </div>
 
-      <ProfileDrawer
-        isOpen={isProfileOpen}
-        onClose={() => setIsProfileOpen(false)}
-      />
+      {!userId && (
+        <ProfileDrawer
+          isOpen={isProfileOpen}
+          onClose={() => setIsProfileOpen(false)}
+        />
+      )}
+
+      {/* ⬇️ SHOW LOGOUT DRAWER WHEN LOGGED IN */}
+      {userId && (
+        <LogoutDrawer
+          isOpen={isLogoutOpen}
+          onClose={() => setIsLogoutOpen(false)}
+        />
+      )}
     </>
   );
 };

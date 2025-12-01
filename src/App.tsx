@@ -24,7 +24,7 @@ import ContactUs from "./components/contactUs/ContactUs.tsx";
 import Faqs from "./components/faqs/Faqs.tsx";
 import Register from "./components/auth/Register.tsx";
 import Login from "./components/auth/Login.tsx";
-import ResetPassword from "./components/auth/ForgotPassword.tsx";
+import ResetPassword from "./components/auth/ResetPassword.tsx";
 import Collections from "./components/collections/Collections.tsx";
 import FilteredCollections from "./components/collections/filteredCollections.tsx";
 import Checkout from "./components/checkout/Checkout.tsx";

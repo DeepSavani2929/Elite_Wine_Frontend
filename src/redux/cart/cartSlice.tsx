@@ -543,9 +543,6 @@
 
 // export default cartSlice.reducer;
 
-
-
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -571,7 +568,7 @@ const getActiveCartId = (): string => {
 export const addToCartAPI = createAsyncThunk(
   "cart/addToCart",
   async (
-    { productId }: { productId: string},
+    { productId }: { productId: string },
     { dispatch, rejectWithValue }
   ) => {
     try {
@@ -588,8 +585,11 @@ export const addToCartAPI = createAsyncThunk(
       );
 
       if (res.data.success) {
-        toast.success("Added to cart");
+        toast.success(res.data.message);
         await dispatch(fetchCartItemsAPI());
+      }
+      else{
+        toast.error(res.data.message)
       }
 
       return true;
@@ -635,7 +635,10 @@ export const incrementQuantity = createAsyncThunk(
       );
 
       if (res.data.success) {
+        toast.success(res.data.message);
         await dispatch(fetchCartItemsAPI());
+      }else{
+        toast.error(res.data.message)
       }
 
       return true;
@@ -658,7 +661,11 @@ export const decrementQuantity = createAsyncThunk(
       );
 
       if (res.data.success) {
+        toast.success(res.data.message);
         await dispatch(fetchCartItemsAPI());
+      }
+      else{
+        toast.error(res.data.message)
       }
 
       return true;
@@ -681,8 +688,11 @@ export const deleteCartProduct = createAsyncThunk(
       );
 
       if (res.data.success) {
-        toast.info("Item removed");
+        toast.success(res.data.message);
         await dispatch(fetchCartItemsAPI());
+      }
+      else{
+        toast.error(res.data.message)
       }
 
       return true;
@@ -715,9 +725,7 @@ const cartSlice = createSlice({
   },
 });
 
-
 export const { setDrawerOpen, clearCartItems, getAllCartItems } =
   cartSlice.actions;
-
 
 export default cartSlice.reducer;
