@@ -92,7 +92,7 @@ const ResetPassword = () => {
             className="w-full border-b border-gray-300 placeholder:text-[#565656] font-meidum py-3.5 focus:outline-none text-md font-urbanist"
           />
           {errors.password && (
-            <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+            <p className="text-red-600 font-urbanist text-sm mt-1">{errors.password}</p>
           )}
         </div>
 
@@ -111,7 +111,7 @@ const ResetPassword = () => {
             className="w-full border-b border-gray-300 placeholder:text-[#565656] py-3 focus:outline-none  text-md font-urbanist"
           />
           {errors.confirmPassword && (
-            <p className="text-red-600 text-sm mt-1">
+            <p className="text-red-600 font-urbanist text-sm mt-1">
               {errors.confirmPassword}
             </p>
           )}

@@ -30,6 +30,8 @@ import FilteredCollections from "./components/collections/filteredCollections.ts
 import Checkout from "./components/checkout/Checkout.tsx";
 import Privacy from "./components/privacy/Privacy.tsx";
 import ForgotPassword from "./components/auth/ForgotPassword.tsx";
+import PaymentSuccess from "./components/checkout/paymentSuccess.tsx";
+import PaymentFailed from "./components/checkout/paymentFailed.tsx";
 
 const App: React.FC = () => {
   return (
@@ -93,6 +95,8 @@ const App: React.FC = () => {
           />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/privacy" element={<Privacy />} />
+              <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+            <Route path="/paymentFailed" element={<PaymentFailed />} />
         </Route>
       </Routes>
     </>

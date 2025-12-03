@@ -10,10 +10,11 @@ import UK from "../../assets/images/UK.svg";
 import switzerland from "../../assets/images/switzerland.jpg";
 import { NavLink, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartPopover from "../cartProducts/CartPopover";
 import ProfileDrawer from "../profileDrower/ProfileDrower";
 import LogoutDrawer from "../profileDrower/LogoutDrower";
+import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,6 +67,12 @@ const cartIconColor =
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const aboutBtnRef = useRef<HTMLLIElement | null>(null);
+
+//   const dispatch = useDispatch();
+
+// useEffect(() => {
+//   dispatch(fetchCartItemsAPI());
+// }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {

@@ -94,7 +94,7 @@ const FilterDropdown: React.FC<Props> = ({
             options.map((opt) => (
               <button
                 key={opt}
-                className={`block w-full text-left py-2 hover:bg-gray-100 rounded-md
+                className={`block w-full text-left py-2 hover:bg-gray-100 cursor-pointer rounded-md
                   ${
                     selected === opt
                       ? "font-semibold underline underline-offset-4 text-[#0B0B0B]"

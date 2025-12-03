@@ -867,10 +867,10 @@ const Shop: React.FC = () => {
 
   const clearAll = () => {
     setFilters({
-      size: "Size",
+      size: [],
       price: { min: 0, max: 100 },
       grape: [],
-      all: "All",
+      all: [],  
       availability: [],
       sortBy: "Best Sellers",
     });
@@ -1299,3 +1299,7 @@ const Shop: React.FC = () => {
 };
 
 export default Shop;
+
+
+
+

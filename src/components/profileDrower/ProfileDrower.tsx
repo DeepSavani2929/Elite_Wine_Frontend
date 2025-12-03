@@ -28,6 +28,23 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
+
+  useEffect(() => {
+  if (!isOpen) {
+
+    setLogin({
+      email: "",
+      password: ""
+    });
+    
+    setLoginErrors({
+      email: "",
+      password: ""
+    });
+  }
+}, [isOpen]);
+
+
   
   const isValidEmail = (value: string) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
@@ -70,7 +87,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
         clearGuestCartId();
 
         localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.firstName);
+        localStorage.setItem("userName", res.data.data.firstName);
         onClose();
       }
     } catch (err) {
@@ -127,7 +144,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           />
 
           {loginErrors.email && (
-            <p className="text-red-600 text-sm mt-1">{loginErrors.email}</p>
+            <p className="text-red-600 font-urbanist text-sm mt-1">{loginErrors.email}</p>
           )}
 
           <label className="block text-base font-semibold mb-2 mt-5">
@@ -149,7 +166,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           />
 
           {loginErrors.password && (
-            <p className="text-red-600 text-sm mt-1">{loginErrors.password}</p>
+            <p className="text-red-600 font-urbanist text-sm mt-1">{loginErrors.password}</p>
           )}
 
           <NavLink to="/login">
@@ -169,6 +186,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           <div className="text-center mt-4">
             <NavLink
               to="/reset-password"
+              onClick = {onClose}
               className="underline text-base font-semibold text-[#565656] cursor-pointer"
             >
               Forgot Your Password?

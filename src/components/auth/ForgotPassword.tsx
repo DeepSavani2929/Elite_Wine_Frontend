@@ -157,7 +157,7 @@ const ForgotPassword = () => {
                     className="w-full border-b border-[#CCCCCC] text-base font-medium py-3 placeholder:text-[#565656] focus:outline-none font-urbanist"
                   />
                   {userDataErrors.email && (
-                    <p className="text-red-600 text-left text-sm mt-1">
+                    <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                       {userDataErrors.email}
                     </p>
                   )}
@@ -173,7 +173,7 @@ const ForgotPassword = () => {
 
                 <button
                   type="submit"
-                              onClick={() => navigate("/login")}
+                  onClick={() => navigate("/login")}
                   className="bg-transparent py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:bg-[#EED291] text-[#0B0B0B] font-urbanist font-semibold shadow-sm      transition-all duration-600 uppercase"
                 >
                   Cancel
@@ -211,7 +211,7 @@ const ForgotPassword = () => {
                     className="w-full border-b border-[#CCCCCC] text-base font-medium py-3 placeholder:text-[#565656] focus:outline-none font-urbanist"
                   />
                   {regErrors.firstName && (
-                    <p className="text-red-600 text-left text-sm mt-1">
+                    <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                       {regErrors.firstName}
                     </p>
                   )}

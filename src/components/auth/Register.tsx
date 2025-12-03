@@ -88,7 +88,7 @@ const Register = () => {
         clearGuestCartId();
 
         localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.firstName)
+        localStorage.setItem("userName", res.data.data.firstName)
         navigate("/")
       }
     } catch (err) {
@@ -134,7 +134,7 @@ const Register = () => {
                 className="w-full border-b border-[#D9D9D9] py-2 font-urbanist font-medium text-base text-[#0B0B0B] focus:outline-none placeholder:text-[#565656]"
               />
               {errors.firstName && (
-                <p className="text-red-600 text-left text-sm mt-1">
+                <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                   {errors.firstName}
                 </p>
               )}
@@ -152,7 +152,7 @@ const Register = () => {
                 className="w-full border-b border-[#D9D9D9] py-2 font-urbanist font-medium text-base text-[#0B0B0B] focus:outline-none placeholder:text-[#565656]"
               />
               {errors.lastName && (
-                <p className="text-red-600 text-left text-sm mt-1">
+                <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                   {errors.lastName}
                 </p>
               )}
@@ -170,7 +170,7 @@ const Register = () => {
                 className="w-full border-b border-[#D9D9D9] py-2 font-urbanist font-medium text-base text-[#0B0B0B] focus:outline-none placeholder:text-[#565656]"
               />
               {errors.email && (
-                <p className="text-red-600 text-left text-sm mt-1">
+                <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                   {errors.email}
                 </p>
               )}
@@ -188,7 +188,7 @@ const Register = () => {
                 className="w-full border-b border-[#D9D9D9] py-2 font-urbanist font-medium text-base text-[#0B0B0B] focus:outline-none placeholder:text-[#565656]"
               />
               {errors.password && (
-                <p className="text-red-600 text-left text-sm mt-1">
+                <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                   {errors.password}
                 </p>
               )}
@@ -212,7 +212,7 @@ const Register = () => {
               </div>
 
               {errors.subscribed && (
-                <p className="text-red-600 text-left text-sm mt-1">
+                <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                   {errors.subscribed}
                 </p>
               )}

@@ -122,7 +122,7 @@ const Login = () => {
         clearGuestCartId();
 
         localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.firstName)
+        localStorage.setItem("userName", res.data.data.firstName)
         navigate("/")
       }
     } catch (err) {
@@ -170,7 +170,7 @@ const Login = () => {
                       setLogin((s) => ({ ...s, email: e.target.value }));
                       setLoginErrors((p) => ({ ...p, email: "" }));
                     }}
-                    className="w-full border-b border-[#CCCCCC] text-base font-medium py-3 placeholder:text-[#565656] focus:outline-none font-urbanist"
+                    className="w-full border-b  border-[#CCCCCC] text-base font-medium py-3 placeholder:text-[#565656] focus:outline-none font-urbanist"
                   />
                   {loginErrors.email && (
                     <p className="text-red-600 text-left text-sm mt-1">
@@ -191,7 +191,7 @@ const Login = () => {
                     className="w-full border-b border-[#CCCCCC] text-base font-medium py-3 placeholder:text-[#565656] focus:outline-none font-urbanist"
                   />
                   {loginErrors.password && (
-                    <p className="text-red-600 text-left text-sm mt-1">
+                    <p className="text-red-600 font-urbanist text-left text-sm mt-1">
                       {loginErrors.password}
                     </p>
                   )}

@@ -32,12 +32,10 @@ const CartPopover = ({ isOpen, onClose }) => {
 
   const [activeSheet, setActiveSheet] = useState(null);
   const [relatedProductsList, setReletedProductsList] = useState([]);
+  const isLoggedIn = Boolean(localStorage.getItem("userId"));
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  // const relatedProductsList = useSelector(
-  //   (state) => state.cart.relatedProducts
-  // );
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -343,15 +341,26 @@ const CartPopover = ({ isOpen, onClose }) => {
               <p className="font-urbanist font-semibold text-base text-[#565656] mb-6">
                 Tax included and shipping calculated at checkout
               </p>
-
-              <NavLink to="/checkout">
+              {isLoggedIn ? (
+                <NavLink to="/checkout">
+                  <button
+                    onClick={() => onClose()}
+                    className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] cursor-pointer text-base font-semibold py-3 rounded-full"
+                  >
+                    Checkout
+                  </button>
+                </NavLink>
+              ) : (
                 <button
-                  onClick={() => onClose()}
+                  onClick={() => {
+                    onClose();
+                    navigate("/login");
+                  }}
                   className="w-full bg-[#EED291] border border-[#EED291] text-[#0B0B0B] cursor-pointer text-base font-semibold py-3 rounded-full"
                 >
-                  Checkout
+                  Login to Checkout
                 </button>
-              </NavLink>
+              )}
 
               <NavLink to="/cartDetails">
                 <button
