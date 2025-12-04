@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearCartItems } from "../../redux/cart/cartSlice";
+import { createGuestCartId } from "../../utils/cartIdManager";
 
 const LogoutDrawer = ({ isOpen, onClose }) => {
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("userName") || "User";
+  const dispatch = useDispatch();
 
   if (!isOpen) return null;
 
@@ -18,22 +22,33 @@ const LogoutDrawer = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-
   const handleLogout = () => {
+    dispatch(clearCartItems());
+
+    // localStorage.removeItem("userId");
+    // localStorage.removeItem("userName");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userCartId");
     localStorage.removeItem("userId");
-    localStorage.removeItem("userName");
+
+    dispatch(clearCartItems());
+
+    createGuestCartId();
     onClose();
   };
 
   return (
-    <div className={`fixed inset-0 z-[999999] ${
+    <div
+      className={`fixed inset-0 z-[999999] ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
-      }`}>
-
-      <div      className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
+      }`}
+    >
+      <div
+        className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
-        onClick={onClose}></div>
+        onClick={onClose}
+      ></div>
 
       <div
         className={`absolute top-0 right-0 h-full w-[340px] bg-white shadow-2xl transform transition-transform duration-300 ${

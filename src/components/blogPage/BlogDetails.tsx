@@ -21,7 +21,7 @@ import {
 } from "../../redux/cart/cartSlice";
 import axios from "axios";
 import Blog from "../blog/Blog";
-import { getBlog, getBlogs } from "../../redux/blog/blogSlice";
+import { getBlog, getOtherBlogs } from "../../redux/blog/blogSlice";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -33,7 +33,7 @@ const BlogDetails = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-      dispatch(getBlogs())
+      dispatch(getOtherBlogs(blogId))
       dispatch(getBlog(blogId))
   }, [blogId])
 
@@ -43,8 +43,9 @@ const BlogDetails = () => {
   const navigate = useNavigate();
 
 
-  const blogDetails = useSelector((state: any) => state.blog.blogDetails);
+  const blogDetails = useSelector((state: any) => state.blog.otherBlogs);
   const perticularBlog = useSelector((state: any) => state.blog.perticularBlog)
+  console.log(perticularBlog)
   // const products = useSelector((state: any) => state.cart.productsDetails);
 
  

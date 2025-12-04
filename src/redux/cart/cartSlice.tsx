@@ -554,15 +554,25 @@ import {
   getUserId,
 } from "../../utils/cartIdManager";
 
-const getActiveCartId = (): string => {
-  const userCartId = getUserCartId();
-  if (userCartId) return userCartId;
+// const getActiveCartId = (): string => {
+//   const userCartId = getUserCartId();
+//   if (userCartId) return userCartId;
 
-  let guestId = getGuestCartId();
-  if (!guestId) {
-    guestId = createGuestCartId();
-  }
-  return guestId;
+//   let guestId = getGuestCartId();
+//   if (!guestId) {
+//     guestId = createGuestCartId();
+//   }
+//   return guestId;
+// };
+
+const getActiveCartId = () => {
+  const userCart = localStorage.getItem("userCartId");
+  if (userCart) return userCart;
+
+  let guestCart = localStorage.getItem("guestCartId");
+  if (!guestCart) guestCart = createGuestCartId();
+
+  return guestCart;
 };
 
 export const addToCartAPI = createAsyncThunk(

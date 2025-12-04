@@ -4,13 +4,26 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
 import axios from "axios";
+import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
+import { useDispatch } from "react-redux";
+
+// const getActiveCartId = (): string => {
+//   const userCartId = getUserCartId();
+//   if (userCartId) return userCartId;
+
+//   let guestId = getGuestCartId();
+//   if (!guestId) {
+//     guestId = createGuestCartId();
+//   }
+//   return guestId;
+// };
 
 const ProfileDrawer = ({ isOpen, onClose }) => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
-
+ const dispatch = useDispatch()
   const [loginErrors, setLoginErrors] = useState({
     email: "",
     password: "",
@@ -79,17 +92,28 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
         payload
       );
 
+      // if (res.data.success) {
+      //   toast.success(res.data.message);
+
+      //   storeUserCartId(res.data.cartId);
+
+      //   clearGuestCartId();
+
+      //   localStorage.setItem("userId", res.data.data._id);
+      //   localStorage.setItem("userName", res.data.data.firstName);
+      //   localStorage.removeItem("userCartId")
+      //      dispatch(fetchCartItemsAPI());
+      //   onClose();
+      // }
+
       if (res.data.success) {
-        toast.success(res.data.message);
+  storeUserCartId(res.data.cartId);
+  localStorage.setItem("token", res.data.token);
+  localStorage.setItem("userId", res.data.userId)
+  clearGuestCartId();
+  dispatch(fetchCartItemsAPI());
+}
 
-        storeUserCartId(res.data.cartId);
-
-        clearGuestCartId();
-
-        localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.data.firstName);
-        onClose();
-      }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");
     }

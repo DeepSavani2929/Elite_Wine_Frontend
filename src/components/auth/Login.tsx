@@ -3,6 +3,9 @@ import { NavLink, useNavigate } from "react-router";
 import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
+
 
 const Login = () => {
   const [login, setLogin] = useState({
@@ -10,6 +13,7 @@ const Login = () => {
     password: "",
   });
   const [loginErrors, setLoginErrors] = useState({});
+  const dispatch = useDispatch()
 
   const [reg, setReg] = useState({
     firstName: "",
@@ -64,6 +68,8 @@ const Login = () => {
 
         localStorage.setItem("userId", res.data.data._id);
         localStorage.setItem("userName", res.data.firstName)
+
+          dispatch(fetchCartItemsAPI());
     
       }
     } catch (err) {

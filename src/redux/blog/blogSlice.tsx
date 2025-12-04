@@ -6,6 +6,7 @@ import axios from "axios";
 
 const initialState = {
   blogDetails: [],
+  otherBlogs: [],
   perticularBlog: {}
 };
 
@@ -15,8 +16,12 @@ export const blogSlice = createSlice({
 
   reducers:{
       
-      getAllBlogs: (state, action) => {
+    getAllBlogs: (state, action) => {
     state.blogDetails = action.payload;
+  },
+
+   getremainingBlogs : (state, action) => {
+     state.otherBlogs = action.payload;
   },
 
    getPerticularBlog: (state, action) => {
@@ -28,7 +33,7 @@ export const blogSlice = createSlice({
 });
 
 export const getBlogs = createAsyncThunk(
-  "cart/fetchCartItems",
+  "blogs/fetchBlogs",
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/blogs/getBlogs`;
@@ -45,7 +50,7 @@ export const getBlogs = createAsyncThunk(
 );
 
 export const getBlog = createAsyncThunk(
-  "cart/fetchCartItems",
+  "blog/fetchBlog",
   async (blogId, { dispatch, rejectWithValue }) => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/blogs/getBlog/${blogId}`;
@@ -61,5 +66,22 @@ export const getBlog = createAsyncThunk(
   }
 );
 
-export const { getAllBlogs, getPerticularBlog } = blogSlice.actions;
+export const getOtherBlogs = createAsyncThunk(
+  "otherBlogs/fetchOtherBlogs",
+  async (blogId, { dispatch, rejectWithValue }) => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/blogs/getOtherBlogs/${blogId}`;
+
+      const res = await axios.get(url);
+
+      dispatch(getremainingBlogs(res.data.data || []));
+
+      return true;
+    } catch (error) {
+      return rejectWithValue("Unable to fetch cart items");
+    }
+  }
+);
+
+export const { getAllBlogs, getPerticularBlog, getremainingBlogs } = blogSlice.actions;
 export default blogSlice.reducer;

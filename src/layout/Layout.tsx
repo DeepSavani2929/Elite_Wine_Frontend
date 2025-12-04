@@ -10,7 +10,7 @@ const Layout = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  const hideHeader = pathname === "/checkout";
+  const hideHeader = pathname === "/checkout" || pathname === "/paymentSuccess";
 
   return (
     <>

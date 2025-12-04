@@ -704,6 +704,2103 @@
 
 
 
+// import React, { useState, useMemo, useEffect } from "react";
+// import { X, Filter, Plus, Minus } from "lucide-react";
+// import ProductsChild from "../products/productsChild";
+// import FilterDropdown from "../ui/FilterDropDown";
+// import axios from "axios";
+// import { useSelector } from "react-redux";
+
+// interface Product {
+//   type: string;
+//   productImg: string;
+//   productName: string;
+//   variety: string;
+//   varietylogo: string;
+//   price: string;
+//   medal?: string;
+//   flavour: string;
+//   size: string;
+//   inStock: boolean;
+//   categoryType: string;
+// }
+
+// const Shop: React.FC = () => {
+//   const [filters, setFilters] = useState({
+//     size: [] as string[],
+//     price: { min: 0, max: 100 },
+//     grape: [] as string[],
+//     all: [] as string[],
+//     availability: [] as string[],
+//     sortBy: "Alphabetically Z-A",
+//   });
+
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+//   const itemsPerPageOptions = [6, 10, 20, 30, 100];
+//   const [limit, setLimit] = useState(itemsPerPageOptions[0]);
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+//   const [totalItems, setTotalItems] = useState(0);
+
+//   // Fetch filtered products from backend
+//   const fetchFilteredProducts = async () => {
+//     try {
+//       // const availability =
+//       //   filters.availability.length > 0 ? filters.availability[0] : "";
+
+//       // const grapeStr =
+//       //   filters.grape.length > 0 ? filters.grape.join(",") : "";
+
+//             const sizeStr =
+//         filters.size.length > 0 ? filters.size.join(",") : "";
+
+//       const categoryStr =
+//         filters.all.length > 0 ? filters.all.join(",") : "";
+
+//       const grapeStr =
+//         filters.grape.length > 0 ? filters.grape.join(",") : "";
+
+//       const availability =
+//         filters.availability.length > 0 ? filters.availability.join(",") : "";
+
+//       const queryParams = new URLSearchParams({
+//         size: sizeStr,
+//         grape: grapeStr,
+//         minPrice: filters.price.min.toString(),
+//         maxPrice: filters.price.max.toString(),
+//         availability,
+//         categoryType: categoryStr,
+//         sortBy: filters.sortBy,
+//         page: currentPage.toString(),
+//         limit: limit.toString(),
+//       });
+
+//       const url = `${
+//         import.meta.env.VITE_API_URL
+//       }/products/getFilteredProducts?${queryParams.toString()}`;
+
+//       const res = await axios.get(url);
+
+//       if (res.data.success) {
+//         setFilteredProducts(res.data.data);
+//         setTotalItems(res.data.total);
+//       }
+//     } catch (error) {
+//       console.error("FILTER API FAILED:", error);
+//     }
+//   };
+
+//   // Fetch when any filter changes
+//   useEffect(() => {
+//     fetchFilteredProducts();
+//   }, [filters, limit, currentPage]);
+
+//   const totalPages = Math.ceil(totalItems / limit);
+//   const currentProducts = filteredProducts;
+
+//   const shopDetails = useSelector((state) => state.cart.productsDetails);
+
+//   const handleOpenSidebar = () => {
+//     if (typeof window !== "undefined" && window.innerWidth > 1024) return;
+//     setSidebarOpen(true);
+//   };
+
+//   const sizeOptions = ["Small", "Medium", "Large", "Extra Large"];
+//   const grapeOptions = [
+//     "Merlot",
+//     "Pinot Noir",
+//     "Sauvignon Blanc",
+//     "Riesling",
+//     "Rosé",
+//     "Gewurztraminer",
+//     "Rouge Pur",
+//     "Pinot Grigio",
+//   ];
+//   const availabilityOptions = ["In Stock", "Out Of Stock"];
+//   const allOptions = ["Featured", "Popular", "New Arrivals"];
+//   const sortByOptions = [
+//     "Best Sellers",
+//     "Featured",
+//     "Alphabetically A-Z",
+//     "Alphabetically Z-A",
+//     "Price, low to high",
+//     "Price, high to low",
+//     "Date, old to new",
+//     "Date, new to old",
+//   ];
+
+//   const handleFilterChange = (name: string, value: any) => {
+//     setFilters((prev) => ({ ...prev, [name]: value }));
+//     setCurrentPage(1);
+//   };
+
+//   const removeChip = (type: string, value: string) => {
+//     if (type === "size") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         size: prev.size.filter((x) => x !== value),
+//       }));
+//     } else if (type === "price") {
+//       setFilters((prev) => ({ ...prev, price: { min: 0, max: 100 } }));
+//     } else if (type === "grape") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         grape: prev.grape.filter((g) => g !== value),
+//       }));
+//     } else if (type === "availability") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         availability: prev.availability.filter((a) => a !== value),
+//       }));
+//     } else if (type === "all") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         all: prev.all.filter((x) => x !== value),
+//       }));
+//     }
+//   };
+
+//   const Accordion = ({ title, children }: { title: string; children: any }) => {
+//     const [open, setOpen] = useState(false);
+//     return (
+//       <div className="border-b border-gray-300 pb-3">
+//         <button
+//           onClick={() => setOpen(!open)}
+//           className="flex justify-between items-center w-full text-left py-3 font-urbanist font-semibold text-lg"
+//         >
+//           <span>{title}</span>
+//           {open ? (
+//             <Minus size={20} className="text-[#0B0B0B]" />
+//           ) : (
+//             <Plus size={20} className="text-[#0B0B0B]" />
+//           )}
+//         </button>
+
+//         {open && <div className="pl-2 pb-2">{children}</div>}
+//       </div>
+//     );
+//   };
+
+//   const clearAll = () => {
+//     setFilters({
+//       size: [],
+//       price: { min: 0, max: 100 },
+//       grape: [],
+//       all: [],
+//       availability: [],
+//       sortBy: "Best Sellers",
+//     });
+//   };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       if (window.innerWidth >= 1024) setSidebarOpen(false);
+//     };
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   const Chip = ({ label, onRemove }: any) => (
+//     <div className="bg-[#EED291] text-[#0B0B0B] px-3 py-1 rounded-md flex items-center gap-2 font-urbanist text-sm">
+//       {label}
+//       <button onClick={onRemove}>
+//         <X size={16} />
+//       </button>
+//     </div>
+//   );
+
+//   return (
+//     <>
+//       {/* ---- TOP BANNER ---- */}
+//       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
+//         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
+//           <p className="font-urbanist font-semibold text-base text-white">
+//             Home <span className="font-Poppins me-1 ms-1">&gt; </span>Shop
+//           </p>
+//           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">
+//             Products
+//           </p>
+//         </div>
+//       </div>
+
+//       <div className="w-full">
+//         <div className="w-[95%] mx-auto pt-[55px] xl:pt-[100px]">
+//           {/* ---- TOP FILTERS ---- */}
+//           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
+//             <div className="flex items-center flex-wrap gap-3">
+//               <button
+//                 onClick={handleOpenSidebar}
+//                 className="flex items-center gap-2 w-[60px] h-[40px] rounded-lg font-urbanist font-semibold text-sm text-[#0B0B0B]"
+//               >
+//                 <Filter size={18} />
+//                 <span>Filter</span>
+//               </button>
+
+//               {/* DESKTOP FILTERS */}
+//               <div className="hidden xl:flex items-center gap-3">
+//                 <div className="w-[150px]">
+//                   <FilterDropdown
+//                     type="multi"
+//                     label="Size"
+//                     value={filters.size}
+//                     options={sizeOptions}
+//                     onChange={(v) => handleFilterChange("size", v)}
+//                   />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown
+//                     type="price"
+//                     value={filters.price}
+//                     label="Price"
+//                     onChange={(v) => handleFilterChange("price", v)}
+//                   />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown
+//                     type="multi"
+//                     label="Grape"
+//                     value={filters.grape}
+//                     options={grapeOptions}
+//                     onChange={(v) => handleFilterChange("grape", v)}
+//                   />
+//                 </div>
+
+//                 <div className="w-[140px]">
+//                   <FilterDropdown
+//                     type="multi"
+//                     label="All"
+//                     value={filters.all}
+//                     options={allOptions}
+//                     onChange={(v) => handleFilterChange("all", v)}
+//                   />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown
+//                     type="multi"
+//                     label="Availability"
+//                     value={filters.availability}
+//                     options={availabilityOptions}
+//                     onChange={(v) => handleFilterChange("availability", v)}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* SORT DROPDOWN */}
+//             <div className="flex items-center gap-3 w-full md:w-auto">
+//               <span className="font-urbanist font-semibold text-sm md:text-base text-[#0B0B0B]">
+//                 Sort By:
+//               </span>
+//               <div className="w-[180px]">
+//                 <FilterDropdown
+//                   type="single"
+//                   value={filters.sortBy}
+//                   label="Sort"
+//                   options={sortByOptions}
+//                   onChange={(v) => handleFilterChange("sortBy", v)}
+//                 />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* ---- FILTER CHIPS ---- */}
+//           {/* <div className="mt-6 flex flex-wrap items-center gap-3">
+//             {(filters.size !== "Size" ||
+//               filters.price.min !== 0 ||
+//               filters.price.max !== 100 ||
+//               filters.grape.length > 0 ||
+//               filters.availability.length > 0 ||
+//               filters.all !== "All") && (
+//               <button
+//                 onClick={clearAll}
+//                 className="text-[#0B0B0B] underline font-urbanist text-sm"
+//               >
+//                 Clear All
+//               </button>
+//             )}
+
+//             {filters.size !== "Size" && (
+//               <Chip
+//                 label={filters.size}
+//                 onRemove={() => removeChip("size", filters.size)}
+//               />
+//             )}
+
+//             {(filters.price.min !== 0 || filters.price.max !== 100) && (
+//               <Chip
+//                 label={`$${filters.price.min} - $${filters.price.max}`}
+//                 onRemove={() => removeChip("price", "")}
+//               />
+//             )}
+
+//             {filters.grape.map((g) => (
+//               <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
+//             ))}
+
+//             {filters.availability.map((a) => (
+//               <Chip
+//                 key={a}
+//                 label={a}
+//                 onRemove={() => removeChip("availability", a)}
+//               />
+//             ))}
+
+//             {filters.all !== "All" && (
+//               <Chip
+//                 label={filters.all}
+//                 onRemove={() => removeChip("all", filters.all)}
+//               />
+//             )}
+//           </div> */}
+
+
+//                     <div className="mt-6 flex flex-wrap items-center gap-3">
+
+//             {(filters.size.length > 0 ||
+//               filters.price.min !== 0 ||
+//               filters.price.max !== 100 ||
+//               filters.grape.length > 0 ||
+//               filters.availability.length > 0 ||
+//               filters.all.length > 0) && (
+//               <button
+//                 onClick={clearAll}
+//                 className="text-[#0B0B0B] underline font-urbanist text-sm"
+//               >
+//                 Clear All
+//               </button>
+//             )}
+
+//             {filters.size.map((s) => (
+//               <Chip key={s} label={s} onRemove={() => removeChip("size", s)} />
+//             ))}
+
+//             {(filters.price.min !== 0 || filters.price.max !== 100) && (
+//               <Chip
+//                 label={`$${filters.price.min} - $${filters.price.max}`}
+//                 onRemove={() => removeChip("price", "")}
+//               />
+//             )}
+
+//             {filters.grape.map((g) => (
+//               <Chip
+//                 key={g}
+//                 label={g}
+//                 onRemove={() => removeChip("grape", g)}
+//               />
+//             ))}
+
+//             {filters.availability.map((a) => (
+//               <Chip
+//                 key={a}
+//                 label={a}
+//                 onRemove={() => removeChip("availability", a)}
+//               />
+//             ))}
+
+//             {filters.all.map((c) => (
+//               <Chip key={c} label={c} onRemove={() => removeChip("all", c)} />
+//             ))}
+//           </div>
+
+//         </div>
+
+//         {/* ---- SIDEBAR ---- */}
+//         <div
+//           className={`fixed top-0 left-0 h-full w-[72%] sm:w-[40%] md:w-[38%] lg:w-[28%] z-[9999] bg-white shadow-xl transform transition-all duration-300 ${
+//             sidebarOpen ? "translate-x-0" : "-translate-x-full"
+//           }`}
+//         >
+//           <div className="flex justify-between items-center px-4 py-4">
+//             <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
+//             <button onClick={() => setSidebarOpen(false)}>
+//               <X size={24} />
+//             </button>
+//           </div>
+
+//           <div className="p-4 overflow-y-auto h-[calc(100%-60px)] font-urbanist">
+//             {(filters.size.length > 0 ||
+//               filters.price.min !== 0 ||
+//               filters.price.max !== 100 ||
+//               filters.grape.length > 0 ||
+//               filters.availability.length > 0 ||
+//               filters.all.length > 0) && (
+//               <div className="flex justify-between items-center mb-4">
+//                 <h3 className="font-urbanist font-semibold text-lg">Filters</h3>
+//                 <button
+//                   onClick={clearAll}
+//                   className="text-[#0B0B0B] underline text-sm font-medium"
+//                 >
+//                   Clear All
+//                 </button>
+//               </div>
+//             )}
+
+//             <Accordion title="Size">
+//               {sizeOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-1">
+//                   <input
+//                     type="checkbox"
+//                     name="size"
+//                     checked={filters.size.includes(opt)}
+//                            onChange={() => {
+//                       const u = filters.size.includes(opt)
+//                         ? filters.size.filter((x) => x !== opt)
+//                         : [...filters.size, opt];
+//                       handleFilterChange("size", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             {/* <Accordion title="Price">
+//               <div className="flex flex-col gap-4">
+//                 <div className="relative w-full h-2 bg-gray-200 rounded-full">
+//                   <div
+//                     className="absolute h-full bg-[#E5C97A] rounded-full"
+//                     style={{
+//                       left: `${filters.price.min}%`,
+//                       width: `${filters.price.max - filters.price.min}%`,
+//                     }}
+//                   />
+
+//                   <input
+//                     type="range"
+//                     min={0}
+//                     max={100}
+//                     value={filters.price.min}
+//                     onChange={(e) => {
+//                       const v = +e.target.value;
+//                       if (v < filters.price.max)
+//                         handleFilterChange("price", {
+//                           ...filters.price,
+//                           min: v,
+//                         });
+//                     }}
+//                     onMouseUp={() => setSidebarOpen(false)}
+//                     className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
+//                   />
+
+//                   <input
+//                     type="range"
+//                     min={0}
+//                     max={100}
+//                     value={filters.price.max}
+//                     onChange={(e) => {
+//                       const v = +e.target.value;
+//                       if (v > filters.price.min)
+//                         handleFilterChange("price", {
+//                           ...filters.price,
+//                           max: v,
+//                         });
+//                     }}
+//                     onMouseUp={() => setSidebarOpen(false)}
+//                     className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
+//                   />
+//                 </div>
+
+//                 <div className="flex justify-between">
+//                   <div className="border px-3 py-1 rounded">
+//                     ${filters.price.min}
+//                   </div>
+//                   <span>to</span>
+//                   <div className="border px-3 py-1 rounded">
+//                     ${filters.price.max}
+//                   </div>
+//                 </div>
+//               </div>
+//             </Accordion> */}
+
+//             <Accordion title="Price">
+//   <div className="flex flex-col gap-4">
+//     <div className="relative w-full h-2 bg-gray-200 rounded-full">
+//       <div
+//         className="absolute h-full bg-[#E5C97A] rounded-full"
+//         style={{
+//           left: `${filters.price.min}%`,
+//           width: `${filters.price.max - filters.price.min}%`,
+//         }}
+//       />
+
+//       {/* LEFT HANDLE */}
+//       <input
+//         type="range"
+//         min={0}
+//         max={100}
+//         value={filters.price.min}
+//         onChange={(e) => {
+//           const v = Number(e.target.value);
+//           if (v < filters.price.max) {
+//             handleFilterChange("price", { ...filters.price, min: v });
+//           }
+//         }}
+//         className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
+//       />
+
+//       {/* RIGHT HANDLE */}
+//       <input
+//         type="range"
+//         min={0}
+//         max={100}
+//         value={filters.price.max}
+//         onChange={(e) => {
+//           const v = Number(e.target.value);
+//           if (v > filters.price.min) {
+//             handleFilterChange("price", { ...filters.price, max: v });
+//           }
+//         }}
+//         className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
+//       />
+//     </div>
+
+//     <div className="flex justify-between">
+//       <div className="border px-3 py-1 rounded">${filters.price.min}</div>
+//       <span>to</span>
+//       <div className="border px-3 py-1 rounded">${filters.price.max}</div>
+//     </div>
+//   </div>
+// </Accordion>
+
+
+//             <Accordion title="Grape">
+//               {grapeOptions.map((opt) => (
+//                 <label
+//                   key={opt}
+//                   className="flex items-center gap-3 py-2 cursor-pointer"
+//                 >
+//                   <input
+//                     type="checkbox"
+//                     value={opt}
+//                     checked={filters.grape.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.grape.includes(opt)
+//                         ? filters.grape.filter((x) => x !== opt)
+//                         : [...filters.grape, opt];
+
+//                       handleFilterChange("grape", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="w-4 h-4 accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             <Accordion title="All Categories">
+//               {allOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2">
+//                   <input
+//                     type="checkbox"
+//                     name="all"
+//                     checked={filters.all.includes(opt)}
+//                    onChange={() => {
+//                       const u = filters.all.includes(opt)
+//                         ? filters.all.filter((x) => x !== opt)
+//                         : [...filters.all, opt];
+//                       handleFilterChange("all", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             <Accordion title="Availability">
+//               {availabilityOptions.map((opt) => (
+//                 <label
+//                   key={opt}
+//                   className="flex items-center gap-3 py-2 cursor-pointer"
+//                 >
+//                   <input
+//                     type="checkbox"
+//                     value={opt}
+//                     checked={filters.availability.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.availability.includes(opt)
+//                         ? filters.availability.filter((x) => x !== opt)
+//                         : [...filters.availability, opt];
+
+//                       handleFilterChange("availability", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="w-4 h-4 accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+//           </div>
+//         </div>
+
+//         {sidebarOpen && (
+//           <div
+//             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[900] xl:hidden"
+//             onClick={() => setSidebarOpen(false)}
+//           />
+//         )}
+
+//         {/* ---- PRODUCTS GRID ---- */}
+//         <div className="w-[95%] xl:w-[80%] pb-[55px] xl:pb-[100px] mx-auto grid gap-8 grid-cols-2 md:grid-cols-3 mt-10">
+//           {currentProducts.map((product, index) => (
+//             <ProductsChild key={index} product={product} />
+//           ))}
+//         </div>
+
+//         {/* ---- PAGINATION ---- */}
+//         <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
+//           <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
+//             <p className="text-sm">Showing</p>
+//             <select
+//               value={limit}
+//               onChange={(e) => {
+//                 setLimit(Number(e.target.value));
+//                 setCurrentPage(1);
+//               }}
+//               className="border border-[#E5C97A] rounded-lg px-2 py-1 text-sm"
+//             >
+//               {itemsPerPageOptions.map((opt) => (
+//                 <option key={opt} value={opt}>
+//                   {opt}
+//                 </option>
+//               ))}
+//             </select>
+
+//             <p className="text-sm">
+//               of <span className="font-semibold">{totalItems}</span> entries
+//             </p>
+//           </div>
+
+//           <div className="flex items-center gap-2">
+//             <button
+//               onClick={() => setCurrentPage(currentPage - 1)}
+//               disabled={currentPage === 1}
+//               className="px-3 py-1 border font-urbanist border-[#E5C97A] rounded disabled:opacity-50"
+//             >
+//               Prev
+//             </button>
+
+//             {Array.from({ length: totalPages }).map((_, i) => {
+//               const p = i + 1;
+//               return (
+//                 <button
+//                   key={p}
+//                   onClick={() => setCurrentPage(p)}
+//                   className={`px-4 py-2 rounded  font-urbanist text-sm ${
+//                     currentPage === p
+//                       ? "bg-[#EED291]"
+//                       : "bg-white border border-[#EED291]"
+//                   }`}
+//                 >
+//                   {p}
+//                 </button>
+//               );
+//             })}
+
+//             <button
+//               onClick={() => setCurrentPage(currentPage + 1)}
+//               disabled={currentPage === totalPages}
+//               className="px-3 py-1 border  font-urbanist border-[#EED291] rounded disabled:opacity-50"
+//             >
+//               Next
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Shop;
+
+
+// import React, { useState, useMemo, useEffect } from "react";
+// import { X, Filter, Plus, Minus } from "lucide-react";
+// import ProductsChild from "../products/productsChild";
+// import FilterDropdown from "../ui/FilterDropDown";
+// import axios from "axios";
+// import { useSelector } from "react-redux";
+
+// interface Product {
+//   type: string;
+//   productImg: string;
+//   productName: string;
+//   variety: string;
+//   varietylogo: string;
+//   price: string;
+//   medal?: string;
+//   flavour: string;
+//   size: string;
+//   inStock: boolean;
+//   categoryType: string;
+// }
+
+// const Shop: React.FC = () => {
+//   const [filters, setFilters] = useState({
+//     size: [] as string[],
+//     price: { min: 0, max: 100 },
+//     grape: [] as string[],
+//     all: [] as string[],
+//     availability: [] as string[],
+//     sortBy: "Alphabetically Z-A",
+//   });
+
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+//   const itemsPerPageOptions = [6, 10, 20, 30, 100];
+//   const [limit, setLimit] = useState(itemsPerPageOptions[0]);
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+//   const [totalItems, setTotalItems] = useState(0);
+
+//   // Fetch filtered products from backend
+//   const fetchFilteredProducts = async () => {
+//     try {
+//       const sizeStr = filters.size.length > 0 ? filters.size.join(",") : "";
+//       const categoryStr = filters.all.length > 0 ? filters.all.join(",") : "";
+//       const grapeStr = filters.grape.length > 0 ? filters.grape.join(",") : "";
+//       const availability = filters.availability.length > 0 ? filters.availability.join(",") : "";
+
+//       const queryParams = new URLSearchParams({
+//         size: sizeStr,
+//         grape: grapeStr,
+//         minPrice: filters.price.min.toString(),
+//         maxPrice: filters.price.max.toString(),
+//         availability,
+//         categoryType: categoryStr,
+//         sortBy: filters.sortBy,
+//         page: currentPage.toString(),
+//         limit: limit.toString(),
+//       });
+
+//       const url = `${import.meta.env.VITE_API_URL}/products/getFilteredProducts?${queryParams.toString()}`;
+//       const res = await axios.get(url);
+
+//       if (res.data.success) {
+//         setFilteredProducts(res.data.data);
+//         setTotalItems(res.data.total);
+//       }
+//     } catch (error) {
+//       console.error("FILTER API FAILED:", error);
+//     }
+//   };
+
+//   // Fetch when any filter changes
+//   useEffect(() => {
+//     fetchFilteredProducts();
+//   }, [filters, limit, currentPage]);
+
+//   const totalPages = Math.ceil(totalItems / limit);
+//   const currentProducts = filteredProducts;
+
+//   const shopDetails = useSelector((state: any) => state.cart.productsDetails);
+
+//   const handleOpenSidebar = () => {
+//     if (typeof window !== "undefined" && window.innerWidth > 1024) return;
+//     setSidebarOpen(true);
+//   };
+
+//   const sizeOptions = ["Small", "Medium", "Large", "Extra Large"];
+//   const grapeOptions = [
+//     "Merlot",
+//     "Pinot Noir",
+//     "Sauvignon Blanc",
+//     "Riesling",
+//     "Rosé",
+//     "Gewurztraminer",
+//     "Rouge Pur",
+//     "Pinot Grigio",
+//   ];
+//   const availabilityOptions = ["In Stock", "Out Of Stock"];
+//   const allOptions = ["Featured", "Popular", "New Arrivals"];
+//   const sortByOptions = [
+//     "Best Sellers",
+//     "Featured",
+//     "Alphabetically A-Z",
+//     "Alphabetically Z-A",
+//     "Price, low to high",
+//     "Price, high to low",
+//     "Date, old to new",
+//     "Date, new to old",
+//   ];
+
+//   const handleFilterChange = (name: string, value: any) => {
+//     setFilters((prev) => ({ ...prev, [name]: value }));
+//     setCurrentPage(1);
+//   };
+
+//   const removeChip = (type: string, value: string) => {
+//     if (type === "size") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         size: prev.size.filter((x) => x !== value),
+//       }));
+//     } else if (type === "price") {
+//       setFilters((prev) => ({ ...prev, price: { min: 0, max: 100 } }));
+//     } else if (type === "grape") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         grape: prev.grape.filter((g) => g !== value),
+//       }));
+//     } else if (type === "availability") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         availability: prev.availability.filter((a) => a !== value),
+//       }));
+//     } else if (type === "all") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         all: prev.all.filter((x) => x !== value),
+//       }));
+//     }
+//   };
+
+//   const Accordion = ({ title, children }: { title: string; children: any }) => {
+//     const [open, setOpen] = useState(false);
+//     return (
+//       <div className="border-b border-gray-300 pb-3">
+//         <button
+//           onClick={() => setOpen(!open)}
+//           className="flex justify-between items-center w-full text-left py-3 font-urbanist font-semibold text-lg"
+//         >
+//           <span>{title}</span>
+//           {open ? <Minus size={20} className="text-[#0B0B0B]" /> : <Plus size={20} className="text-[#0B0B0B]" />}
+//         </button>
+
+//         {open && <div className="pl-2 pb-2">{children}</div>}
+//       </div>
+//     );
+//   };
+
+//   const clearAll = () => {
+//     setFilters({
+//       size: [],
+//       price: { min: 0, max: 100 },
+//       grape: [],
+//       all: [],
+//       availability: [],
+//       sortBy: "Best Sellers",
+//     });
+//   };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       if (window.innerWidth >= 1024) setSidebarOpen(false);
+//     };
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   const Chip = ({ label, onRemove }: any) => (
+//     <div className="bg-[#EED291] text-[#0B0B0B] px-3 py-1 rounded-md flex items-center gap-2 font-urbanist text-sm">
+//       {label}
+//       <button onClick={onRemove}>
+//         <X size={16} />
+//       </button>
+//     </div>
+//   );
+
+//   return (
+//     <>
+//       {/* ---- TOP BANNER ---- */}
+//       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
+//         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
+//           <p className="font-urbanist font-semibold text-base text-white">
+//             Home <span className="font-Poppins me-1 ms-1">&gt; </span>Shop
+//           </p>
+//           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">Products</p>
+//         </div>
+//       </div>
+
+//       <div className="w-full">
+//         <div className="w-[95%] mx-auto pt-[55px] xl:pt-[100px]">
+//           {/* ---- TOP FILTERS ---- */}
+//           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
+//             <div className="flex items-center flex-wrap gap-3">
+//               <button onClick={handleOpenSidebar} className="flex items-center gap-2 w-[60px] h-[40px] rounded-lg font-urbanist font-semibold text-sm text-[#0B0B0B]">
+//                 <Filter size={18} />
+//                 <span>Filter</span>
+//               </button>
+
+//               {/* DESKTOP FILTERS */}
+//               <div className="hidden xl:flex items-center gap-3">
+//                 <div className="w-[150px]">
+//                   <FilterDropdown type="multi" label="Size" value={filters.size} options={sizeOptions} onChange={(v) => handleFilterChange("size", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="price" value={filters.price} label="Price" onChange={(v) => handleFilterChange("price", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="multi" label="Grape" value={filters.grape} options={grapeOptions} onChange={(v) => handleFilterChange("grape", v)} />
+//                 </div>
+
+//                 <div className="w-[140px]">
+//                   <FilterDropdown type="multi" label="All" value={filters.all} options={allOptions} onChange={(v) => handleFilterChange("all", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="multi" label="Availability" value={filters.availability} options={availabilityOptions} onChange={(v) => handleFilterChange("availability", v)} />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* SORT DROPDOWN */}
+//             <div className="flex items-center gap-3 w-full md:w-auto">
+//               <span className="font-urbanist font-semibold text-sm md:text-base text-[#0B0B0B]">Sort By:</span>
+//               <div className="w-[180px]">
+//                 <FilterDropdown type="single" value={filters.sortBy} label="Sort" options={sortByOptions} onChange={(v) => handleFilterChange("sortBy", v)} />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* ---- FILTER CHIPS ---- */}
+//           <div className="mt-6 flex flex-wrap items-center gap-3">
+//             {(filters.size.length > 0 || filters.price.min !== 0 || filters.price.max !== 100 || filters.grape.length > 0 || filters.availability.length > 0 || filters.all.length > 0) && (
+//               <button onClick={clearAll} className="text-[#0B0B0B] underline font-urbanist text-sm">
+//                 Clear All
+//               </button>
+//             )}
+
+//             {filters.size.map((s) => (
+//               <Chip key={s} label={s} onRemove={() => removeChip("size", s)} />
+//             ))}
+
+//             {(filters.price.min !== 0 || filters.price.max !== 100) && (
+//               <Chip label={`$${filters.price.min} - $${filters.price.max}`} onRemove={() => removeChip("price", "")} />
+//             )}
+
+//             {filters.grape.map((g) => (
+//               <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
+//             ))}
+
+//             {filters.availability.map((a) => (
+//               <Chip key={a} label={a} onRemove={() => removeChip("availability", a)} />
+//             ))}
+
+//             {filters.all.map((c) => (
+//               <Chip key={c} label={c} onRemove={() => removeChip("all", c)} />
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* ---- SIDEBAR ---- */}
+//         <div
+//           className={`fixed top-0 left-0 h-full w-[72%] sm:w-[40%] md:w-[38%] lg:w-[28%] z-[9999] bg-white shadow-xl transform transition-all duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+//         >
+//           <div className="flex justify-between items-center px-4 py-4">
+//             <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
+//             <button onClick={() => setSidebarOpen(false)}>
+//               <X size={24} />
+//             </button>
+//           </div>
+
+//           <div className="p-4 overflow-y-auto h-[calc(100%-60px)] font-urbanist">
+//             {(filters.size.length > 0 || filters.price.min !== 0 || filters.price.max !== 100 || filters.grape.length > 0 || filters.availability.length > 0 || filters.all.length > 0) && (
+//               <div className="flex justify-between items-center mb-4">
+//                 <h3 className="font-urbanist font-semibold text-lg">Filters</h3>
+//                 <button onClick={clearAll} className="text-[#0B0B0B] underline text-sm font-medium">
+//                   Clear All
+//                 </button>
+//               </div>
+//             )}
+
+//             <Accordion title="Size">
+//               {sizeOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-1">
+//                   <input
+//                     type="checkbox"
+//                     name="size"
+//                     checked={filters.size.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.size.includes(opt) ? filters.size.filter((x) => x !== opt) : [...filters.size, opt];
+//                       handleFilterChange("size", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             {/* ---------- REPLACED PRICE SECTION (dual-handle for sidebar) ---------- */}
+//             <Accordion title="Price">
+//               <div className="flex flex-col gap-4">
+//                 <div className="relative w-full h-3">
+//                   {/* inactive full track */}
+//                   <div className="absolute inset-0 rounded-full" style={{ background: "#D4D4D4", height: 8 }} />
+
+//                   {/* active (gold) segment */}
+//                   <div
+//                     className="absolute rounded-full"
+//                     style={{
+//                       left: `${filters.price.min}%`,
+//                       width: `${filters.price.max - filters.price.min}%`,
+//                       background: "#E5C97A",
+//                       height: 8,
+//                     }}
+//                   />
+
+//                   {/* invisible range inputs that capture pointer */}
+//                   <input
+//                     type="range"
+//                     min={0}
+//                     max={100}
+//                     step={1}
+//                     value={filters.price.min}
+//                     onChange={(e) => {
+//                       const v = Number(e.target.value);
+//                       if (v < filters.price.max) handleFilterChange("price", { ...filters.price, min: v });
+//                     }}
+//                     className="absolute left-0 top-0 w-full h-6 bg-transparent appearance-none opacity-0"
+//                   />
+
+//                   <input
+//                     type="range"
+//                     min={0}
+//                     max={100}
+//                     step={1}
+//                     value={filters.price.max}
+//                     onChange={(e) => {
+//                       const v = Number(e.target.value);
+//                       if (v > filters.price.min) handleFilterChange("price", { ...filters.price, max: v });
+//                     }}
+//                     className="absolute left-0 top-0 w-full h-6 bg-transparent appearance-none opacity-0"
+//                   />
+
+//                   {/* custom handles & bubbles (sidebar) */}
+//                   <div style={{ left: `${filters.price.min}%` }} className="absolute -translate-x-1/2 pointer-events-none">
+//                     <div className="text-xs font-medium bg-white px-2 py-1 rounded-md shadow">${filters.price.min}</div>
+//                     <div className="w-4 h-4 bg-white rounded-full border border-gray-200 shadow-md mt-1" />
+//                   </div>
+
+//                   <div style={{ left: `${filters.price.max}%` }} className="absolute -translate-x-1/2 pointer-events-none">
+//                     <div className="text-xs font-medium bg-white px-2 py-1 rounded-md shadow">${filters.price.max}</div>
+//                     <div className="w-4 h-4 bg-white rounded-full border border-gray-200 shadow-md mt-1" />
+//                   </div>
+//                 </div>
+
+//                 <div className="flex justify-between">
+//                   <div className="border px-3 py-1 rounded">${filters.price.min}</div>
+//                   <span>to</span>
+//                   <div className="border px-3 py-1 rounded">${filters.price.max}</div>
+//                 </div>
+//               </div>
+//             </Accordion>
+
+//             <Accordion title="Grape">
+//               {grapeOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
+//                   <input
+//                     type="checkbox"
+//                     value={opt}
+//                     checked={filters.grape.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.grape.includes(opt) ? filters.grape.filter((x) => x !== opt) : [...filters.grape, opt];
+
+//                       handleFilterChange("grape", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="w-4 h-4 accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             <Accordion title="All Categories">
+//               {allOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2">
+//                   <input
+//                     type="checkbox"
+//                     name="all"
+//                     checked={filters.all.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.all.includes(opt) ? filters.all.filter((x) => x !== opt) : [...filters.all, opt];
+//                       handleFilterChange("all", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             <Accordion title="Availability">
+//               {availabilityOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
+//                   <input
+//                     type="checkbox"
+//                     value={opt}
+//                     checked={filters.availability.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.availability.includes(opt) ? filters.availability.filter((x) => x !== opt) : [...filters.availability, opt];
+
+//                       handleFilterChange("availability", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="w-4 h-4 accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+//           </div>
+//         </div>
+
+//         {sidebarOpen && (
+//           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[900] xl:hidden" onClick={() => setSidebarOpen(false)} />
+//         )}
+
+//         {/* ---- PRODUCTS GRID ---- */}
+//         <div className="w-[95%] xl:w-[80%] pb-[55px] xl:pb-[100px] mx-auto grid gap-8 grid-cols-2 md:grid-cols-3 mt-10">
+//           {currentProducts.map((product, index) => (
+//             <ProductsChild key={index} product={product} />
+//           ))}
+//         </div>
+
+//         {/* ---- PAGINATION ---- */}
+//         <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
+//           <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
+//             <p className="text-sm">Showing</p>
+//             <select
+//               value={limit}
+//               onChange={(e) => {
+//                 setLimit(Number(e.target.value));
+//                 setCurrentPage(1);
+//               }}
+//               className="border border-[#E5C97A] rounded-lg px-2 py-1 text-sm"
+//             >
+//               {itemsPerPageOptions.map((opt) => (
+//                 <option key={opt} value={opt}>
+//                   {opt}
+//                 </option>
+//               ))}
+//             </select>
+
+//             <p className="text-sm">
+//               of <span className="font-semibold">{totalItems}</span> entries
+//             </p>
+//           </div>
+
+//           <div className="flex items-center gap-2">
+//             <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-1 border font-urbanist border-[#E5C97A] rounded disabled:opacity-50">
+//               Prev
+//             </button>
+
+//             {Array.from({ length: totalPages }).map((_, i) => {
+//               const p = i + 1;
+//               return (
+//                 <button
+//                   key={p}
+//                   onClick={() => setCurrentPage(p)}
+//                   className={`px-4 py-2 rounded  font-urbanist text-sm ${currentPage === p ? "bg-[#EED291]" : "bg-white border border-[#EED291]"}`}
+//                 >
+//                   {p}
+//                 </button>
+//               );
+//             })}
+
+//             <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-1 border  font-urbanist border-[#EED291] rounded disabled:opacity-50">
+//               Next
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Shop;
+
+
+
+// import React, { useState, useMemo, useEffect } from "react";
+// import { X, Filter, Plus, Minus } from "lucide-react";
+// import ProductsChild from "../products/productsChild";
+// import FilterDropdown from "../ui/FilterDropDown";
+// import axios from "axios";
+// import { useSelector } from "react-redux";
+
+// interface Product {
+//   type: string;
+//   productImg: string;
+//   productName: string;
+//   variety: string;
+//   varietylogo: string;
+//   price: string;
+//   medal?: string;
+//   flavour: string;
+//   size: string;
+//   inStock: boolean;
+//   categoryType: string;
+// }
+
+// const Shop: React.FC = () => {
+//   const [filters, setFilters] = useState({
+//     size: [] as string[],
+//     price: { min: 0, max: 100 },
+//     grape: [] as string[],
+//     all: [] as string[],
+//     availability: [] as string[],
+//     sortBy: "Alphabetically Z-A",
+//   });
+
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+//   const itemsPerPageOptions = [6, 10, 20, 30, 100];
+//   const [limit, setLimit] = useState(itemsPerPageOptions[0]);
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+//   const [totalItems, setTotalItems] = useState(0);
+
+//   // Fetch filtered products from backend
+//   const fetchFilteredProducts = async () => {
+//     try {
+//       const sizeStr = filters.size.length > 0 ? filters.size.join(",") : "";
+//       const categoryStr = filters.all.length > 0 ? filters.all.join(",") : "";
+//       const grapeStr = filters.grape.length > 0 ? filters.grape.join(",") : "";
+//       const availability = filters.availability.length > 0 ? filters.availability.join(",") : "";
+
+//       const queryParams = new URLSearchParams({
+//         size: sizeStr,
+//         grape: grapeStr,
+//         minPrice: filters.price.min.toString(),
+//         maxPrice: filters.price.max.toString(),
+//         availability,
+//         categoryType: categoryStr,
+//         sortBy: filters.sortBy,
+//         page: currentPage.toString(),
+//         limit: limit.toString(),
+//       });
+
+//       const url = `${import.meta.env.VITE_API_URL}/products/getFilteredProducts?${queryParams.toString()}`;
+//       const res = await axios.get(url);
+
+//       if (res.data.success) {
+//         setFilteredProducts(res.data.data);
+//         setTotalItems(res.data.total);
+//       }
+//     } catch (error) {
+//       console.error("FILTER API FAILED:", error);
+//     }
+//   };
+
+//   // Fetch when any filter changes
+//   useEffect(() => {
+//     fetchFilteredProducts();
+//   }, [filters, limit, currentPage]);
+
+//   const totalPages = Math.ceil(totalItems / limit);
+//   const currentProducts = filteredProducts;
+
+//   const shopDetails = useSelector((state: any) => state.cart.productsDetails);
+
+//   const handleOpenSidebar = () => {
+//     if (typeof window !== "undefined" && window.innerWidth > 1024) return;
+//     setSidebarOpen(true);
+//   };
+
+//   const sizeOptions = ["Small", "Medium", "Large", "Extra Large"];
+//   const grapeOptions = [
+//     "Merlot",
+//     "Pinot Noir",
+//     "Sauvignon Blanc",
+//     "Riesling",
+//     "Rosé",
+//     "Gewurztraminer",
+//     "Rouge Pur",
+//     "Pinot Grigio",
+//   ];
+//   const availabilityOptions = ["In Stock", "Out Of Stock"];
+//   const allOptions = ["Featured", "Popular", "New Arrivals"];
+//   const sortByOptions = [
+//     "Best Sellers",
+//     "Featured",
+//     "Alphabetically A-Z",
+//     "Alphabetically Z-A",
+//     "Price, low to high",
+//     "Price, high to low",
+//     "Date, old to new",
+//     "Date, new to old",
+//   ];
+
+//   const handleFilterChange = (name: string, value: any) => {
+//     setFilters((prev) => ({ ...prev, [name]: value }));
+//     setCurrentPage(1);
+//   };
+
+//   const removeChip = (type: string, value: string) => {
+//     if (type === "size") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         size: prev.size.filter((x) => x !== value),
+//       }));
+//     } else if (type === "price") {
+//       setFilters((prev) => ({ ...prev, price: { min: 0, max: 100 } }));
+//     } else if (type === "grape") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         grape: prev.grape.filter((g) => g !== value),
+//       }));
+//     } else if (type === "availability") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         availability: prev.availability.filter((a) => a !== value),
+//       }));
+//     } else if (type === "all") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         all: prev.all.filter((x) => x !== value),
+//       }));
+//     }
+//   };
+
+//   const Accordion = ({ title, children }: { title: string; children: any }) => {
+//     const [open, setOpen] = useState(false);
+//     return (
+//       <div className="border-b border-gray-300 pb-3">
+//         <button
+//           onClick={() => setOpen(!open)}
+//           className="flex justify-between items-center w-full text-left py-3 font-urbanist font-semibold text-lg"
+//         >
+//           <span>{title}</span>
+//           {open ? <Minus size={20} className="text-[#0B0B0B]" /> : <Plus size={20} className="text-[#0B0B0B]" />}
+//         </button>
+
+//         {open && <div className="pl-2 pb-2">{children}</div>}
+//       </div>
+//     );
+//   };
+
+//   const clearAll = () => {
+//     setFilters({
+//       size: [],
+//       price: { min: 0, max: 100 },
+//       grape: [],
+//       all: [],
+//       availability: [],
+//       sortBy: "Best Sellers",
+//     });
+//   };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       if (window.innerWidth >= 1024) setSidebarOpen(false);
+//     };
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   const Chip = ({ label, onRemove }: any) => (
+//     <div className="bg-[#EED291] text-[#0B0B0B] px-3 py-1 rounded-md flex items-center gap-2 font-urbanist text-sm">
+//       {label}
+//       <button onClick={onRemove}>
+//         <X size={16} />
+//       </button>
+//     </div>
+//   );
+
+//   return (
+//     <>
+//       {/* ---- TOP BANNER ---- */}
+//       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
+//         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
+//           <p className="font-urbanist font-semibold text-base text-white">
+//             Home <span className="font-Poppins me-1 ms-1">&gt; </span>Shop
+//           </p>
+//           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">Products</p>
+//         </div>
+//       </div>
+
+//       <div className="w-full">
+//         <div className="w-[95%] mx-auto pt-[55px] xl:pt-[100px]">
+//           {/* ---- TOP FILTERS ---- */}
+//           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
+//             <div className="flex items-center flex-wrap gap-3">
+//               <button onClick={handleOpenSidebar} className="flex items-center gap-2 w-[60px] h-[40px] rounded-lg font-urbanist font-semibold text-sm text-[#0B0B0B]">
+//                 <Filter size={18} />
+//                 <span>Filter</span>
+//               </button>
+
+//               {/* DESKTOP FILTERS */}
+//               <div className="hidden xl:flex items-center gap-3">
+//                 <div className="w-[150px]">
+//                   <FilterDropdown type="multi" label="Size" value={filters.size} options={sizeOptions} onChange={(v) => handleFilterChange("size", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="price" value={filters.price} label="Price" onChange={(v) => handleFilterChange("price", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="multi" label="Grape" value={filters.grape} options={grapeOptions} onChange={(v) => handleFilterChange("grape", v)} />
+//                 </div>
+
+//                 <div className="w-[140px]">
+//                   <FilterDropdown type="multi" label="All" value={filters.all} options={allOptions} onChange={(v) => handleFilterChange("all", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="multi" label="Availability" value={filters.availability} options={availabilityOptions} onChange={(v) => handleFilterChange("availability", v)} />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* SORT DROPDOWN */}
+//             <div className="flex items-center gap-3 w-full md:w-auto">
+//               <span className="font-urbanist font-semibold text-sm md:text-base text-[#0B0B0B]">Sort By:</span>
+//               <div className="w-[180px]">
+//                 <FilterDropdown type="single" value={filters.sortBy} label="Sort" options={sortByOptions} onChange={(v) => handleFilterChange("sortBy", v)} />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* ---- FILTER CHIPS ---- */}
+//           <div className="mt-6 flex flex-wrap items-center gap-3">
+//             {(filters.size.length > 0 || filters.price.min !== 0 || filters.price.max !== 100 || filters.grape.length > 0 || filters.availability.length > 0 || filters.all.length > 0) && (
+//               <button onClick={clearAll} className="text-[#0B0B0B] underline font-urbanist text-sm">
+//                 Clear All
+//               </button>
+//             )}
+
+//             {filters.size.map((s) => (
+//               <Chip key={s} label={s} onRemove={() => removeChip("size", s)} />
+//             ))}
+
+//             {(filters.price.min !== 0 || filters.price.max !== 100) && (
+//               <Chip label={`$${filters.price.min} - $${filters.price.max}`} onRemove={() => removeChip("price", "")} />
+//             )}
+
+//             {filters.grape.map((g) => (
+//               <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
+//             ))}
+
+//             {filters.availability.map((a) => (
+//               <Chip key={a} label={a} onRemove={() => removeChip("availability", a)} />
+//             ))}
+
+//             {filters.all.map((c) => (
+//               <Chip key={c} label={c} onRemove={() => removeChip("all", c)} />
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* ---- SIDEBAR ---- */}
+//         <div
+//           className={`fixed top-0 left-0 h-full w-[72%] sm:w-[40%] md:w-[38%] lg:w-[28%] z-[9999] bg-white shadow-xl transform transition-all duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+//         >
+//           <div className="flex justify-between items-center px-4 py-4">
+//             <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
+//             <button onClick={() => setSidebarOpen(false)}>
+//               <X size={24} />
+//             </button>
+//           </div>
+
+//           <div className="p-4 overflow-y-auto h-[calc(100%-60px)] font-urbanist">
+//             {(filters.size.length > 0 || filters.price.min !== 0 || filters.price.max !== 100 || filters.grape.length > 0 || filters.availability.length > 0 || filters.all.length > 0) && (
+//               <div className="flex justify-between items-center mb-4">
+//                 <h3 className="font-urbanist font-semibold text-lg">Filters</h3>
+//                 <button onClick={clearAll} className="text-[#0B0B0B] underline text-sm font-medium">
+//                   Clear All
+//                 </button>
+//               </div>
+//             )}
+
+//             <Accordion title="Size">
+//               {sizeOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-1">
+//                   <input
+//                     type="checkbox"
+//                     name="size"
+//                     checked={filters.size.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.size.includes(opt) ? filters.size.filter((x) => x !== opt) : [...filters.size, opt];
+//                       handleFilterChange("size", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             {/* ---------- REPLACED PRICE SECTION (dual-handle for sidebar) ---------- */}
+//             <Accordion title="Price">
+//               <div className="flex flex-col gap-4">
+//                 <div className="relative w-full h-6">
+//                   {/* inactive full track */}
+//                   <div className="absolute inset-0 rounded-full" style={{ background: "#D4D4D4", height: 8 }} />
+
+//                   {/* active (black) segment */}
+//                   <div
+//                     className="absolute rounded-full"
+//                     style={{
+//                       left: `${filters.price.min}%`,
+//                       width: `${filters.price.max - filters.price.min}%`,
+//                       background: "#000000",
+//                       height: 8,
+//                     }}
+//                   />
+
+//                   {/* invisible range inputs overlaid */}
+//                   <input
+//                     type="range"
+//                     min={0}
+//                     max={100}
+//                     step={1}
+//                     value={filters.price.min}
+//                     onMouseDown={() => {}}
+//                     onChange={(e) => {
+//                       const v = Number(e.target.value);
+//                       if (v < filters.price.max) handleFilterChange("price", { ...filters.price, min: v });
+//                     }}
+//                     className="absolute left-0 top-0 w-full h-9 bg-transparent appearance-none opacity-0"
+//                     style={{ zIndex: 3 }}
+//                   />
+
+//                   <input
+//                     type="range"
+//                     min={0}
+//                     max={100}
+//                     step={1}
+//                     value={filters.price.max}
+//                     onMouseDown={() => {}}
+//                     onChange={(e) => {
+//                       const v = Number(e.target.value);
+//                       if (v > filters.price.min) handleFilterChange("price", { ...filters.price, max: v });
+//                     }}
+//                     className="absolute left-0 top-0 w-full h-9 bg-transparent appearance-none opacity-0"
+//                     style={{ zIndex: 2 }}
+//                   />
+
+//                   {/* custom handles (no bubbles) */}
+//                   <div style={{ left: `${filters.price.min}%` }} className="absolute -translate-x-1/2 pointer-events-none" >
+//                     <div className="w-4 h-4 bg-white rounded-full border border-black mt-[-6px]" />
+//                   </div>
+
+//                   <div style={{ left: `${filters.price.max}%` }} className="absolute -translate-x-1/2 pointer-events-none" >
+//                     <div className="w-4 h-4 bg-white rounded-full border border-black mt-[-6px]" />
+//                   </div>
+//                 </div>
+
+//                 <div className="flex justify-between">
+//                   <div className="border px-3 py-1 rounded">${filters.price.min}</div>
+//                   <span>to</span>
+//                   <div className="border px-3 py-1 rounded">${filters.price.max}</div>
+//                 </div>
+//               </div>
+//             </Accordion>
+
+//             <Accordion title="Grape">
+//               {grapeOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
+//                   <input
+//                     type="checkbox"
+//                     value={opt}
+//                     checked={filters.grape.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.grape.includes(opt) ? filters.grape.filter((x) => x !== opt) : [...filters.grape, opt];
+
+//                       handleFilterChange("grape", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="w-4 h-4 accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             <Accordion title="All Categories">
+//               {allOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2">
+//                   <input
+//                     type="checkbox"
+//                     name="all"
+//                     checked={filters.all.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.all.includes(opt) ? filters.all.filter((x) => x !== opt) : [...filters.all, opt];
+//                       handleFilterChange("all", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+
+//             <Accordion title="Availability">
+//               {availabilityOptions.map((opt) => (
+//                 <label key={opt} className="flex items-center gap-3 py-2 cursor-pointer">
+//                   <input
+//                     type="checkbox"
+//                     value={opt}
+//                     checked={filters.availability.includes(opt)}
+//                     onChange={() => {
+//                       const u = filters.availability.includes(opt) ? filters.availability.filter((x) => x !== opt) : [...filters.availability, opt];
+
+//                       handleFilterChange("availability", u);
+//                       setSidebarOpen(false);
+//                     }}
+//                     className="w-4 h-4 accent-[#E5C97A]"
+//                   />
+//                   <span>{opt}</span>
+//                 </label>
+//               ))}
+//             </Accordion>
+//           </div>
+//         </div>
+
+//         {sidebarOpen && (
+//           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[900] xl:hidden" onClick={() => setSidebarOpen(false)} />
+//         )}
+
+//         {/* ---- PRODUCTS GRID ---- */}
+//         <div className="w-[95%] xl:w-[80%] pb-[55px] xl:pb-[100px] mx-auto grid gap-8 grid-cols-2 md:grid-cols-3 mt-10">
+//           {currentProducts.map((product, index) => (
+//             <ProductsChild key={index} product={product} />
+//           ))}
+//         </div>
+
+//         {/* ---- PAGINATION ---- */}
+//         <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
+//           <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
+//             <p className="text-sm">Showing</p>
+//             <select
+//               value={limit}
+//               onChange={(e) => {
+//                 setLimit(Number(e.target.value));
+//                 setCurrentPage(1);
+//               }}
+//               className="border border-[#E5C97A] rounded-lg px-2 py-1 text-sm"
+//             >
+//               {itemsPerPageOptions.map((opt) => (
+//                 <option key={opt} value={opt}>
+//                   {opt}
+//                 </option>
+//               ))}
+//             </select>
+
+//             <p className="text-sm">
+//               of <span className="font-semibold">{totalItems}</span> entries
+//             </p>
+//           </div>
+
+//           <div className="flex items-center gap-2">
+//             <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-1 border cursor-pointer font-urbanist border-[#E5C97A] rounded disabled:opacity-50">
+//               Prev
+//             </button>
+
+//             {Array.from({ length: totalPages }).map((_, i) => {
+//               const p = i + 1;
+//               return (
+//                 <button
+//                   key={p}
+//                   onClick={() => setCurrentPage(p)}
+//                   className={`px-4 py-2 rounded  font-urbanist cursor-pointer text-sm ${currentPage === p ? "bg-[#EED291]" : "bg-white border border-[#EED291]"}`}
+//                 >
+//                   {p}
+//                 </button>
+//               );
+//             })}
+
+//             <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-1 border cursor-pointer  font-urbanist border-[#EED291] rounded disabled:opacity-50">
+//               Next
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Shop;
+
+
+
+
+// import React, { useState, useMemo, useEffect } from "react";
+// import { X, Filter, Plus, Minus } from "lucide-react";
+// import ProductsChild from "../products/productsChild";
+// import FilterDropdown from "../ui/FilterDropDown";
+// import axios from "axios";
+// import { useSelector } from "react-redux";
+
+// interface Product {
+//   type: string;
+//   productImg: string;
+//   productName: string;
+//   variety: string;
+//   varietylogo: string;
+//   price: string;
+//   medal?: string;
+//   flavour: string;
+//   size: string;
+//   inStock: boolean;
+//   categoryType: string;
+// }
+
+// const Shop: React.FC = () => {
+//   const [filters, setFilters] = useState({
+//     size: [] as string[],
+//     price: { min: 0, max: 100 },
+//     grape: [] as string[],
+//     all: [] as string[],
+//     availability: [] as string[],
+//     sortBy: "Alphabetically Z-A",
+//   });
+
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+//   const itemsPerPageOptions = [6, 10, 20, 30, 100];
+//   const [limit, setLimit] = useState(itemsPerPageOptions[0]);
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+//   const [totalItems, setTotalItems] = useState(0);
+
+//   const [errorMessage, setErrorMessage] = useState<string>("");
+
+//   // Fetch filtered products from backend
+//   const fetchFilteredProducts = async () => {
+//     try {
+//       const sizeStr = filters.size.length > 0 ? filters.size.join(",") : "";
+//       const categoryStr = filters.all.length > 0 ? filters.all.join(",") : "";
+//       const grapeStr = filters.grape.length > 0 ? filters.grape.join(",") : "";
+//       const availability = filters.availability.length > 0 ? filters.availability.join(",") : "";
+
+//       const queryParams = new URLSearchParams({
+//         size: sizeStr,
+//         grape: grapeStr,
+//         minPrice: filters.price.min.toString(),
+//         maxPrice: filters.price.max.toString(),
+//         availability,
+//         categoryType: categoryStr,
+//         sortBy: filters.sortBy,
+//         page: currentPage.toString(),
+//         limit: limit.toString(),
+//       });
+
+//       const url = `${import.meta.env.VITE_API_URL}/products/getFilteredProducts?${queryParams.toString()}`;
+//       const res = await axios.get(url);
+
+//       if (res.data.success) {
+//         const products = res.data.data;
+//         setFilteredProducts(products);
+//         setTotalItems(res.data.total);
+
+//         // Handle error messages
+//         if (products.length === 0) {
+//           if (filters.availability.includes("Out Of Stock")) {
+//             setErrorMessage("No out-of-stock products found.");
+//           } else if (filters.availability.includes("In Stock")) {
+//             setErrorMessage("No in-stock products available.");
+//           } else {
+//             setErrorMessage("No products found for the selected filters.");
+//           }
+//         } else {
+//           setErrorMessage("");
+//         }
+//       }
+//     } catch (error) {
+//       console.error("FILTER API FAILED:", error);
+//     }
+//   };
+
+//   // Fetch when any filter changes
+//   useEffect(() => {
+//     fetchFilteredProducts();
+//   }, [filters, limit, currentPage]);
+
+//   const totalPages = Math.ceil(totalItems / limit);
+//   const currentProducts = filteredProducts;
+
+//   const shopDetails = useSelector((state: any) => state.cart.productsDetails);
+
+//   const handleOpenSidebar = () => {
+//     if (typeof window !== "undefined" && window.innerWidth > 1024) return;
+//     setSidebarOpen(true);
+//   };
+
+//   const sizeOptions = ["Small", "Medium", "Large", "Extra Large"];
+//   const grapeOptions = [
+//     "Merlot",
+//     "Pinot Noir",
+//     "Sauvignon Blanc",
+//     "Riesling",
+//     "Rosé",
+//     "Gewurztraminer",
+//     "Rouge Pur",
+//     "Pinot Grigio",
+//   ];
+//   const availabilityOptions = ["In Stock", "Out Of Stock"];
+//   const allOptions = ["Featured", "Popular", "New Arrivals"];
+//   const sortByOptions = [
+//     "Best Sellers",
+//     "Featured",
+//     "Alphabetically A-Z",
+//     "Alphabetically Z-A",
+//     "Price, low to high",
+//     "Price, high to low",
+//     "Date, old to new",
+//     "Date, new to old",
+//   ];
+
+//   const handleFilterChange = (name: string, value: any) => {
+//     setFilters((prev) => ({ ...prev, [name]: value }));
+//     setCurrentPage(1);
+//   };
+
+//   const removeChip = (type: string, value: string) => {
+//     if (type === "size") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         size: prev.size.filter((x) => x !== value),
+//       }));
+//     } else if (type === "price") {
+//       setFilters((prev) => ({ ...prev, price: { min: 0, max: 100 } }));
+//     } else if (type === "grape") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         grape: prev.grape.filter((g) => g !== value),
+//       }));
+//     } else if (type === "availability") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         availability: prev.availability.filter((a) => a !== value),
+//       }));
+//     } else if (type === "all") {
+//       setFilters((prev) => ({
+//         ...prev,
+//         all: prev.all.filter((x) => x !== value),
+//       }));
+//     }
+//   };
+
+//   const Accordion = ({ title, children }: { title: string; children: any }) => {
+//     const [open, setOpen] = useState(false);
+//     return (
+//       <div className="border-b border-gray-300 pb-3">
+//         <button
+//           onClick={() => setOpen(!open)}
+//           className="flex justify-between items-center w-full text-left py-3 font-urbanist font-semibold text-lg"
+//         >
+//           <span>{title}</span>
+//           {open ? <Minus size={20} className="text-[#0B0B0B]" /> : <Plus size={20} className="text-[#0B0B0B]" />}
+//         </button>
+
+//         {open && <div className="pl-2 pb-2">{children}</div>}
+//       </div>
+//     );
+//   };
+
+//   const clearAll = () => {
+//     setFilters({
+//       size: [],
+//       price: { min: 0, max: 100 },
+//       grape: [],
+//       all: [],
+//       availability: [],
+//       sortBy: "Best Sellers",
+//     });
+//   };
+
+//   useEffect(() => {
+//     const handleResize = () => {
+//       if (window.innerWidth >= 1024) setSidebarOpen(false);
+//     };
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   const Chip = ({ label, onRemove }: any) => (
+//     <div className="bg-[#EED291] text-[#0B0B0B] px-3 py-1 rounded-md flex items-center gap-2 font-urbanist text-sm">
+//       {label}
+//       <button onClick={onRemove}>
+//         <X size={16} />
+//       </button>
+//     </div>
+//   );
+
+//   return (
+//     <>
+//       {/* ---- TOP BANNER ---- */}
+//       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
+//         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
+//           <p className="font-urbanist font-semibold text-base text-white">
+//             Home <span className="font-Poppins me-1 ms-1">&gt; </span>Shop
+//           </p>
+//           <p className="font-cormorant font-bold text-[28px] md:text-[34px] lg:text-[48px] uppercase text-white">Products</p>
+//         </div>
+//       </div>
+
+//       <div className="w-full">
+//         <div className="w-[95%] mx-auto pt-[55px] xl:pt-[100px]">
+          
+//           {/* ---- TOP FILTERS ---- */}
+//           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-6">
+//             <div className="flex items-center flex-wrap gap-3">
+//               <button onClick={handleOpenSidebar} className="flex items-center gap-2 w-[60px] h-[40px] rounded-lg font-urbanist font-semibold text-sm text-[#0B0B0B]">
+//                 <Filter size={18} />
+//                 <span>Filter</span>
+//               </button>
+
+//               {/* DESKTOP FILTERS */}
+//               <div className="hidden xl:flex items-center gap-3">
+//                 <div className="w-[150px]">
+//                   <FilterDropdown type="multi" label="Size" value={filters.size} options={sizeOptions} onChange={(v) => handleFilterChange("size", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="price" value={filters.price} label="Price" onChange={(v) => handleFilterChange("price", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="multi" label="Grape" value={filters.grape} options={grapeOptions} onChange={(v) => handleFilterChange("grape", v)} />
+//                 </div>
+
+//                 <div className="w-[140px]">
+//                   <FilterDropdown type="multi" label="All" value={filters.all} options={allOptions} onChange={(v) => handleFilterChange("all", v)} />
+//                 </div>
+
+//                 <div className="w-[200px]">
+//                   <FilterDropdown type="multi" label="Availability" value={filters.availability} options={availabilityOptions} onChange={(v) => handleFilterChange("availability", v)} />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* SORT DROPDOWN */}
+//             <div className="flex items-center gap-3 w-full md:w-auto">
+//               <span className="font-urbanist font-semibold text-sm md:text-base text-[#0B0B0B]">Sort By:</span>
+//               <div className="w-[180px]">
+//                 <FilterDropdown type="single" value={filters.sortBy} label="Sort" options={sortByOptions} onChange={(v) => handleFilterChange("sortBy", v)} />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* ---- FILTER CHIPS ---- */}
+//           <div className="mt-6 flex flex-wrap items-center gap-3">
+            
+//             {(filters.size.length > 0 || filters.price.min !== 0 || filters.price.max !== 100 || filters.grape.length > 0 || filters.availability.length > 0 || filters.all.length > 0) && (
+//               <button onClick={clearAll} className="text-[#0B0B0B] underline font-urbanist text-sm">
+//                 Clear All
+//               </button>
+//             )}
+
+//             {filters.size.map((s) => (
+//               <Chip key={s} label={s} onRemove={() => removeChip("size", s)} />
+//             ))}
+
+//             {(filters.price.min !== 0 || filters.price.max !== 100) && (
+//               <Chip label={`$${filters.price.min} - $${filters.price.max}`} onRemove={() => removeChip("price", "")} />
+//             )}
+
+//             {filters.grape.map((g) => (
+//               <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
+//             ))}
+
+//             {filters.availability.map((a) => (
+//               <Chip key={a} label={a} onRemove={() => removeChip("availability", a)} />
+//             ))}
+
+//             {filters.all.map((c) => (
+//               <Chip key={c} label={c} onRemove={() => removeChip("all", c)} />
+//             ))}
+
+//           </div>
+//         </div>
+
+//         {/* ---- ERROR MESSAGE (IF NO PRODUCTS) ---- */}
+//         {errorMessage && (
+//           <div className="w-[95%] xl:w-[80%] mx-auto mt-6 text-center text-red-600 font-urbanist font-semibold text-lg">
+//             {errorMessage}
+//           </div>
+//         )}
+
+//         {/* ---- PRODUCTS GRID ---- */}
+//         <div className="w-[95%] xl:w-[80%] pb-[55px] xl:pb-[100px] mx-auto grid gap-8 grid-cols-2 md:grid-cols-3 mt-10">
+//           {!errorMessage &&
+//             currentProducts.map((product, index) => (
+//               <ProductsChild key={index} product={product} />
+//             ))
+//           }
+//         </div>
+
+//         {/* ---- PAGINATION ---- */}
+//         {!errorMessage && (
+//           <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
+//             <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
+//               <p className="text-sm">Showing</p>
+//               <select
+//                 value={limit}
+//                 onChange={(e) => {
+//                   setLimit(Number(e.target.value));
+//                   setCurrentPage(1);
+//                 }}
+//                 className="border border-[#E5C97A] rounded-lg px-2 py-1 text-sm"
+//               >
+//                 {itemsPerPageOptions.map((opt) => (
+//                   <option key={opt} value={opt}>
+//                     {opt}
+//                   </option>
+//                 ))}
+//               </select>
+
+//               <p className="text-sm">
+//                 of <span className="font-semibold">{totalItems}</span> entries
+//               </p>
+//             </div>
+
+//             <div className="flex items-center gap-2">
+//               <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="px-3 py-1 border cursor-pointer font-urbanist border-[#E5C97A] rounded disabled:opacity-50">
+//                 Prev
+//               </button>
+
+//               {Array.from({ length: totalPages }).map((_, i) => {
+//                 const p = i + 1;
+//                 return (
+//                   <button
+//                     key={p}
+//                     onClick={() => setCurrentPage(p)}
+//                     className={`px-4 py-2 rounded font-urbanist cursor-pointer text-sm ${
+//                       currentPage === p ? "bg-[#EED291]" : "bg-white border border-[#EED291]"
+//                     }`}
+//                   >
+//                     {p}
+//                   </button>
+//                 );
+//               })}
+
+//               <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="px-3 py-1 border cursor-pointer font-urbanist border-[#EED291] rounded disabled:opacity-50">
+//                 Next
+//               </button>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Shop;
+
+
+
 import React, { useState, useMemo, useEffect } from "react";
 import { X, Filter, Plus, Minus } from "lucide-react";
 import ProductsChild from "../products/productsChild";
@@ -727,10 +2824,10 @@ interface Product {
 
 const Shop: React.FC = () => {
   const [filters, setFilters] = useState({
-    size: "Size",
+    size: [] as string[],
     price: { min: 0, max: 100 },
     grape: [] as string[],
-    all: "All",
+    all: [] as string[],
     availability: [] as string[],
     sortBy: "Alphabetically Z-A",
   });
@@ -744,43 +2841,55 @@ const Shop: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [totalItems, setTotalItems] = useState(0);
 
-  // Fetch filtered products from backend
+  // NEW → availability / no product message
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Fetch products
   const fetchFilteredProducts = async () => {
     try {
-      const availability =
-        filters.availability.length > 0 ? filters.availability[0] : "";
-
-      const grapeStr =
-        filters.grape.length > 0 ? filters.grape.join(",") : "";
+      const sizeStr = filters.size.length ? filters.size.join(",") : "";
+      const categoryStr = filters.all.length ? filters.all.join(",") : "";
+      const grapeStr = filters.grape.length ? filters.grape.join(",") : "";
+      const availability = filters.availability.length ? filters.availability.join(",") : "";
 
       const queryParams = new URLSearchParams({
-        size: filters.size !== "Size" ? filters.size : "",
+        size: sizeStr,
         grape: grapeStr,
         minPrice: filters.price.min.toString(),
         maxPrice: filters.price.max.toString(),
         availability,
-        categoryType: filters.all !== "All" ? filters.all : "",
+        categoryType: categoryStr,
         sortBy: filters.sortBy,
         page: currentPage.toString(),
         limit: limit.toString(),
       });
 
-      const url = `${
-        import.meta.env.VITE_API_URL
-      }/products/getFilteredProducts?${queryParams.toString()}`;
-
+      const url = `${import.meta.env.VITE_API_URL}/products/getFilteredProducts?${queryParams.toString()}`;
       const res = await axios.get(url);
 
       if (res.data.success) {
-        setFilteredProducts(res.data.data);
+        const products = res.data.data;
+        setFilteredProducts(products);
         setTotalItems(res.data.total);
+
+        // NEW ⚠ AVAILABILITY MESSAGES
+        if (products.length === 0) {
+          if (filters.availability.includes("Out Of Stock")) {
+            setErrorMessage("No out-of-stock products found.");
+          } else if (filters.availability.includes("In Stock")) {
+            setErrorMessage("No in-stock products available.");
+          } else {
+            setErrorMessage("No products found for the selected filters.");
+          }
+        } else {
+          setErrorMessage("");
+        }
       }
     } catch (error) {
       console.error("FILTER API FAILED:", error);
     }
   };
 
-  // Fetch when any filter changes
   useEffect(() => {
     fetchFilteredProducts();
   }, [filters, limit, currentPage]);
@@ -788,7 +2897,7 @@ const Shop: React.FC = () => {
   const totalPages = Math.ceil(totalItems / limit);
   const currentProducts = filteredProducts;
 
-  const shopDetails = useSelector((state) => state.cart.productsDetails);
+  const shopDetails = useSelector((state: any) => state.cart.productsDetails);
 
   const handleOpenSidebar = () => {
     if (typeof window !== "undefined" && window.innerWidth > 1024) return;
@@ -826,7 +2935,10 @@ const Shop: React.FC = () => {
 
   const removeChip = (type: string, value: string) => {
     if (type === "size") {
-      setFilters((prev) => ({ ...prev, size: "Size" }));
+      setFilters((prev) => ({
+        ...prev,
+        size: prev.size.filter((x) => x !== value),
+      }));
     } else if (type === "price") {
       setFilters((prev) => ({ ...prev, price: { min: 0, max: 100 } }));
     } else if (type === "grape") {
@@ -840,11 +2952,15 @@ const Shop: React.FC = () => {
         availability: prev.availability.filter((a) => a !== value),
       }));
     } else if (type === "all") {
-      setFilters((prev) => ({ ...prev, all: "All" }));
+      setFilters((prev) => ({
+        ...prev,
+        all: prev.all.filter((x) => x !== value),
+      }));
     }
   };
 
-  const Accordion = ({ title, children }: { title: string; children: any }) => {
+
+    const Accordion = ({ title, children }: { title: string; children: any }) => {
     const [open, setOpen] = useState(false);
     return (
       <div className="border-b border-gray-300 pb-3">
@@ -870,7 +2986,7 @@ const Shop: React.FC = () => {
       size: [],
       price: { min: 0, max: 100 },
       grape: [],
-      all: [],  
+      all: [],
       availability: [],
       sortBy: "Best Sellers",
     });
@@ -895,7 +3011,7 @@ const Shop: React.FC = () => {
 
   return (
     <>
-      {/* ---- TOP BANNER ---- */}
+      {/* TOP BANNER */}
       <div className="bg-[url('/images/productDetailsImg.png')] h-[320px] lg:h-[340px] xl:h-[400px] relative top-0 bg-cover bg-center ">
         <div className="absolute z-50 ps-3 md:ps-6 lg:ps-7 xl:ps-12 flex flex-col gap-1 mt-38 md:mt-45 lg:mt-50 xl:mt-60 w-[95%] xl:w-[80%] mx-auto">
           <p className="font-urbanist font-semibold text-base text-white">
@@ -924,7 +3040,7 @@ const Shop: React.FC = () => {
               <div className="hidden xl:flex items-center gap-3">
                 <div className="w-[150px]">
                   <FilterDropdown
-                    type="single"
+                    type="multi"
                     label="Size"
                     value={filters.size}
                     options={sizeOptions}
@@ -941,6 +3057,17 @@ const Shop: React.FC = () => {
                   />
                 </div>
 
+                {/* UPDATED WIDTH FOR ALL DROPDOWN */}
+                <div className="w-[240px]">
+                  <FilterDropdown
+                    type="multi"
+                    label="All"
+                    value={filters.all}
+                    options={allOptions}
+                    onChange={(v) => handleFilterChange("all", v)}
+                  />
+                </div>
+
                 <div className="w-[200px]">
                   <FilterDropdown
                     type="multi"
@@ -948,16 +3075,6 @@ const Shop: React.FC = () => {
                     value={filters.grape}
                     options={grapeOptions}
                     onChange={(v) => handleFilterChange("grape", v)}
-                  />
-                </div>
-
-                <div className="w-[140px]">
-                  <FilterDropdown
-                    type="single"
-                    label="All"
-                    value={filters.all}
-                    options={allOptions}
-                    onChange={(v) => handleFilterChange("all", v)}
                   />
                 </div>
 
@@ -992,12 +3109,12 @@ const Shop: React.FC = () => {
 
           {/* ---- FILTER CHIPS ---- */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            {(filters.size !== "Size" ||
+            {(filters.size.length > 0 ||
               filters.price.min !== 0 ||
               filters.price.max !== 100 ||
               filters.grape.length > 0 ||
               filters.availability.length > 0 ||
-              filters.all !== "All") && (
+              filters.all.length > 0) && (
               <button
                 onClick={clearAll}
                 className="text-[#0B0B0B] underline font-urbanist text-sm"
@@ -1006,12 +3123,13 @@ const Shop: React.FC = () => {
               </button>
             )}
 
-            {filters.size !== "Size" && (
+            {filters.size.map((s) => (
               <Chip
-                label={filters.size}
-                onRemove={() => removeChip("size", filters.size)}
+                key={s}
+                label={s}
+                onRemove={() => removeChip("size", s)}
               />
-            )}
+            ))}
 
             {(filters.price.min !== 0 || filters.price.max !== 100) && (
               <Chip
@@ -1021,7 +3139,11 @@ const Shop: React.FC = () => {
             )}
 
             {filters.grape.map((g) => (
-              <Chip key={g} label={g} onRemove={() => removeChip("grape", g)} />
+              <Chip
+                key={g}
+                label={g}
+                onRemove={() => removeChip("grape", g)}
+              />
             ))}
 
             {filters.availability.map((a) => (
@@ -1032,274 +3154,97 @@ const Shop: React.FC = () => {
               />
             ))}
 
-            {filters.all !== "All" && (
+            {filters.all.map((c) => (
               <Chip
-                label={filters.all}
-                onRemove={() => removeChip("all", filters.all)}
+                key={c}
+                label={c}
+                onRemove={() => removeChip("all", c)}
               />
-            )}
+            ))}
           </div>
         </div>
 
-        {/* ---- SIDEBAR ---- */}
-        <div
-          className={`fixed top-0 left-0 h-full w-[72%] sm:w-[40%] md:w-[38%] lg:w-[28%] z-[9999] bg-white shadow-xl transform transition-all duration-300 ${
-            sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          <div className="flex justify-between items-center px-4 py-4">
-            <h2 className="text-xl font-semibold font-urbanist">Sidebar</h2>
-            <button onClick={() => setSidebarOpen(false)}>
-              <X size={24} />
-            </button>
+        {/* ---- ERROR MESSAGE ---- */}
+        {errorMessage && (
+          <div className="w-[95%] xl:w-[80%] mx-auto mt-6 text-center text-red-600 font-urbanist font-semibold text-lg">
+            {errorMessage}
           </div>
-
-          <div className="p-4 overflow-y-auto h-[calc(100%-60px)] font-urbanist">
-            {(filters.size !== "Size" ||
-              filters.price.min !== 0 ||
-              filters.price.max !== 100 ||
-              filters.grape.length > 0 ||
-              filters.availability.length > 0 ||
-              filters.all !== "All") && (
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-urbanist font-semibold text-lg">Filters</h3>
-                <button
-                  onClick={clearAll}
-                  className="text-[#0B0B0B] underline text-sm font-medium"
-                >
-                  Clear All
-                </button>
-              </div>
-            )}
-
-            <Accordion title="Size">
-              {sizeOptions.map((opt) => (
-                <label key={opt} className="flex items-center gap-3 py-1">
-                  <input
-                    type="radio"
-                    name="size"
-                    value={filters.size}
-                    checked={filters.size === opt}
-                    onChange={() => {
-                      handleFilterChange("size", opt);
-                      setSidebarOpen(false);
-                    }}
-                    className="accent-[#E5C97A]"
-                  />
-                  <span>{opt}</span>
-                </label>
-              ))}
-            </Accordion>
-
-            <Accordion title="Price">
-              <div className="flex flex-col gap-4">
-                <div className="relative w-full h-2 bg-gray-200 rounded-full">
-                  <div
-                    className="absolute h-full bg-[#E5C97A] rounded-full"
-                    style={{
-                      left: `${filters.price.min}%`,
-                      width: `${filters.price.max - filters.price.min}%`,
-                    }}
-                  />
-
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={filters.price.min}
-                    onChange={(e) => {
-                      const v = +e.target.value;
-                      if (v < filters.price.max)
-                        handleFilterChange("price", {
-                          ...filters.price,
-                          min: v,
-                        });
-                    }}
-                    onMouseUp={() => setSidebarOpen(false)}
-                    className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
-                  />
-
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={filters.price.max}
-                    onChange={(e) => {
-                      const v = +e.target.value;
-                      if (v > filters.price.min)
-                        handleFilterChange("price", {
-                          ...filters.price,
-                          max: v,
-                        });
-                    }}
-                    onMouseUp={() => setSidebarOpen(false)}
-                    className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
-                  />
-                </div>
-
-                <div className="flex justify-between">
-                  <div className="border px-3 py-1 rounded">
-                    ${filters.price.min}
-                  </div>
-                  <span>to</span>
-                  <div className="border px-3 py-1 rounded">
-                    ${filters.price.max}
-                  </div>
-                </div>
-              </div>
-            </Accordion>
-
-            <Accordion title="Grape">
-              {grapeOptions.map((opt) => (
-                <label
-                  key={opt}
-                  className="flex items-center gap-3 py-2 cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value={opt}
-                    checked={filters.grape.includes(opt)}
-                    onChange={() => {
-                      const u = filters.grape.includes(opt)
-                        ? filters.grape.filter((x) => x !== opt)
-                        : [...filters.grape, opt];
-
-                      handleFilterChange("grape", u);
-                      setSidebarOpen(false);
-                    }}
-                    className="w-4 h-4 accent-[#E5C97A]"
-                  />
-                  <span>{opt}</span>
-                </label>
-              ))}
-            </Accordion>
-
-            <Accordion title="All Categories">
-              {allOptions.map((opt) => (
-                <label key={opt} className="flex items-center gap-3 py-2">
-                  <input
-                    type="radio"
-                    name="all"
-                    value={filters.all}
-                    checked={filters.all === opt}
-                    onChange={() => {
-                      handleFilterChange("all", opt);
-                      setSidebarOpen(false);
-                    }}
-                    className="accent-[#E5C97A]"
-                  />
-                  <span>{opt}</span>
-                </label>
-              ))}
-            </Accordion>
-
-            <Accordion title="Availability">
-              {availabilityOptions.map((opt) => (
-                <label
-                  key={opt}
-                  className="flex items-center gap-3 py-2 cursor-pointer"
-                >
-                  <input
-                    type="checkbox"
-                    value={opt}
-                    checked={filters.availability.includes(opt)}
-                    onChange={() => {
-                      const u = filters.availability.includes(opt)
-                        ? filters.availability.filter((x) => x !== opt)
-                        : [...filters.availability, opt];
-
-                      handleFilterChange("availability", u);
-                      setSidebarOpen(false);
-                    }}
-                    className="w-4 h-4 accent-[#E5C97A]"
-                  />
-                  <span>{opt}</span>
-                </label>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-
-        {sidebarOpen && (
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[900] xl:hidden"
-            onClick={() => setSidebarOpen(false)}
-          />
         )}
 
         {/* ---- PRODUCTS GRID ---- */}
         <div className="w-[95%] xl:w-[80%] pb-[55px] xl:pb-[100px] mx-auto grid gap-8 grid-cols-2 md:grid-cols-3 mt-10">
-          {currentProducts.map((product, index) => (
-            <ProductsChild key={index} product={product} />
-          ))}
+          {!errorMessage &&
+            currentProducts.map((product, index) => (
+              <ProductsChild key={index} product={product} />
+            ))
+          }
         </div>
 
         {/* ---- PAGINATION ---- */}
-        <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
-          <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
-            <p className="text-sm">Showing</p>
-            <select
-              value={limit}
-              onChange={(e) => {
-                setLimit(Number(e.target.value));
-                setCurrentPage(1);
-              }}
-              className="border border-[#E5C97A] rounded-lg px-2 py-1 text-sm"
-            >
-              {itemsPerPageOptions.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
+        {!errorMessage && (
+          <div className="w-full flex gap-y-4 flex-col md:flex-row justify-between items-center px-6 pb-12">
+            <div className="flex items-center gap-2 mt-4 md:mt-0 font-urbanist">
+              <p className="text-sm">Showing</p>
 
-            <p className="text-sm">
-              of <span className="font-semibold">{totalItems}</span> entries
-            </p>
+              <select
+                value={limit}
+                onChange={(e) => {
+                  setLimit(Number(e.target.value));
+                  setCurrentPage(1);
+                }}
+                className="border border-[#E5C97A] rounded-lg px-2 py-1 text-sm"
+              >
+                {itemsPerPageOptions.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+
+              <p className="text-sm">
+                of <span className="font-semibold">{totalItems}</span> entries
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3 py-1 border cursor-pointer font-urbanist border-[#E5C97A] rounded disabled:opacity-50"
+              >
+                Prev
+              </button>
+
+              {Array.from({ length: totalPages }).map((_, i) => {
+                const p = i + 1;
+                return (
+                  <button
+                    key={p}
+                    onClick={() => setCurrentPage(p)}
+                    className={`px-4 py-2 rounded font-urbanist cursor-pointer text-sm ${
+                      currentPage === p
+                        ? "bg-[#EED291]"
+                        : "bg-white border border-[#EED291]"
+                    }`}
+                  >
+                    {p}
+                  </button>
+                );
+              })}
+
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 border cursor-pointer font-urbanist border-[#EED291] rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="px-3 py-1 border font-urbanist border-[#E5C97A] rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
-
-            {Array.from({ length: totalPages }).map((_, i) => {
-              const p = i + 1;
-              return (
-                <button
-                  key={p}
-                  onClick={() => setCurrentPage(p)}
-                  className={`px-4 py-2 rounded  font-urbanist text-sm ${
-                    currentPage === p
-                      ? "bg-[#EED291]"
-                      : "bg-white border border-[#EED291]"
-                  }`}
-                >
-                  {p}
-                </button>
-              );
-            })}
-
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 border  font-urbanist border-[#EED291] rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </>
   );
 };
 
 export default Shop;
-
-
-
-
