@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios"
-import { clearGuestCartId, storeUserCartId, storeUserId } from "../../utils/cartIdManager";
+import axios from "axios";
+import {
+  clearGuestCartId,
+  storeUserCartId,
+  storeUserId,
+} from "../../utils/cartIdManager";
 import { useNavigate } from "react-router";
+import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +20,8 @@ const Register = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const navigate =  useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const validate = () => {
     let validationErrors = {};
@@ -57,10 +64,10 @@ const Register = () => {
   //   }
   // };
 
-  const {subscribed, ...userData} = formData
+  const { subscribed, ...userData } = formData;
 
   const handleOnRegister = async (e) => {
-      e.preventDefault();  
+    e.preventDefault();
     if (!validate()) return;
 
     try {
@@ -71,7 +78,7 @@ const Register = () => {
         lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
-        guestCartId: guestCartId || null
+        guestCartId: guestCartId || null,
       };
 
       const res = await axios.post(
@@ -82,20 +89,20 @@ const Register = () => {
       if (res.data.success) {
         toast.success("Registered successfully!");
 
-    
+        localStorage.setItem("token", res.data.token);
         storeUserCartId(res.data.cartId);
 
         clearGuestCartId();
 
         localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.data.firstName)
-        navigate("/")
+        localStorage.setItem("userName", res.data.data.firstName);
+        dispatch(fetchCartItemsAPI());
+        navigate("/");
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");
     }
   };
-
 
   return (
     <>

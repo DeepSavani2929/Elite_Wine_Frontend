@@ -25,15 +25,13 @@ const LogoutDrawer = ({ isOpen, onClose }) => {
   const handleLogout = () => {
     dispatch(clearCartItems());
 
-    // localStorage.removeItem("userId");
-    // localStorage.removeItem("userName");
     localStorage.removeItem("token");
     localStorage.removeItem("userCartId");
     localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
 
-    dispatch(clearCartItems());
+    createGuestCartId(); 
 
-    createGuestCartId();
     onClose();
   };
 

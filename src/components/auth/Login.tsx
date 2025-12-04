@@ -6,14 +6,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 
-
 const Login = () => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
   const [loginErrors, setLoginErrors] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [reg, setReg] = useState({
     firstName: "",
@@ -23,7 +22,7 @@ const Login = () => {
     subscribed: false,
   });
   const [regErrors, setRegErrors] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const isValidEmail = (value) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
@@ -39,9 +38,8 @@ const Login = () => {
     return Object.keys(errs).length === 0;
   };
 
-
-    const handleLoginSubmit = async (e) => {
-      e.preventDefault();  
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
     if (!validateLogin()) return;
 
     try {
@@ -50,7 +48,7 @@ const Login = () => {
       const payload = {
         email: login.email,
         password: login.password,
-        guestCartId: guestCartId || null
+        guestCartId: guestCartId || null,
       };
 
       const res = await axios.post(
@@ -61,22 +59,20 @@ const Login = () => {
       if (res.data.success) {
         toast.success(res.data.message);
 
-    
         storeUserCartId(res.data.cartId);
 
         clearGuestCartId();
 
         localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.firstName)
+        localStorage.setItem("userName", res.data.firstName);
 
-          dispatch(fetchCartItemsAPI());
-    
+        dispatch(fetchCartItemsAPI());
+        navigate("/")
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");
     }
   };
-
 
   const validateRegister = () => {
     const errs = {};
@@ -97,10 +93,8 @@ const Login = () => {
     return Object.keys(errs).length === 0;
   };
 
-
-
-    const handleRegisterSubmit = async (e) => {
-      e.preventDefault();  
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
     if (!validateRegister()) return;
 
     try {
@@ -111,7 +105,7 @@ const Login = () => {
         lastName: reg.lastName,
         email: reg.email,
         password: reg.password,
-        guestCartId: guestCartId || null
+        guestCartId: guestCartId || null,
       };
 
       const res = await axios.post(
@@ -120,22 +114,22 @@ const Login = () => {
       );
 
       if (res.data.success) {
-        toast.success("Registered successfully!");
-
-    
+        localStorage.setItem("token", res.data.token);
         storeUserCartId(res.data.cartId);
 
         clearGuestCartId();
 
-        localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.data.firstName)
-        navigate("/")
+        localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("userName", res.data.data.firstName);
+
+        dispatch(fetchCartItemsAPI());
+        onclose();
+        navigate("/");
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");
     }
   };
-
 
   return (
     <>
@@ -215,7 +209,6 @@ const Login = () => {
 
                 <NavLink
                   to="/reset-password"
-            
                   className="text-base font-urbanist underline text-[#0B0B0B] hover:text-[#641026]"
                 >
                   Lost your password?

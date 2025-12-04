@@ -554,181 +554,128 @@ import {
   getUserId,
 } from "../../utils/cartIdManager";
 
-// const getActiveCartId = (): string => {
-//   const userCartId = getUserCartId();
-//   if (userCartId) return userCartId;
-
-//   let guestId = getGuestCartId();
-//   if (!guestId) {
-//     guestId = createGuestCartId();
-//   }
-//   return guestId;
-// };
-
 const getActiveCartId = () => {
-  const userCart = localStorage.getItem("userCartId");
-  if (userCart) return userCart;
+  const userCartId = getUserCartId();
+  if (userCartId) return userCartId;
 
-  let guestCart = localStorage.getItem("guestCartId");
-  if (!guestCart) guestCart = createGuestCartId();
-
-  return guestCart;
+  let guestId = getGuestCartId();
+  if (!guestId) guestId = createGuestCartId();
+  return guestId;
 };
 
+const authHeader = () => {
+  const token = localStorage.getItem("token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
+/* ADD TO CART */
 export const addToCartAPI = createAsyncThunk(
   "cart/addToCart",
-  async (
-    { productId }: { productId: string },
-    { dispatch, rejectWithValue }
-  ) => {
+  async ({ productId }, { dispatch, rejectWithValue }) => {
     try {
       const cartId = getActiveCartId();
-      const userId = getUserId();
 
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/cart/addToCart`,
-        {
-          cartId,
-          productId,
-          userId: userId || null,
-        }
+        { cartId, productId },
+        { headers: authHeader() }
       );
 
       if (res.data.success) {
         toast.success(res.data.message);
-        await dispatch(fetchCartItemsAPI());
-      }
-      else{
-        toast.error(res.data.message)
+        dispatch(fetchCartItemsAPI());
+      } else {
+        toast.error(res.data.message);
       }
 
       return true;
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "Add to cart failed");
-      return rejectWithValue(error);
+    } catch (err) {
+      return rejectWithValue(err);
     }
   }
 );
 
+/* FETCH CART ITEMS */
 export const fetchCartItemsAPI = createAsyncThunk(
   "cart/fetchCartItems",
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const cartId = getActiveCartId();
-      const userId = getUserId();
-
-      const url = `${
-        import.meta.env.VITE_API_URL
-      }/cart/getCartProducts/${cartId}${userId ? `?userId=${userId}` : ""}`;
-
-      const res = await axios.get(url);
-
-      dispatch(getAllCartItems(res.data.data || []));
-
-      return true;
-    } catch (error) {
-      return rejectWithValue("Unable to fetch cart items");
-    }
-  }
-);
-
-export const incrementQuantity = createAsyncThunk(
-  "cart/incrementQuantity",
-  async (productId: string, { dispatch, rejectWithValue }) => {
-    try {
-      const cartId = getActiveCartId();
-
-      const res = await axios.put(
-        `${
-          import.meta.env.VITE_API_URL
-        }/cart/incrementQuantity/${cartId}/${productId}`
-      );
-
-      if (res.data.success) {
-        toast.success(res.data.message);
-        await dispatch(fetchCartItemsAPI());
-      }else{
-        toast.error(res.data.message)
-      }
-
-      return true;
-    } catch (error) {
-      return rejectWithValue("Failed to increase quantity");
-    }
-  }
-);
-
-export const decrementQuantity = createAsyncThunk(
-  "cart/decrementQuantity",
-  async (productId: string, { dispatch, rejectWithValue }) => {
-    try {
-      const cartId = getActiveCartId();
-
-      const res = await axios.put(
-        `${
-          import.meta.env.VITE_API_URL
-        }/cart/decrementQuantity/${cartId}/${productId}`
-      );
-
-      if (res.data.success) {
-        toast.success(res.data.message);
-        await dispatch(fetchCartItemsAPI());
-      }
-      else{
-        toast.error(res.data.message)
-      }
-
-      return true;
-    } catch (error) {
-      return rejectWithValue("Failed to decrease quantity");
-    }
-  }
-);
-
-export const deleteCartProduct = createAsyncThunk(
-  "cart/deleteCartProduct",
-  async (productId: string, { dispatch, rejectWithValue }) => {
-    try {
-      const cartId = getActiveCartId();
 
       const res = await axios.get(
-        `${
-          import.meta.env.VITE_API_URL
-        }/cart/deteleCartProduct/${cartId}/${productId}`
+        `${import.meta.env.VITE_API_URL}/cart/getCartProducts/${cartId}`,
+        { headers: authHeader() }
       );
 
-      if (res.data.success) {
-        toast.success(res.data.message);
-        await dispatch(fetchCartItemsAPI());
-      }
-      else{
-        toast.error(res.data.message)
-      }
-
+      dispatch(getAllCartItems(res.data.data || []));
       return true;
-    } catch (error) {
-      return rejectWithValue("Failed to delete product");
+    } catch {
+      return rejectWithValue("Failed");
     }
   }
 );
 
-const initialState = {
-  cartItems: [] as any[],
-  isDrawerOpen: false,
-};
+/* INCREMENT */
+export const incrementQuantity = createAsyncThunk(
+  "cart/incrementQuantity",
+  async (productId, { dispatch }) => {
+    const cartId = getActiveCartId();
 
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/cart/incrementQuantity/${cartId}/${productId}`,
+      {},
+      { headers: authHeader() }
+    );
+
+    dispatch(fetchCartItemsAPI());
+  }
+);
+
+/* DECREMENT */
+export const decrementQuantity = createAsyncThunk(
+  "cart/decrementQuantity",
+  async (productId, { dispatch }) => {
+    const cartId = getActiveCartId();
+
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/cart/decrementQuantity/${cartId}/${productId}`,
+      {},
+      { headers: authHeader() }
+    );
+
+    dispatch(fetchCartItemsAPI());
+  }
+);
+
+/* DELETE */
+export const deleteCartProduct = createAsyncThunk(
+  "cart/deleteCartProduct",
+  async (productId, { dispatch }) => {
+    const cartId = getActiveCartId();
+
+    await axios.get(
+      `${import.meta.env.VITE_API_URL}/cart/deteleCartProduct/${cartId}/${productId}`,
+      { headers: authHeader() }
+    );
+
+    dispatch(fetchCartItemsAPI());
+  }
+);
+
+/* SLICE */
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: {
+    cartItems: [],
+    isDrawerOpen: false,
+  },
   reducers: {
     setDrawerOpen: (state, action) => {
       state.isDrawerOpen = action.payload;
     },
-
     clearCartItems: (state) => {
       state.cartItems = [];
     },
-
     getAllCartItems: (state, action) => {
       state.cartItems = action.payload;
     },

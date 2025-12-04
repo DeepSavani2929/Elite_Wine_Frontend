@@ -107,11 +107,16 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
       // }
 
       if (res.data.success) {
-  storeUserCartId(res.data.cartId);
   localStorage.setItem("token", res.data.token);
-  localStorage.setItem("userId", res.data.userId)
+  storeUserCartId(res.data.cartId);
+
   clearGuestCartId();
+
+  localStorage.setItem("userId", res.data.userId);
+  localStorage.setItem("userName", res.data.data.firstName);
+
   dispatch(fetchCartItemsAPI());
+  onClose();
 }
 
     } catch (err) {
