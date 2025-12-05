@@ -1,20 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
 import { MoveLeft, MoveRight, X, SlidersVertical } from "lucide-react";
 import ProductsChild from "../products/productsChild";
 import BlogChild from "../blog/BlogChild";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import verietyImg from "../../assets/images/variety.png";
 import productmedal from "../../assets/images/productmedal.png";
-
 import {
   addToCartAPI,
   setDrawerOpen as setCartDrawer,

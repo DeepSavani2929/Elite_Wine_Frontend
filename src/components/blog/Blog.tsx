@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import blog1 from "../../assets/images/blog1.png";
-import blog2 from "../../assets/images/blog2.png";
-import blog3 from "../../assets/images/blog3.png";
 import BlogChild from "./BlogChild";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";

@@ -6,7 +6,6 @@ import {
   getGuestCartId,
   createGuestCartId,
   getUserCartId,
-  getUserId,
 } from "../../utils/cartIdManager";
 
 const getActiveCartId = () => {
@@ -60,10 +59,16 @@ export const fetchCartItemsAPI = createAsyncThunk(
         { headers: authHeader() }
       );
 
-      dispatch(getAllCartItems(res.data.data || []));
+      if (res.data.success) {
+        dispatch(getAllCartItems(res.data.data || []));
+      } else {
+        toast.error(res.data.message || "Failed to fetch cart items");
+      }
+
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message);
+      toast.error(error.response?.data?.message || error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -74,16 +79,25 @@ export const incrementQuantity = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      await axios.put(
+      const res = await axios.put(
         `${
           import.meta.env.VITE_API_URL
         }/cart/incrementQuantity/${cartId}/${productId}`,
         {},
         { headers: authHeader() }
       );
-      dispatch(fetchCartItemsAPI());
+
+      if (res.data.success) {
+        dispatch(fetchCartItemsAPI());
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message || "Failed to increase quantity");
+      }
+
+      return true;
     } catch (error) {
-      toast.error(error.response?.data?.message);
+      toast.error(error.response?.data?.message || error.message);
+      return false;
     }
   }
 );
@@ -94,7 +108,7 @@ export const decrementQuantity = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      await axios.put(
+      const res = await axios.put(
         `${
           import.meta.env.VITE_API_URL
         }/cart/decrementQuantity/${cartId}/${productId}`,
@@ -102,9 +116,17 @@ export const decrementQuantity = createAsyncThunk(
         { headers: authHeader() }
       );
 
-      dispatch(fetchCartItemsAPI());
+      if (res.data.success) {
+        dispatch(fetchCartItemsAPI());
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message || "Failed to decrease quantity");
+      }
+
+      return true;
     } catch (error) {
-      toast.error(error.response?.data?.message);
+      toast.error(error.response?.data?.message || error.message);
+      return false;
     }
   }
 );
@@ -112,16 +134,28 @@ export const decrementQuantity = createAsyncThunk(
 export const deleteCartProduct = createAsyncThunk(
   "cart/deleteCartProduct",
   async (productId, { dispatch }) => {
-    const cartId = getActiveCartId();
+    try {
+      const cartId = getActiveCartId();
 
-    await axios.get(
-      `${
-        import.meta.env.VITE_API_URL
-      }/cart/deteleCartProduct/${cartId}/${productId}`,
-      { headers: authHeader() }
-    );
+      const res = await axios.get(
+        `${
+          import.meta.env.VITE_API_URL
+        }/cart/deteleCartProduct/${cartId}/${productId}`,
+        { headers: authHeader() }
+      );
 
-    dispatch(fetchCartItemsAPI());
+      if (res.data.success) {
+        dispatch(fetchCartItemsAPI());
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message || "Failed to delete cart product");
+      }
+
+      return true;
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+      return false;
+    }
   }
 );
 

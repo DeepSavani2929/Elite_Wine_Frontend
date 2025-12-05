@@ -1,5 +1,4 @@
 import React from "react";
-
 import collection1 from "../../assets/images/collections/collection1.png";
 import collection2 from "../../assets/images/collections/collection2.png";
 import collection3 from "../../assets/images/collections/collection3.png";

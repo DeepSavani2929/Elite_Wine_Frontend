@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartPopover from "../cartProducts/CartPopover";
 import ProfileDrawer from "../profileDrower/ProfileDrower";
 import LogoutDrawer from "../profileDrower/LogoutDrower";
+import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,8 +26,8 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart.cartItems);
-
   const userId = localStorage.getItem("userId");
 
   const location = useLocation();
@@ -78,6 +79,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(fetchCartItemsAPI())
     const measure = () => {
       bannerHeightRef.current = bannerRef.current?.offsetHeight ?? 0;
     };

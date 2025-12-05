@@ -4,6 +4,7 @@ import ProductsChild from "../products/productsChild";
 import FilterDropdown from "../ui/FilterDropDown";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 interface Product {
   type: string;
@@ -81,6 +82,7 @@ const Shop: React.FC = () => {
           }
         } else {
           setErrorMessage("");
+          toast.error(res.data.message);
         }
       }
     } catch (error) {

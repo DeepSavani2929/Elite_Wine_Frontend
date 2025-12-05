@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProductsChild from "./productsChild";
+import { toast } from "react-toastify";
 
 const wineries = [
   { name: "Bergdolt, Reif & Nett", slug: "bergdolt-reif-nett" },
@@ -28,6 +29,9 @@ const Products = () => {
 
       if (res.data.success) {
         setProductsByType(res.data.data);
+      }
+      else{
+        toast.error(res.data.message)
       }
     } catch (error) {
       console.log("Error fetching products:", error);

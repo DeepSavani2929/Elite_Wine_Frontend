@@ -5,6 +5,7 @@ import productDetails2 from "../../assets/images/productDetails2.png";
 import productDetails3 from "../../assets/images/productDetails3.png";
 import productDetails4 from "../../assets/images/productDetails4.png";
 import productDetails5 from "../../assets/images/productDetails5.png";
+import shipping1 from "../../assets/images/shipping1.png";
 import shipping2 from "../../assets/images/shipping2.png";
 import { useEffect, useState, useRef } from "react";
 import ProductsChild from "./productsChild";
@@ -24,6 +25,7 @@ import {
   incrementQuantity,
   setDrawerOpen,
 } from "../../redux/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState("description");
@@ -103,6 +105,8 @@ const ProductDetails = () => {
 
       if (res.data.success) {
         setCurrentProduct(res.data.data);
+      } else {
+        toast.error(res.data.message);
       }
     } catch (err) {
       console.error("Failed to load product:", err);
@@ -119,6 +123,8 @@ const ProductDetails = () => {
 
       if (res.data.success) {
         setReletedProductsList(res.data.data);
+      } else {
+        toast.error(res.data.message);
       }
     } catch (err) {
       console.error("Failed to load product:", err);
