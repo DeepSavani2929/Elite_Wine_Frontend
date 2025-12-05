@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import {
-  clearGuestCartId,
-  storeUserCartId,
-  storeUserId,
-} from "../../utils/cartIdManager";
+import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
 import { useNavigate } from "react-router";
 import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
+import { showError, showSuccess } from "../../utils/toastHandler";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -80,7 +77,7 @@ const Register = () => {
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
 
         localStorage.setItem("token", res.data.token);
         storeUserCartId(res.data.cartId);
@@ -92,10 +89,10 @@ const Register = () => {
         dispatch(fetchCartItemsAPI());
         navigate("/");
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "Register failed");
+      showError(error, "Register failed");
     }
   };
 

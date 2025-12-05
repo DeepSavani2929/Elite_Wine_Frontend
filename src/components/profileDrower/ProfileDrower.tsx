@@ -6,6 +6,7 @@ import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
 import axios from "axios";
 import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
+import { showError, showSuccess } from "../../utils/toastHandler";
 
 const ProfileDrawer = ({ isOpen, onClose }) => {
   const [login, setLogin] = useState({
@@ -85,14 +86,15 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
 
         localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("userName", res.data.data.firstName);
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
         dispatch(fetchCartItemsAPI());
         onClose();
       } else {
-        toast.error(res.data.message);
+            showError(res.data.message);
       }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Register failed");
+    } catch (error) {
+      
+      showError(error, "Login failed");
     }
   };
 

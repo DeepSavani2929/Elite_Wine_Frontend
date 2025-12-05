@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
+import { showError, showSuccess } from "../../utils/toastHandler";
 
 const Login = () => {
   const [login, setLogin] = useState({
@@ -57,7 +58,7 @@ const Login = () => {
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
 
         storeUserCartId(res.data.cartId);
 
@@ -69,10 +70,11 @@ const Login = () => {
         dispatch(fetchCartItemsAPI());
         navigate("/");
       } else {
-        toast.error(res.data.message);
+          showError(res.data.message);
       }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Register failed");
+    } catch (error) {
+
+       showError(error, "Login failed");
     }
   };
 
@@ -120,16 +122,19 @@ const Login = () => {
         storeUserCartId(res.data.cartId);
 
         clearGuestCartId();
-
+        
         localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("userName", res.data.data.firstName);
-
+        showSuccess(res.data.message);
         dispatch(fetchCartItemsAPI());
         onclose();
         navigate("/");
       }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Register failed");
+      else{
+           showError(res.data.message);
+      }
+    } catch (error) {
+      showError(error, "Register failed");
     }
   };
 

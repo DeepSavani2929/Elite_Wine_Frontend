@@ -19,6 +19,7 @@ import {
   incrementQuantity,
 } from "../../redux/cart/cartSlice";
 import axios from "axios";
+import { showError } from "../../utils/toastHandler";
 
 const CartPopover = ({ isOpen, onClose }) => {
   const swiperRef = useRef(null);
@@ -74,9 +75,11 @@ const CartPopover = ({ isOpen, onClose }) => {
 
       if (res.data.success) {
         setReletedProductsList(res.data.data);
+      } else {
+        showError(res.data.message);
       }
-    } catch (err) {
-      console.error("Failed to load product:", err);
+    } catch (error) {
+      showError(error, "Failed to load product");
     } finally {
       setLoading(false);
     }

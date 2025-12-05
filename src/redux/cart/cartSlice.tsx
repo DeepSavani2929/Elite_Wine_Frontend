@@ -7,6 +7,7 @@ import {
   createGuestCartId,
   getUserCartId,
 } from "../../utils/cartIdManager";
+import { showError, showSuccess } from "../../utils/toastHandler";
 
 const getActiveCartId = () => {
   const userCartId = getUserCartId();
@@ -35,14 +36,15 @@ export const addToCartAPI = createAsyncThunk(
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
         dispatch(fetchCartItemsAPI());
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
 
       return true;
     } catch (err) {
+      showError(err, "Failed to add item to cart");
       return rejectWithValue(err);
     }
   }
@@ -62,12 +64,12 @@ export const fetchCartItemsAPI = createAsyncThunk(
       if (res.data.success) {
         dispatch(getAllCartItems(res.data.data || []));
       } else {
-        toast.error(res.data.message || "Failed to fetch cart items");
+        showError(res.data.message, "Failed to fetch cart items");
       }
 
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Failed to fetch cart items");
       return rejectWithValue(error.message);
     }
   }
@@ -89,14 +91,14 @@ export const incrementQuantity = createAsyncThunk(
 
       if (res.data.success) {
         dispatch(fetchCartItemsAPI());
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
       } else {
-        toast.error(res.data.message || "Failed to increase quantity");
+        showError(res.data.message);
       }
 
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Failed to increase quantity");
       return false;
     }
   }
@@ -118,14 +120,14 @@ export const decrementQuantity = createAsyncThunk(
 
       if (res.data.success) {
         dispatch(fetchCartItemsAPI());
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
       } else {
-        toast.error(res.data.message || "Failed to decrease quantity");
+        showError(res.data.message);
       }
 
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Failed to decrease quantity");
       return false;
     }
   }
@@ -146,14 +148,14 @@ export const deleteCartProduct = createAsyncThunk(
 
       if (res.data.success) {
         dispatch(fetchCartItemsAPI());
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
       } else {
-        toast.error(res.data.message || "Failed to delete cart product");
+        showError(res.data.message);
       }
 
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Failed to delete cart product");
       return false;
     }
   }

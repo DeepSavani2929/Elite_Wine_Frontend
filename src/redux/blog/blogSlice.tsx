@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { showError } from "../../utils/toastHandler";
 
 const initialState = {
   blogDetails: [],
@@ -36,14 +37,12 @@ export const getBlogs = createAsyncThunk(
       const res = await axios.get(url);
       if (res.data.success) {
         dispatch(getAllBlogs(res.data.data || []));
-        toast.success(res.data.message);
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
-
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Unable to fetch blogs");
       return rejectWithValue("Unable to fetch cart items");
     }
   }
@@ -58,14 +57,13 @@ export const getBlog = createAsyncThunk(
       const res = await axios.get(url);
       if (res.data.success) {
         dispatch(getPerticularBlog(res.data.data || []));
-        toast.success(res.data.message);
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
 
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Unable to fetch this blog");
       return rejectWithValue("Unable to fetch cart items");
     }
   }
@@ -83,14 +81,13 @@ export const getOtherBlogs = createAsyncThunk(
 
       if (res.data.success) {
         dispatch(getremainingBlogs(res.data.data || []));
-        toast.success(res.data.message);
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
 
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      showError(error, "Unable to fetch other blogs");
       return rejectWithValue("Unable to fetch cart items");
     }
   }

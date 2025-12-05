@@ -26,7 +26,7 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const userId = localStorage.getItem("userId");
 
@@ -79,7 +79,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchCartItemsAPI())
+    dispatch(fetchCartItemsAPI());
     const measure = () => {
       bannerHeightRef.current = bannerRef.current?.offsetHeight ?? 0;
     };

@@ -25,6 +25,7 @@ import {
   getUserCartId,
 } from "../../utils/cartIdManager";
 import { clearCartItems } from "../../redux/cart/cartSlice";
+import { showError } from "../../utils/toastHandler";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -230,8 +231,8 @@ const CheckoutInner: React.FC = () => {
         navigate("/paymentSuccess");
         dispatch(clearCartItems());
       }
-    } catch (err: any) {
-      setErrorMessage("Payment failed. Try again.");
+    } catch (error: any) {
+      showError(error, "Payment failed. Try again.");
     } finally {
       setLoading(false);
     }

@@ -3,6 +3,7 @@ import { clearGuestCartId, storeUserCartId } from "../../utils/cartIdManager";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { showError, showSuccess } from "../../utils/toastHandler";
 
 const ForgotPassword = () => {
   const [userData, setUserData] = useState({
@@ -48,13 +49,13 @@ const ForgotPassword = () => {
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
+          showSuccess(res.data.message);
         navigate("/login");
       } else {
-        toast.error(res.data.message);
+          showError(res.data.message);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Register failed");
+          showError(error, "Email is not valid!");
     }
   };
 
@@ -98,17 +99,17 @@ const ForgotPassword = () => {
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
         storeUserCartId(res.data.cartId);
         clearGuestCartId();
         localStorage.setItem("userId", res.data.data._id);
         localStorage.setItem("userName", res.data.firstName);
         navigate("/");
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Register failed");
+    } catch (error) {
+          showError(error, "Register failed");
     }
   };
 

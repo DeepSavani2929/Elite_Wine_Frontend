@@ -9,6 +9,7 @@ import {
 } from "../../redux/cart/cartSlice";
 import ProductsChild from "../products/productsChild";
 import axios from "axios";
+import { showError } from "../../utils/toastHandler";
 
 const CartDetails = () => {
   const [relatedProductsList, setReletedProductsList] = useState([]);
@@ -22,6 +23,7 @@ const CartDetails = () => {
   useEffect(() => {
     getReletedProducts();
   }, []);
+
   const subTotal = cartItems.reduce(
     (sum, item) => sum + Number(item.price) * item.quantity,
     0
@@ -36,8 +38,11 @@ const CartDetails = () => {
       if (res.data.success) {
         setReletedProductsList(res.data.data);
       }
-    } catch (err) {
-      console.error("Failed to load product:", err);
+      else{
+          showError(res.data.message);
+      }
+    } catch (error) {
+       showError(error,"Failed to load product:");
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { showError, showSuccess } from "../../utils/toastHandler";
 
 const ResetPassword = () => {
   const { email } = useParams();
@@ -49,13 +50,13 @@ const ResetPassword = () => {
       );
 
       if (res.data.success) {
-        toast.success(res.data.message);
+        showSuccess(res.data.message);
         navigate("/login");
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
     } catch (error: any) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      showError(error, "Something went wrong");
     }
   };
 

@@ -25,7 +25,7 @@ import {
   incrementQuantity,
   setDrawerOpen,
 } from "../../redux/cart/cartSlice";
-import { toast } from "react-toastify";
+import { showError } from "../../utils/toastHandler";
 
 const ProductDetails = () => {
   const [activeTab, setActiveTab] = useState("description");
@@ -106,10 +106,10 @@ const ProductDetails = () => {
       if (res.data.success) {
         setCurrentProduct(res.data.data);
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
-    } catch (err) {
-      console.error("Failed to load product:", err);
+    } catch (error) {
+      showError(error, "Failed to load product:");
     } finally {
       setLoading(false);
     }
@@ -124,10 +124,10 @@ const ProductDetails = () => {
       if (res.data.success) {
         setReletedProductsList(res.data.data);
       } else {
-        toast.error(res.data.message);
+        showError(res.data.message);
       }
-    } catch (err) {
-      console.error("Failed to load product:", err);
+    } catch (error) {
+      showError(error, "Failed to load product:");
     } finally {
       setLoading(false);
     }

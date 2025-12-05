@@ -16,6 +16,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import axios from "axios";
 import { toast } from "react-toastify";
+import { showError } from "../../utils/toastHandler";
 
 const PopularProducts = () => {
   const [isBeginning, setIsBeginning] = useState(true);
@@ -34,10 +35,10 @@ const PopularProducts = () => {
         if (res.data.success) {
           setPopularProducts(res.data.data);
         }else{
-          toast.error(res.data.message)
+           showError(res.data.message);
         }
       } catch (error) {
-        console.error("Popular products fetch error:", error);
+          showError(error, "Popular products are not fetched!");
       }
     };
 

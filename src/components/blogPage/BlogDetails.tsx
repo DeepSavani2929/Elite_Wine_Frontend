@@ -16,7 +16,6 @@ import {
   setDrawerOpen as setCartDrawer,
 } from "../../redux/cart/cartSlice";
 import axios from "axios";
-import Blog from "../blog/Blog";
 import { getBlog, getOtherBlogs } from "../../redux/blog/blogSlice";
 
 const BlogDetails = () => {
