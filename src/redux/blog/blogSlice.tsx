@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { showError } from "../../utils/toastHandler";
+import api from "../../api/axiosInterceptor";
 
 const initialState = {
   blogDetails: [],
@@ -32,9 +32,9 @@ export const getBlogs = createAsyncThunk(
   "blogs/fetchBlogs",
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/blogs/getBlogs`;
+      const url = `/blogs/getBlogs`;
 
-      const res = await axios.get(url);
+      const res = await api.get(url);
       if (res.data.success) {
         dispatch(getAllBlogs(res.data.data || []));
       } else {
@@ -52,9 +52,9 @@ export const getBlog = createAsyncThunk(
   "blog/fetchBlog",
   async (blogId, { dispatch, rejectWithValue }) => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/blogs/getBlog/${blogId}`;
+      const url = `/blogs/getBlog/${blogId}`;
 
-      const res = await axios.get(url);
+      const res = await api.get(url);
       if (res.data.success) {
         dispatch(getPerticularBlog(res.data.data || []));
       } else {
@@ -73,11 +73,9 @@ export const getOtherBlogs = createAsyncThunk(
   "otherBlogs/fetchOtherBlogs",
   async (blogId, { dispatch, rejectWithValue }) => {
     try {
-      const url = `${
-        import.meta.env.VITE_API_URL
-      }/blogs/getOtherBlogs/${blogId}`;
+      const url = `/blogs/getOtherBlogs/${blogId}`;
 
-      const res = await axios.get(url);
+      const res = await api.get(url);
 
       if (res.data.success) {
         dispatch(getremainingBlogs(res.data.data || []));

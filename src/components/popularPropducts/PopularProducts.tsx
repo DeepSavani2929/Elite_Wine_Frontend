@@ -5,17 +5,14 @@ import productmedal from "../../assets/images/productmedal.png";
 import ProductsChild from "../products/productsChild";
 import secondtabproduct from "../../assets/images/secondtabproduct.png";
 import thirdtabproduct from "../../assets/images/thirdtabproduct.png";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
-
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import { showError } from "../../utils/toastHandler";
 
 const PopularProducts = () => {
@@ -34,11 +31,11 @@ const PopularProducts = () => {
 
         if (res.data.success) {
           setPopularProducts(res.data.data);
-        }else{
-           showError(res.data.message);
+        } else {
+          showError(res.data.message);
         }
       } catch (error) {
-          showError(error, "Popular products are not fetched!");
+        showError(error, "Popular products are not fetched!");
       }
     };
 

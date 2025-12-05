@@ -57,6 +57,7 @@ const Register = () => {
   const { subscribed, ...userData } = formData;
 
   const handleOnRegister = async (e) => {
+    console.log(userData)
     e.preventDefault();
     if (!validate()) return;
 
@@ -64,10 +65,10 @@ const Register = () => {
       const guestCartId = localStorage.getItem("guestCartId");
 
       const payload = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        password: userData.password,
         guestCartId: guestCartId || null,
       };
 

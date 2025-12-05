@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { toast } from "react-toastify";
-
 import {
   getGuestCartId,
   createGuestCartId,
   getUserCartId,
 } from "../../utils/cartIdManager";
 import { showError, showSuccess } from "../../utils/toastHandler";
+import api from "../../api/axiosInterceptor";
 
 const getActiveCartId = () => {
   const userCartId = getUserCartId();
@@ -29,11 +28,7 @@ export const addToCartAPI = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/cart/addToCart`,
-        { cartId, productId },
-        { headers: authHeader() }
-      );
+      const res = await api.post(`/cart/addToCart`, { cartId, productId });
 
       if (res.data.success) {
         showSuccess(res.data.message);
@@ -56,10 +51,7 @@ export const fetchCartItemsAPI = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/cart/getCartProducts/${cartId}`,
-        { headers: authHeader() }
-      );
+      const res = await api.get(`/cart/getCartProducts/${cartId}`);
 
       if (res.data.success) {
         dispatch(getAllCartItems(res.data.data || []));
@@ -81,12 +73,8 @@ export const incrementQuantity = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      const res = await axios.put(
-        `${
-          import.meta.env.VITE_API_URL
-        }/cart/incrementQuantity/${cartId}/${productId}`,
-        {},
-        { headers: authHeader() }
+      const res = await api.put(
+        `/cart/incrementQuantity/${cartId}/${productId}`
       );
 
       if (res.data.success) {
@@ -110,12 +98,8 @@ export const decrementQuantity = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      const res = await axios.put(
-        `${
-          import.meta.env.VITE_API_URL
-        }/cart/decrementQuantity/${cartId}/${productId}`,
-        {},
-        { headers: authHeader() }
+      const res = await api.put(
+        `/cart/decrementQuantity/${cartId}/${productId}`
       );
 
       if (res.data.success) {
@@ -139,11 +123,8 @@ export const deleteCartProduct = createAsyncThunk(
     try {
       const cartId = getActiveCartId();
 
-      const res = await axios.get(
-        `${
-          import.meta.env.VITE_API_URL
-        }/cart/deteleCartProduct/${cartId}/${productId}`,
-        { headers: authHeader() }
+      const res = await api.delete(
+        `/cart/deteleCartProduct/${cartId}/${productId}`
       );
 
       if (res.data.success) {

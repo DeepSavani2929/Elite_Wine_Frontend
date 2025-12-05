@@ -37,12 +37,11 @@ const CartDetails = () => {
 
       if (res.data.success) {
         setReletedProductsList(res.data.data);
-      }
-      else{
-          showError(res.data.message);
+      } else {
+        showError(res.data.message);
       }
     } catch (error) {
-       showError(error,"Failed to load product:");
+      showError(error, "Failed to load product:");
     } finally {
       setLoading(false);
     }

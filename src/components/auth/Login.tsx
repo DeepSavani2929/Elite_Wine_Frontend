@@ -20,7 +20,7 @@ const Login = () => {
     lastName: "",
     email: "",
     password: "",
-    subscribed: false,
+
   });
   const [regErrors, setRegErrors] = useState({});
   const navigate = useNavigate();
@@ -90,9 +90,6 @@ const Login = () => {
     else if (reg.password.length < 6)
       errs.password = "Password must be at least 6 characters";
 
-    if (!reg.subscribed)
-      errs.subscribed = "Please accept marketing subscription";
-
     setRegErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -127,7 +124,6 @@ const Login = () => {
         localStorage.setItem("userName", res.data.data.firstName);
         showSuccess(res.data.message);
         dispatch(fetchCartItemsAPI());
-        onclose();
         navigate("/");
       }
       else{
