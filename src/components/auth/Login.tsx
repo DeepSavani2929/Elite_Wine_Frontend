@@ -67,7 +67,9 @@ const Login = () => {
         localStorage.setItem("userName", res.data.firstName);
 
         dispatch(fetchCartItemsAPI());
-        navigate("/")
+        navigate("/");
+      } else {
+        toast.error(res.data.message);
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");

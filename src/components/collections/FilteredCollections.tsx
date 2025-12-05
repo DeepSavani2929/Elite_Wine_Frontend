@@ -504,7 +504,7 @@ const FilteredCollections: React.FC = () => {
                           min: v,
                         });
                     }}
-                    onMouseUp={() => setSidebarOpen(false)} // CLOSE SIDEBAR
+                    onMouseUp={() => setSidebarOpen(false)}
                     className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
                   />
 
@@ -521,7 +521,7 @@ const FilteredCollections: React.FC = () => {
                           max: v,
                         });
                     }}
-                    onMouseUp={() => setSidebarOpen(false)} // CLOSE SIDEBAR
+                    onMouseUp={() => setSidebarOpen(false)}
                     className="absolute w-full top-[-6px] opacity-0 cursor-pointer"
                   />
                 </div>
@@ -554,7 +554,7 @@ const FilteredCollections: React.FC = () => {
                         : [...filters.grape, opt];
 
                       handleFilterChange("grape", u);
-                      setSidebarOpen(false); // CLOSE SIDEBAR
+                      setSidebarOpen(false);
                     }}
                     className="w-4 h-4 accent-[#E5C97A]"
                   />
@@ -573,7 +573,7 @@ const FilteredCollections: React.FC = () => {
                     checked={filters.all === opt}
                     onChange={() => {
                       handleFilterChange("all", opt);
-                      setSidebarOpen(false); // CLOSE SIDEBAR
+                      setSidebarOpen(false);
                     }}
                     className="accent-[#E5C97A]"
                   />

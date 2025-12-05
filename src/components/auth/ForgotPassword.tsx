@@ -18,7 +18,7 @@ const ForgotPassword = () => {
     subscribed: false,
   });
   const [regErrors, setRegErrors] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const isValidEmail = (value) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
@@ -26,36 +26,36 @@ const ForgotPassword = () => {
   const validateLogin = () => {
     const errs = {};
     if (!userData.email.trim()) errs.email = "Email is required";
-    else if (!isValidEmail(userData.email)) errs.email = "Invalid email address";
+    else if (!isValidEmail(userData.email))
+      errs.email = "Invalid email address";
 
     setUserDataErrors(errs);
     return Object.keys(errs).length === 0;
   };
 
-  const handleOnForgotPassword = async(e) => {
+  const handleOnForgotPassword = async (e) => {
     e.preventDefault();
     if (!validateLogin()) return;
 
-    try{
-          const payload = {
-             email :  userData.email
-          }
+    try {
+      const payload = {
+        email: userData.email,
+      };
 
-          const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/emailVerify`, payload)
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/emailVerify`,
+        payload
+      );
 
-          if(res.data.success){
-              toast.success(res.data.message)
-              navigate("/login")
-          }
-          else{
-            toast.error(res.data.message)
-          }
+      if (res.data.success) {
+        toast.success(res.data.message);
+        navigate("/login");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Register failed");
     }
-    catch(error) {
-          toast.error(error.response?.data?.message || "Register failed");
-    }
-
-
   };
 
   const validateRegister = () => {
@@ -77,9 +77,8 @@ const ForgotPassword = () => {
     return Object.keys(errs).length === 0;
   };
 
-
-    const handleRegisterSubmit = async (e) => {
-      e.preventDefault();  
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
     if (!validateRegister()) return;
 
     try {
@@ -90,7 +89,7 @@ const ForgotPassword = () => {
         lastName: reg.lastName,
         email: reg.email,
         password: reg.password,
-        guestCartId: guestCartId || null
+        guestCartId: guestCartId || null,
       };
 
       const res = await axios.post(
@@ -99,22 +98,19 @@ const ForgotPassword = () => {
       );
 
       if (res.data.success) {
-        toast.success("Registered successfully!");
-
-    
+        toast.success(res.data.message);
         storeUserCartId(res.data.cartId);
-
         clearGuestCartId();
-
         localStorage.setItem("userId", res.data.data._id);
-        localStorage.setItem("userName", res.data.firstName)
-        navigate("/")
+        localStorage.setItem("userName", res.data.firstName);
+        navigate("/");
+      } else {
+        toast.error(res.data.message);
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");
     }
   };
-
 
   return (
     <>
@@ -163,26 +159,23 @@ const ForgotPassword = () => {
                   )}
                 </div>
 
-              <div className="flex items-center gap-5 pt-1 mt-5">
-                <button
-                  type="submit"
-                  className="bg-[#EED291] py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:border-[#0B0B0B] text-[#0B0B0B] font-urbanist font-semibold shadow-sm hover:bg-transparent transition-all duration-600 uppercase"
-                >
-                  submit
-                </button>
+                <div className="flex items-center gap-5 pt-1 mt-5">
+                  <button
+                    type="submit"
+                    className="bg-[#EED291] py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:border-[#0B0B0B] text-[#0B0B0B] font-urbanist font-semibold shadow-sm hover:bg-transparent transition-all duration-600 uppercase"
+                  >
+                    submit
+                  </button>
 
-                <button
-                  type="submit"
-                  onClick={() => navigate("/login")}
-                  className="bg-transparent py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:bg-[#EED291] text-[#0B0B0B] font-urbanist font-semibold shadow-sm      transition-all duration-600 uppercase"
-                >
-                  Cancel
-                </button>
-              </div>
-                
+                  <button
+                    type="submit"
+                    onClick={() => navigate("/login")}
+                    className="bg-transparent py-2.5 xl:py-4 px-10 xl:px-14 rounded-full border border-[#EED291] cursor-pointer hover:bg-[#EED291] text-[#0B0B0B] font-urbanist font-semibold shadow-sm      transition-all duration-600 uppercase"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </form>
-
-
             </div>
           </div>
 

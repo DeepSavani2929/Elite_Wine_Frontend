@@ -1107,12 +1107,9 @@ const CheckoutInner: React.FC = () => {
     country: "US",
   });
 
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpiry, setCardExpiry] = useState("");
-  const [cardCvc, setCardCvc] = useState("");
   const [billingName, setBillingName] = useState("");
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cartDetails = useSelector((state) => state.cart.cartItems);
   console.log(cartDetails);
 
@@ -1150,19 +1147,6 @@ const CheckoutInner: React.FC = () => {
     else if (!/^[0-9]{4,10}$/.test(address.postal_code))
       err.postal_code = "ZIP Code must be 4–10 digits";
 
-    // // PAYMENT
-    // if (!cardNumber.trim()) err.cardNumber = "Card number is required";
-    // else if (!/^[0-9]{12,19}$/.test(cardNumber))
-    //   err.cardNumber = "Card number must be 12–19 digits";
-
-    // if (!cardExpiry.trim()) err.cardExpiry = "Expiration date is required";
-    // else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(cardExpiry))
-    //   err.cardExpiry = "Invalid format (MM/YY)";
-
-    // if (!cardCvc.trim()) err.cardCvc = "Security code is required";
-    // else if (!/^[0-9]{3,4}$/.test(cardCvc))
-    //   err.cardCvc = "CVC must be 3 or 4 digits";
-
     if (!billingName.trim()) err.billingName = "Cardholder name is required";
 
     setErrors(err);
@@ -1193,38 +1177,6 @@ const CheckoutInner: React.FC = () => {
     }
   }, [summaryOpenBottom]);
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-
-  //   setLoading(true);
-
-  //   try {
-  //     const resp = await fetch("/api/create-payment-intent", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         currency: order.currency,
-  //         items: order.items,
-  //         customer_email: email,
-  //         shipping: {
-  //           name: billingName,
-  //           address,
-  //         },
-  //         card: {
-  //           number: cardNumber,
-  //           exp: cardExpiry,
-  //           cvc: cardCvc,
-  //         },
-  //       }),
-  //     });
-
-  //     setSuccess(true);
-  //   } catch (err: any) {
-  //     setErrorMessage(err.message || "Unexpected error");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const handlePayment = async (e: any) => {
     e.preventDefault();
     setErrorMessage(null);
@@ -1235,7 +1187,6 @@ const CheckoutInner: React.FC = () => {
     setLoading(true);
 
     try {
-      // 1️⃣ Create Payment Intent
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/buyProducts/createPaymentIntent`,
         {
@@ -1269,7 +1220,6 @@ const CheckoutInner: React.FC = () => {
 
       const clientSecret = res.data.clientSecret;
 
-      // 2️⃣ Confirm Payment With Stripe Elements Card
       const cardElement = elements.getElement(CardNumberElement);
 
       const { paymentIntent, error } = await stripe.confirmCardPayment(
@@ -1299,7 +1249,7 @@ const CheckoutInner: React.FC = () => {
 
       if (paymentIntent?.status === "succeeded") {
         navigate("/paymentSuccess");
-       dispatch(clearCartItems())
+        dispatch(clearCartItems());
       }
     } catch (err: any) {
       setErrorMessage("Payment failed. Try again.");
@@ -1327,12 +1277,11 @@ const CheckoutInner: React.FC = () => {
   }, [summaryOpenTop]);
 
   const subTotal = cartDetails.reduce(
-  (total, item) => total + item.price * item.quantity,
-  0
-);
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
-
-const total = subTotal + order.shipping - order.discount;
+  const total = subTotal + order.shipping - order.discount;
 
   const elementStyle = {
     style: {
@@ -1355,7 +1304,10 @@ const total = subTotal + order.shipping - order.discount;
     <div className="min-h-screen bg-white text-[#0B0B0B]">
       <header className="w-full border-b border-[#CCCCCC] bg-white py-2.5 flex justify-center">
         <div className="w-[95%] md:w-[70%] flex justify-between items-center">
-          <div className="flex flex-col items-center gap-2 cursor-pointer" onClick = {() =>  navigate("/")}>
+          <div
+            className="flex flex-col items-center gap-2 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             <img src={ews} className="w-[70px] h-[60px]" />
             <p className="text-[#641026] text-[12px]">
               Pure Terroir.{" "}
@@ -1923,8 +1875,7 @@ const total = subTotal + order.shipping - order.discount;
                   <div className="flex justify-between py-2">
                     <span className="text-2xl font-semibold">Total</span>
                     <span className="text-xl font-semibold">
-                      $
-                      {total.toFixed(2)}
+                      ${total.toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -2045,8 +1996,7 @@ const total = subTotal + order.shipping - order.discount;
               <div className="flex justify-between py-2">
                 <span className="text-[#565656] font-semibold">Subtotal</span>
                 <span className="font-semibold text-[#565656] text-md">
-                  $
-                  {subTotal.toFixed(2)}
+                  ${subTotal.toFixed(2)}
                 </span>
               </div>
 

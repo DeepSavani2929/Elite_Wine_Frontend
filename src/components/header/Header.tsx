@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CartPopover from "../cartProducts/CartPopover";
 import ProfileDrawer from "../profileDrower/ProfileDrower";
 import LogoutDrawer from "../profileDrower/LogoutDrower";
-import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +23,7 @@ const Header = () => {
   );
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-    const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -35,24 +34,19 @@ const Header = () => {
     location.pathname === "/cartDetails" ||
     location.pathname === "/register" ||
     location.pathname === "/login" ||
-    location.pathname === "/reset-password" || 
+    location.pathname === "/reset-password" ||
     location.pathname === "/privacy";
 
   const isResetPasswordPage = location.pathname.startsWith("/reset-password/");
 
-// Existing iconColor logic (unchanged)
-const iconColor =
-  isCartPage ? "brightness-0" : "";
+  const iconColor = isCartPage ? "brightness-0" : "";
 
-// ⭐ NEW LOGIC → ONLY Cart icon becomes GRAY on resetPassword page when NOT sticky
-const cartIconColor =
-  isResetPasswordPage && !isSticky
-    ? "grayscale brightness-[0.40]"
-    : iconColor;
-
+  const cartIconColor =
+    isResetPasswordPage && !isSticky
+      ? "grayscale brightness-[0.40]"
+      : iconColor;
 
   const textColor = isCartPage ? "text-[#0B0B0B]" : "text-white";
-  
 
   const itemCount = cartItems.length;
 
@@ -67,12 +61,6 @@ const cartIconColor =
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const aboutBtnRef = useRef<HTMLLIElement | null>(null);
-
-//   const dispatch = useDispatch();
-
-// useEffect(() => {
-//   dispatch(fetchCartItemsAPI());
-// }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -636,7 +624,6 @@ const cartIconColor =
         />
       )}
 
-      {/* ⬇️ SHOW LOGOUT DRAWER WHEN LOGGED IN */}
       {userId && (
         <LogoutDrawer
           isOpen={isLogoutOpen}

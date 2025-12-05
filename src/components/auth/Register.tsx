@@ -21,7 +21,7 @@ const Register = () => {
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const validate = () => {
     let validationErrors = {};
@@ -57,13 +57,6 @@ const Register = () => {
     return Object.keys(validationErrors).length === 0;
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validate()) {
-  //     console.log("REGISTER FORM SUBMITTED:", formData);
-  //   }
-  // };
-
   const { subscribed, ...userData } = formData;
 
   const handleOnRegister = async (e) => {
@@ -87,7 +80,7 @@ const Register = () => {
       );
 
       if (res.data.success) {
-        toast.success("Registered successfully!");
+        toast.success(res.data.message);
 
         localStorage.setItem("token", res.data.token);
         storeUserCartId(res.data.cartId);
@@ -98,6 +91,8 @@ const Register = () => {
         localStorage.setItem("userName", res.data.data.firstName);
         dispatch(fetchCartItemsAPI());
         navigate("/");
+      } else {
+        toast.error(res.data.message);
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");

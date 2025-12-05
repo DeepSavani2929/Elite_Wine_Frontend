@@ -13,18 +13,12 @@ const PaymentSuccess: React.FC = () => {
         Thank you for your purchase. Your order has been successfully processed.
       </p>
 
-      <div className="mt-8 flex flex-col sm:flex-row gap-4">
+      <div className="mt-8 flex  justify-center gap-4">
         <button
           onClick={() => navigate("/")}
-          className="bg-[#018D43] cursor-pointer text-white px-6 py-2 rounded-full font-[Poppins]"
+          className="bg-[#018D43] cursor-pointer text-center text-white px-6 py-2 rounded-full font-[Poppins]"
         >
           Back to Home
-        </button>
-        <button
-          onClick={() => navigate("/orders")}
-          className="border cursor-pointer border-[#018D43] text-[#018D43] px-6 py-2 rounded-full font-[Poppins]"
-        >
-          View My Orders
         </button>
       </div>
     </div>

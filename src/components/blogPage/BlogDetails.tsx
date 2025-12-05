@@ -30,62 +30,54 @@ const BlogDetails = () => {
   const [isEnd, setIsEnd] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(getOtherBlogs(blogId))
-      dispatch(getBlog(blogId))
-  }, [blogId])
+    dispatch(getOtherBlogs(blogId));
+    dispatch(getBlog(blogId));
+  }, [blogId]);
 
   const desktopSwiperRef = useRef<any>(null);
   const drawerSwiperRef = useRef<any>(null);
 
   const navigate = useNavigate();
 
-
   const blogDetails = useSelector((state: any) => state.blog.otherBlogs);
-  const perticularBlog = useSelector((state: any) => state.blog.perticularBlog)
-  console.log(perticularBlog)
-  // const products = useSelector((state: any) => state.cart.productsDetails);
-
- 
-
-  // const featuredProducts = products
-  //   .filter((p: any) => p.categoryType === "Featured")
-  //   .slice(0, 3);
+  const perticularBlog = useSelector((state: any) => state.blog.perticularBlog);
+  console.log(perticularBlog);
 
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? "hidden" : "";
   }, [drawerOpen]);
 
+  const fetchFilteredProducts = async () => {
+    try {
+      const queryParams = new URLSearchParams({
+        categoryType: "Featured",
+        limit: "3",
+        page: "1",
+      });
 
-const fetchFilteredProducts = async () => {
-  try {
-    // Always filter only categoryType = "Featured"
-    const queryParams = new URLSearchParams({
-      categoryType: "Featured",
-      limit: "3",    
-      page: "1"       
-    });
+      const url = `${
+        import.meta.env.VITE_API_URL
+      }/products/getFilteredProducts?${queryParams.toString()}`;
 
-    const url = `${import.meta.env.VITE_API_URL}/products/getFilteredProducts?${queryParams.toString()}`;
+      const res = await axios.get(url);
 
-    const res = await axios.get(url);
-
-    if (res.data.success) {
-      setFilteredProducts(res.data.data);
+      if (res.data.success) {
+        setFilteredProducts(res.data.data);
+      }
+    } catch (error) {
+      console.error("FILTER API FAILED:", error);
     }
-  } catch (error) {
-    console.error("FILTER API FAILED:", error);
-  }
-};
+  };
 
+  useEffect(() => {
+    fetchFilteredProducts();
+  }, []);
 
-useEffect(() => {
-  fetchFilteredProducts();
-}, []);
-
-  if (!perticularBlog) return <div className="py-10 text-center">Blog Not Found</div>;
+  if (!perticularBlog)
+    return <div className="py-10 text-center">Blog Not Found</div>;
 
   return (
     <>
@@ -209,7 +201,6 @@ useEffect(() => {
             ))}
           </div>
 
-          {/* Mobile Slider */}
           <div className="block lg:hidden">
             <Swiper
               modules={[Pagination]}
@@ -322,7 +313,9 @@ useEffect(() => {
                     <div className="relative flex items-center justify-center overflow-hidden">
                       <div className="w-full py-10">
                         <img
-                          src={`${import.meta.env.VITE_IMG_URL}/${product.productImg}`}
+                          src={`${import.meta.env.VITE_IMG_URL}/${
+                            product.productImg
+                          }`}
                           alt={product.productName}
                           className="w-full h-[400px] md:h-[650px] object-contain"
                         />

@@ -38,7 +38,6 @@ const AboutFourthProduct = () => {
             KvD Strauch Sektmanufaktur
           </p>
           <div className="flex flex-col xl:flex-row items-center gap-6 xl:gap-20">
-            {/* LEFT IMAGE */}
             <div className="w-full xl:w-1/2 hover:scale(1) flex justify-center  bg-[#F8F8F8] py-6 cursor-pointer overflow-hidden">
               <img
                 src={about1}
@@ -47,7 +46,6 @@ const AboutFourthProduct = () => {
               />
             </div>
 
-            {/* RIGHT TEXT */}
             <div className="w-full xl:w-1/2 ">
               <div className="flex flex-col">
                 <p className="mb-3 text-[#565656] font-medium font-urbanist text-sm xl:text-base leading-[26px]">

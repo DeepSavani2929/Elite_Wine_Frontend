@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const ResetPassword = () => {
-  const { email } = useParams(); // userId coming from email link
+  const { email } = useParams();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -51,6 +51,8 @@ const ResetPassword = () => {
       if (res.data.success) {
         toast.success(res.data.message);
         navigate("/login");
+      } else {
+        toast.error(res.data.message);
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Something went wrong");
@@ -59,20 +61,15 @@ const ResetPassword = () => {
 
   return (
     <div className=" mb-40 w-full bg-white  pt-12 ">
-
       <h2 className="text-center font-urbanist text-[28px] md:text-xl font-bold text-[#0B0B0B] mt-14 pb-6">
         RESET ACCOUNT PASSWORD
       </h2>
 
-      {/* Email Text */}
       <p className="text-center text-[#0B0B0B] font-medium   font-urbanist text-lg mt-3">
         Enter a new password for <br />
-        <span className="font-medium">
-            {email}
-        </span>
+        <span className="font-medium">{email}</span>
       </p>
 
-      {/* Form */}
       <form
         onSubmit={handleOnSubmit}
         className="w-[90%] md:w-[38%] xl:w-[24%] mx-auto mt-16 flex flex-col gap-6"
@@ -92,7 +89,9 @@ const ResetPassword = () => {
             className="w-full border-b border-gray-300 placeholder:text-[#565656] font-meidum py-3.5 focus:outline-none text-md font-urbanist"
           />
           {errors.password && (
-            <p className="text-red-600 font-urbanist text-sm mt-1">{errors.password}</p>
+            <p className="text-red-600 font-urbanist text-sm mt-1">
+              {errors.password}
+            </p>
           )}
         </div>
 
@@ -117,7 +116,6 @@ const ResetPassword = () => {
           )}
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className=" bg-white text-[#0B0B0B] border border-[#0B0B0B] hover:text-white hover:bg-[#0B0B0B] rounded-full py-2.5 text-lg  font-urbanist font-semibold cursor-pointer  transition-all duration-600"

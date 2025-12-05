@@ -44,9 +44,8 @@ const AboutSecondProduct = () => {
           <p className="font-bold font-cormorant px-8 md:px-16 text-[24px] md:text-[28px] xl:text-[36px] uppercase text-center mb-10">
             About Weingut Lamm-Jung (Rheingau, Germany)
           </p>
-          {/* DESKTOP VERSION (≥1024px) */}
+
           <div className=" flex flex-col xl:flex-row justify-between items-center gap-6  xl:gap-20">
-            {/* RIGHT IMAGES */}
             <div className="w-full xl:w-1/2  flex items-center justify-center gap-4 md:gap-10 bg-[#F8F8F8] py-8 group overflow-hidden cursor-pointer">
               <div className="flex flex-col gap-2 md:gap-5 items-center">
                 <img

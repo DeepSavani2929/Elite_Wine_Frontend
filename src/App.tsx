@@ -95,8 +95,8 @@ const App: React.FC = () => {
           />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/privacy" element={<Privacy />} />
-              <Route path="/paymentSuccess" element={<PaymentSuccess />} />
-            <Route path="/paymentFailed" element={<PaymentFailed />} />
+          <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+          <Route path="/paymentFailed" element={<PaymentFailed />} />
         </Route>
       </Routes>
     </>

@@ -7,29 +7,26 @@ import axios from "axios";
 const initialState = {
   blogDetails: [],
   otherBlogs: [],
-  perticularBlog: {}
+  perticularBlog: {},
 };
 
 export const blogSlice = createSlice({
   name: "blog",
   initialState,
 
-  reducers:{
-      
+  reducers: {
     getAllBlogs: (state, action) => {
-    state.blogDetails = action.payload;
+      state.blogDetails = action.payload;
+    },
+
+    getremainingBlogs: (state, action) => {
+      state.otherBlogs = action.payload;
+    },
+
+    getPerticularBlog: (state, action) => {
+      state.perticularBlog = action.payload;
+    },
   },
-
-   getremainingBlogs : (state, action) => {
-     state.otherBlogs = action.payload;
-  },
-
-   getPerticularBlog: (state, action) => {
-    state.perticularBlog = action.payload;
-  },
-
-  }
-
 });
 
 export const getBlogs = createAsyncThunk(
@@ -70,7 +67,9 @@ export const getOtherBlogs = createAsyncThunk(
   "otherBlogs/fetchOtherBlogs",
   async (blogId, { dispatch, rejectWithValue }) => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/blogs/getOtherBlogs/${blogId}`;
+      const url = `${
+        import.meta.env.VITE_API_URL
+      }/blogs/getOtherBlogs/${blogId}`;
 
       const res = await axios.get(url);
 
@@ -83,5 +82,6 @@ export const getOtherBlogs = createAsyncThunk(
   }
 );
 
-export const { getAllBlogs, getPerticularBlog, getremainingBlogs } = blogSlice.actions;
+export const { getAllBlogs, getPerticularBlog, getremainingBlogs } =
+  blogSlice.actions;
 export default blogSlice.reducer;

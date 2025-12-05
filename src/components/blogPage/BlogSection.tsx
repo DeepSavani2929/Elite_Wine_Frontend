@@ -7,10 +7,9 @@ import { useEffect } from "react";
 import { getBlogs } from "../../redux/blog/blogSlice";
 
 const BlogSection = () => {
-
   useEffect(() => {
-    getBlogs()
-  },[])
+    getBlogs();
+  }, []);
   const blogDetails = useSelector((state) => state.blog.blogDetails);
   console.log("Blog Details from Redux:", blogDetails);
 

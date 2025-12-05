@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { clearCartItems } from "../../redux/cart/cartSlice";
 import { createGuestCartId } from "../../utils/cartIdManager";
+import { toast } from "react-toastify";
 
 const LogoutDrawer = ({ isOpen, onClose }) => {
   const userId = localStorage.getItem("userId");
@@ -29,8 +30,8 @@ const LogoutDrawer = ({ isOpen, onClose }) => {
     localStorage.removeItem("userCartId");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
-
-    createGuestCartId(); 
+    toast.success("User logout successfully!");
+    createGuestCartId();
 
     onClose();
   };

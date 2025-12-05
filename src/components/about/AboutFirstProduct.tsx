@@ -46,7 +46,6 @@ const AboutFirstProduct = () => {
             Weingut Bergdolt-Reif & Nett (Palatinate, Germany)
           </p>
           <div className="flex flex-col xl:flex-row items-center gap-6 xl:gap-20">
-            {/* LEFT IMAGE */}
             <div className="w-full xl:w-1/2  flex justify-center  bg-[#F8F8F8] pb-5 cursor-pointer overflow-hidden">
               <img
                 src={about1}
@@ -55,7 +54,6 @@ const AboutFirstProduct = () => {
               />
             </div>
 
-            {/* RIGHT TEXT */}
             <div className="w-full xl:w-1/2 ">
               <div className="flex flex-col gap-8">
                 <div>

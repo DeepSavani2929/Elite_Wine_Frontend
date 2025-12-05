@@ -23,7 +23,6 @@ const About = () => {
       <div className="w-full">
         <div className="w-[95%] xl:w-[80%] mx-auto">
           <div className="py-[55px] xl:py-[100px] flex flex-col xl:flex-row items-center lg:gap-1 xl:gap-20">
-            {/* LEFT IMAGE */}
             <div className="w-full xl:w-1/2 overflow-hidden  cursor-pointer">
               <img
                 src={about1}
@@ -32,7 +31,6 @@ const About = () => {
               />
             </div>
 
-            {/* RIGHT TEXT */}
             <div className="w-full xl:w-1/2 pt-6">
               <h2 className="font-cormorant font-bold text-[28px] xl:text-[40px] leading-tight uppercase text-[#0B0B0B]">
                 ELITE WINE SELECTIONS - PURE TERROIR. ZERO COMPROMISE.

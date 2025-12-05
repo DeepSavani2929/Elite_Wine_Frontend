@@ -11,7 +11,6 @@ const ProductsChild = ({ product }) => {
   const location = useLocation();
   const isBlogDetailsPage = location.pathname.startsWith("/blog/blogDetails");
 
-
   return (
     <>
       <div
@@ -49,7 +48,7 @@ const ProductsChild = ({ product }) => {
             onClick={(e) => {
               e.stopPropagation();
               dispatch(setDrawerOpen(true));
-              dispatch(addToCartAPI({productId:product._id}));
+              dispatch(addToCartAPI({ productId: product._id }));
             }}
           >
             ADD TO CART
@@ -69,7 +68,7 @@ const ProductsChild = ({ product }) => {
                 </span>
                 <img
                   src={verietyImg}
-                  alt= "icon"
+                  alt="icon"
                   className="h-6 w-6 object-contain"
                 />
               </div>

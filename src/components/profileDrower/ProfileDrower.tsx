@@ -7,29 +7,18 @@ import axios from "axios";
 import { fetchCartItemsAPI } from "../../redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
 
-// const getActiveCartId = (): string => {
-//   const userCartId = getUserCartId();
-//   if (userCartId) return userCartId;
-
-//   let guestId = getGuestCartId();
-//   if (!guestId) {
-//     guestId = createGuestCartId();
-//   }
-//   return guestId;
-// };
-
 const ProfileDrawer = ({ isOpen, onClose }) => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
- const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [loginErrors, setLoginErrors] = useState({
     email: "",
     password: "",
   });
 
-    useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -41,24 +30,20 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-
   useEffect(() => {
-  if (!isOpen) {
+    if (!isOpen) {
+      setLogin({
+        email: "",
+        password: "",
+      });
 
-    setLogin({
-      email: "",
-      password: ""
-    });
-    
-    setLoginErrors({
-      email: "",
-      password: ""
-    });
-  }
-}, [isOpen]);
+      setLoginErrors({
+        email: "",
+        password: "",
+      });
+    }
+  }, [isOpen]);
 
-
-  
   const isValidEmail = (value: string) =>
     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value);
 
@@ -92,45 +77,33 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
         payload
       );
 
-      // if (res.data.success) {
-      //   toast.success(res.data.message);
-
-      //   storeUserCartId(res.data.cartId);
-
-      //   clearGuestCartId();
-
-      //   localStorage.setItem("userId", res.data.data._id);
-      //   localStorage.setItem("userName", res.data.data.firstName);
-      //   localStorage.removeItem("userCartId")
-      //      dispatch(fetchCartItemsAPI());
-      //   onClose();
-      // }
-
       if (res.data.success) {
-  localStorage.setItem("token", res.data.token);
-  storeUserCartId(res.data.cartId);
+        localStorage.setItem("token", res.data.token);
+        storeUserCartId(res.data.cartId);
 
-  clearGuestCartId();
+        clearGuestCartId();
 
-  localStorage.setItem("userId", res.data.userId);
-  localStorage.setItem("userName", res.data.data.firstName);
-
-  dispatch(fetchCartItemsAPI());
-  onClose();
-}
-
+        localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("userName", res.data.data.firstName);
+        toast.success(res.data.message);
+        dispatch(fetchCartItemsAPI());
+        onClose();
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (err) {
       toast.error(err.response?.data?.message || "Register failed");
     }
   };
 
   return (
-    <div className={`fixed inset-0 z-[999999] ${
+    <div
+      className={`fixed inset-0 z-[999999] ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
-      }`}>
- 
+      }`}
+    >
       <div
-         className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}
@@ -173,7 +146,9 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           />
 
           {loginErrors.email && (
-            <p className="text-red-600 font-urbanist text-sm mt-1">{loginErrors.email}</p>
+            <p className="text-red-600 font-urbanist text-sm mt-1">
+              {loginErrors.email}
+            </p>
           )}
 
           <label className="block text-base font-semibold mb-2 mt-5">
@@ -195,7 +170,9 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           />
 
           {loginErrors.password && (
-            <p className="text-red-600 font-urbanist text-sm mt-1">{loginErrors.password}</p>
+            <p className="text-red-600 font-urbanist text-sm mt-1">
+              {loginErrors.password}
+            </p>
           )}
 
           <NavLink to="/login">
@@ -215,7 +192,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
           <div className="text-center mt-4">
             <NavLink
               to="/reset-password"
-              onClick = {onClose}
+              onClick={onClose}
               className="underline text-base font-semibold text-[#565656] cursor-pointer"
             >
               Forgot Your Password?
