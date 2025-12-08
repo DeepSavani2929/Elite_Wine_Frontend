@@ -231,19 +231,19 @@ const CartPopover = ({ isOpen, onClose }) => {
                         onClick={slideLeft}
                         disabled={isBeginning}
                         className={`${
-                          isBeginning ? "opacity-30 pointer-events-none" : ""
+                          isBeginning ? "opacity-30 cursor-pointer pointer-events-none" : ""
                         }`}
                       >
-                        <MoveLeft className="w-8 h-8" />
+                        <MoveLeft className="w-8 h-8 cursor-pointer" />
                       </button>
                       <button
                         onClick={slideRight}
                         disabled={isEnd}
                         className={`${
-                          isEnd ? "opacity-30 pointer-events-none" : ""
+                          isEnd ? "opacity-30 cursor-pointer pointer-events-none" : ""
                         }`}
                       >
-                        <MoveRight className="w-8 h-8" />
+                        <MoveRight className="w-8 h-8 cursor-pointer" />
                       </button>
                     </div>
                   </div>
@@ -266,8 +266,10 @@ const CartPopover = ({ isOpen, onClose }) => {
                       <SwiperSlide key={idx}>
                         <div
                           className="flex gap-10 items-start ps-12 justify-center"
-                          onClick={() =>
-                            navigate(`/productDetails/${product.id}`)
+                          onClick={() =>{
+                            navigate(`/productDetails/${product._id}`);
+                             onClose();
+                          }
                           }
                         >
                           <img
@@ -282,7 +284,7 @@ const CartPopover = ({ isOpen, onClose }) => {
                               className="font-semibold text-md mb-1 leading-5 font-urbanist text-[#641026] cursor-pointer"
                               onClick={() => {
                                 onClose();
-                                navigate(`/productDetails/${product.id}`);
+                                navigate(`/productDetails/${product._id}`);
                               }}
                             >
                               {product.productName}
